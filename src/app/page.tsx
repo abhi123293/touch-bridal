@@ -1,13 +1,11 @@
 import BridalHero from "@/components/BridalHero";
+import AboutUs from "@/components/AboutUs";
 
 export default function HomePage() {
   return (
     <main>
       <BridalHero />
-
-      <section className="min-h-screen bg-[#faf7f2]">
-        {/* About the salon */}
-      </section>
+      <AboutUs />
     </main>
   );
 }
