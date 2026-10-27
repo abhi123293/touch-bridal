@@ -5,15 +5,18 @@ import { motion, useScroll, useTransform } from "motion/react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import Link from "next/link";
-import { Oswald } from "next/font/google";
+import { Open_Sans } from "next/font/google";
+
 
 gsap.registerPlugin(useGSAP);
 
 // Tall, condensed display font for the headline (like the reference design).
-const display = Oswald({
+const display = Open_Sans({
   subsets: ["latin"],
-  weight: ["500", "600", "700"],
+  weight: ["400", "500", "600", "700", "800"],
+  display: "swap",
 });
+
 
 const bridalImages = [
   {
@@ -39,7 +42,7 @@ const bridalImages = [
 ];
 
 const paragraphText =
-  "Curated bridal makeup, hairstyling and beauty services that bring confidence, elegance and calm to your big day.";
+  "From bridal makeovers to everyday beauty and grooming, we make every occasion special.";
 
 // TODO: replace these placeholder details with your real information.
 const happyCount = "500+";
@@ -175,12 +178,24 @@ export default function BridalHero() {
           0.1,
         );
 
-        tl.fromTo(
-          ".hero-line",
-          { opacity: 0, y: 28 },
-          { opacity: 1, y: 0, duration: 0.9, stagger: 0.14 },
-          0.2,
-        );
+       // Heading: blur-to-sharp reveal, one line at a time
+tl.fromTo(
+  ".hero-line",
+  {
+    opacity: 0,
+    filter: "blur(18px)",
+    y: 30,
+  },
+  {
+    opacity: 1,
+    filter: "blur(0px)",
+    y: 0,
+    duration: 1.1,
+    stagger: 0.18,
+    ease: "power3.out",
+  },
+  0.2,
+);
 
         tl.fromTo(
           ".hero-description",
@@ -189,6 +204,27 @@ export default function BridalHero() {
           0.7,
         );
 
+
+        // CTA buttons: reveal individually with a soft blur
+tl.fromTo(
+  ".hero-cta",
+  {
+    opacity: 0,
+    filter: "blur(12px)",
+    y: 18,
+    scale: 0.97,
+  },
+  {
+    opacity: 1,
+    filter: "blur(0px)",
+    y: 0,
+    scale: 1,
+    duration: 0.8,
+    stagger: 0.2,
+    ease: "power3.out",
+  },
+  1.5,
+);
         tl.fromTo(
           ".hero-fade",
           { opacity: 0, y: 12 },
@@ -215,10 +251,15 @@ export default function BridalHero() {
       });
 
       mm.add("(prefers-reduced-motion: reduce)", () => {
-        gsap.set(
-          ".hero-eyebrow, .hero-line, .hero-description, .hero-fade, .hero-visual",
-          { opacity: 1, y: 0, scale: 1 },
-        );
+       gsap.set(
+  ".hero-eyebrow, .hero-line, .hero-description, .hero-fade, .hero-cta, .hero-visual",
+  {
+    opacity: 1,
+    filter: "none",
+    y: 0,
+    scale: 1,
+  },
+);
       });
 
       return () => mm.revert();
@@ -240,7 +281,7 @@ export default function BridalHero() {
       {/* Rounded cream frame, like a browser card */}
       <div
         ref={contentRef}
-        className="relative mx-auto max-w-[1280px] overflow-hidden rounded-[26px] bg-[#f7f1e9] text-[#2d1b13] shadow-[0_30px_80px_-30px_rgba(0,0,0,0.65)] sm:rounded-[34px]"
+        className="relative mx-auto max-w-[1320px] overflow-hidden rounded-[26px] bg-[#f7f1e9] text-[#2d1b13] shadow-[0_30px_80px_-30px_rgba(0,0,0,0.65)] sm:rounded-[34px]"
       >
     
      
@@ -250,42 +291,68 @@ export default function BridalHero() {
             {/* LEFT: HEADLINE AND BOOKING */}
             <div className="relative z-10 flex flex-col items-start">
               <p className="hero-eyebrow mb-6 flex items-center gap-3 text-[9px] font-medium uppercase tracking-[0.22em] text-[#a8663f] opacity-0 sm:text-[10px]">
-                <span className="h-px w-8 bg-[#a8663f]" />A bridal studio that
-                feels like you
+                <span className="h-px w-8 bg-[#a8663f]" />Touch Bridal Makeover Studio & Unisex Salon
               </p>
 
               <h1
-                className={`${display.className} text-[clamp(2.6rem,5.5vw,5rem)] font-bold uppercase leading-[0.9] tracking-[-0.02em] text-[#2d1b13]`}
+                className={`${display.className} text-[clamp(2.3rem,4.8vw,4.5rem)] font-bold uppercase leading-[1] tracking-[-0.02em] text-[#2d1b13]`}
               >
-                <span className="hero-line block opacity-0">Your Beauty.</span>
-                <span className="hero-line block opacity-0">Your Moment.</span>
-                <span className="hero-line block text-[#8b4a28] opacity-0">
-                  Your Story.
-                </span>
+                <span className="hero-line block opacity-0">
+  Your Dream Bridal
+</span>
+
+<span className="hero-line block opacity-0">
+  Look, Beautifully
+</span>
+
+<span className="hero-line block text-[#8b4a28] opacity-0">
+  Brought to Life.
+</span>
               </h1>
 
               <p className="hero-description mt-7 max-w-[400px] text-sm leading-7 text-[#6e5b4e] opacity-0 sm:text-[15px]">
                 {paragraphText}
               </p>
 
-              <div className="hero-fade mt-8 flex flex-wrap items-center gap-3 opacity-0">
-                <a
-                  href={whatsappLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group inline-flex min-h-12 items-center justify-center gap-2.5 rounded-full bg-[#8b4a28] px-7 text-xs font-semibold tracking-[0.04em] text-white shadow-[0_12px_28px_-12px_rgba(139,74,40,0.8)] transition-colors hover:bg-[#2d1b13]"
-                >
-                  Book Appointment
-                  <ArrowIcon className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
-                </a>
+             <div className="mt-8 flex flex-wrap items-center gap-4">
 
-                <Link
-                  href="/bridal-gallery"
-                  className="inline-flex min-h-12 items-center justify-center rounded-full border border-[#2d1b13]/20 bg-white/50 px-7 text-xs font-semibold tracking-[0.04em] text-[#2d1b13] transition-colors hover:border-[#8b4a28] hover:text-[#8b4a28]"
-                >
-                  Our Gallery
-                </Link>
-              </div>
+  {/* PRIMARY: Neon Glass Book Appointment */}
+  <a
+    href={whatsappLink}
+    target="_blank"
+    rel="noopener noreferrer"
+    className="hero-cta opacity-0 group relative isolate inline-flex min-h-12 items-center justify-center gap-2.5 overflow-hidden rounded-full border border-white/50 bg-gradient-to-br from-[#cba879] via-[#8b4a28] to-[#382319] px-7 text-xs font-semibold tracking-[0.04em] text-white shadow-[inset_0_1px_2px_rgba(255,255,255,0.7),inset_0_-5px_12px_rgba(45,27,19,0.35),0_0_14px_rgba(201,164,119,0.35),0_8px_24px_rgba(45,27,19,0.2)] backdrop-blur-xl transition-all duration-500 hover:-translate-y-1 hover:border-[#f4d7a8] hover:shadow-[inset_0_1px_2px_rgba(255,255,255,0.8),0_0_24px_rgba(201,164,119,0.75),0_12px_30px_rgba(45,27,19,0.3)]"
+  >
+    {/* Glass highlight */}
+    <span
+      aria-hidden="true"
+      className="pointer-events-none absolute inset-0 -z-10 rounded-full bg-gradient-to-b from-white/25 via-transparent to-black/10"
+    />
+
+    <span className="relative">
+      Book an Appointment
+    </span>
+
+  </a>
+
+  {/* SECONDARY: Frosted Glass Gallery */}
+  <Link
+    href="/bridal-gallery"
+    className="hero-cta opacity-0 group relative isolate inline-flex min-h-12 items-center justify-center gap-2.5 overflow-hidden rounded-full border border-[#b18a5b]/40 bg-gradient-to-br from-white/85 via-white/55 to-[#d8b98f]/30 px-7 text-xs font-semibold tracking-[0.04em] text-[#3a2418] shadow-[inset_0_1px_2px_rgba(255,255,255,0.95),inset_0_-3px_8px_rgba(139,74,40,0.08),0_0_12px_rgba(201,164,119,0.18),0_6px_20px_rgba(45,27,19,0.1)] backdrop-blur-xl transition-all duration-500 hover:-translate-y-1 hover:border-[#b18a5b] hover:shadow-[inset_0_1px_2px_rgba(255,255,255,1),0_0_22px_rgba(201,164,119,0.5),0_10px_26px_rgba(45,27,19,0.15)]"
+  >
+    {/* Glossy overlay */}
+    <span
+      aria-hidden="true"
+      className="pointer-events-none absolute inset-0 -z-10 rounded-full bg-gradient-to-b from-white/65 via-transparent to-[#b18a5b]/10"
+    />
+
+    <span className="relative">
+      Explore Bridal Gallery
+    </span>
+
+  </Link>
+
+</div>
 
               <div className="hero-fade mt-8 flex items-center gap-3 opacity-0">
                 <div className="flex -space-x-2.5">
@@ -444,17 +511,7 @@ export default function BridalHero() {
 
           {/* FOOTER NOTE */}
           <div className="flex items-center justify-between gap-4 pt-5">
-            <p className="text-[8px] uppercase tracking-[0.14em] text-[#8a7566] sm:text-[10px]">
-              Touch Bridal Makeover Studio &amp; Unisex Salon
-            </p>
-            <a
-              href={whatsappLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="shrink-0 text-[9px] font-semibold uppercase tracking-[0.12em] text-[#8b4a28] transition-colors hover:text-[#2d1b13] sm:text-[10px]"
-            >
-              Let&apos;s Talk ↗
-            </a>
+        
           </div>
         </div>
       </div>

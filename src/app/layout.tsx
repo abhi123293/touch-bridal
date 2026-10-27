@@ -1,30 +1,32 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+
 import "./globals.css";
 import Navbar from "@/components/Navbar";
+import { Open_Sans } from "next/font/google";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const openSans = Open_Sans({
   subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800"],
+  variable: "--font-open-sans",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "Bridal Salon",
-  description: "Discover your perfect bridal look.",
+  title: "Touch Bridal Makeover Studio & Unisex Salon",
+  description:
+    "Discover your perfect bridal look with Touch Bridal Makeover Studio & Unisex Salon.",
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default function RootLayout({
+  children,
+}: LayoutProps<"/">) {
   return (
     <html
-      lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
-    >
-      <body className="min-h-full flex flex-col">
+  lang="en"
+  className={`${openSans.variable} h-full antialiased`}
+>
+  <body className={`${openSans.className} flex min-h-full flex-col`}>
+
         <Navbar />
         {children}
       </body>
