@@ -274,9 +274,9 @@ tl.fromTo(
     );
 
   return (
-    <section
+  <section
   ref={heroRef}
-  className="relative overflow-hidden bg-[radial-gradient(ellipse_at_top_left,#b58b66_0%,#6a4430_42%,#2f1d14_100%)] px-2 pb-2 pt-4 sm:px-3 sm:pb-3 sm:pt-5 lg:px-4 lg:pb-4 lg:pt-26"
+  className="relative overflow-hidden px-2 pb-2 pt-4 sm:px-3 sm:pb-3 sm:pt-5 lg:px-4 lg:pb-4 lg:pt-26"
 >
       {/* Rounded cream frame, like a browser card */}
       <div
@@ -510,9 +510,7 @@ tl.fromTo(
           </div>
 
           {/* FOOTER NOTE */}
-          <div className="flex items-center justify-between gap-4 pt-5">
         
-          </div>
         </div>
       </div>
     </section>
