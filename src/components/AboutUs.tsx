@@ -52,16 +52,10 @@ export default function AboutUs() {
   return (
     <section
       id="about-us"
-      className="relative z-10 bg-[#faf7f2] px-4 py-16 sm:px-6 sm:py-24 lg:px-8 lg:py-28"
+      className="relative z-10 bg-transparent px-2 pb-2 sm:px-3 sm:pb-3 lg:px-4 lg:pb-4"
     >
-      {/* Decorative ambient glow */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute left-1/2 top-1/2 -z-10 h-[520px] w-full max-w-[1100px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-tr from-[#ead7c0]/40 via-[#f4e8db]/30 to-transparent blur-3xl"
-      />
-
-      {/* Main Wide Horizontal Rectangular Container */}
-      <div className="mx-auto max-w-[1320px] overflow-hidden rounded-3xl border border-[#d8c3af]/60 bg-[#fdfaf6] shadow-[0_24px_64px_-24px_rgba(45,27,19,0.12)] transition-shadow duration-500 hover:shadow-[0_32px_72px_-20px_rgba(45,27,19,0.16)] sm:rounded-[32px] lg:rounded-[40px]">
+      {/* Main Wide Horizontal Rectangular Container matching Hero card style */}
+      <div className="relative mx-auto max-w-[1320px] overflow-hidden rounded-[26px] sm:rounded-[34px] border border-[#3a2418]/[0.08] bg-[#f7f1e9] text-[#2d1b13] shadow-[0_30px_80px_-30px_rgba(0,0,0,0.65)]">
         <div className="grid grid-cols-1 items-stretch lg:grid-cols-12">
           
           {/* Left Side — About Us Content */}
@@ -166,7 +160,7 @@ export default function AboutUs() {
             {/* Soft luxury editorial overlay blending into left card */}
             <div
               aria-hidden="true"
-              className="pointer-events-none absolute inset-0 z-20 bg-gradient-to-t from-[#2d1b13]/25 via-transparent to-transparent lg:bg-gradient-to-r lg:from-[#fdfaf6]/10 lg:via-transparent lg:to-transparent"
+              className="pointer-events-none absolute inset-0 z-20 bg-gradient-to-t from-[#2d1b13]/25 via-transparent to-transparent lg:bg-gradient-to-r lg:from-[#f7f1e9]/10 lg:via-transparent lg:to-transparent"
             />
           </div>
 
