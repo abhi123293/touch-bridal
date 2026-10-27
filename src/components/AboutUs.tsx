@@ -12,27 +12,27 @@ const serifFont = Cormorant_Garamond({
 
 const aboutImages = [
   {
-    src: "/images/about-us.jpeg",
+    src: "/images/about%20us.jpeg",
     alt: "The S Touch Signature Bridal Look",
   },
   {
-    src: "/images/about-1.jpg",
+    src: "/images/about%201.jpg",
     alt: "The S Touch Traditional Bridal Makeup",
   },
   {
-    src: "/images/about-2.jpg",
+    src: "/images/about%202.jpg",
     alt: "The S Touch Royal Bridal Styling",
   },
   {
-    src: "/images/about-3.jpg",
+    src: "/images/about%203.jpg",
     alt: "The S Touch Elegant Hair & Makeup",
   },
   {
-    src: "/images/about-4.jpg",
+    src: "/images/about%204.jpg",
     alt: "The S Touch Reception Look",
   },
   {
-    src: "/images/about-5.jpg",
+    src: "/images/about%205.jpg",
     alt: "The S Touch Classic Bridal Radiance",
   },
 ];
