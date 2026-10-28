@@ -10,8 +10,8 @@ gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 const galleryImages = [
   {
-    src: "/images/saree-1.jpg",
-    alt: "Bridal saree portrait",
+    src: "/images/bridal-01.jpg",
+    alt: "Bridal portrait",
   },
   {
     src: "/images/bridal-02.jpg",
@@ -26,24 +26,20 @@ const galleryImages = [
     alt: "Bridal beauty portrait",
   },
   {
-    // Replace with /images/bridal-05.jpg when available
-    src: "/images/bridal-01.jpg",
-    alt: "Bridal gallery image five",
+    src: "/images/bridal-05.jpg",
+    alt: "Bridal makeover elegance",
   },
   {
-    // Replace with /images/bridal-06.jpg when available
-    src: "/images/bridal-02.jpg",
-    alt: "Bridal gallery image six",
+    src: "/images/bridal-06.jpg",
+    alt: "Signature bridal makeup",
   },
   {
-    // Replace with /images/bridal-07.jpg when available
-    src: "/images/bridal-03.jpg",
-    alt: "Bridal gallery image seven",
+    src: "/images/bridal-07.jpg",
+    alt: "Bridal reception portrait",
   },
   {
-    // Replace with /images/bridal-08.jpg when available
-    src: "/images/bridal-04.jpg",
-    alt: "Bridal gallery image eight",
+    src: "/images/bridal-08.jpg",
+    alt: "Royal bridal look",
   },
 ];
 
