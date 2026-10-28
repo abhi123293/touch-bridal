@@ -10,8 +10,8 @@ gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 const galleryImages = [
   {
-    src: "/images/bridal-01.jpg",
-    alt: "Bridal portrait",
+    src: "/images/saree-1.jpg",
+    alt: "Bridal saree portrait",
   },
   {
     src: "/images/bridal-02.jpg",
@@ -119,6 +119,7 @@ export default function BridalGalleryPreview() {
 
             <div className="bridal-collage">
               <svg
+                suppressHydrationWarning
                 className="bridal-collage-svg"
                 viewBox="0 0 700 900"
                 preserveAspectRatio="none"
@@ -265,42 +266,17 @@ export default function BridalGalleryPreview() {
                 {/* DARK DIVIDERS — EDITORIAL STYLE */}
 
                 <g
+                  suppressHydrationWarning
                   fill="none"
                   stroke="#211c18"
                   strokeWidth="4"
                   strokeLinejoin="round"
                   pointerEvents="none"
                 >
-                  <path
-                    d="
-                      M 0 126
-                      C 135 186, 285 265, 440 315
-                      C 535 348, 615 356, 700 340
-                    "
-                  />
-
-                  <path
-                    d="
-                      M 250 242
-                      L 250 565
-                    "
-                  />
-
-                  <path
-                    d="
-                      M 475 330
-                      L 475 625
-                    "
-                  />
-
-                  <path
-                    d="
-                      M 0 530
-                      C 78 543, 165 555, 250 565
-                      C 319 583, 400 606, 475 625
-                      C 545 647, 624 669, 700 690
-                    "
-                  />
+                  <path d="M 0 126 C 135 186, 285 265, 440 315 C 535 348, 615 356, 700 340" />
+                  <path d="M 250 242 L 250 565" />
+                  <path d="M 475 330 L 475 625" />
+                  <path d="M 0 530 C 78 543, 165 555, 250 565 C 319 583, 400 606, 475 625 C 545 647, 624 669, 700 690" />
 
                   <path d="M 175 556 V 900" />
                   <path d="M 355 605 V 900" />
