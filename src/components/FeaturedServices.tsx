@@ -3,7 +3,7 @@
 
 import Link from "next/link";
 import { motion } from "motion/react";
-import { useRef } from "react";
+import { useRef, useState, useCallback, useEffect } from "react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
@@ -23,25 +23,36 @@ const services = [
   },
   {
     number: "02",
-    title: "Hair & Beauty Care",
+    title: "Hair Care",
     description:
-      "Hair, skincare, facials and everyday grooming.",
-    image: "/images/bridal-02.jpg",
-    imageAlt: "Beauty and makeup look",
-    tag: "EVERYDAY CARE",
+      "Discover hair styling and care for your everyday look and special occasions.",
+    image: "/servicesimg/haircare.jpg",
+    imageAlt: "Hair styling and beauty look",
+    tag: "HAIR CARE",
     message:
-      "Hi, I would like to enquire about Hair & Beauty Care at Touch Bridal Makeover Studio & Unisex Salon.",
+      "Hi, I would like to enquire about Hair Care at Touch Bridal Makeover Studio & Unisex Salon.",
   },
   {
     number: "03",
-    title: "Wedding Styling",
+    title: "Skin Care",
     description:
-      "Elegant hairstyling and finishing touches for every occasion.",
-    image: "/images/bridal-03.jpg",
-    imageAlt: "Wedding makeup and styling",
-    tag: "SPECIAL OCCASIONS",
+      "Explore skincare and facial services to help you feel refreshed.",
+    image: "/servicesimg/bridal-03.jpg",
+    imageAlt: "Skin care ",
+    tag: "SKIN CARE",
     message:
-      "Hi, I would like to enquire about Wedding Styling at Touch Bridal Makeover Studio & Unisex Salon.",
+      "Hi, I would like to enquire about Skin Care at Touch Bridal Makeover Studio & Unisex Salon.",
+  },
+  {
+    number: "04",
+    title: "Beauty Services",
+    description:
+      "Thoughtful beauty services and finishing touches for every occasion.",
+    image: "/images/bridal-04.jpg",
+    imageAlt: "Beauty services and makeup look",
+    tag: "BEAUTY SERVICES",
+    message:
+      "Hi, I would like to enquire about Beauty Services at Touch Bridal Makeover Studio & Unisex Salon.",
   },
 ];
 
@@ -73,7 +84,68 @@ const getWhatsAppLink = (message: string) =>
 
 export default function FeaturedServices() {
   const introRef = useRef<HTMLDivElement>(null);
+const carouselRef = useRef<HTMLDivElement>(null);
 
+const [canScrollLeft, setCanScrollLeft] = useState(false);
+const [canScrollRight, setCanScrollRight] = useState(true);
+
+const updateScrollButtons = useCallback(() => {
+  const carousel = carouselRef.current;
+
+  if (!carousel) return;
+
+  const maxScrollLeft = Math.max(
+    0,
+    carousel.scrollWidth - carousel.clientWidth
+  );
+
+  const currentScrollLeft = carousel.scrollLeft;
+
+  setCanScrollLeft(currentScrollLeft > 8);
+  setCanScrollRight(currentScrollLeft < maxScrollLeft - 8);
+}, []);
+
+useEffect(() => {
+  const carousel = carouselRef.current;
+
+  if (!carousel) return;
+
+  updateScrollButtons();
+
+  const resizeObserver = new ResizeObserver(() => {
+    updateScrollButtons();
+  });
+
+  resizeObserver.observe(carousel);
+
+  window.addEventListener("resize", updateScrollButtons);
+
+  return () => {
+    resizeObserver.disconnect();
+    window.removeEventListener("resize", updateScrollButtons);
+  };
+}, [updateScrollButtons]);
+
+const scrollServices = (direction: "left" | "right") => {
+  const carousel = carouselRef.current;
+
+  if (!carousel) return;
+
+  const card = carousel.querySelector<HTMLElement>(
+    "[data-service-card]"
+  );
+
+  if (!card) return;
+
+  const carouselStyles = window.getComputedStyle(carousel);
+  const gap = parseFloat(carouselStyles.columnGap) || 0;
+  const scrollAmount = card.offsetWidth + gap;
+
+  carousel.scrollBy({
+    left: direction === "right" ? scrollAmount : -scrollAmount,
+    behavior: "smooth",
+  });
+};
   
 useGSAP(
   () => {
@@ -174,84 +246,109 @@ useGSAP(
 </Link>
           </div>
 
-          {/* Three featured service cards */}
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-x-5 sm:gap-y-7 md:grid-cols-3 md:gap-4 lg:gap-5">
-            {services.map((service, index) => (
-              <motion.article
-                key={service.number}
-                initial={{ opacity: 0, y: 14 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.15 }}
-                transition={{
-                  duration: 0.45,
-                  delay: index * 0.1,
-                  ease: "easeOut",
-                }}
-                className="group min-w-0"
-              >
-               
-<Link
-  href="/bridal-gallery"
-  aria-label={`View the bridal gallery for ${service.title}`}
-  className="group relative block overflow-hidden rounded-[13px] border border-[#3a2418]/10 bg-[#e8dccd] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#8b4a28]"
->
-  {/* Service image */}
-  <div className="relative aspect-[4/3] overflow-hidden md:aspect-[3/3.7] lg:aspect-[4/4.5]">
-    <img
-      src={service.image}
-      alt={service.imageAlt}
-      loading="lazy"
-      className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04] motion-reduce:transition-none"
-    />
+       
+{/* FOUR SERVICE CARDS — HORIZONTAL SCROLL */}
+<div className="relative min-w-0">
 
-    {/* Subtle dark gradient at the bottom */}
-    <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#2d1b13]/65 via-transparent to-transparent opacity-80" />
+  {/* Carousel viewport */}
+  <div className="relative">
 
-    {/* Category badge */}
-    <span className="absolute left-2.5 top-2.5 max-w-[calc(100%-1.25rem)] rounded-full border border-white/40 bg-[#f7f1e9]/95 px-2.5 py-1.5 text-[8px] font-semibold tracking-[0.07em] text-[#3a2418] sm:text-[9px]">
-      {service.tag}
-    </span>
-
-    {/* Enquire button: hover on desktop, always visible on mobile */}
-    <span
-      className="absolute inset-x-3 bottom-3 flex translate-y-0 items-center justify-center opacity-100 transition-all duration-300 ease-out sm:translate-y-3 sm:opacity-0 sm:group-hover:translate-y-0 sm:group-hover:opacity-100 sm:group-focus-within:translate-y-0 sm:group-focus-within:opacity-100"
+    {/* LEFT ARROW */}
+    <button
+      type="button"
+      onClick={() => scrollServices("left")}
+      disabled={!canScrollLeft}
+      aria-label="Scroll to previous services"
+      className={`absolute left-0 top-[40%] z-20 flex h-10 w-10 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-[#8b4a28]/25 bg-[#f7f1e9] text-lg text-[#8b4a28] shadow-md transition-all duration-300 hover:bg-[#8b4a28] hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#8b4a28] ${
+        canScrollLeft
+          ? "pointer-events-auto scale-100 opacity-100"
+          : "pointer-events-none scale-90 opacity-0"
+      }`}
     >
-      <span
-        className="inline-flex min-h-10 items-center justify-center gap-2 rounded-full border border-[#e7c9a0]/70 bg-[#2d1b13]/80 px-5 py-2.5 text-[10px] font-semibold tracking-[0.09em] text-[#fff5e6] shadow-[0_0_12px_rgba(231,201,160,0.2),inset_0_1px_2px_rgba(255,255,255,0.12)] backdrop-blur-xl transition-all duration-300 group-hover:border-[#e7c9a0] group-hover:shadow-[0_0_18px_rgba(231,201,160,0.4)]"
-      >
-        ENQUIRE 
-      </span>
-    </span>
-  </div>
-</Link>
+      <span aria-hidden="true">←</span>
+    </button>
 
+    {/* RIGHT ARROW */}
+    <button
+      type="button"
+      onClick={() => scrollServices("right")}
+      disabled={!canScrollRight}
+      aria-label="Scroll to next services"
+      className={`absolute right-0 top-[40%] z-20 flex h-10 w-10 translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-[#8b4a28]/25 bg-[#f7f1e9] text-lg text-[#8b4a28] shadow-md transition-all duration-300 hover:bg-[#8b4a28] hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#8b4a28] ${
+        canScrollRight
+          ? "pointer-events-auto scale-100 opacity-100"
+          : "pointer-events-none scale-90 opacity-0"
+      }`}
+    >
+      <span aria-hidden="true">→</span>
+    </button>
 
-                <div className="pt-3">
-                  {/* <p className="text-[9px] font-medium tracking-[0.13em] text-[#a8663f]">
-                    SERVICE {service.number}
-                  </p> */}
+    {/* SCROLLABLE CARDS */}
+    <div
+      ref={carouselRef}
+      onScroll={updateScrollButtons}
+      className="flex snap-x snap-mandatory gap-5 overflow-x-auto scroll-smooth pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+    >
+      {services.map((service, index) => (
+        <motion.article
+          key={service.number}
+          data-service-card
+          initial={{ opacity: 0, y: 14 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.15 }}
+          transition={{
+            duration: 0.45,
+            delay: index * 0.1,
+            ease: "easeOut",
+          }}
+          className="group w-[82%] min-w-0 shrink-0 snap-start sm:w-[calc(50%-10px)] md:w-[calc(50%-10px)] lg:w-[31%]"
+        >
+          <Link
+            href="/bridal-gallery"
+            aria-label={`View the bridal gallery for ${service.title}`}
+            className="group relative block overflow-hidden rounded-[13px] border border-[#3a2418]/10 bg-[#e8dccd] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#8b4a28]"
+          >
+            {/* Service image */}
+            <div className="relative aspect-[4/3] overflow-hidden md:aspect-[3/3.7] lg:aspect-[4/4.5]">
+              <img
+                src={service.image}
+                alt={service.imageAlt}
+                loading="lazy"
+                className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04] motion-reduce:transition-none"
+              />
 
-                  <h3 className="mt-1.5 text-base font-semibold leading-snug tracking-[-0.015em] sm:text-[15px] lg:text-base">
-                    {service.title}
-                  </h3>
+              {/* Image gradient */}
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#2d1b13]/65 via-transparent to-transparent opacity-80" />
 
-                  <p className="mt-1.5 text-xs leading-[1.65] text-[#756356] sm:text-[12px]">
-                    {service.description}
-                  </p>
+              {/* Category badge */}
+              <span className="absolute left-2.5 top-2.5 max-w-[calc(100%-1.25rem)] rounded-full border border-white/40 bg-[#f7f1e9]/95 px-2.5 py-1.5 text-[8px] font-semibold tracking-[0.07em] text-[#3a2418] sm:text-[9px]">
+                {service.tag}
+              </span>
 
-                  {/* <a
-                    href={getWhatsAppLink(service.message)}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={`Enquire about ${service.title} on WhatsApp`}
-                    className="mt-3 inline-flex items-center gap-1.5 text-[10px] font-semibold tracking-[0.09em] text-[#8b4a28] transition-colors duration-200 hover:text-[#2d1b13] focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#8b4a28]"
-                  >
-                    ENQUIRE 
-                  </a> */}
-                </div>
-              </motion.article>
-            ))}
+              {/* Enquire label */}
+              <span className="absolute inset-x-3 bottom-3 flex translate-y-0 items-center justify-center opacity-100 transition-all duration-300 ease-out sm:translate-y-3 sm:opacity-0 sm:group-hover:translate-y-0 sm:group-hover:opacity-100 sm:group-focus-within:translate-y-0 sm:group-focus-within:opacity-100">
+                <span className="inline-flex min-h-10 items-center justify-center gap-2 rounded-full border border-[#e7c9a0]/70 bg-[#2d1b13]/80 px-5 py-2.5 text-[10px] font-semibold tracking-[0.09em] text-[#fff5e6] shadow-[0_0_12px_rgba(231,201,160,0.2),inset_0_1px_2px_rgba(255,255,255,0.12)] backdrop-blur-xl transition-all duration-300 group-hover:border-[#e7c9a0] group-hover:shadow-[0_0_18px_rgba(231,201,160,0.4)]">
+                  ENQUIRE
+                </span>
+              </span>
+            </div>
+          </Link>
+
+          {/* Service details */}
+          <div className="pt-3">
+            <h3 className="mt-1.5 text-base font-semibold leading-snug tracking-[-0.015em] sm:text-[15px] lg:text-base">
+              {service.title}
+            </h3>
+
+            <p className="mt-1.5 text-xs leading-[1.65] text-[#756356] sm:text-[12px]">
+              {service.description}
+            </p>
           </div>
+        </motion.article>
+      ))}
+    </div>
+  </div>
+</div>
         </div>
       </div>
     </section>
