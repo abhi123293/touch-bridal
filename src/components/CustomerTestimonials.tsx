@@ -15,7 +15,7 @@ const openSans = Open_Sans({
 });
 
 // Replace this with your preferred central portrait image.
-const featuredImage = "/images/bridal-01.jpg";
+const featuredImage = "/servicesimg/beauty.jpg";
 
 const reviews = [
   {
