@@ -48,29 +48,39 @@ export default function BridalGalleryPreview() {
 
   useGSAP(
     () => {
-      gsap.from(".bridal-gallery-text", {
-        y: 35,
-        opacity: 0,
-        duration: 0.9,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 75%",
-          toggleActions: "play none none none",
-        },
-      });
+      gsap.fromTo(
+        ".bridal-gallery-text",
+        { y: 35, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.9,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 85%",
+            toggleActions: "play none none none",
+          },
+          clearProps: "all",
+        }
+      );
 
-      gsap.from(".bridal-collage-image", {
-        opacity: 0,
-        duration: 0.9,
-        stagger: 0.1,
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 75%",
-          toggleActions: "play none none none",
-        },
-      });
+      gsap.fromTo(
+        ".bridal-collage-image",
+        { opacity: 0 },
+        {
+          opacity: 1,
+          duration: 0.9,
+          stagger: 0.1,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 85%",
+            toggleActions: "play none none none",
+          },
+          clearProps: "opacity",
+        }
+      );
     },
     { scope: sectionRef }
   );
@@ -81,12 +91,11 @@ export default function BridalGalleryPreview() {
       className="bg-transparent px-4 py-16 sm:px-6 sm:py-20 lg:px-8"
     >
       <div className="mx-auto w-full max-w-[1320px]">
-        <div className="overflow-hidden rounded-[26px] bg-[#f7f1e9] p-5 font-sans sm:rounded-[34px] sm:p-8 lg:p-12">
+        <div className="overflow-hidden rounded-[26px] bg-[#f7f1e9] p-5 font-sans sm:rounded-[34px] sm:p-8 lg:p-12 shadow-2xl border border-[#3a2418]/[0.08]">
           <div className="grid items-center gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-14">
             {/* LEFT CONTENT — MATCHES THE OTHER SECTIONS */}
-
             <div className="bridal-gallery-text">
-              <span className="mb-5 inline-flex items-center gap-3 text-[10px] font-semibold tracking-[0.24em] text-[#8b4a28] sm:text-xs">
+              <span className="mb-5 inline-flex items-center gap-3 text-[10px] font-semibold tracking-[0.24em] text-[#8b4a28] sm:text-xs uppercase">
                 <span className="h-px w-8 bg-[#8b4a28]" />
                 OUR BRIDAL GALLERY
               </span>
@@ -103,7 +112,7 @@ export default function BridalGalleryPreview() {
               </p>
 
               <Link
-                href="/bridal-gallery"
+                href="/services"
                 className="mt-8 inline-flex items-center gap-3 rounded-full bg-[#2d1b13] px-6 py-3.5 text-xs font-semibold tracking-[0.12em] text-[#f7f1e9] transition-colors duration-300 hover:bg-[#8b4a28]"
               >
                 EXPLORE BRIDAL GALLERY
@@ -112,14 +121,17 @@ export default function BridalGalleryPreview() {
             </div>
 
             {/* RIGHT SIDE — EIGHT-IMAGE EDITORIAL COLLAGE */}
-
-            <div className="bridal-collage">
+            <div
+              className="bridal-collage relative w-full min-w-0 aspect-[7/9] overflow-hidden rounded-[22px] sm:rounded-[26px] lg:rounded-[28px] bg-[#e8ddd1] shadow-2xl isolate"
+              style={{ aspectRatio: "7 / 9" }}
+            >
               <svg
                 suppressHydrationWarning
-                className="bridal-collage-svg"
+                className="bridal-collage-svg block h-full w-full"
                 viewBox="0 0 700 900"
                 preserveAspectRatio="none"
                 xmlns="http://www.w3.org/2000/svg"
+                xmlnsXlink="http://www.w3.org/1999/xlink"
                 role="img"
                 aria-label="Eight-image bridal beauty gallery collage"
               >
@@ -166,10 +178,10 @@ export default function BridalGalleryPreview() {
                 </defs>
 
                 {/* BOTTOM ROW — RENDERED FIRST */}
-
                 <image
-                  className="bridal-collage-image"
+                  className="bridal-collage-image transition-opacity duration-500"
                   href={galleryImages[4].src}
+                  xlinkHref={galleryImages[4].src}
                   x="0"
                   y="520"
                   width="175"
@@ -179,8 +191,9 @@ export default function BridalGalleryPreview() {
                 />
 
                 <image
-                  className="bridal-collage-image"
+                  className="bridal-collage-image transition-opacity duration-500"
                   href={galleryImages[5].src}
+                  xlinkHref={galleryImages[5].src}
                   x="175"
                   y="550"
                   width="180"
@@ -190,8 +203,9 @@ export default function BridalGalleryPreview() {
                 />
 
                 <image
-                  className="bridal-collage-image"
+                  className="bridal-collage-image transition-opacity duration-500"
                   href={galleryImages[6].src}
+                  xlinkHref={galleryImages[6].src}
                   x="355"
                   y="595"
                   width="175"
@@ -201,8 +215,9 @@ export default function BridalGalleryPreview() {
                 />
 
                 <image
-                  className="bridal-collage-image"
+                  className="bridal-collage-image transition-opacity duration-500"
                   href={galleryImages[7].src}
+                  xlinkHref={galleryImages[7].src}
                   x="530"
                   y="645"
                   width="170"
@@ -212,10 +227,10 @@ export default function BridalGalleryPreview() {
                 />
 
                 {/* MIDDLE ROW — THREE IMAGES */}
-
                 <image
-                  className="bridal-collage-image"
+                  className="bridal-collage-image transition-opacity duration-500"
                   href={galleryImages[1].src}
+                  xlinkHref={galleryImages[1].src}
                   x="0"
                   y="120"
                   width="255"
@@ -225,8 +240,9 @@ export default function BridalGalleryPreview() {
                 />
 
                 <image
-                  className="bridal-collage-image"
+                  className="bridal-collage-image transition-opacity duration-500"
                   href={galleryImages[2].src}
+                  xlinkHref={galleryImages[2].src}
                   x="245"
                   y="235"
                   width="240"
@@ -236,8 +252,9 @@ export default function BridalGalleryPreview() {
                 />
 
                 <image
-                  className="bridal-collage-image"
+                  className="bridal-collage-image transition-opacity duration-500"
                   href={galleryImages[3].src}
+                  xlinkHref={galleryImages[3].src}
                   x="470"
                   y="325"
                   width="230"
@@ -247,10 +264,10 @@ export default function BridalGalleryPreview() {
                 />
 
                 {/* LARGE TOP IMAGE */}
-
                 <image
-                  className="bridal-collage-image"
+                  className="bridal-collage-image transition-opacity duration-500"
                   href={galleryImages[0].src}
+                  xlinkHref={galleryImages[0].src}
                   x="0"
                   y="0"
                   width="700"
@@ -260,7 +277,6 @@ export default function BridalGalleryPreview() {
                 />
 
                 {/* DARK DIVIDERS — EDITORIAL STYLE */}
-
                 <g
                   suppressHydrationWarning
                   fill="none"
@@ -273,7 +289,6 @@ export default function BridalGalleryPreview() {
                   <path d="M 250 242 L 250 565" />
                   <path d="M 475 330 L 475 625" />
                   <path d="M 0 530 C 78 543, 165 555, 250 565 C 319 583, 400 606, 475 625 C 545 647, 624 669, 700 690" />
-
                   <path d="M 175 556 V 900" />
                   <path d="M 355 605 V 900" />
                   <path d="M 530 650 V 900" />
@@ -281,10 +296,14 @@ export default function BridalGalleryPreview() {
               </svg>
 
               {/* CENTRAL EDITORIAL TITLE */}
-
-              <div className="bridal-collage-title" aria-hidden="true">
-                <span>BRIDAL</span>
-                <span className="bridal-collage-title-second">
+              <div
+                className="bridal-collage-title pointer-events-none absolute left-1/2 top-[52%] z-10 flex -translate-x-1/2 -translate-y-1/2 flex-col items-center text-center text-[#fffaf4] whitespace-nowrap leading-[0.95] drop-shadow-[0_2px_18px_rgba(0,0,0,0.6)]"
+                aria-hidden="true"
+              >
+                <span className="text-[26px] sm:text-[34px] lg:text-[44px] font-semibold tracking-[0.1em]">
+                  BRIDAL
+                </span>
+                <span className="text-[26px] sm:text-[34px] lg:text-[44px] font-normal tracking-[0.18em]">
                   BEAUTY
                 </span>
               </div>
@@ -292,8 +311,6 @@ export default function BridalGalleryPreview() {
           </div>
         </div>
       </div>
-
-
     </section>
   );
 }
