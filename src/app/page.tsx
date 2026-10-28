@@ -1,6 +1,10 @@
 import BridalHero from "@/components/BridalHero";
 import AboutUs from "@/components/AboutUs";
 import FeaturedServices from "@/components/FeaturedServices";
+import BridalGalleryPreview from "@/components/BridalGalleryPreview";
+
+
+
 
 export default function HomePage() {
   return (
@@ -8,6 +12,8 @@ export default function HomePage() {
       <BridalHero />
       <AboutUs />
       <FeaturedServices />
+      <BridalGalleryPreview/>
+   
     </main>
   );
 }
