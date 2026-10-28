@@ -128,116 +128,43 @@ export default function BridalGalleryPreview() {
               >
                 <defs>
                   {/* IMAGE 1 — LARGE TOP */}
-
                   <clipPath id="bridal-clip-top">
-                    <path
-                      d="
-                        M 0 0
-                        H 700
-                        V 340
-                        C 615 356, 535 348, 440 315
-                        C 285 265, 135 186, 0 126
-                        Z
-                      "
-                    />
+                    <path d="M 0 0 H 700 V 340 C 615 356, 535 348, 440 315 C 285 265, 135 186, 0 126 Z" />
                   </clipPath>
 
                   {/* IMAGE 2 — MIDDLE LEFT */}
-
                   <clipPath id="bridal-clip-left">
-                    <path
-                      d="
-                        M 0 126
-                        C 85 165, 174 211, 250 242
-                        L 250 565
-                        C 165 555, 78 543, 0 530
-                        Z
-                      "
-                    />
+                    <path d="M 0 126 C 85 165, 174 211, 250 242 L 250 565 C 165 555, 78 543, 0 530 Z" />
                   </clipPath>
 
                   {/* IMAGE 3 — MIDDLE CENTRE */}
-
                   <clipPath id="bridal-clip-center">
-                    <path
-                      d="
-                        M 250 242
-                        C 326 270, 405 305, 475 330
-                        L 475 625
-                        C 400 606, 319 583, 250 565
-                        Z
-                      "
-                    />
+                    <path d="M 250 242 C 326 270, 405 305, 475 330 L 475 625 C 400 606, 319 583, 250 565 Z" />
                   </clipPath>
 
                   {/* IMAGE 4 — MIDDLE RIGHT */}
-
                   <clipPath id="bridal-clip-right">
-                    <path
-                      d="
-                        M 475 330
-                        C 554 359, 630 391, 700 420
-                        V 690
-                        C 624 669, 545 647, 475 625
-                        Z
-                      "
-                    />
+                    <path d="M 475 330 C 554 359, 630 391, 700 420 V 690 C 624 669, 545 647, 475 625 Z" />
                   </clipPath>
 
                   {/* IMAGE 5 — BOTTOM LEFT */}
-
                   <clipPath id="bridal-clip-bottom-one">
-                    <path
-                      d="
-                        M 0 530
-                        C 58 540, 118 550, 175 556
-                        V 900
-                        H 0
-                        Z
-                      "
-                    />
+                    <path d="M 0 530 C 58 540, 118 550, 175 556 V 900 H 0 Z" />
                   </clipPath>
 
                   {/* IMAGE 6 — BOTTOM CENTRE-LEFT */}
-
                   <clipPath id="bridal-clip-bottom-two">
-                    <path
-                      d="
-                        M 175 556
-                        C 235 572, 294 590, 355 605
-                        V 900
-                        H 175
-                        Z
-                      "
-                    />
+                    <path d="M 175 556 C 235 572, 294 590, 355 605 V 900 H 175 Z" />
                   </clipPath>
 
                   {/* IMAGE 7 — BOTTOM CENTRE-RIGHT */}
-
                   <clipPath id="bridal-clip-bottom-three">
-                    <path
-                      d="
-                        M 355 605
-                        C 414 620, 474 637, 530 650
-                        V 900
-                        H 355
-                        Z
-                      "
-                    />
+                    <path d="M 355 605 C 414 620, 474 637, 530 650 V 900 H 355 Z" />
                   </clipPath>
 
                   {/* IMAGE 8 — BOTTOM RIGHT */}
-
                   <clipPath id="bridal-clip-bottom-four">
-                    <path
-                      d="
-                        M 530 650
-                        C 592 668, 649 690, 700 710
-                        V 900
-                        H 530
-                        Z
-                      "
-                    />
+                    <path d="M 530 650 C 592 668, 649 690, 700 710 V 900 H 530 Z" />
                   </clipPath>
                 </defs>
 
@@ -394,93 +321,7 @@ export default function BridalGalleryPreview() {
         </div>
       </div>
 
-      {/* RESPONSIVE COLLAGE STYLING */}
 
-      <style jsx>{`
-        .bridal-collage {
-          position: relative;
-          width: 100%;
-          min-width: 0;
-          aspect-ratio: 7 / 9;
-          overflow: hidden;
-          isolation: isolate;
-          border-radius: 26px;
-          background: #e8ddd1;
-        }
-
-        .bridal-collage-svg {
-          display: block;
-          width: 100%;
-          height: 100%;
-        }
-
-        .bridal-collage-image {
-          transition: opacity 0.5s ease;
-        }
-
-        .bridal-collage-title {
-          position: absolute;
-          top: 52%;
-          left: 50%;
-          z-index: 5;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          transform: translate(-50%, -50%);
-          color: #fffaf4;
-          font-size: clamp(25px, 3.7vw, 46px);
-          font-weight: 600;
-          letter-spacing: 0.1em;
-          line-height: 0.95;
-          white-space: nowrap;
-          text-align: center;
-          text-shadow: 0 2px 18px rgba(0, 0, 0, 0.4);
-          pointer-events: none;
-        }
-
-        .bridal-collage-title-second {
-          font-weight: 400;
-          letter-spacing: 0.18em;
-        }
-
-        @media (min-width: 1024px) {
-          .bridal-collage {
-            border-radius: 28px;
-          }
-        }
-
-        @media (max-width: 1023px) {
-          .bridal-collage {
-            aspect-ratio: 4 / 5;
-          }
-
-          .bridal-collage-title {
-            font-size: clamp(30px, 6vw, 46px);
-          }
-        }
-
-        @media (max-width: 640px) {
-          .bridal-collage {
-            aspect-ratio: 7 / 9;
-            border-radius: 22px;
-          }
-
-          .bridal-collage-title {
-            font-size: clamp(22px, 6vw, 32px);
-            letter-spacing: 0.08em;
-          }
-
-          .bridal-collage-title-second {
-            letter-spacing: 0.12em;
-          }
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-          .bridal-collage-image {
-            transition: none;
-          }
-        }
-      `}</style>
     </section>
   );
 }
