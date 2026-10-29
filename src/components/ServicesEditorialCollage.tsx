@@ -19,6 +19,10 @@ const WHATSAPP_ENQUIRY_URL =
   "https://wa.me/919789376174?text=" +
   encodeURIComponent("Hi Touch! I'd love to book an appointment.");
 
+const WHATSAPP_RENTAL_JEWELS_URL =
+  "https://wa.me/919789376174?text=" +
+  encodeURIComponent("Hi Touch! I'd love to enquire about Rental Jewels.");
+
 interface ServicesEditorialCollageProps {
   onSelectBridalMakeup?: () => void;
   onSelectHairServices?: () => void;
@@ -442,6 +446,47 @@ export default function ServicesEditorialCollage({
             </a>
           </div>
 
+          {/* -----------------------------------------------------------------------
+              FRAME 9 (Bottom Center - Right): Rental Jewels
+              (Exact reference: right beside bottom-center portrait, below centerpiece)
+             ----------------------------------------------------------------------- */}
+          <div
+            className="absolute left-[46.8%] top-[59%] w-[14.5%] h-[18%] z-15"
+          >
+            <a
+              href={WHATSAPP_RENTAL_JEWELS_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Rental Jewels Enquiry via WhatsApp"
+              className="group relative block w-full h-full overflow-hidden rounded-[2px] border border-[#2B1C17]/25 bg-[#2B1C17] shadow-md text-left cursor-pointer transition-all duration-300 hover:border-[#C8A66A] hover:shadow-xl focus:outline-none"
+            >
+              <img
+                src="/images/rental jewels.jpg"
+                alt="Rental Jewels by S Touch Salon"
+                className="h-full w-full object-cover object-[center_20%] transition-transform duration-700 ease-out group-hover:scale-[1.035]"
+              />
+              <div
+                aria-hidden="true"
+                className="pointer-events-none absolute inset-x-0 bottom-0 h-18 bg-gradient-to-t from-[#1C120F]/90 via-[#1C120F]/40 to-transparent"
+              />
+              <div className="absolute inset-x-0 bottom-0 p-2.5 flex items-end justify-between gap-1">
+                <div>
+                  <span className={`${inter.className} block text-[8px] uppercase tracking-[0.16em] font-semibold text-[#C8A66A]`}>
+                    Adornments
+                  </span>
+                  <h3
+                    className={`${cormorant.className} text-xs lg:text-[14px] font-medium text-[#F5F0E8] leading-tight drop-shadow-sm`}
+                  >
+                    Rental Jewels
+                  </h3>
+                </div>
+                <span className="shrink-0 inline-flex h-4.5 w-4.5 items-center justify-center rounded-full bg-[#C8A66A]/25 text-[#C8A66A]">
+                  <ArrowUpRight className="h-2.5 w-2.5 stroke-[2]" />
+                </span>
+              </div>
+            </a>
+          </div>
+
 
           {/* -----------------------------------------------------------------------
               EDITORIAL TEXT BLOCK IN LOWER-LEFT OPEN SPACE
@@ -740,6 +785,38 @@ export default function ServicesEditorialCollage({
                   </div>
                   <span className="shrink-0 inline-flex h-4.5 w-4.5 items-center justify-center rounded-full bg-[#C8A66A]/25 text-[#C8A66A]">
                     <ArrowUpRight className="h-2.5 w-2.5" />
+                  </span>
+                </div>
+              </a>
+            </div>
+
+            {/* Card 9: Rental Jewels */}
+            <div className="col-span-2">
+              <a
+                href={WHATSAPP_RENTAL_JEWELS_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Rental Jewels Enquiry via WhatsApp"
+                className="group relative w-full h-[180px] overflow-hidden rounded-[2px] border border-[#2B1C17]/25 bg-[#2B1C17] text-left block"
+              >
+                <img
+                  src="/images/rental jewels.jpg"
+                  alt="Rental Jewels"
+                  className="h-full w-full object-cover object-[center_30%]"
+                />
+                <div className="absolute inset-x-0 bottom-0 h-22 bg-gradient-to-t from-[#1C120F] via-[#1C120F]/55 to-transparent" />
+                <div className="absolute inset-x-0 bottom-0 p-3 flex items-end justify-between gap-2">
+                  <div>
+                    <span className="block text-[9px] uppercase tracking-[0.2em] font-semibold text-[#C8A66A]">
+                      Adornments
+                    </span>
+                    <h3 className={`${cormorant.className} text-lg font-medium text-[#F5F0E8]`}>
+                      Rental Jewels
+                    </h3>
+                  </div>
+                  <span className="shrink-0 inline-flex items-center gap-1 px-3 py-1 rounded-full bg-[#C8A66A] text-[#1C120F] text-xs font-semibold">
+                    <span>Enquire</span>
+                    <ArrowUpRight className="h-3 w-3" />
                   </span>
                 </div>
               </a>
