@@ -62,6 +62,15 @@ export const SKIN_SUB_SERVICES: SkinSubService[] = [
     image: "/images/bleach.jpg",
     alt: "Skin Bleach Therapy by S Touch Salon",
   },
+  {
+    id: "korean-facial",
+    number: "05",
+    title: "Korean Facial",
+    description:
+      "Enjoy a refreshing Korean facial that deeply hydrates your skin, enhances your natural glow, and leaves your face looking smooth, fresh, and radiant.",
+    image: "/images/korean facial.jpg",
+    alt: "Korean Facial Therapy by S Touch Salon",
+  },
 ];
 
 interface SkinFacialServicesSectionProps {
