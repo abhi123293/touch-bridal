@@ -151,7 +151,7 @@ export default function AdditionalServicesSection({
                   <img
                     src={service.image}
                     alt={service.alt}
-                    className="h-full w-full object-cover object-center"
+                    className="h-full w-full object-cover object-top"
                   />
                 </div>
               );
@@ -288,7 +288,7 @@ export default function AdditionalServicesSection({
                   <img
                     src={service.image}
                     alt={service.alt}
-                    className="h-full w-full object-cover object-center"
+                    className="h-full w-full object-cover object-top"
                   />
                 </div>
               );
