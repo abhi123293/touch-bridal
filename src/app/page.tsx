@@ -4,7 +4,7 @@ import FeaturedServices from "@/components/FeaturedServices";
 import BridalGalleryPreview from "@/components/BridalGalleryPreview";
 import WhyChooseUs from "@/components/WhyChooseUs";
 import CustomerTestimonials from "@/components/CustomerTestimonials";
-
+import LocationContact from "@/components/LocationContact";
 
 
 export default function HomePage() {
@@ -16,6 +16,7 @@ export default function HomePage() {
       <BridalGalleryPreview/>
       <WhyChooseUs />
       <CustomerTestimonials />
+      <LocationContact />
    
     </main>
   );
