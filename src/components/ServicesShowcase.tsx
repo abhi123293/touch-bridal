@@ -1,12 +1,11 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
-import { motion, AnimatePresence } from "motion/react";
-import ServiceSelectionSection from "@/components/ServiceSelectionSection";
+import { useState, useEffect } from "react";
+import ServicesEditorialCollage from "@/components/ServicesEditorialCollage";
 import BridalMakeupSection from "@/components/BridalMakeupSection";
 import HairServicesSection from "@/components/HairServicesSection";
-import SkinFacialServicesSection from "@/components/SkinFacialServicesSection";
 import BeautyGroomingServicesSection from "@/components/BeautyGroomingServicesSection";
+import SkinFacialServicesSection from "@/components/SkinFacialServicesSection";
 
 // Precise Mughal Cusped Arch Paths (Single-line continuous strings to prevent CRLF hydration mismatch)
 const MUGHAL_ARCH_OUTER_PATH =
@@ -46,76 +45,138 @@ const SAREE_MODELS = [
 ];
 
 export default function ServicesShowcase() {
-  const [selectedServices, setSelectedServices] = useState<string[]>([]);
-  const bridalSectionRef = useRef<HTMLDivElement>(null);
-  const hairSectionRef = useRef<HTMLDivElement>(null);
-  const skinSectionRef = useRef<HTMLDivElement>(null);
-  const beautySectionRef = useRef<HTMLDivElement>(null);
+  const [isBridalOpen, setIsBridalOpen] = useState(false);
+  const [isHairOpen, setIsHairOpen] = useState(false);
+  const [isBeautyOpen, setIsBeautyOpen] = useState(false);
+  const [isSkinOpen, setIsSkinOpen] = useState(false);
+  const [closingSection, setClosingSection] = useState<"bridal" | "hair" | "beauty" | "skin" | null>(null);
 
-  const isBridalMakeupSelected = selectedServices.includes("Bridal Makeup");
-  const isHairServicesSelected = selectedServices.includes("Hair Services");
-  const isSkinServicesSelected = selectedServices.includes("Skin & Facial Services");
-  const isBeautyServicesSelected = selectedServices.includes("Beauty & Grooming Services");
+  // Auto-reveal if hash is present (e.g. #bridal-makeup, #hair-services, #beauty-grooming, or #skin-facial)
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const hash = window.location.hash.toLowerCase();
+      if (hash.includes("skin") || hash.includes("facial")) {
+        setIsSkinOpen(true);
+        setTimeout(() => {
+          const el = document.getElementById("skin-facial-section");
+          if (el) {
+            el.scrollIntoView({ behavior: "smooth", block: "start" });
+          }
+        }, 150);
+      } else if (hash.includes("beauty-grooming") || hash.includes("beauty") || hash.includes("grooming")) {
+        setIsBeautyOpen(true);
+        setTimeout(() => {
+          const el = document.getElementById("beauty-grooming-section");
+          if (el) {
+            el.scrollIntoView({ behavior: "smooth", block: "start" });
+          }
+        }, 150);
+      } else if (hash.includes("hair-services") || hash.includes("hair")) {
+        setIsHairOpen(true);
+        setTimeout(() => {
+          const el = document.getElementById("hair-services-section");
+          if (el) {
+            el.scrollIntoView({ behavior: "smooth", block: "start" });
+          }
+        }, 150);
+      } else if (hash.includes("bridal-makeup") || hash.includes("bridal-services")) {
+        setIsBridalOpen(true);
+        setTimeout(() => {
+          const el = document.getElementById("bridal-makeup-section");
+          if (el) {
+            el.scrollIntoView({ behavior: "smooth", block: "start" });
+          }
+        }, 150);
+      }
+    }
+  }, []);
 
-  const toggleService = (service: string) => {
-    setSelectedServices((prev) =>
-      prev.includes(service)
-        ? prev.filter((item) => item !== service)
-        : [...prev, service]
-    );
+  const handleOpenBridalSection = () => {
+    setIsHairOpen(false);
+    setIsBeautyOpen(false);
+    setIsSkinOpen(false);
+    setClosingSection(null);
+    setIsBridalOpen(true);
+    // Smooth scroll down to bridal subservices section
+    setTimeout(() => {
+      const el = document.getElementById("bridal-makeup-section");
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }, 100);
   };
 
-  // Smooth scroll down to the Bridal Makeup section when it is checked
-  useEffect(() => {
-    if (isBridalMakeupSelected) {
-      const timer = setTimeout(() => {
-        bridalSectionRef.current?.scrollIntoView({
-          behavior: "smooth",
-          block: "start",
-        });
-      }, 180);
-      return () => clearTimeout(timer);
-    }
-  }, [isBridalMakeupSelected]);
+  const handleOpenHairSection = () => {
+    setIsBridalOpen(false);
+    setIsBeautyOpen(false);
+    setIsSkinOpen(false);
+    setClosingSection(null);
+    setIsHairOpen(true);
+    // Smooth scroll down to hair subservices section
+    setTimeout(() => {
+      const el = document.getElementById("hair-services-section");
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }, 100);
+  };
 
-  // Smooth scroll down to the Hair Services section when it is checked
-  useEffect(() => {
-    if (isHairServicesSelected) {
-      const timer = setTimeout(() => {
-        hairSectionRef.current?.scrollIntoView({
-          behavior: "smooth",
-          block: "start",
-        });
-      }, 180);
-      return () => clearTimeout(timer);
-    }
-  }, [isHairServicesSelected]);
+  const handleOpenBeautySection = () => {
+    setIsBridalOpen(false);
+    setIsHairOpen(false);
+    setIsSkinOpen(false);
+    setClosingSection(null);
+    setIsBeautyOpen(true);
+    // Smooth scroll down to beauty subservices section
+    setTimeout(() => {
+      const el = document.getElementById("beauty-grooming-section");
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }, 100);
+  };
 
-  // Smooth scroll down to the Skin & Facial Services section when it is checked
-  useEffect(() => {
-    if (isSkinServicesSelected) {
-      const timer = setTimeout(() => {
-        skinSectionRef.current?.scrollIntoView({
-          behavior: "smooth",
-          block: "start",
-        });
-      }, 180);
-      return () => clearTimeout(timer);
-    }
-  }, [isSkinServicesSelected]);
+  const handleOpenSkinSection = () => {
+    setIsBridalOpen(false);
+    setIsHairOpen(false);
+    setIsBeautyOpen(false);
+    setClosingSection(null);
+    setIsSkinOpen(true);
+    // Smooth scroll down to skin & facial subservices section
+    setTimeout(() => {
+      const el = document.getElementById("skin-facial-section");
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }, 100);
+  };
 
-  // Smooth scroll down to the Beauty & Grooming Services section when it is checked
-  useEffect(() => {
-    if (isBeautyServicesSelected) {
-      const timer = setTimeout(() => {
-        beautySectionRef.current?.scrollIntoView({
-          behavior: "smooth",
-          block: "start",
-        });
-      }, 180);
-      return () => clearTimeout(timer);
+  const handleBackToServices = () => {
+    // 1. Smoothly scroll back up to all-services-collage
+    const el = document.getElementById("all-services-collage");
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
     }
-  }, [isBeautyServicesSelected]);
+
+    // 2. Clean URL hash if present
+    if (typeof window !== "undefined" && window.location.hash) {
+      history.replaceState(null, "", window.location.pathname + window.location.search);
+    }
+
+    // 3. Initiate exit transition and disappear the active sub-section after scrolling up
+    if (isBridalOpen) setClosingSection("bridal");
+    if (isHairOpen) setClosingSection("hair");
+    if (isBeautyOpen) setClosingSection("beauty");
+    if (isSkinOpen) setClosingSection("skin");
+
+    setTimeout(() => {
+      setIsBridalOpen(false);
+      setIsHairOpen(false);
+      setIsBeautyOpen(false);
+      setIsSkinOpen(false);
+      setClosingSection(null);
+    }, 420);
+  };
 
   return (
     <section
@@ -214,93 +275,65 @@ export default function ServicesShowcase() {
             </article>
           ))}
         </div>
+      </div>
 
-        {/* S TOUCH SALON — Translucent Brownish Glassmorphism Service Selection Box */}
-        <ServiceSelectionSection
-          selectedServices={selectedServices}
-          onToggleService={toggleService}
+      {/* Editorial Collage Services Section — Under / After the Image Frames */}
+      <div id="all-services-collage" className="w-full mt-6 sm:mt-8 lg:mt-10">
+        <ServicesEditorialCollage
+          onSelectBridalMakeup={handleOpenBridalSection}
+          onSelectHairServices={handleOpenHairSection}
+          onSelectBeautyGrooming={handleOpenBeautySection}
+          onSelectSkinFacial={handleOpenSkinSection}
         />
       </div>
 
-      {/* DYNAMIC BRIDAL MAKEUP CONTENT SECTION (Expands smoothly below selection box) */}
-      <AnimatePresence>
-        {isBridalMakeupSelected && (
-          <motion.div
-            ref={bridalSectionRef}
-            initial={{ opacity: 0, height: 0, y: -24 }}
-            animate={{ opacity: 1, height: "auto", y: 0 }}
-            exit={{ opacity: 0, height: 0, y: -24 }}
-            transition={{
-              duration: 0.55,
-              ease: [0.16, 1, 0.3, 1],
-              opacity: { duration: 0.38 },
-            }}
-            className="overflow-hidden w-full pt-6 sm:pt-8"
-          >
-            <BridalMakeupSection />
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {/* Interactive Bridal Makeup Sub-Service Section (Reveals upon selecting Bridal Makeup) */}
+      {isBridalOpen && (
+        <div
+          id="bridal-makeup-section"
+          className={`w-full mt-8 sm:mt-12 lg:mt-16 scroll-mt-28 transition-all duration-400 ease-out ${
+            closingSection === "bridal" ? "opacity-0 translate-y-6 pointer-events-none" : "opacity-100 translate-y-0"
+          }`}
+        >
+          <BridalMakeupSection onBackToServices={handleBackToServices} />
+        </div>
+      )}
 
-      {/* DYNAMIC HAIR SERVICES CONTENT SECTION (Expands smoothly below selection box) */}
-      <AnimatePresence>
-        {isHairServicesSelected && (
-          <motion.div
-            ref={hairSectionRef}
-            initial={{ opacity: 0, height: 0, y: -24 }}
-            animate={{ opacity: 1, height: "auto", y: 0 }}
-            exit={{ opacity: 0, height: 0, y: -24 }}
-            transition={{
-              duration: 0.55,
-              ease: [0.16, 1, 0.3, 1],
-              opacity: { duration: 0.38 },
-            }}
-            className="overflow-hidden w-full pt-6 sm:pt-8"
-          >
-            <HairServicesSection />
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {/* Interactive Hair Services Sub-Service Section (Reveals upon selecting Hair Services) */}
+      {isHairOpen && (
+        <div
+          id="hair-services-section"
+          className={`w-full mt-8 sm:mt-12 lg:mt-16 scroll-mt-28 transition-all duration-400 ease-out ${
+            closingSection === "hair" ? "opacity-0 translate-y-6 pointer-events-none" : "opacity-100 translate-y-0"
+          }`}
+        >
+          <HairServicesSection onBackToServices={handleBackToServices} />
+        </div>
+      )}
 
-      {/* DYNAMIC SKIN & FACIAL SERVICES CONTENT SECTION (Expands smoothly below selection box) */}
-      <AnimatePresence>
-        {isSkinServicesSelected && (
-          <motion.div
-            ref={skinSectionRef}
-            initial={{ opacity: 0, height: 0, y: -24 }}
-            animate={{ opacity: 1, height: "auto", y: 0 }}
-            exit={{ opacity: 0, height: 0, y: -24 }}
-            transition={{
-              duration: 0.55,
-              ease: [0.16, 1, 0.3, 1],
-              opacity: { duration: 0.38 },
-            }}
-            className="overflow-hidden w-full pt-6 sm:pt-8"
-          >
-            <SkinFacialServicesSection />
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {/* Interactive Beauty & Grooming Sub-Service Section (Reveals upon selecting Beauty & Grooming) */}
+      {isBeautyOpen && (
+        <div
+          id="beauty-grooming-section"
+          className={`w-full mt-8 sm:mt-12 lg:mt-16 scroll-mt-28 transition-all duration-400 ease-out ${
+            closingSection === "beauty" ? "opacity-0 translate-y-6 pointer-events-none" : "opacity-100 translate-y-0"
+          }`}
+        >
+          <BeautyGroomingServicesSection onBackToServices={handleBackToServices} />
+        </div>
+      )}
 
-      {/* DYNAMIC BEAUTY & GROOMING SERVICES CONTENT SECTION (Expands smoothly below selection box) */}
-      <AnimatePresence>
-        {isBeautyServicesSelected && (
-          <motion.div
-            ref={beautySectionRef}
-            initial={{ opacity: 0, height: 0, y: -24 }}
-            animate={{ opacity: 1, height: "auto", y: 0 }}
-            exit={{ opacity: 0, height: 0, y: -24 }}
-            transition={{
-              duration: 0.55,
-              ease: [0.16, 1, 0.3, 1],
-              opacity: { duration: 0.38 },
-            }}
-            className="overflow-hidden w-full pt-6 sm:pt-8"
-          >
-            <BeautyGroomingServicesSection />
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {/* Interactive Skin & Facial Sub-Service Section (Reveals upon selecting Skin & Facial) */}
+      {isSkinOpen && (
+        <div
+          id="skin-facial-section"
+          className={`w-full mt-8 sm:mt-12 lg:mt-16 scroll-mt-28 transition-all duration-400 ease-out ${
+            closingSection === "skin" ? "opacity-0 translate-y-6 pointer-events-none" : "opacity-100 translate-y-0"
+          }`}
+        >
+          <SkinFacialServicesSection onBackToServices={handleBackToServices} />
+        </div>
+      )}
     </section>
   );
 }

@@ -2,7 +2,7 @@ import ServicesShowcase from "@/components/ServicesShowcase";
 
 export const metadata = {
   title: "Bridal Showcase & Services | S Touch Salon",
-  description: "Touch Bridal Makeover Studio & Unisex Salon showcase and service selection.",
+  description: "Touch Bridal Makeover Studio & Unisex Salon showcase and comprehensive services.",
 };
 
 export default function ServicesPage() {
@@ -14,7 +14,7 @@ export default function ServicesPage() {
         className="pointer-events-none absolute left-1/2 top-1/3 h-[500px] w-full max-w-[1200px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-b from-[#e6c178]/15 via-[#8b4a28]/10 to-transparent blur-[120px]"
       />
 
-      {/* Interactive Bridal Showcase with Selection Box & Expandable Bridal Makeup Section */}
+      {/* Bridal Showcase & Services Sections */}
       <ServicesShowcase />
     </main>
   );
