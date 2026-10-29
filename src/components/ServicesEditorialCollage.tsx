@@ -29,6 +29,7 @@ interface ServicesEditorialCollageProps {
   onSelectBeautyGrooming?: () => void;
   onSelectSkinFacial?: () => void;
   onSelectAdditionalServices?: () => void;
+  onSelectMensServices?: () => void;
 }
 
 export default function ServicesEditorialCollage({
@@ -37,6 +38,7 @@ export default function ServicesEditorialCollage({
   onSelectBeautyGrooming,
   onSelectSkinFacial,
   onSelectAdditionalServices,
+  onSelectMensServices,
 }: ServicesEditorialCollageProps = {}) {
   return (
     <section
@@ -407,12 +409,11 @@ export default function ServicesEditorialCollage({
           <div
             className="absolute left-[26%] top-[65%] w-[20.5%] h-[29.5%] z-20"
           >
-            <a
-              href={WHATSAPP_ENQUIRY_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Men's Services Enquiry"
-              className="group relative block w-full h-full overflow-hidden rounded-[2px] border border-[#dfb76c]/35 bg-[#1e110a] shadow-[0_12px_32px_rgba(0,0,0,0.65)] text-left cursor-pointer transition-all duration-300 hover:border-[#dfb76c] hover:shadow-[0_14px_38px_rgba(223,183,108,0.22)] focus:outline-none"
+            <button
+              type="button"
+              onClick={onSelectMensServices}
+              aria-label="Men's Services"
+              className="group relative w-full h-full overflow-hidden rounded-[2px] border border-[#dfb76c]/35 bg-[#1e110a] shadow-[0_12px_32px_rgba(0,0,0,0.65)] text-left cursor-pointer transition-all duration-300 hover:border-[#dfb76c] hover:shadow-[0_14px_38px_rgba(223,183,108,0.22)] focus:outline-none"
             >
               <img
                 src="/images/mens-services.jpg"
@@ -435,7 +436,7 @@ export default function ServicesEditorialCollage({
                   <ArrowUpRight className="h-3 w-3 stroke-[2.2] transition-colors duration-200" />
                 </span>
               </div>
-            </a>
+            </button>
           </div>
 
           {/* -----------------------------------------------------------------------
@@ -680,10 +681,9 @@ export default function ServicesEditorialCollage({
 
             {/* Card 8: Men's Services */}
             <div className="col-span-1">
-              <a
-                href={WHATSAPP_ENQUIRY_URL}
-                target="_blank"
-                rel="noopener noreferrer"
+              <button
+                type="button"
+                onClick={onSelectMensServices}
                 aria-label="Men's Services"
                 className="group relative w-full h-[185px] overflow-hidden rounded-[2px] border border-[#dfb76c]/30 bg-[#1e110a] text-left block shadow-[0_8px_20px_rgba(0,0,0,0.5)]"
               >
@@ -703,7 +703,7 @@ export default function ServicesEditorialCollage({
                     <ArrowUpRight className="h-2.5 w-2.5 transition-colors duration-200" />
                   </span>
                 </div>
-              </a>
+              </button>
             </div>
 
             {/* Card 9: Rental Jewels */}
