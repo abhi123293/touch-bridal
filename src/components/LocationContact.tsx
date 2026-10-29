@@ -174,44 +174,47 @@ export default function LocationContact() {
           </div>
 
           {/* RIGHT: LOCATION & GOOGLE MAP */}
-          <div className="flex min-h-[440px] flex-col rounded-[24px] bg-[#e9dfd1] p-5 sm:p-7 lg:min-h-[520px]">
-            <span className="text-[10px] font-semibold uppercase tracking-[0.22em] text-[#8b4a28]">
-              FIND US HERE
-            </span>
+        <div className="flex min-h-[440px] flex-col rounded-[24px] border border-[#d6b27b]/20 bg-[#2d1b13] p-5 shadow-[0_12px_35px_rgba(45,27,19,0.15)] sm:p-7 lg:min-h-[520px]">
+  <span className="text-[10px] font-semibold uppercase tracking-[0.22em] text-[#d6b27b]">
+    FIND US HERE
+  </span>
 
-            <h3
-              className={`${serif.className} mt-3 text-4xl font-semibold leading-tight text-[#2d1b13] sm:text-5xl`}
-            >
-              Visit Our Studio
-            </h3>
+  <h3
+    className={`${serif.className} mt-3 text-4xl font-semibold leading-tight text-[#fff7ec] sm:text-5xl`}
+  >
+    Visit Our Studio
+  </h3>
 
-            <p className="mt-2 text-sm leading-6 text-[#6b5a4d]">
-              Find Touch Bridal Makeover Studio &amp; Unisex Salon in Nagercoil.
-            </p>
+  <p className="mt-2 text-sm leading-6 text-[#e2d3c5]/80">
+    Find Touch Bridal Makeover Studio &amp; Unisex Salon in Nagercoil.
+  </p>
 
-            {/* GOOGLE MAP PREVIEW */}
-            <div className="mt-5 min-h-[260px] flex-1 overflow-hidden rounded-[18px] border border-[#3a2418]/10 bg-white">
-              <iframe
-                title="Touch Bridal Makeover Studio location"
-                src={mapEmbedUrl}
-                className="h-full min-h-[260px] w-full lg:min-h-[300px]"
-                style={{ border: 0 }}
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                allowFullScreen
-              />
-            </div>
+  {/* GOOGLE MAP PREVIEW */}
+  <div className="mt-5 min-h-[260px] flex-1 overflow-hidden rounded-[18px] border border-[#d6b27b]/25 bg-white shadow-inner">
+    <iframe
+      title="Touch Bridal Makeover Studio location"
+      src={mapEmbedUrl}
+      className="h-full min-h-[260px] w-full lg:min-h-[300px]"
+      style={{ border: 0 }}
+      loading="lazy"
+      referrerPolicy="no-referrer-when-downgrade"
+      allowFullScreen
+    />
+  </div>
 
-            {/* DIRECTIONS BUTTON */}
-            <a
-              href={directionsUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-5 inline-flex w-fit items-center gap-3 rounded-full bg-[#3a2418] px-6 py-3.5 text-xs font-semibold uppercase tracking-wide text-white transition-colors hover:bg-[#8b4a28]"
-            >
-              Get Directions <span aria-hidden="true">↗</span>
-            </a>
-          </div>
+  {/* DIRECTIONS BUTTON */}
+ <a
+  href={directionsUrl}
+  target="_blank"
+  rel="noopener noreferrer"
+  className="group relative mt-5 inline-flex w-fit items-center gap-3 overflow-hidden rounded-full border border-[#d6b27b]/40 bg-white/[0.08] px-7 py-3.5 text-xs font-semibold uppercase tracking-[0.14em] text-[#f5dfbd] shadow-[inset_0_1px_0_rgba(255,255,255,0.12),0_8px_24px_rgba(0,0,0,0.15)] backdrop-blur-xl transition-all duration-500 ease-out hover:-translate-y-0.5 hover:border-[#f0d2ad]/80 hover:bg-[#d6b27b]/15 hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.2),0_10px_30px_rgba(214,178,123,0.15)] active:translate-y-0"
+>
+  <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/[0.08] to-transparent transition-transform duration-700 group-hover:translate-x-full" />
+
+  <span className="relative">Get Directions</span>
+
+</a>
+</div>
         </div>
       </div>
     </section>

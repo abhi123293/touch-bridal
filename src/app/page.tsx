@@ -5,7 +5,7 @@ import BridalGalleryPreview from "@/components/BridalGalleryPreview";
 import WhyChooseUs from "@/components/WhyChooseUs";
 import CustomerTestimonials from "@/components/CustomerTestimonials";
 import LocationContact from "@/components/LocationContact";
-
+import ContactCTA from "@/components/ContactCTA";
 
 export default function HomePage() {
   return (
@@ -17,7 +17,7 @@ export default function HomePage() {
       <WhyChooseUs />
       <CustomerTestimonials />
       <LocationContact />
-   
+      <ContactCTA />
     </main>
   );
 }
