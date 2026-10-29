@@ -14,6 +14,10 @@ const inter = Inter({
   display: "swap",
 });
 
+const WHATSAPP_ENQUIRY_URL =
+  "https://wa.me/919789376174?text=" +
+  encodeURIComponent("Hi Touch! I'd love to book an appointment.");
+
 interface ServicesEditorialCollageProps {
   onSelectBridalMakeup?: () => void;
   onSelectHairServices?: () => void;
@@ -21,10 +25,6 @@ interface ServicesEditorialCollageProps {
   onSelectSkinFacial?: () => void;
   onSelectAdditionalServices?: () => void;
 }
-
-const WHATSAPP_ENQUIRY_URL =
-  "https://wa.me/919789376174?text=" +
-  encodeURIComponent("Hi Touch! I'd love to book an appointment.");
 
 export default function ServicesEditorialCollage({
   onSelectBridalMakeup,
@@ -36,292 +36,467 @@ export default function ServicesEditorialCollage({
   return (
     <section
       aria-label="Editorial Services Gallery"
-      className="relative w-full overflow-hidden rounded-t-[36px] sm:rounded-t-[48px] lg:rounded-t-[56px] rounded-b-[20px] sm:rounded-b-[28px] bg-[#1C120F] border border-[#dfb76c]/25 shadow-2xl pt-6 sm:pt-8 lg:pt-10 pb-8 sm:pb-10 lg:pb-12 px-3 sm:px-6 lg:px-8 select-none"
+      className="relative w-full overflow-hidden rounded-[24px] sm:rounded-[36px] lg:rounded-[44px] bg-[#F5F0E8] border border-[#3A2921]/15 shadow-[0_20px_60px_rgba(28,18,15,0.14)] py-10 sm:py-14 lg:py-16 px-4 sm:px-8 lg:px-12 select-none"
     >
-      {/* 1. Subtle Radial Background Glow in Warm Muted Champagne Gold */}
+      {/* =========================================================================
+          1. WARM IVORY & CREAM AMBIENT BACKGROUND TEXTURE
+         ========================================================================= */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,rgba(200,166,106,0.06)_0%,rgba(43,28,23,0.4)_45%,#1C120F_100%)]"
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(250,246,240,0.85)_0%,rgba(245,240,232,0.95)_60%,#EAE1D5_100%)]"
       />
 
-      <div className="relative mx-auto w-full max-w-[1280px]">
+      {/* =========================================================================
+          2. DECORATIVE DIAGONAL CHAMPAGNE-GOLD CORNER SHAPES
+         ========================================================================= */}
+      {/* Top-Left Diagonal Corner Shape */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute left-0 top-0 h-44 w-44 sm:h-64 sm:w-64 lg:h-80 lg:w-80 overflow-hidden z-0"
+      >
+        <svg
+          viewBox="0 0 100 100"
+          preserveAspectRatio="none"
+          className="h-full w-full"
+        >
+          <defs>
+            <linearGradient id="corner-grad-tl" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#C8A66A" stopOpacity="0.30" />
+              <stop offset="65%" stopColor="#C8A66A" stopOpacity="0.10" />
+              <stop offset="100%" stopColor="#C8A66A" stopOpacity="0.0" />
+            </linearGradient>
+          </defs>
+          <polygon points="0,0 100,0 0,100" fill="url(#corner-grad-tl)" />
+          <line
+            x1="0"
+            y1="100"
+            x2="100"
+            y2="0"
+            stroke="#C8A66A"
+            strokeWidth="1.2"
+            strokeOpacity="0.45"
+          />
+        </svg>
+      </div>
+
+      {/* Bottom-Right Diagonal Corner Shape */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute bottom-0 right-0 h-44 w-44 sm:h-64 sm:w-64 lg:h-80 lg:w-80 overflow-hidden z-0"
+      >
+        <svg
+          viewBox="0 0 100 100"
+          preserveAspectRatio="none"
+          className="h-full w-full"
+        >
+          <defs>
+            <linearGradient id="corner-grad-br" x1="100%" y1="100%" x2="0%" y2="0%">
+              <stop offset="0%" stopColor="#C8A66A" stopOpacity="0.30" />
+              <stop offset="65%" stopColor="#C8A66A" stopOpacity="0.10" />
+              <stop offset="100%" stopColor="#C8A66A" stopOpacity="0.0" />
+            </linearGradient>
+          </defs>
+          <polygon points="100,100 0,100 100,0" fill="url(#corner-grad-br)" />
+          <line
+            x1="0"
+            y1="100"
+            x2="100"
+            y2="0"
+            stroke="#C8A66A"
+            strokeWidth="1.2"
+            strokeOpacity="0.45"
+          />
+        </svg>
+      </div>
+
+      <div className="relative mx-auto w-full max-w-[1360px]">
         {/* =========================================================================
-            HEADER: Eyebrow + Main Heading + Subtle Gold Divider
+            3. THIN RECTANGULAR OUTLINE BEHIND THE COLLAGE (VISIBLE IN OPEN SPACES)
            ========================================================================= */}
-        <div className="flex flex-col items-center text-center mb-6 sm:mb-8 lg:mb-9">
-          {/* Eyebrow / Sub-title */}
-          <div className="flex items-center gap-2.5 sm:gap-3">
-            <span className="h-px w-6 sm:w-8 bg-[#C8A66A]" />
-            <span
-              className={`${inter.className} text-[10.5px] sm:text-xs font-semibold uppercase tracking-[0.26em] text-[#C8A66A]`}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-4 sm:inset-7 lg:inset-10 z-0 border border-[#C8A66A]/45 rounded-[4px]"
+        />
+
+        {/* =========================================================================
+            DESKTOP & TABLET OVERLAPPING EDITORIAL COLLAGE (hidden on mobile)
+            Height: ~900px, Staggered varied-level overlapping layout
+           ========================================================================= */}
+        <div className="relative hidden md:block w-full h-[840px] lg:h-[920px] xl:h-[960px] z-10">
+          {/* -----------------------------------------------------------------------
+              ITEM 1: Additional Services (Upper-Left side, medium landscape)
+             ----------------------------------------------------------------------- */}
+          <div
+            className="absolute left-[2%] lg:left-[3%] top-[4%] lg:top-[5%] w-[27%] lg:w-[26%] xl:w-[25%] z-10"
+          >
+            <button
+              type="button"
+              onClick={onSelectAdditionalServices}
+              aria-label="Additional Services"
+              className="group block w-full text-left cursor-pointer focus:outline-none"
             >
-              Choose a Perfect Service
-            </span>
-            <span className="h-px w-6 sm:w-8 bg-[#C8A66A]" />
+              <div className="relative w-full aspect-[4/3] overflow-hidden rounded-[3px] border border-[#3A2921]/15 bg-[#FAF6F0] shadow-[0_10px_26px_rgba(28,18,15,0.12)] transition-all duration-300 hover:border-[#C8A66A] hover:shadow-[0_16px_34px_rgba(200,166,106,0.22)]">
+                <img
+                  src="/images/preplating copy.jpg"
+                  alt="Additional Services"
+                  className="h-full w-full object-cover object-[center_20%] transition-transform duration-700 ease-out group-hover:scale-[1.025]"
+                />
+              </div>
+              <span
+                className={`${cormorant.className} block mt-2.5 text-lg lg:text-[22px] font-normal tracking-[0.02em] text-[#1C120F] leading-tight drop-shadow-sm transition-colors duration-250 group-hover:text-[#A98955]`}
+              >
+                Additional Services
+              </span>
+            </button>
           </div>
 
-          {/* Main Heading */}
-          <h2
-            className={`${cormorant.className} mt-2.5 text-3xl font-normal tracking-tight text-[#F5F0E8] sm:text-4xl lg:text-[44px] xl:text-[48px] leading-[1.12] drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)]`}
+          {/* -----------------------------------------------------------------------
+              ITEM 2: Bridal Makeup (Tall portrait image near upper-middle area)
+             ----------------------------------------------------------------------- */}
+          <div
+            className="absolute left-[29%] lg:left-[29%] top-[1%] lg:top-[2%] w-[25%] lg:w-[23%] xl:w-[22%] z-25"
           >
-            Our Premium Services
-          </h2>
+            <button
+              type="button"
+              onClick={onSelectBridalMakeup}
+              aria-label="Bridal Makeup"
+              className="group block w-full text-left cursor-pointer focus:outline-none"
+            >
+              <div className="relative w-full aspect-[3/5] overflow-hidden rounded-[3px] border border-[#3A2921]/15 bg-[#FAF6F0] shadow-[0_16px_38px_rgba(28,18,15,0.16)] transition-all duration-300 hover:border-[#C8A66A] hover:shadow-[0_22px_48px_rgba(200,166,106,0.28)]">
+                <img
+                  src="/images/bridal-makeup.jpg"
+                  alt="Bridal Makeup"
+                  className="h-full w-full object-cover object-[center_15%] transition-transform duration-700 ease-out group-hover:scale-[1.025]"
+                />
+              </div>
+              <span
+                className={`${cormorant.className} block mt-2.5 text-xl lg:text-[24px] font-normal tracking-[0.02em] text-[#1C120F] leading-tight drop-shadow-sm transition-colors duration-250 group-hover:text-[#A98955]`}
+              >
+                Bridal Makeup
+              </span>
+            </button>
+          </div>
 
-          {/* Delicate Gold Accent Divider */}
-          <div className="mt-3.5 flex items-center gap-2">
-            <span className="h-[1.5px] w-10 sm:w-12 bg-[#C8A66A]" />
-            <span className="h-1 w-1 rounded-full bg-[#C8A66A]" />
-            <span className="h-[1px] w-14 sm:w-18 bg-[#C8A66A]/40" />
+          {/* -----------------------------------------------------------------------
+              ITEM 3: Skin & Facial Services (Upper-Right side, small portrait)
+             ----------------------------------------------------------------------- */}
+          <div
+            className="absolute left-[54%] lg:left-[53%] top-[4%] lg:top-[5%] w-[19%] lg:w-[18%] xl:w-[17%] z-10"
+          >
+            <button
+              type="button"
+              onClick={onSelectSkinFacial}
+              aria-label="Skin & Facial Services"
+              className="group block w-full text-left cursor-pointer focus:outline-none"
+            >
+              <div className="relative w-full aspect-[4/3] overflow-hidden rounded-[3px] border border-[#3A2921]/15 bg-[#FAF6F0] shadow-[0_10px_24px_rgba(28,18,15,0.12)] transition-all duration-300 hover:border-[#C8A66A] hover:shadow-[0_16px_34px_rgba(200,166,106,0.22)]">
+                <img
+                  src="/images/skin-facial.jpg"
+                  alt="Skin & Facial Services"
+                  className="h-full w-full object-cover object-[center_25%] transition-transform duration-700 ease-out group-hover:scale-[1.025]"
+                />
+              </div>
+              <span
+                className={`${cormorant.className} block mt-2.5 text-base lg:text-[19px] font-normal tracking-[0.02em] text-[#1C120F] leading-tight drop-shadow-sm transition-colors duration-250 group-hover:text-[#A98955]`}
+              >
+                Skin &amp; Facial Services
+              </span>
+            </button>
+          </div>
+
+          {/* -----------------------------------------------------------------------
+              ITEM 4: Beauty & Grooming Services (Upper-Right side, medium square)
+             ----------------------------------------------------------------------- */}
+          <div
+            className="absolute left-[74%] lg:left-[73%] top-[7%] lg:top-[8%] w-[23%] lg:w-[22%] xl:w-[21%] z-10"
+          >
+            <button
+              type="button"
+              onClick={onSelectBeautyGrooming}
+              aria-label="Beauty & Grooming Services"
+              className="group block w-full text-left cursor-pointer focus:outline-none"
+            >
+              <div className="relative w-full aspect-[1/1] overflow-hidden rounded-[3px] border border-[#3A2921]/15 bg-[#FAF6F0] shadow-[0_12px_28px_rgba(28,18,15,0.12)] transition-all duration-300 hover:border-[#C8A66A] hover:shadow-[0_18px_38px_rgba(200,166,106,0.22)]">
+                <img
+                  src="/images/beauty-grooming.jpg"
+                  alt="Beauty & Grooming Services"
+                  className="h-full w-full object-cover object-[center_20%] transition-transform duration-700 ease-out group-hover:scale-[1.025]"
+                />
+              </div>
+              <span
+                className={`${cormorant.className} block mt-2.5 text-lg lg:text-[21px] font-normal tracking-[0.02em] text-[#1C120F] leading-tight drop-shadow-sm transition-colors duration-250 group-hover:text-[#A98955]`}
+              >
+                Beauty &amp; Grooming Services
+              </span>
+            </button>
+          </div>
+
+          {/* -----------------------------------------------------------------------
+              ITEM 5: Appointment Enquiry (Large landscape image near the center)
+             ----------------------------------------------------------------------- */}
+          <div
+            className="absolute left-[13%] lg:left-[14%] top-[45%] lg:top-[46%] w-[33%] lg:w-[32%] xl:w-[31%] z-15"
+          >
+            <a
+              href={WHATSAPP_ENQUIRY_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Appointment Enquiry"
+              className="group block w-full text-left cursor-pointer focus:outline-none"
+            >
+              <div className="relative w-full aspect-[16/10] overflow-hidden rounded-[3px] border border-[#3A2921]/15 bg-[#FAF6F0] shadow-[0_14px_32px_rgba(28,18,15,0.14)] transition-all duration-300 hover:border-[#C8A66A] hover:shadow-[0_20px_42px_rgba(200,166,106,0.25)]">
+                <img
+                  src="/images/appointment.jpg"
+                  alt="Appointment Booking"
+                  className="h-full w-full object-cover object-[center_45%] transition-transform duration-700 ease-out group-hover:scale-[1.025]"
+                />
+              </div>
+              <span
+                className={`${cormorant.className} block mt-2.5 text-lg lg:text-[22px] font-normal tracking-[0.02em] text-[#1C120F] leading-tight drop-shadow-sm transition-colors duration-250 group-hover:text-[#A98955]`}
+              >
+                Appointment Enquiry
+              </span>
+            </a>
+          </div>
+
+          {/* -----------------------------------------------------------------------
+              ITEM 6: Hair Services (One tall image toward the right-middle area)
+             ----------------------------------------------------------------------- */}
+          <div
+            className="absolute left-[71%] lg:left-[70%] top-[37%] lg:top-[38%] w-[24%] lg:w-[23%] xl:w-[22%] z-20"
+          >
+            <button
+              type="button"
+              onClick={onSelectHairServices}
+              aria-label="Hair Services"
+              className="group block w-full text-left cursor-pointer focus:outline-none"
+            >
+              <div className="relative w-full aspect-[3/5] overflow-hidden rounded-[3px] border border-[#3A2921]/15 bg-[#FAF6F0] shadow-[0_16px_36px_rgba(28,18,15,0.15)] transition-all duration-300 hover:border-[#C8A66A] hover:shadow-[0_22px_46px_rgba(200,166,106,0.26)]">
+                <img
+                  src="/images/hair-services.jpg"
+                  alt="Hair Services"
+                  className="h-full w-full object-cover object-[center_20%] transition-transform duration-700 ease-out group-hover:scale-[1.025]"
+                />
+              </div>
+              <span
+                className={`${cormorant.className} block mt-2.5 text-xl lg:text-[23px] font-normal tracking-[0.02em] text-[#1C120F] leading-tight drop-shadow-sm transition-colors duration-250 group-hover:text-[#A98955]`}
+              >
+                Hair Services
+              </span>
+            </button>
+          </div>
+
+          {/* -----------------------------------------------------------------------
+              ITEM 7 & 8: Lower-Middle Area (Two smaller images: Groom & Men's Services)
+             ----------------------------------------------------------------------- */}
+          <div
+            className="absolute left-[44%] lg:left-[45%] top-[50%] lg:top-[52%] w-[15%] lg:w-[15%] z-25"
+          >
+            <a
+              href={WHATSAPP_ENQUIRY_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Groom Makeup Enquiry"
+              className="group block w-full text-left cursor-pointer focus:outline-none"
+            >
+              <div className="relative w-full aspect-[4/5] overflow-hidden rounded-[3px] border border-[#3A2921]/15 bg-[#FAF6F0] shadow-[0_12px_28px_rgba(28,18,15,0.13)] transition-all duration-300 hover:border-[#C8A66A] hover:shadow-[0_16px_34px_rgba(200,166,106,0.22)]">
+                <img
+                  src="/images/Groom.jpg"
+                  alt="Groom Makeup"
+                  className="h-full w-full object-cover object-[center_18%] transition-transform duration-700 ease-out group-hover:scale-[1.025]"
+                />
+              </div>
+            </a>
+          </div>
+
+          <div
+            className="absolute left-[58%] lg:left-[59%] top-[62%] lg:top-[64%] w-[15%] lg:w-[15%] z-22"
+          >
+            <a
+              href={WHATSAPP_ENQUIRY_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Men's Services Enquiry"
+              className="group block w-full text-left cursor-pointer focus:outline-none"
+            >
+              <div className="relative w-full aspect-[4/5] overflow-hidden rounded-[3px] border border-[#3A2921]/15 bg-[#FAF6F0] shadow-[0_12px_28px_rgba(28,18,15,0.13)] transition-all duration-300 hover:border-[#C8A66A] hover:shadow-[0_16px_34px_rgba(200,166,106,0.22)]">
+                <img
+                  src="/images/mens-services.jpg"
+                  alt="Men's Services"
+                  className="h-full w-full object-cover object-[center_20%] transition-transform duration-700 ease-out group-hover:scale-[1.025]"
+                />
+              </div>
+            </a>
+          </div>
+
+          {/* -----------------------------------------------------------------------
+              ITEM 9: Lower-Left Balancing Image (Saree Box Folding)
+             ----------------------------------------------------------------------- */}
+          <div
+            className="absolute left-[3%] lg:left-[4%] top-[67%] lg:top-[68%] w-[19%] lg:w-[18%] z-10"
+          >
+            <button
+              type="button"
+              onClick={onSelectAdditionalServices}
+              aria-label="Saree Box Folding"
+              className="group block w-full text-left cursor-pointer focus:outline-none"
+            >
+              <div className="relative w-full aspect-[4/3] overflow-hidden rounded-[3px] border border-[#3A2921]/15 bg-[#FAF6F0] shadow-[0_10px_24px_rgba(28,18,15,0.12)] transition-all duration-300 hover:border-[#C8A66A] hover:shadow-[0_16px_32px_rgba(200,166,106,0.22)]">
+                <img
+                  src="/images/boxfolding.jpg"
+                  alt="Saree Box Folding"
+                  className="h-full w-full object-cover object-[center_20%] transition-transform duration-700 ease-out group-hover:scale-[1.025]"
+                />
+              </div>
+            </button>
           </div>
         </div>
 
         {/* =========================================================================
-            DESKTOP & TABLET ASYMMETRICAL 8-FRAME COLLAGE (md & lg & xl)
-            - Proportional compact sizing (scaled down photos)
-            - 12 Columns, 6 Rows
-            - Varied architectural widths & heights
-            - Strict 8-12px gaps (gap-2 sm:gap-2.5)
-            - Rectangular frames with subtle 3px radius (rounded-[3px])
+            MOBILE RESPONSIVE EDITORIAL COLLAGE (< md)
+            - Compact 2-column layout
+            - All 6 service names clearly readable and clickable
+            - Varied rectangular proportions with 0-4px corners
            ========================================================================= */}
-        <div className="hidden md:grid md:grid-cols-12 md:grid-rows-6 gap-2 sm:gap-2.5 w-full max-w-[1020px] lg:max-w-[1080px] xl:max-w-[1120px] mx-auto h-[400px] sm:h-[440px] lg:h-[480px] xl:h-[510px]">
-          {/* Frame 1: Medium landscape image positioned in upper-left area */}
-          <button
-            type="button"
-            onClick={onSelectAdditionalServices}
-            aria-label="Additional Services"
-            className="group relative col-start-1 col-end-5 row-start-1 row-end-3 w-full h-full overflow-hidden rounded-[3px] bg-[#2B1C17] border border-[#dfb76c]/20 shadow-md cursor-pointer transition-all duration-300 hover:border-[#C8A66A]/60 focus:outline-none focus-visible:ring-1 focus-visible:ring-[#C8A66A]"
-          >
-            <img
-              src="/images/preplating.jpg"
-              alt="Additional Services - Saree Pre-Pleating"
-              className="h-full w-full object-cover object-[center_20%] transition-transform duration-700 ease-out group-hover:scale-[1.025]"
-            />
-          </button>
+        <div className="relative md:hidden grid grid-cols-2 gap-3.5 w-full max-w-[500px] mx-auto z-10 pt-2 pb-4">
+          {/* Mobile Card 1: Additional Services */}
+          <div className="col-span-2">
+            <button
+              type="button"
+              onClick={onSelectAdditionalServices}
+              aria-label="Additional Services"
+              className="group block w-full text-left cursor-pointer focus:outline-none"
+            >
+              <div className="relative w-full aspect-[16/10] overflow-hidden rounded-[3px] border border-[#3A2921]/15 bg-[#FAF6F0] shadow-sm">
+                <img
+                  src="/images/preplating copy.jpg"
+                  alt="Additional Services"
+                  className="h-full w-full object-cover object-[center_20%] transition-transform duration-700 ease-out group-hover:scale-[1.02]"
+                />
+              </div>
+              <span
+                className={`${cormorant.className} block mt-2 text-[18px] font-normal tracking-[0.02em] text-[#1C120F] leading-tight`}
+              >
+                Additional Services
+              </span>
+            </button>
+          </div>
 
-          {/* Frame 2: Medium landscape image positioned slightly lower and to the right of Frame 1 */}
-          <button
-            type="button"
-            onClick={onSelectBeautyGrooming}
-            aria-label="Beauty and Grooming"
-            className="group relative col-start-5 col-end-8 row-start-2 row-end-4 w-full h-full overflow-hidden rounded-[3px] bg-[#2B1C17] border border-[#dfb76c]/20 shadow-md cursor-pointer transition-all duration-300 hover:border-[#C8A66A]/60 focus:outline-none focus-visible:ring-1 focus-visible:ring-[#C8A66A]"
-          >
-            <img
-              src="/images/beauty-grooming.jpg"
-              alt="Beauty and Grooming"
-              className="h-full w-full object-cover object-[center_20%] transition-transform duration-700 ease-out group-hover:scale-[1.025]"
-            />
-          </button>
+          {/* Mobile Card 2: Bridal Makeup (Tall) */}
+          <div className="col-span-1">
+            <button
+              type="button"
+              onClick={onSelectBridalMakeup}
+              aria-label="Bridal Makeup"
+              className="group block w-full text-left cursor-pointer focus:outline-none"
+            >
+              <div className="relative w-full aspect-[3/5] overflow-hidden rounded-[3px] border border-[#3A2921]/15 bg-[#FAF6F0] shadow-sm">
+                <img
+                  src="/images/bridal-makeup.jpg"
+                  alt="Bridal Makeup"
+                  className="h-full w-full object-cover object-[center_15%] transition-transform duration-700 ease-out group-hover:scale-[1.02]"
+                />
+              </div>
+              <span
+                className={`${cormorant.className} block mt-2 text-[18px] font-normal tracking-[0.02em] text-[#1C120F] leading-tight`}
+              >
+                Bridal Makeup
+              </span>
+            </button>
+          </div>
 
-          {/* Frame 3: Tall portrait image positioned in the upper-middle area */}
-          <button
-            type="button"
-            onClick={onSelectBridalMakeup}
-            aria-label="Bridal Makeup"
-            className="group relative col-start-8 col-end-10 row-start-1 row-end-5 w-full h-full overflow-hidden rounded-[3px] bg-[#2B1C17] border border-[#dfb76c]/20 shadow-md cursor-pointer transition-all duration-300 hover:border-[#C8A66A]/60 focus:outline-none focus-visible:ring-1 focus-visible:ring-[#C8A66A]"
-          >
-            <img
-              src="/images/bridal-makeup.jpg"
-              alt="Bridal Makeup"
-              className="h-full w-full object-cover object-[center_15%] transition-transform duration-700 ease-out group-hover:scale-[1.025]"
-            />
-          </button>
+          {/* Mobile Card 3: Hair Services (Tall) */}
+          <div className="col-span-1">
+            <button
+              type="button"
+              onClick={onSelectHairServices}
+              aria-label="Hair Services"
+              className="group block w-full text-left cursor-pointer focus:outline-none"
+            >
+              <div className="relative w-full aspect-[3/5] overflow-hidden rounded-[3px] border border-[#3A2921]/15 bg-[#FAF6F0] shadow-sm">
+                <img
+                  src="/images/hair-services.jpg"
+                  alt="Hair Services"
+                  className="h-full w-full object-cover object-[center_20%] transition-transform duration-700 ease-out group-hover:scale-[1.02]"
+                />
+              </div>
+              <span
+                className={`${cormorant.className} block mt-2 text-[18px] font-normal tracking-[0.02em] text-[#1C120F] leading-tight`}
+              >
+                Hair Services
+              </span>
+            </button>
+          </div>
 
-          {/* Frame 4: Small portrait image positioned toward the upper-right area */}
-          <button
-            type="button"
-            onClick={onSelectSkinFacial}
-            aria-label="Skin and Facial Services"
-            className="group relative col-start-10 col-end-13 row-start-1 row-end-3 w-full h-full overflow-hidden rounded-[3px] bg-[#2B1C17] border border-[#dfb76c]/20 shadow-md cursor-pointer transition-all duration-300 hover:border-[#C8A66A]/60 focus:outline-none focus-visible:ring-1 focus-visible:ring-[#C8A66A]"
-          >
-            <img
-              src="/images/skin-facial.jpg"
-              alt="Skin and Facial Services"
-              className="h-full w-full object-cover object-[center_25%] transition-transform duration-700 ease-out group-hover:scale-[1.025]"
-            />
-          </button>
+          {/* Mobile Card 4: Skin & Facial Services */}
+          <div className="col-span-1">
+            <button
+              type="button"
+              onClick={onSelectSkinFacial}
+              aria-label="Skin & Facial Services"
+              className="group block w-full text-left cursor-pointer focus:outline-none"
+            >
+              <div className="relative w-full aspect-[4/3] overflow-hidden rounded-[3px] border border-[#3A2921]/15 bg-[#FAF6F0] shadow-sm">
+                <img
+                  src="/images/skin-facial.jpg"
+                  alt="Skin & Facial Services"
+                  className="h-full w-full object-cover object-[center_25%] transition-transform duration-700 ease-out group-hover:scale-[1.02]"
+                />
+              </div>
+              <span
+                className={`${cormorant.className} block mt-2 text-[17px] font-normal tracking-[0.02em] text-[#1C120F] leading-tight`}
+              >
+                Skin &amp; Facial Services
+              </span>
+            </button>
+          </div>
 
-          {/* Frame 5: Medium landscape image positioned to the right of the central frames */}
-          <a
-            href={WHATSAPP_ENQUIRY_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Groom Makeup Enquiry"
-            className="group relative col-start-10 col-end-13 row-start-3 row-end-5 w-full h-full overflow-hidden rounded-[3px] bg-[#2B1C17] border border-[#dfb76c]/20 shadow-md cursor-pointer transition-all duration-300 hover:border-[#C8A66A]/60 focus:outline-none focus-visible:ring-1 focus-visible:ring-[#C8A66A]"
-          >
-            <img
-              src="/images/Groom.jpg"
-              alt="Groom Makeup"
-              className="h-full w-full object-cover object-[center_18%] transition-transform duration-700 ease-out group-hover:scale-[1.025]"
-            />
-          </a>
+          {/* Mobile Card 5: Beauty & Grooming Services */}
+          <div className="col-span-1">
+            <button
+              type="button"
+              onClick={onSelectBeautyGrooming}
+              aria-label="Beauty & Grooming Services"
+              className="group block w-full text-left cursor-pointer focus:outline-none"
+            >
+              <div className="relative w-full aspect-[4/3] overflow-hidden rounded-[3px] border border-[#3A2921]/15 bg-[#FAF6F0] shadow-sm">
+                <img
+                  src="/images/beauty-grooming.jpg"
+                  alt="Beauty & Grooming Services"
+                  className="h-full w-full object-cover object-[center_20%] transition-transform duration-700 ease-out group-hover:scale-[1.02]"
+                />
+              </div>
+              <span
+                className={`${cormorant.className} block mt-2 text-[17px] font-normal tracking-[0.02em] text-[#1C120F] leading-tight`}
+              >
+                Beauty &amp; Grooming Services
+              </span>
+            </button>
+          </div>
 
-          {/* Frame 6: Tall portrait image positioned in the lower-left/center area */}
-          <button
-            type="button"
-            onClick={onSelectHairServices}
-            aria-label="Hair Services"
-            className="group relative col-start-1 col-end-4 row-start-3 row-end-7 w-full h-full overflow-hidden rounded-[3px] bg-[#2B1C17] border border-[#dfb76c]/20 shadow-md cursor-pointer transition-all duration-300 hover:border-[#C8A66A]/60 focus:outline-none focus-visible:ring-1 focus-visible:ring-[#C8A66A]"
-          >
-            <img
-              src="/images/hair-services.jpg"
-              alt="Hair Services"
-              className="h-full w-full object-cover object-[center_20%] transition-transform duration-700 ease-out group-hover:scale-[1.025]"
-            />
-          </button>
-
-          {/* Frame 7: Wide landscape image positioned in the lower-middle area */}
-          <a
-            href={WHATSAPP_ENQUIRY_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Appointment Enquiry"
-            className="group relative col-start-4 col-end-10 row-start-5 row-end-7 w-full h-full overflow-hidden rounded-[3px] bg-[#2B1C17] border border-[#dfb76c]/20 shadow-md cursor-pointer transition-all duration-300 hover:border-[#C8A66A]/60 focus:outline-none focus-visible:ring-1 focus-visible:ring-[#C8A66A]"
-          >
-            <img
-              src="/images/appointment.jpg"
-              alt="Appointment Booking"
-              className="h-full w-full object-cover object-[center_45%] transition-transform duration-700 ease-out group-hover:scale-[1.025]"
-            />
-          </a>
-
-          {/* Frame 8: Medium landscape image positioned in the lower-right area */}
-          <a
-            href={WHATSAPP_ENQUIRY_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Men's Services Enquiry"
-            className="group relative col-start-10 col-end-13 row-start-5 row-end-7 w-full h-full overflow-hidden rounded-[3px] bg-[#2B1C17] border border-[#dfb76c]/20 shadow-md cursor-pointer transition-all duration-300 hover:border-[#C8A66A]/60 focus:outline-none focus-visible:ring-1 focus-visible:ring-[#C8A66A]"
-          >
-            <img
-              src="/images/mens-services.jpg"
-              alt="Men's Services"
-              className="h-full w-full object-cover object-[center_20%] transition-transform duration-700 ease-out group-hover:scale-[1.025]"
-            />
-          </a>
-        </div>
-
-        {/* =========================================================================
-            MOBILE 2-COLUMN COMPACT COLLAGE (< md)
-            - Scaled down, compact 2-column layout
-            - Varied image heights and proportions preserving editorial feel
-            - Strict 8-10px gaps (gap-2)
-            - Rectangular frames with subtle 3px radius (rounded-[3px])
-           ========================================================================= */}
-        <div className="grid md:hidden grid-cols-2 gap-2 w-full max-w-[460px] mx-auto">
-          {/* Frame 1: Medium landscape image (spanning 2 columns) */}
-          <button
-            type="button"
-            onClick={onSelectAdditionalServices}
-            aria-label="Additional Services"
-            className="group relative col-span-2 aspect-[16/9] w-full overflow-hidden rounded-[3px] bg-[#2B1C17] border border-[#dfb76c]/20 shadow-md text-left cursor-pointer"
-          >
-            <img
-              src="/images/preplating.jpg"
-              alt="Additional Services - Saree Pre-Pleating"
-              className="h-full w-full object-cover object-[center_20%] transition-transform duration-700 ease-out group-hover:scale-[1.02]"
-            />
-          </button>
-
-          {/* Frame 2: Medium frame (col 1) */}
-          <button
-            type="button"
-            onClick={onSelectBeautyGrooming}
-            aria-label="Beauty and Grooming"
-            className="group relative col-span-1 aspect-[1/1] w-full overflow-hidden rounded-[3px] bg-[#2B1C17] border border-[#dfb76c]/20 shadow-md text-left cursor-pointer"
-          >
-            <img
-              src="/images/beauty-grooming.jpg"
-              alt="Beauty and Grooming"
-              className="h-full w-full object-cover object-[center_20%] transition-transform duration-700 ease-out group-hover:scale-[1.02]"
-            />
-          </button>
-
-          {/* Frame 3: Tall portrait image (col 2, tall) */}
-          <button
-            type="button"
-            onClick={onSelectBridalMakeup}
-            aria-label="Bridal Makeup"
-            className="group relative col-span-1 aspect-[3/4] w-full overflow-hidden rounded-[3px] bg-[#2B1C17] border border-[#dfb76c]/20 shadow-md text-left cursor-pointer"
-          >
-            <img
-              src="/images/bridal-makeup.jpg"
-              alt="Bridal Makeup"
-              className="h-full w-full object-cover object-[center_15%] transition-transform duration-700 ease-out group-hover:scale-[1.02]"
-            />
-          </button>
-
-          {/* Frame 4: Small portrait image (col 1) */}
-          <button
-            type="button"
-            onClick={onSelectSkinFacial}
-            aria-label="Skin and Facial Services"
-            className="group relative col-span-1 aspect-[1/1] w-full overflow-hidden rounded-[3px] bg-[#2B1C17] border border-[#dfb76c]/20 shadow-md text-left cursor-pointer"
-          >
-            <img
-              src="/images/skin-facial.jpg"
-              alt="Skin and Facial Services"
-              className="h-full w-full object-cover object-[center_25%] transition-transform duration-700 ease-out group-hover:scale-[1.02]"
-            />
-          </button>
-
-          {/* Frame 5: Medium landscape image (col 1) */}
-          <a
-            href={WHATSAPP_ENQUIRY_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Groom Makeup Enquiry"
-            className="group relative col-span-1 aspect-[1/1] w-full overflow-hidden rounded-[3px] bg-[#2B1C17] border border-[#dfb76c]/20 shadow-md block"
-          >
-            <img
-              src="/images/Groom.jpg"
-              alt="Groom Makeup"
-              className="h-full w-full object-cover object-[center_18%] transition-transform duration-700 ease-out group-hover:scale-[1.02]"
-            />
-          </a>
-
-          {/* Frame 6: Tall portrait image (col 2, tall) */}
-          <button
-            type="button"
-            onClick={onSelectHairServices}
-            aria-label="Hair Services"
-            className="group relative col-span-1 aspect-[3/4] w-full overflow-hidden rounded-[3px] bg-[#2B1C17] border border-[#dfb76c]/20 shadow-md text-left cursor-pointer"
-          >
-            <img
-              src="/images/hair-services.jpg"
-              alt="Hair Services"
-              className="h-full w-full object-cover object-[center_20%] transition-transform duration-700 ease-out group-hover:scale-[1.02]"
-            />
-          </button>
-
-          {/* Frame 7: Wide landscape image (spanning 2 columns) */}
-          <a
-            href={WHATSAPP_ENQUIRY_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Appointment Enquiry"
-            className="group relative col-span-2 aspect-[16/9] w-full overflow-hidden rounded-[3px] bg-[#2B1C17] border border-[#dfb76c]/20 shadow-md block"
-          >
-            <img
-              src="/images/appointment.jpg"
-              alt="Appointment Booking"
-              className="h-full w-full object-cover object-[center_45%] transition-transform duration-700 ease-out group-hover:scale-[1.02]"
-            />
-          </a>
-
-          {/* Frame 8: Medium landscape image (spanning 2 columns) */}
-          <a
-            href={WHATSAPP_ENQUIRY_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Men's Services Enquiry"
-            className="group relative col-span-2 aspect-[16/9] w-full overflow-hidden rounded-[3px] bg-[#2B1C17] border border-[#dfb76c]/20 shadow-md block"
-          >
-            <img
-              src="/images/mens-services.jpg"
-              alt="Men's Services"
-              className="h-full w-full object-cover object-[center_20%] transition-transform duration-700 ease-out group-hover:scale-[1.02]"
-            />
-          </a>
+          {/* Mobile Card 6: Appointment Enquiry */}
+          <div className="col-span-2">
+            <a
+              href={WHATSAPP_ENQUIRY_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Appointment Enquiry"
+              className="group block w-full text-left cursor-pointer focus:outline-none"
+            >
+              <div className="relative w-full aspect-[16/9] overflow-hidden rounded-[3px] border border-[#3A2921]/15 bg-[#FAF6F0] shadow-sm">
+                <img
+                  src="/images/appointment.jpg"
+                  alt="Appointment Booking"
+                  className="h-full w-full object-cover object-[center_45%] transition-transform duration-700 ease-out group-hover:scale-[1.02]"
+                />
+              </div>
+              <span
+                className={`${cormorant.className} block mt-2 text-[18px] font-normal tracking-[0.02em] text-[#1C120F] leading-tight`}
+              >
+                Appointment Enquiry
+              </span>
+            </a>
+          </div>
         </div>
       </div>
     </section>
