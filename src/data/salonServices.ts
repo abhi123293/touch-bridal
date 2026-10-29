@@ -1,0 +1,131 @@
+
+export type ServiceCategory = {
+  id: string;
+  label: string;
+  services: string[];
+};
+
+export const salonServices: ServiceCategory[] = [
+  {
+    id: "mens-boys",
+    label: "Men's & Boys' Services",
+    services: [
+      "Men's Hair Cuts",
+      "Boy Baby Hair Cuts",
+      "Men's Beard Styles",
+      "Colour Me Gorgeous",
+      "Chemical Hair Treatments",
+      "Hair Care",
+      "Facials",
+      "Hydra Facials",
+      "Korean Facials",
+      "Groom Facials",
+      "Bleach",
+      "D-Tan",
+      "Face Mask",
+      "Serum Face Mask",
+      "Body Polishing",
+      "Hands & Feet",
+      "Relax & Rejuvenate",
+      "Waxing",
+    ],
+  },
+  {
+    id: "womens",
+    label: "Women's Services",
+    services: [
+      "Women's Hair Cuts",
+      "Girl Baby Hair Cuts",
+      "Colour Me Gorgeous",
+      "Chemical Hair Treatments",
+      "Facials",
+      "Hydra Facials",
+      "Korean Facials",
+      "Bridal Facials",
+      "Bleach",
+      "D-Tan",
+      "Face Mask",
+      "Serum Face Mask",
+      "Body Polishing",
+      "Hands & Feet",
+      "Waxing",
+      "Hair Care",
+      "Relax & Rejuvenate",
+    ],
+  },
+  {
+    id: "makeup",
+    label: "Makeup Services",
+    services: [
+      "Wedding Makeup",
+      "Reception Makeup",
+      "Engagement Makeup",
+      "Puberty Makeup",
+      "Holy Communion Makeup",
+      "Baby Shower Makeup",
+      "Party Makeup",
+      "Goddess Makeup",
+      "SFX Makeup",
+    ],
+  },
+  {
+    id: "rental-jewellery",
+    label: "Rental Jewellery",
+    services: [
+      "Temple Collection",
+      "Antique Collection",
+      "A.D Collection",
+      "Kundan Collection",
+      "Jadavu Collection",
+      "Victorian Collection",
+    ],
+  },
+  {
+    id: "wedding-rentals",
+    label: "Wedding Rentals",
+    services: [
+      "Wedding Bouquet",
+      "Wedding Crown",
+      "Wedding Veil",
+    ],
+  },
+  {
+    id: "extensions",
+    label: "Extensions",
+    services: [
+      "Nail Arts",
+      "Hair Extension",
+    ],
+  },
+  {
+    id: "skin-facial",
+    label: "Skin & Facial Services",
+    services: [
+      "Facials",
+      "Hydra Facials",
+      "Korean Facials",
+      "Bridal Facials",
+      "Bleach",
+      "D-Tan",
+      "Face Mask",
+      "Serum Face Mask",
+      "Body Polishing",
+    ],
+  },
+  {
+    id: "hair-care",
+    label: "Hair Care & Treatments",
+    services: [
+      "Hair Cuts",
+      "Hair Care",
+      "Hair Extensions",
+      "Hair Colouring",
+      "Chemical Hair Treatments",
+      "Hair Spa",
+      "Hair Treatment",
+      "Straightening",
+      "Smoothening",
+      "Rebonding",
+    ],
+  },
+];

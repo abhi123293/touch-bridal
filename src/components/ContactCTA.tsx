@@ -2,7 +2,9 @@
 "use client";
 
 import type { FormEvent } from "react";
+import { useState } from "react";
 import { Open_Sans, Cormorant_Garamond } from "next/font/google";
+import ServiceSelector from "@/components/ServiceSelector";
 
 const openSans = Open_Sans({
   subsets: ["latin"],
@@ -21,14 +23,19 @@ const whatsappNumber = "919789376174";
 const phoneNumber = "+919789376174";
 
 export default function ContactCTA() {
+    const [selectedServices, setSelectedServices] = useState<string[]>([]);
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+     if (selectedServices.length === 0) {
+    alert("Please select at least one service.");
+    return;
+  }
 
     const formData = new FormData(event.currentTarget);
 
     const name = String(formData.get("name") || "").trim();
     const phone = String(formData.get("phone") || "").trim();
-    const service = String(formData.get("service") || "").trim();
+  const service = selectedServices.join(", ");
     const eventDate = String(formData.get("eventDate") || "").trim();
     const message = String(formData.get("message") || "").trim();
 
@@ -189,32 +196,15 @@ export default function ContactCTA() {
               {/* Service and date */}
               <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
                 <div>
-                  <label
-                    htmlFor="cta-service"
-                    className="mb-2 block text-[11px] font-medium text-[#514034]"
-                  >
-                    Service *
-                  </label>
+                <label className="mb-2 block text-[11px] font-medium text-[#514034]">
+  Service *
+</label>
 
-                  <select
-                    id="cta-service"
-                    name="service"
-                    required
-                    defaultValue=""
-                    className="w-full border-b border-[#d8caba] bg-transparent px-0 py-3 text-xs text-[#756356] outline-none focus:border-[#8b4a28] sm:text-sm"
-                  >
-                    <option value="" disabled>
-                      Choose a service
-                    </option>
-                    <option value="Bridal Makeup">Bridal Makeup</option>
-                    <option value="Reception Makeup">Reception Makeup</option>
-                    <option value="Party Makeup">Party Makeup</option>
-                    <option value="Hair Services">Hair Services</option>
-                    <option value="Skin and Facial">Skin & Facial</option>
-                    <option value="Beauty Services">Beauty Services</option>
-                    <option value="Wedding Rentals">Wedding Rentals</option>
-                    <option value="Other">Other</option>
-                  </select>
+                 
+  <ServiceSelector
+    selectedServices={selectedServices}
+    onChange={setSelectedServices}
+  />
                 </div>
 
                 <div>
