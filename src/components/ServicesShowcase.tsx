@@ -6,6 +6,7 @@ import BridalMakeupSection from "@/components/BridalMakeupSection";
 import HairServicesSection from "@/components/HairServicesSection";
 import BeautyGroomingServicesSection from "@/components/BeautyGroomingServicesSection";
 import SkinFacialServicesSection from "@/components/SkinFacialServicesSection";
+import AdditionalServicesSection from "@/components/AdditionalServicesSection";
 
 // Precise Mughal Cusped Arch Paths (Single-line continuous strings to prevent CRLF hydration mismatch)
 const MUGHAL_ARCH_OUTER_PATH =
@@ -49,13 +50,29 @@ export default function ServicesShowcase() {
   const [isHairOpen, setIsHairOpen] = useState(false);
   const [isBeautyOpen, setIsBeautyOpen] = useState(false);
   const [isSkinOpen, setIsSkinOpen] = useState(false);
-  const [closingSection, setClosingSection] = useState<"bridal" | "hair" | "beauty" | "skin" | null>(null);
+  const [isAdditionalOpen, setIsAdditionalOpen] = useState(false);
+  const [closingSection, setClosingSection] = useState<
+    "bridal" | "hair" | "beauty" | "skin" | "additional" | null
+  >(null);
 
-  // Auto-reveal if hash is present (e.g. #bridal-makeup, #hair-services, #beauty-grooming, or #skin-facial)
+  // Auto-reveal if hash is present (e.g. #bridal-makeup, #hair-services, #beauty-grooming, #skin-facial, or #additional-services)
   useEffect(() => {
     if (typeof window !== "undefined") {
       const hash = window.location.hash.toLowerCase();
-      if (hash.includes("skin") || hash.includes("facial")) {
+      if (
+        hash.includes("additional") ||
+        hash.includes("saree") ||
+        hash.includes("pleating") ||
+        hash.includes("folding")
+      ) {
+        setIsAdditionalOpen(true);
+        setTimeout(() => {
+          const el = document.getElementById("additional-services-section");
+          if (el) {
+            el.scrollIntoView({ behavior: "smooth", block: "start" });
+          }
+        }, 150);
+      } else if (hash.includes("skin") || hash.includes("facial")) {
         setIsSkinOpen(true);
         setTimeout(() => {
           const el = document.getElementById("skin-facial-section");
@@ -95,6 +112,7 @@ export default function ServicesShowcase() {
     setIsHairOpen(false);
     setIsBeautyOpen(false);
     setIsSkinOpen(false);
+    setIsAdditionalOpen(false);
     setClosingSection(null);
     setIsBridalOpen(true);
     // Smooth scroll down to bridal subservices section
@@ -110,6 +128,7 @@ export default function ServicesShowcase() {
     setIsBridalOpen(false);
     setIsBeautyOpen(false);
     setIsSkinOpen(false);
+    setIsAdditionalOpen(false);
     setClosingSection(null);
     setIsHairOpen(true);
     // Smooth scroll down to hair subservices section
@@ -125,6 +144,7 @@ export default function ServicesShowcase() {
     setIsBridalOpen(false);
     setIsHairOpen(false);
     setIsSkinOpen(false);
+    setIsAdditionalOpen(false);
     setClosingSection(null);
     setIsBeautyOpen(true);
     // Smooth scroll down to beauty subservices section
@@ -140,11 +160,28 @@ export default function ServicesShowcase() {
     setIsBridalOpen(false);
     setIsHairOpen(false);
     setIsBeautyOpen(false);
+    setIsAdditionalOpen(false);
     setClosingSection(null);
     setIsSkinOpen(true);
     // Smooth scroll down to skin & facial subservices section
     setTimeout(() => {
       const el = document.getElementById("skin-facial-section");
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }, 100);
+  };
+
+  const handleOpenAdditionalSection = () => {
+    setIsBridalOpen(false);
+    setIsHairOpen(false);
+    setIsBeautyOpen(false);
+    setIsSkinOpen(false);
+    setClosingSection(null);
+    setIsAdditionalOpen(true);
+    // Smooth scroll down to additional subservices section
+    setTimeout(() => {
+      const el = document.getElementById("additional-services-section");
       if (el) {
         el.scrollIntoView({ behavior: "smooth", block: "start" });
       }
@@ -168,12 +205,14 @@ export default function ServicesShowcase() {
     if (isHairOpen) setClosingSection("hair");
     if (isBeautyOpen) setClosingSection("beauty");
     if (isSkinOpen) setClosingSection("skin");
+    if (isAdditionalOpen) setClosingSection("additional");
 
     setTimeout(() => {
       setIsBridalOpen(false);
       setIsHairOpen(false);
       setIsBeautyOpen(false);
       setIsSkinOpen(false);
+      setIsAdditionalOpen(false);
       setClosingSection(null);
     }, 420);
   };
@@ -284,6 +323,7 @@ export default function ServicesShowcase() {
           onSelectHairServices={handleOpenHairSection}
           onSelectBeautyGrooming={handleOpenBeautySection}
           onSelectSkinFacial={handleOpenSkinSection}
+          onSelectAdditionalServices={handleOpenAdditionalSection}
         />
       </div>
 
@@ -332,6 +372,18 @@ export default function ServicesShowcase() {
           }`}
         >
           <SkinFacialServicesSection onBackToServices={handleBackToServices} />
+        </div>
+      )}
+
+      {/* Interactive Additional Services Sub-Service Section (Reveals upon selecting Additional Services) */}
+      {isAdditionalOpen && (
+        <div
+          id="additional-services-section"
+          className={`w-full mt-8 sm:mt-12 lg:mt-16 scroll-mt-28 transition-all duration-400 ease-out ${
+            closingSection === "additional" ? "opacity-0 translate-y-6 pointer-events-none" : "opacity-100 translate-y-0"
+          }`}
+        >
+          <AdditionalServicesSection onBackToServices={handleBackToServices} />
         </div>
       )}
     </section>

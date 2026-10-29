@@ -25,6 +25,7 @@ interface ServicesEditorialCollageProps {
   onSelectHairServices?: () => void;
   onSelectBeautyGrooming?: () => void;
   onSelectSkinFacial?: () => void;
+  onSelectAdditionalServices?: () => void;
 }
 
 export default function ServicesEditorialCollage({
@@ -32,6 +33,7 @@ export default function ServicesEditorialCollage({
   onSelectHairServices,
   onSelectBeautyGrooming,
   onSelectSkinFacial,
+  onSelectAdditionalServices,
 }: ServicesEditorialCollageProps = {}) {
   return (
     <section
@@ -105,9 +107,14 @@ export default function ServicesEditorialCollage({
               </div>
             </div>
 
-            {/* Column 1 Image: Placed beneath the CTA button with tight elegant gap */}
+            {/* Column 1 Image: Additional Services (Interactive trigger to sub-services) */}
             <div className="mt-6 sm:mt-7 lg:mt-8 w-full">
-              <article className="group relative w-full h-[220px] sm:h-[260px] lg:h-[280px] overflow-hidden rounded-[8px] border border-[#C8A66A]/25 bg-[#2B1C17] shadow-[0_12px_30px_rgba(0,0,0,0.65)] transition-all duration-300 hover:border-[#C8A66A]/60">
+              <button
+                type="button"
+                onClick={onSelectAdditionalServices}
+                aria-label="Open Additional Services sub-services collection"
+                className="group relative block w-full h-[220px] sm:h-[260px] lg:h-[280px] overflow-hidden rounded-[8px] border border-[#C8A66A]/25 bg-[#2B1C17] shadow-[0_12px_30px_rgba(0,0,0,0.65)] transition-all duration-300 hover:border-[#C8A66A] hover:shadow-[0_18px_40px_rgba(200,166,106,0.3)] text-left cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#C8A66A]"
+              >
                 <img
                   src="/images/additional-services.jpg"
                   alt="Additional Services at Touch Salon"
@@ -115,16 +122,22 @@ export default function ServicesEditorialCollage({
                 />
                 <div
                   aria-hidden="true"
-                  className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-[#1C120F]/90 via-[#1C120F]/40 to-transparent"
+                  className="pointer-events-none absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-[#1C120F]/90 via-[#1C120F]/40 to-transparent"
                 />
-                <div className="absolute inset-x-0 bottom-0 p-3.5 sm:p-4">
-                  <span
-                    className={`${cormorant.className} text-base sm:text-lg font-medium tracking-[0.04em] text-[#F5F0E8] drop-shadow-[0_1px_4px_rgba(0,0,0,0.9)]`}
-                  >
-                    Additional Services
-                  </span>
+                <div className="absolute inset-x-0 bottom-0 p-3 sm:p-4">
+                  <div className="flex items-center justify-between gap-1.5 sm:gap-2">
+                    <span
+                      className={`${cormorant.className} text-[15px] sm:text-base lg:text-[17px] font-medium tracking-[0.02em] text-[#F5F0E8] drop-shadow-[0_1px_4px_rgba(0,0,0,0.9)] leading-tight`}
+                    >
+                      Additional Services
+                    </span>
+                    <span className="shrink-0 whitespace-nowrap inline-flex items-center gap-1 rounded-full bg-[#C8A66A] px-2 sm:px-2.5 py-0.5 text-[10.5px] sm:text-[11px] font-semibold text-[#1C120F] shadow-md transition-all duration-250 group-hover:scale-105 group-hover:bg-[#d8b87c]">
+                      <span className="whitespace-nowrap">2 Looks</span>
+                      <ArrowUpRight className="h-3 w-3 stroke-[2.5]" />
+                    </span>
+                  </div>
                 </div>
-              </article>
+              </button>
             </div>
           </div>
 
