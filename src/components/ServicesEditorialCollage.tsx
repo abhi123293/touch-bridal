@@ -97,7 +97,7 @@ export default function ServicesEditorialCollage({
         </svg>
       </div>
 
-      <div className="relative mx-auto w-full max-w-[1040px]">
+      <div className="relative mx-auto w-full max-w-[1160px]">
         {/* =========================================================================
             DESKTOP & TABLET EDITORIAL COLLAGE (Strict replica of uploaded reference)
             - Proportional 1000 x 1280 coordinate stage
@@ -106,7 +106,7 @@ export default function ServicesEditorialCollage({
             - Editorial philosophy block in lower-left
             - All 8 service frames with inside text + micro-accents
            ========================================================================= */}
-        <div className="relative hidden md:block w-full h-[1120px] lg:h-[1220px] xl:h-[1260px] z-10">
+        <div className="relative hidden md:block w-full h-[1180px] lg:h-[1280px] xl:h-[1320px] z-10">
           {/* -----------------------------------------------------------------------
               THE THIN RECTANGULAR OUTLINE
               (Exact reference: runs from top-left behind center image, across to right,
@@ -130,7 +130,7 @@ export default function ServicesEditorialCollage({
               (Exact reference: medium landscape image on left, below top edge)
              ----------------------------------------------------------------------- */}
           <div
-            className="absolute left-[8%] top-[25.5%] w-[26.5%] h-[14.5%] z-10"
+            className="absolute left-[7%] top-[24.5%] w-[28%] h-[15.5%] z-10"
           >
             <button
               type="button"
@@ -167,7 +167,7 @@ export default function ServicesEditorialCollage({
               (Exact reference: tall vertical image near upper-middle, breaks top line)
              ----------------------------------------------------------------------- */}
           <div
-            className="absolute left-[35%] top-[14.5%] w-[26%] h-[25.5%] z-20"
+            className="absolute left-[34.5%] top-[13.5%] w-[27%] h-[26.8%] z-20"
           >
             <button
               type="button"
@@ -204,7 +204,7 @@ export default function ServicesEditorialCollage({
               (Exact reference: medium portrait/square directly below Frame 1)
              ----------------------------------------------------------------------- */}
           <div
-            className="absolute left-[4%] top-[40.5%] w-[23%] h-[18%] z-15"
+            className="absolute left-[3.5%] top-[40.2%] w-[24%] h-[19%] z-15"
           >
             <button
               type="button"
@@ -241,7 +241,7 @@ export default function ServicesEditorialCollage({
               (Exact reference: large center photo, flush below Frame 2 & beside Frame 3)
              ----------------------------------------------------------------------- */}
           <div
-            className="absolute left-[27.5%] top-[40.5%] w-[34%] h-[18%] z-10"
+            className="absolute left-[27%] top-[40.2%] w-[35%] h-[19%] z-10"
           >
             <a
               href={WHATSAPP_ENQUIRY_URL}
@@ -279,7 +279,7 @@ export default function ServicesEditorialCollage({
               (Exact reference: right side, below the "Love" cursive script)
              ----------------------------------------------------------------------- */}
           <div
-            className="absolute left-[62%] top-[30.5%] w-[20.5%] h-[12.8%] z-10"
+            className="absolute left-[62.5%] top-[29.5%] w-[21.5%] h-[13.8%] z-10"
           >
             <button
               type="button"
@@ -316,7 +316,7 @@ export default function ServicesEditorialCollage({
               (Exact reference: directly below Frame 5)
              ----------------------------------------------------------------------- */}
           <div
-            className="absolute left-[62%] top-[43.8%] w-[20.5%] h-[18.2%] z-10"
+            className="absolute left-[62.5%] top-[43.5%] w-[21.5%] h-[19%] z-10"
           >
             <button
               type="button"
@@ -353,7 +353,7 @@ export default function ServicesEditorialCollage({
               (Exact reference: narrow vertical photo breaking the right border line)
              ----------------------------------------------------------------------- */}
           <div
-            className="absolute left-[83%] top-[37.5%] w-[16%] h-[13.5%] z-20"
+            className="absolute left-[84%] top-[37%] w-[16.5%] h-[14.5%] z-20"
           >
             <a
               href={WHATSAPP_ENQUIRY_URL}
@@ -391,7 +391,7 @@ export default function ServicesEditorialCollage({
               (Exact reference: vertical portrait below centerpiece, breaks bottom line)
              ----------------------------------------------------------------------- */}
           <div
-            className="absolute left-[26.8%] top-[59%] w-[19.5%] h-[20.5%] z-20"
+            className="absolute left-[26%] top-[59.5%] w-[20.5%] h-[21.5%] z-20"
           >
             <a
               href={WHATSAPP_ENQUIRY_URL}
@@ -429,7 +429,7 @@ export default function ServicesEditorialCollage({
               (Exact reference: right beside bottom-center portrait, below centerpiece)
              ----------------------------------------------------------------------- */}
           <div
-            className="absolute left-[46.8%] top-[59%] w-[14.5%] h-[18%] z-15"
+            className="absolute left-[47%] top-[59.5%] w-[15.5%] h-[19%] z-15"
           >
             <a
               href={WHATSAPP_RENTAL_JEWELS_URL}
@@ -490,7 +490,7 @@ export default function ServicesEditorialCollage({
                 type="button"
                 onClick={onSelectBridalMakeup}
                 aria-label="Bridal Makeup"
-                className="group relative w-full h-[320px] overflow-hidden rounded-[2px] border border-[#dfb76c]/30 bg-[#1e110a] text-left block shadow-[0_8px_20px_rgba(0,0,0,0.5)]"
+                className="group relative w-full h-[360px] overflow-hidden rounded-[2px] border border-[#dfb76c]/30 bg-[#1e110a] text-left block shadow-[0_8px_20px_rgba(0,0,0,0.5)]"
               >
                 <img
                   src="/images/imageee.jpg"
@@ -517,7 +517,7 @@ export default function ServicesEditorialCollage({
                 type="button"
                 onClick={onSelectAdditionalServices}
                 aria-label="Additional Services"
-                className="group relative w-full h-[180px] overflow-hidden rounded-[2px] border border-[#dfb76c]/30 bg-[#1e110a] text-left block shadow-[0_8px_20px_rgba(0,0,0,0.5)]"
+                className="group relative w-full h-[210px] overflow-hidden rounded-[2px] border border-[#dfb76c]/30 bg-[#1e110a] text-left block shadow-[0_8px_20px_rgba(0,0,0,0.5)]"
               >
                 <img
                   src="/images/preplating copy.jpg"
@@ -544,7 +544,7 @@ export default function ServicesEditorialCollage({
                 type="button"
                 onClick={onSelectHairServices}
                 aria-label="Hair Services"
-                className="group relative w-full h-[180px] overflow-hidden rounded-[2px] border border-[#dfb76c]/30 bg-[#1e110a] text-left block shadow-[0_8px_20px_rgba(0,0,0,0.5)]"
+                className="group relative w-full h-[210px] overflow-hidden rounded-[2px] border border-[#dfb76c]/30 bg-[#1e110a] text-left block shadow-[0_8px_20px_rgba(0,0,0,0.5)]"
               >
                 <img
                   src="/images/hair-services.jpg"
@@ -571,7 +571,7 @@ export default function ServicesEditorialCollage({
                 type="button"
                 onClick={onSelectSkinFacial}
                 aria-label="Skin & Facial"
-                className="group relative w-full h-[180px] overflow-hidden rounded-[2px] border border-[#dfb76c]/30 bg-[#1e110a] text-left block shadow-[0_8px_20px_rgba(0,0,0,0.5)]"
+                className="group relative w-full h-[210px] overflow-hidden rounded-[2px] border border-[#dfb76c]/30 bg-[#1e110a] text-left block shadow-[0_8px_20px_rgba(0,0,0,0.5)]"
               >
                 <img
                   src="/images/skin-facial.jpg"
@@ -598,7 +598,7 @@ export default function ServicesEditorialCollage({
                 type="button"
                 onClick={onSelectBeautyGrooming}
                 aria-label="Beauty & Grooming"
-                className="group relative w-full h-[180px] overflow-hidden rounded-[2px] border border-[#dfb76c]/30 bg-[#1e110a] text-left block shadow-[0_8px_20px_rgba(0,0,0,0.5)]"
+                className="group relative w-full h-[210px] overflow-hidden rounded-[2px] border border-[#dfb76c]/30 bg-[#1e110a] text-left block shadow-[0_8px_20px_rgba(0,0,0,0.5)]"
               >
                 <img
                   src="/images/beauty-grooming.jpg"
@@ -626,7 +626,7 @@ export default function ServicesEditorialCollage({
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Appointment Enquiry"
-                className="group relative w-full h-[190px] overflow-hidden rounded-[2px] border border-[#dfb76c]/30 bg-[#1e110a] text-left block shadow-[0_8px_20px_rgba(0,0,0,0.5)]"
+                className="group relative w-full h-[220px] overflow-hidden rounded-[2px] border border-[#dfb76c]/30 bg-[#1e110a] text-left block shadow-[0_8px_20px_rgba(0,0,0,0.5)]"
               >
                 <img
                   src="/images/appointment.jpg"
@@ -655,7 +655,7 @@ export default function ServicesEditorialCollage({
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Groom Makeup"
-                className="group relative w-full h-[160px] overflow-hidden rounded-[2px] border border-[#dfb76c]/30 bg-[#1e110a] text-left block shadow-[0_8px_20px_rgba(0,0,0,0.5)]"
+                className="group relative w-full h-[185px] overflow-hidden rounded-[2px] border border-[#dfb76c]/30 bg-[#1e110a] text-left block shadow-[0_8px_20px_rgba(0,0,0,0.5)]"
               >
                 <img
                   src="/images/Groom.jpg"
@@ -683,7 +683,7 @@ export default function ServicesEditorialCollage({
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Men's Services"
-                className="group relative w-full h-[160px] overflow-hidden rounded-[2px] border border-[#dfb76c]/30 bg-[#1e110a] text-left block shadow-[0_8px_20px_rgba(0,0,0,0.5)]"
+                className="group relative w-full h-[185px] overflow-hidden rounded-[2px] border border-[#dfb76c]/30 bg-[#1e110a] text-left block shadow-[0_8px_20px_rgba(0,0,0,0.5)]"
               >
                 <img
                   src="/images/mens-services.jpg"
@@ -711,7 +711,7 @@ export default function ServicesEditorialCollage({
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Rental Jewels Enquiry via WhatsApp"
-                className="group relative w-full h-[180px] overflow-hidden rounded-[2px] border border-[#dfb76c]/30 bg-[#1e110a] text-left block shadow-[0_8px_20px_rgba(0,0,0,0.5)]"
+                className="group relative w-full h-[210px] overflow-hidden rounded-[2px] border border-[#dfb76c]/30 bg-[#1e110a] text-left block shadow-[0_8px_20px_rgba(0,0,0,0.5)]"
               >
                 <img
                   src="/images/rental jewels.jpg"
