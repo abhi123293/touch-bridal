@@ -41,7 +41,7 @@ export const ADDITIONAL_SUB_SERVICES: AdditionalSubService[] = [
     title: "Saree Box Folding",
     description:
       "Keep your saree beautifully folded and organized with precise box folding for easy storage and travel.",
-    image: "/images/boxfolding.jpg",
+    image: "/images/saree box folding.jpg",
     alt: "Saree Box Folding by S Touch Salon",
   },
 ];
