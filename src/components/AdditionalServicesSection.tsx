@@ -32,7 +32,7 @@ export const ADDITIONAL_SUB_SERVICES: AdditionalSubService[] = [
     title: "Saree Pre-Pleating",
     description:
       "Get perfectly arranged saree pleats for a neat, elegant look and effortless draping.",
-    image: "/images/preplating.jpg",
+    image: "/images/preplating copy.jpg",
     alt: "Saree Pre-Pleating by S Touch Salon",
   },
   {
