@@ -2,7 +2,8 @@ import BridalHero from "@/components/BridalHero";
 import AboutUs from "@/components/AboutUs";
 import FeaturedServices from "@/components/FeaturedServices";
 import BridalGalleryPreview from "@/components/BridalGalleryPreview";
-
+import WhyChooseUs from "@/components/WhyChooseUs";
+import CustomerTestimonials from "@/components/CustomerTestimonials";
 
 
 
@@ -13,6 +14,8 @@ export default function HomePage() {
       <AboutUs />
       <FeaturedServices />
       <BridalGalleryPreview/>
+      <WhyChooseUs />
+      <CustomerTestimonials />
    
     </main>
   );
