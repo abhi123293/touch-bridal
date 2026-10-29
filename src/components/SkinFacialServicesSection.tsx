@@ -89,6 +89,15 @@ export const SKIN_SUB_SERVICES: SkinSubService[] = [
     image: "/images/face masks.jpg",
     alt: "Face Masks Therapy by S Touch Salon",
   },
+  {
+    id: "serum-face-mask",
+    number: "08",
+    title: "Serum Face Mask",
+    description:
+      "Nourish and hydrate your skin with serum face masks that leave it feeling soft, refreshed, and radiant.",
+    image: "/images/serum.jpg",
+    alt: "Serum Face Mask Therapy by S Touch Salon",
+  },
 ];
 
 interface SkinFacialServicesSectionProps {
