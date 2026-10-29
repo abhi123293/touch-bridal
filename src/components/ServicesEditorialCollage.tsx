@@ -164,7 +164,7 @@ export default function ServicesEditorialCollage({
             className="group relative sm:col-span-2 lg:col-span-5 h-[270px] sm:h-[310px] lg:h-[350px] overflow-hidden rounded-[6px] sm:rounded-[8px] border border-[#3A2921]/15 bg-[#2B1C17] shadow-[0_10px_26px_rgba(28,18,15,0.12)] text-left cursor-pointer transition-all duration-350 hover:border-[#C8A66A] hover:shadow-[0_16px_36px_rgba(200,166,106,0.25)] hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#C8A66A]"
           >
             <img
-              src="/images/bridal-makeup.jpg"
+              src="/images/imageee.jpg"
               alt="Bridal Makeup by S Touch Salon"
               className="h-full w-full object-cover object-[center_15%] transition-transform duration-700 ease-out group-hover:scale-[1.03]"
             />
