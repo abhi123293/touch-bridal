@@ -71,6 +71,15 @@ export const GROOM_SUB_SERVICES: GroomSubService[] = [
     image: "/images/eng.jpg",
     alt: "Groom Engagement Makeup Artistry by Touch Salon",
   },
+  {
+    id: "holy-communion-makeup",
+    number: "06",
+    title: "Holy Communion Makeup",
+    description:
+      "Give your little boy a neat and charming look with gentle grooming for his special Holy Communion day.",
+    image: "/images/communion.jpg",
+    alt: "Holy Communion Groom Makeup by Touch Salon",
+  },
 ];
 
 interface GroomMakeupSectionProps {
