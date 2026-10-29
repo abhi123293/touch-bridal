@@ -372,7 +372,7 @@ export default function WhyChooseUs() {
   return (
    <section
   ref={sectionRef}
-  className={`${openSans.className} relative -mt-4 bg-transparent px-2 pt-2 pb-6 sm:-mt-18 sm:px-3 sm:pt-3 sm:pb-8 lg:px-4`}
+  className={`${openSans.className} relative -mt-4 bg-transparent px-2 pt-2 pb-6 sm:-mt-19 sm:px-3 sm:pt-3 sm:pb-8 lg:px-4`}
 >
   <div className="mx-auto w-full max-w-[1320px]">
     <div
