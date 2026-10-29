@@ -71,6 +71,42 @@ export const BRIDAL_SUB_SERVICES: BridalSubService[] = [
     image: "/images/puberty.jpg",
     alt: "Puberty Makeup by Touch Salon",
   },
+  {
+    id: "engagement-makeup",
+    number: "06",
+    title: "Engagement Makeup",
+    description:
+      "Enjoy a beautiful engagement look with elegant makeup that enhances your natural beauty and makes your special day unforgettable.",
+    image: "/images/engagement.jpg",
+    alt: "Engagement Makeup by Touch Salon",
+  },
+  {
+    id: "holy-communion-makeup",
+    number: "07",
+    title: "Holy Communion Makeup",
+    description:
+      "Celebrate your child’s Holy Communion with beautiful, elegant makeup that creates a natural and graceful look for this special day.",
+    image: "/images/holy.jpeg",
+    alt: "Holy Communion Makeup by Touch Salon",
+  },
+  {
+    id: "goddess-makeup",
+    number: "08",
+    title: "Goddess Makeup",
+    description:
+      "Get a stunning goddess look with radiant makeup that enhances your natural beauty and gives you an elegant, divine glow.",
+    image: "/images/goddess.jpg",
+    alt: "Goddess Makeup by Touch Salon",
+  },
+  {
+    id: "sfx-makeup",
+    number: "09",
+    title: "SFX Makeup",
+    description:
+      "Transform your look with creative special-effects makeup featuring realistic wounds, scars, and fantasy designs for a dramatic appearance.",
+    image: "/images/haloween.jpg",
+    alt: "SFX Makeup by Touch Salon",
+  },
 ];
 
 interface BridalMakeupSectionProps {
