@@ -89,6 +89,15 @@ export const BEAUTY_SUB_SERVICES: BeautySubService[] = [
     image: "/images/ear-piercing.jpg",
     alt: "Ear Piercing by S Touch Salon",
   },
+  {
+    id: "body-polishing",
+    number: "08",
+    title: "Body Polishing",
+    description:
+      "Enjoy a luxurious body polishing treatment that exfoliates, nourishes, and leaves your skin feeling soft, smooth, and radiant.",
+    image: "/images/polish.jpg",
+    alt: "Body Polishing by S Touch Salon",
+  },
 ];
 
 interface BeautyGroomingServicesSectionProps {
