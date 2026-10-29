@@ -126,24 +126,6 @@ export default function ServicesEditorialCollage({
           </svg>
 
           {/* -----------------------------------------------------------------------
-              CURSIVE SCRIPT CALLIGRAPHY IN UPPER-RIGHT OPEN SPACE
-              (Exact reference: ornate cursive "Love" script in the open space)
-             ----------------------------------------------------------------------- */}
-          <div
-            className="absolute right-[8%] top-[19%] z-10 pointer-events-none text-right"
-          >
-            <span
-              className="block font-serif italic text-6xl lg:text-7xl xl:text-[84px] text-[#dfb76c]/90 leading-none drop-shadow-[0_2px_14px_rgba(223,183,108,0.3)] select-none"
-              style={{
-                fontFamily: "var(--font-cormorant), 'Playfair Display', Georgia, serif",
-                letterSpacing: "0.04em",
-              }}
-            >
-              Love
-            </span>
-          </div>
-
-          {/* -----------------------------------------------------------------------
               FRAME 1 (Upper-Left Image): Additional Services
               (Exact reference: medium landscape image on left, below top edge)
              ----------------------------------------------------------------------- */}
@@ -167,9 +149,6 @@ export default function ServicesEditorialCollage({
               />
               <div className="absolute inset-x-0 bottom-0 p-3 flex items-end justify-between gap-1.5">
                 <div>
-                  <span className={`${inter.className} block text-[9px] uppercase tracking-[0.2em] font-semibold text-[#C8A66A]`}>
-                    Saree Pleating
-                  </span>
                   <h3
                     className={`${cormorant.className} text-base lg:text-[18px] font-medium text-[#F5F0E8] leading-tight drop-shadow-sm`}
                   >
@@ -207,9 +186,6 @@ export default function ServicesEditorialCollage({
               />
               <div className="absolute inset-x-0 bottom-0 p-3.5 flex items-end justify-between gap-2">
                 <div>
-                  <span className={`${inter.className} block text-[9.5px] uppercase tracking-[0.22em] font-semibold text-[#C8A66A]`}>
-                    Flagship Makeover
-                  </span>
                   <h3
                     className={`${cormorant.className} text-lg lg:text-[22px] font-medium text-[#F5F0E8] leading-tight drop-shadow-sm`}
                   >
@@ -247,9 +223,6 @@ export default function ServicesEditorialCollage({
               />
               <div className="absolute inset-x-0 bottom-0 p-3 flex items-end justify-between gap-1.5">
                 <div>
-                  <span className={`${inter.className} block text-[9px] uppercase tracking-[0.2em] font-semibold text-[#C8A66A]`}>
-                    Radiance
-                  </span>
                   <h3
                     className={`${cormorant.className} text-base lg:text-[18px] font-medium text-[#F5F0E8] leading-tight drop-shadow-sm`}
                   >
@@ -288,9 +261,6 @@ export default function ServicesEditorialCollage({
               />
               <div className="absolute inset-x-0 bottom-0 p-3.5 flex items-end justify-between gap-2">
                 <div>
-                  <span className={`${inter.className} block text-[9px] uppercase tracking-[0.2em] font-semibold text-[#C8A66A]`}>
-                    VIP Booking
-                  </span>
                   <h3
                     className={`${cormorant.className} text-lg lg:text-[20px] font-medium text-[#F5F0E8] leading-tight drop-shadow-sm`}
                   >
@@ -328,9 +298,6 @@ export default function ServicesEditorialCollage({
               />
               <div className="absolute inset-x-0 bottom-0 p-2.5 flex items-end justify-between gap-1">
                 <div>
-                  <span className={`${inter.className} block text-[8.5px] uppercase tracking-[0.18em] font-semibold text-[#C8A66A]`}>
-                    Salon Rituals
-                  </span>
                   <h3
                     className={`${cormorant.className} text-sm lg:text-[16px] font-medium text-[#F5F0E8] leading-tight drop-shadow-sm`}
                   >
@@ -368,9 +335,6 @@ export default function ServicesEditorialCollage({
               />
               <div className="absolute inset-x-0 bottom-0 p-3 flex items-end justify-between gap-1.5">
                 <div>
-                  <span className={`${inter.className} block text-[9px] uppercase tracking-[0.2em] font-semibold text-[#C8A66A]`}>
-                    Couture Styling
-                  </span>
                   <h3
                     className={`${cormorant.className} text-base lg:text-[18px] font-medium text-[#F5F0E8] leading-tight drop-shadow-sm`}
                   >
@@ -409,9 +373,6 @@ export default function ServicesEditorialCollage({
               />
               <div className="absolute inset-x-0 bottom-0 p-2 flex items-end justify-between gap-1">
                 <div>
-                  <span className={`${inter.className} block text-[8px] uppercase tracking-[0.16em] font-semibold text-[#C8A66A]`}>
-                    Groom Suite
-                  </span>
                   <h3
                     className={`${cormorant.className} text-xs lg:text-[14px] font-medium text-[#F5F0E8] leading-tight drop-shadow-sm`}
                   >
@@ -450,9 +411,6 @@ export default function ServicesEditorialCollage({
               />
               <div className="absolute inset-x-0 bottom-0 p-3 flex items-end justify-between gap-1.5">
                 <div>
-                  <span className={`${inter.className} block text-[9px] uppercase tracking-[0.2em] font-semibold text-[#C8A66A]`}>
-                    Executive
-                  </span>
                   <h3
                     className={`${cormorant.className} text-base lg:text-[18px] font-medium text-[#F5F0E8] leading-tight drop-shadow-sm`}
                   >
@@ -491,9 +449,6 @@ export default function ServicesEditorialCollage({
               />
               <div className="absolute inset-x-0 bottom-0 p-2.5 flex items-end justify-between gap-1">
                 <div>
-                  <span className={`${inter.className} block text-[8px] uppercase tracking-[0.16em] font-semibold text-[#C8A66A]`}>
-                    Adornments
-                  </span>
                   <h3
                     className={`${cormorant.className} text-xs lg:text-[14px] font-medium text-[#F5F0E8] leading-tight drop-shadow-sm`}
                   >
@@ -507,35 +462,6 @@ export default function ServicesEditorialCollage({
             </a>
           </div>
 
-
-          {/* -----------------------------------------------------------------------
-              EDITORIAL TEXT BLOCK IN LOWER-LEFT OPEN SPACE
-              (Exact reference: "WEDDING VOWS" heading + neat justified editorial paragraph)
-             ----------------------------------------------------------------------- */}
-          <div
-            className="absolute left-[4%] top-[59.5%] w-[21.5%] z-10 pr-2"
-          >
-            <h4
-              className={`${inter.className} text-[11px] lg:text-[12px] font-bold uppercase tracking-[0.24em] text-[#dfb76c] mb-2`}
-            >
-              Studio Philosophy
-            </h4>
-            <p
-              className={`${inter.className} text-[10px] lg:text-[11px] leading-[1.65] text-[#EAE1D5]/80 text-justify font-normal`}
-            >
-              Every detail tells a story. Every look captures a dream. At Touch Bridal Makeover Studio, we promise to listen to your vision and craft bespoke bridal artistry, couture hair transformations, and rejuvenating skin therapies tailored to make your special moments truly unforgettable.
-            </p>
-            <div className="mt-3">
-              <span
-                className="block font-serif italic text-base lg:text-lg text-[#fdf0d5]/90"
-                style={{
-                  fontFamily: "var(--font-cormorant), 'Playfair Display', Georgia, serif",
-                }}
-              >
-                Touch Bridal Studio
-              </span>
-            </div>
-          </div>
         </div>
 
         {/* =========================================================================
@@ -554,14 +480,6 @@ export default function ServicesEditorialCollage({
                 Our Services
               </h2>
             </div>
-            <span
-              className="font-serif italic text-4xl text-[#dfb76c]"
-              style={{
-                fontFamily: "var(--font-cormorant), 'Playfair Display', Georgia, serif",
-              }}
-            >
-              Love
-            </span>
           </div>
 
           {/* Mobile Collage Cards */}
@@ -582,9 +500,6 @@ export default function ServicesEditorialCollage({
                 <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-[#1C120F] via-[#1C120F]/55 to-transparent" />
                 <div className="absolute inset-x-0 bottom-0 p-3.5 flex items-end justify-between gap-2">
                   <div>
-                    <span className="block text-[9.5px] uppercase tracking-[0.2em] font-semibold text-[#C8A66A]">
-                      Flagship Makeover
-                    </span>
                     <h3 className={`${cormorant.className} text-xl font-medium text-[#F5F0E8]`}>
                       Bridal Makeup
                     </h3>
@@ -612,9 +527,6 @@ export default function ServicesEditorialCollage({
                 <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-[#1C120F] via-[#1C120F]/55 to-transparent" />
                 <div className="absolute inset-x-0 bottom-0 p-2.5 flex items-end justify-between gap-1">
                   <div>
-                    <span className="block text-[8.5px] uppercase tracking-[0.16em] font-semibold text-[#C8A66A]">
-                      Pleating
-                    </span>
                     <h3 className={`${cormorant.className} text-sm font-medium text-[#F5F0E8]`}>
                       Additional Services
                     </h3>
@@ -642,9 +554,6 @@ export default function ServicesEditorialCollage({
                 <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-[#1C120F] via-[#1C120F]/55 to-transparent" />
                 <div className="absolute inset-x-0 bottom-0 p-2.5 flex items-end justify-between gap-1">
                   <div>
-                    <span className="block text-[8.5px] uppercase tracking-[0.16em] font-semibold text-[#C8A66A]">
-                      Couture
-                    </span>
                     <h3 className={`${cormorant.className} text-sm font-medium text-[#F5F0E8]`}>
                       Hair Services
                     </h3>
@@ -672,9 +581,6 @@ export default function ServicesEditorialCollage({
                 <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-[#1C120F] via-[#1C120F]/55 to-transparent" />
                 <div className="absolute inset-x-0 bottom-0 p-2.5 flex items-end justify-between gap-1">
                   <div>
-                    <span className="block text-[8.5px] uppercase tracking-[0.16em] font-semibold text-[#C8A66A]">
-                      Radiance
-                    </span>
                     <h3 className={`${cormorant.className} text-sm font-medium text-[#F5F0E8]`}>
                       Skin &amp; Facial
                     </h3>
@@ -702,9 +608,6 @@ export default function ServicesEditorialCollage({
                 <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-[#1C120F] via-[#1C120F]/55 to-transparent" />
                 <div className="absolute inset-x-0 bottom-0 p-2.5 flex items-end justify-between gap-1">
                   <div>
-                    <span className="block text-[8.5px] uppercase tracking-[0.16em] font-semibold text-[#C8A66A]">
-                      Rituals
-                    </span>
                     <h3 className={`${cormorant.className} text-sm font-medium text-[#F5F0E8]`}>
                       Beauty &amp; Grooming
                     </h3>
@@ -733,9 +636,6 @@ export default function ServicesEditorialCollage({
                 <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-[#1C120F] via-[#1C120F]/55 to-transparent" />
                 <div className="absolute inset-x-0 bottom-0 p-3 flex items-end justify-between gap-2">
                   <div>
-                    <span className="block text-[9px] uppercase tracking-[0.2em] font-semibold text-[#C8A66A]">
-                      VIP Booking
-                    </span>
                     <h3 className={`${cormorant.className} text-lg font-medium text-[#F5F0E8]`}>
                       Appointment Enquiry
                     </h3>
@@ -765,9 +665,6 @@ export default function ServicesEditorialCollage({
                 <div className="absolute inset-x-0 bottom-0 h-18 bg-gradient-to-t from-[#1C120F] via-[#1C120F]/55 to-transparent" />
                 <div className="absolute inset-x-0 bottom-0 p-2 flex items-end justify-between gap-1">
                   <div>
-                    <span className="block text-[8px] uppercase tracking-[0.16em] font-semibold text-[#C8A66A]">
-                      Suite
-                    </span>
                     <h3 className={`${cormorant.className} text-xs font-medium text-[#F5F0E8]`}>
                       Groom Makeup
                     </h3>
@@ -796,9 +693,6 @@ export default function ServicesEditorialCollage({
                 <div className="absolute inset-x-0 bottom-0 h-18 bg-gradient-to-t from-[#1C120F] via-[#1C120F]/55 to-transparent" />
                 <div className="absolute inset-x-0 bottom-0 p-2 flex items-end justify-between gap-1">
                   <div>
-                    <span className="block text-[8px] uppercase tracking-[0.16em] font-semibold text-[#C8A66A]">
-                      Executive
-                    </span>
                     <h3 className={`${cormorant.className} text-xs font-medium text-[#F5F0E8]`}>
                       Men&apos;s Services
                     </h3>
@@ -827,9 +721,6 @@ export default function ServicesEditorialCollage({
                 <div className="absolute inset-x-0 bottom-0 h-22 bg-gradient-to-t from-[#1C120F] via-[#1C120F]/55 to-transparent" />
                 <div className="absolute inset-x-0 bottom-0 p-3 flex items-end justify-between gap-2">
                   <div>
-                    <span className="block text-[9px] uppercase tracking-[0.2em] font-semibold text-[#C8A66A]">
-                      Adornments
-                    </span>
                     <h3 className={`${cormorant.className} text-lg font-medium text-[#F5F0E8]`}>
                       Rental Jewels
                     </h3>
@@ -843,15 +734,6 @@ export default function ServicesEditorialCollage({
             </div>
           </div>
 
-          {/* Mobile Editorial Philosophy Block */}
-          <div className="border-t border-[#dfb76c]/25 pt-3">
-            <h4 className={`${inter.className} text-[10.5px] font-bold uppercase tracking-[0.2em] text-[#dfb76c] mb-1.5`}>
-              Studio Philosophy
-            </h4>
-            <p className={`${inter.className} text-[10px] leading-relaxed text-[#EAE1D5]/80 text-justify`}>
-              Every detail tells a story. Every look captures a dream. At Touch Bridal Makeover Studio, we promise to listen to your vision and craft bespoke bridal artistry, couture hair transformations, and rejuvenating skin therapies tailored to make your special moments truly unforgettable.
-            </p>
-          </div>
         </div>
       </div>
     </section>
