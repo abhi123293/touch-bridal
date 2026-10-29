@@ -442,45 +442,6 @@ export default function ServicesEditorialCollage({
             </a>
           </div>
 
-          {/* -----------------------------------------------------------------------
-              FRAME 9 (Bottom Center - Right): Saree Box Folding
-              (Exact reference: small photo to the right of Frame 8)
-             ----------------------------------------------------------------------- */}
-          <div
-            className="absolute left-[46.8%] top-[59%] w-[14.5%] h-[13.5%] z-15"
-          >
-            <button
-              type="button"
-              onClick={onSelectAdditionalServices}
-              aria-label="Saree Box Folding"
-              className="group relative w-full h-full overflow-hidden rounded-[2px] border border-[#2B1C17]/25 bg-[#2B1C17] shadow-md text-left cursor-pointer transition-all duration-300 hover:border-[#C8A66A] hover:shadow-xl focus:outline-none"
-            >
-              <img
-                src="/images/boxfolding.jpg"
-                alt="Saree Box Folding by S Touch Salon"
-                className="h-full w-full object-cover object-[center_20%] transition-transform duration-700 ease-out group-hover:scale-[1.035]"
-              />
-              <div
-                aria-hidden="true"
-                className="pointer-events-none absolute inset-x-0 bottom-0 h-18 bg-gradient-to-t from-[#1C120F]/90 via-[#1C120F]/40 to-transparent"
-              />
-              <div className="absolute inset-x-0 bottom-0 p-2 flex items-end justify-between gap-1">
-                <div>
-                  <span className={`${inter.className} block text-[8px] uppercase tracking-[0.16em] font-semibold text-[#C8A66A]`}>
-                    Precision
-                  </span>
-                  <h3
-                    className={`${cormorant.className} text-xs lg:text-[14px] font-medium text-[#F5F0E8] leading-tight drop-shadow-sm`}
-                  >
-                    Box Folding
-                  </h3>
-                </div>
-                <span className="shrink-0 inline-flex h-4.5 w-4.5 items-center justify-center rounded-full bg-[#C8A66A]/25 text-[#C8A66A]">
-                  <ArrowUpRight className="h-2.5 w-2.5 stroke-[2]" />
-                </span>
-              </div>
-            </button>
-          </div>
 
           {/* -----------------------------------------------------------------------
               EDITORIAL TEXT BLOCK IN LOWER-LEFT OPEN SPACE
