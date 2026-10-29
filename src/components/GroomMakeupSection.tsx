@@ -27,8 +27,17 @@ export interface GroomSubService {
 
 export const GROOM_SUB_SERVICES: GroomSubService[] = [
   {
-    id: "wedding-makeup",
+    id: "engagement-makeup",
     number: "01",
+    title: "Engagement Makeup",
+    description:
+      "Look stylish and confident with groom engagement makeup that enhances your features and gives you a polished, elegant look for your special day.",
+    image: "/images/eng.jpg",
+    alt: "Groom Engagement Makeup Artistry by Touch Salon",
+  },
+  {
+    id: "wedding-makeup",
+    number: "02",
     title: "Wedding Makeup",
     description:
       "Look sharp and confident with professional groom makeup that enhances your features for a polished and elegant look on your special day.",
@@ -37,7 +46,7 @@ export const GROOM_SUB_SERVICES: GroomSubService[] = [
   },
   {
     id: "reception-makeup",
-    number: "02",
+    number: "03",
     title: "Reception Makeup",
     description:
       "Get a stylish and elegant look with reception groom makeup that enhances your features and keeps you looking confident and handsome on your special day.",
@@ -46,7 +55,7 @@ export const GROOM_SUB_SERVICES: GroomSubService[] = [
   },
   {
     id: "party-makeup",
-    number: "03",
+    number: "04",
     title: "Party Makeup",
     description:
       "Shine at every celebration with glamorous party makeup that enhances your natural beauty and gives you a flawless, stunning look.",
@@ -55,21 +64,12 @@ export const GROOM_SUB_SERVICES: GroomSubService[] = [
   },
   {
     id: "baby-shower",
-    number: "04",
+    number: "05",
     title: "Baby Shower",
     description:
       "Look smart and elegant with groom styling for your baby shower, perfect for celebrating this special occasion with confidence and charm.",
     image: "/images/shower.jpg",
     alt: "Groom Baby Shower Styling & Makeup by Touch Salon",
-  },
-  {
-    id: "engagement-makeup",
-    number: "05",
-    title: "Engagement Makeup",
-    description:
-      "Look stylish and confident with groom engagement makeup that enhances your features and gives you a polished, elegant look for your special day.",
-    image: "/images/eng.jpg",
-    alt: "Groom Engagement Makeup Artistry by Touch Salon",
   },
   {
     id: "holy-communion-makeup",

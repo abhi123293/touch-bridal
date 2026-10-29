@@ -27,8 +27,17 @@ export interface BridalSubService {
 
 export const BRIDAL_SUB_SERVICES: BridalSubService[] = [
   {
-    id: "bridal-makeup",
+    id: "engagement-makeup",
     number: "01",
+    title: "Engagement Makeup",
+    description:
+      "Enjoy a beautiful engagement look with elegant makeup that enhances your natural beauty and makes your special day unforgettable.",
+    image: "/images/engagement copy.jpg",
+    alt: "Engagement Makeup by Touch Salon",
+  },
+  {
+    id: "bridal-makeup",
+    number: "02",
     title: "Bridal Makeup",
     description:
       "Every detail tells a story. Every look captures a dream. Bridal beauty, perfected for your special day.",
@@ -37,7 +46,7 @@ export const BRIDAL_SUB_SERVICES: BridalSubService[] = [
   },
   {
     id: "reception-makeup",
-    number: "02",
+    number: "03",
     title: "Reception Makeup",
     description:
       "Step into the spotlight with a beautifully refined look that captures the magic of your celebration and leaves a lasting impression.",
@@ -46,7 +55,7 @@ export const BRIDAL_SUB_SERVICES: BridalSubService[] = [
   },
   {
     id: "party-makeup",
-    number: "03",
+    number: "04",
     title: "Party Makeup",
     description:
       "Turn every occasion into a moment to shine with a flawless, glamorous look that reflects your unique style.",
@@ -55,7 +64,7 @@ export const BRIDAL_SUB_SERVICES: BridalSubService[] = [
   },
   {
     id: "baby-shower-makeup",
-    number: "04",
+    number: "05",
     title: "Baby Shower Makeup",
     description:
       "Embrace the magic of motherhood with a graceful, glowing look that makes your precious moments even more memorable.",
@@ -64,21 +73,12 @@ export const BRIDAL_SUB_SERVICES: BridalSubService[] = [
   },
   {
     id: "puberty-makeup",
-    number: "05",
+    number: "06",
     title: "Puberty Makeup",
     description:
       "Blending cultural elegance with youthful charm, create a fresh and radiant look for this cherished celebration.",
     image: "/images/puberty.jpg",
     alt: "Puberty Makeup by Touch Salon",
-  },
-  {
-    id: "engagement-makeup",
-    number: "06",
-    title: "Engagement Makeup",
-    description:
-      "Enjoy a beautiful engagement look with elegant makeup that enhances your natural beauty and makes your special day unforgettable.",
-    image: "/images/engagement copy.jpg",
-    alt: "Engagement Makeup by Touch Salon",
   },
   {
     id: "holy-communion-makeup",
