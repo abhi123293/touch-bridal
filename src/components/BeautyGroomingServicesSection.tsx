@@ -98,6 +98,15 @@ export const BEAUTY_SUB_SERVICES: BeautySubService[] = [
     image: "/images/polish.jpg",
     alt: "Body Polishing by S Touch Salon",
   },
+  {
+    id: "relax-and-rejuvenate",
+    number: "09",
+    title: "Relax & Rejuvenate",
+    description:
+      "Relax your body and rejuvenate your mind with our soothing spa treatments.",
+    image: "/images/relax girl.jpg",
+    alt: "Relax and Rejuvenate by S Touch Salon",
+  },
 ];
 
 interface BeautyGroomingServicesSectionProps {
