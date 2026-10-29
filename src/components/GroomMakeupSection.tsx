@@ -35,6 +35,15 @@ export const GROOM_SUB_SERVICES: GroomSubService[] = [
     image: "/images/groom makeup.jpg",
     alt: "Groom Wedding Makeup Artistry by Touch Salon",
   },
+  {
+    id: "reception-makeup",
+    number: "02",
+    title: "Reception Makeup",
+    description:
+      "Get a stylish and elegant look with reception groom makeup that enhances your features and keeps you looking confident and handsome on your special day.",
+    image: "/images/rec.jpg",
+    alt: "Groom Reception Makeup Artistry by Touch Salon",
+  },
 ];
 
 interface GroomMakeupSectionProps {
@@ -319,3 +328,4 @@ export default function GroomMakeupSection({
     </section>
   );
 }
+
