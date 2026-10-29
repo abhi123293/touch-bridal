@@ -89,6 +89,15 @@ export const GROOM_SUB_SERVICES: GroomSubService[] = [
     image: "/images/god.jpg",
     alt: "Men's God Makeup Artistry by Touch Salon",
   },
+  {
+    id: "sfx-makeup",
+    number: "08",
+    title: "SFX Makeup",
+    description:
+      "Transform your look with men’s SFX makeup, featuring realistic wounds, scars, and special effects for a bold and dramatic appearance.",
+    image: "/images/sfx.jpg",
+    alt: "Men's SFX Makeup by Touch Salon",
+  },
 ];
 
 interface GroomMakeupSectionProps {
