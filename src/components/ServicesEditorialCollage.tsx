@@ -92,8 +92,8 @@ export default function ServicesEditorialCollage({
             className="group relative col-start-1 col-end-5 row-start-1 row-end-3 w-full h-full overflow-hidden rounded-[3px] bg-[#2B1C17] border border-[#dfb76c]/20 shadow-md cursor-pointer transition-all duration-300 hover:border-[#C8A66A]/60 focus:outline-none focus-visible:ring-1 focus-visible:ring-[#C8A66A]"
           >
             <img
-              src="/images/additional-services.jpg"
-              alt="Additional Services"
+              src="/images/preplating.jpg"
+              alt="Additional Services - Saree Pre-Pleating"
               className="h-full w-full object-cover object-[center_20%] transition-transform duration-700 ease-out group-hover:scale-[1.025]"
             />
           </button>
@@ -216,8 +216,8 @@ export default function ServicesEditorialCollage({
             className="group relative col-span-2 aspect-[16/9] w-full overflow-hidden rounded-[3px] bg-[#2B1C17] border border-[#dfb76c]/20 shadow-md text-left cursor-pointer"
           >
             <img
-              src="/images/additional-services.jpg"
-              alt="Additional Services"
+              src="/images/preplating.jpg"
+              alt="Additional Services - Saree Pre-Pleating"
               className="h-full w-full object-cover object-[center_20%] transition-transform duration-700 ease-out group-hover:scale-[1.02]"
             />
           </button>
