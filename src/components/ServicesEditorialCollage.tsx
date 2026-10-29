@@ -330,7 +330,7 @@ export default function ServicesEditorialCollage({
           </div>
 
           {/* -----------------------------------------------------------------------
-              FRAME 6 (Right Column - Middle Item): Hair Services
+              FRAME 6 (Right Column - Middle Item): Groom Makeup
               (Exact reference: directly below Frame 5)
              ----------------------------------------------------------------------- */}
           <div
@@ -338,14 +338,14 @@ export default function ServicesEditorialCollage({
           >
             <button
               type="button"
-              onClick={onSelectHairServices}
-              aria-label="Hair Services"
+              onClick={onSelectGroomMakeup}
+              aria-label="Groom Makeup"
               className="group relative w-full h-full overflow-hidden rounded-[2px] border border-[#dfb76c]/30 bg-[#1e110a] shadow-[0_10px_28px_rgba(0,0,0,0.6)] text-left cursor-pointer transition-all duration-300 hover:border-[#dfb76c] hover:shadow-[0_14px_38px_rgba(223,183,108,0.22)] focus:outline-none"
             >
               <img
-                src="/images/hair-services.jpg"
-                alt="Hair Services & Rituals by S Touch Salon"
-                className="h-full w-full object-cover object-[center_20%] transition-transform duration-700 ease-out group-hover:scale-[1.035]"
+                src="/images/Groom.jpg"
+                alt="Groom Makeup by S Touch Salon"
+                className="h-full w-full object-cover object-[center_18%] transition-transform duration-700 ease-out group-hover:scale-[1.035]"
               />
               <div
                 aria-hidden="true"
@@ -356,7 +356,7 @@ export default function ServicesEditorialCollage({
                   <h3
                     className={`${cormorant.className} text-base lg:text-[18px] font-medium text-[#F5F0E8] leading-tight drop-shadow-sm`}
                   >
-                    Hair Services
+                    Groom Makeup
                   </h3>
                 </div>
                 <span className="shrink-0 inline-flex h-6 w-6 items-center justify-center rounded-full bg-[#C8A66A]/25 border border-[#C8A66A]/50 text-[#C8A66A] transition-all duration-300 group-hover:scale-110 group-hover:bg-[#dfb76c] group-hover:text-[#1C120F] group-hover:border-[#dfb76c] hover:!bg-[#dfb76c] hover:!text-[#1C120F]">
@@ -367,7 +367,7 @@ export default function ServicesEditorialCollage({
           </div>
 
           {/* -----------------------------------------------------------------------
-              FRAME 7 (Far Right - Overlapping the Outline): Groom Makeup
+              FRAME 7 (Far Right - Overlapping the Outline): Hair Services
               (Exact reference: narrow vertical photo breaking the right border line)
              ----------------------------------------------------------------------- */}
           <div
@@ -375,14 +375,14 @@ export default function ServicesEditorialCollage({
           >
             <button
               type="button"
-              onClick={onSelectGroomMakeup}
-              aria-label="Groom Makeup"
+              onClick={onSelectHairServices}
+              aria-label="Hair Services"
               className="group relative w-full h-full overflow-hidden rounded-[2px] border border-[#dfb76c]/35 bg-[#1e110a] shadow-[0_12px_32px_rgba(0,0,0,0.65)] text-left cursor-pointer transition-all duration-300 hover:border-[#dfb76c] hover:shadow-[0_14px_38px_rgba(223,183,108,0.22)] focus:outline-none"
             >
               <img
-                src="/images/Groom.jpg"
-                alt="Groom Makeup by S Touch Salon"
-                className="h-full w-full object-cover object-[center_18%] transition-transform duration-700 ease-out group-hover:scale-[1.035]"
+                src="/images/hair-services.jpg"
+                alt="Hair Services & Rituals by S Touch Salon"
+                className="h-full w-full object-cover object-[center_20%] transition-transform duration-700 ease-out group-hover:scale-[1.035]"
               />
               <div
                 aria-hidden="true"
@@ -393,7 +393,7 @@ export default function ServicesEditorialCollage({
                   <h3
                     className={`${cormorant.className} text-base lg:text-[18px] font-medium text-[#F5F0E8] leading-tight drop-shadow-sm`}
                   >
-                    Groom Makeup
+                    Hair Services
                   </h3>
                 </div>
                 <span className="shrink-0 inline-flex h-5 w-5 items-center justify-center rounded-full bg-[#C8A66A]/25 border border-[#C8A66A]/50 text-[#C8A66A] transition-all duration-300 group-hover:scale-110 group-hover:bg-[#dfb76c] group-hover:text-[#1C120F] group-hover:border-[#dfb76c] hover:!bg-[#dfb76c] hover:!text-[#1C120F]">
@@ -542,24 +542,24 @@ export default function ServicesEditorialCollage({
               </button>
             </div>
 
-            {/* Card 3: Hair Services */}
+            {/* Card 3: Groom Makeup */}
             <div className="col-span-1">
               <button
                 type="button"
-                onClick={onSelectHairServices}
-                aria-label="Hair Services"
+                onClick={onSelectGroomMakeup}
+                aria-label="Groom Makeup"
                 className="group relative w-full h-[210px] overflow-hidden rounded-[2px] border border-[#dfb76c]/30 bg-[#1e110a] text-left block shadow-[0_8px_20px_rgba(0,0,0,0.5)]"
               >
                 <img
-                  src="/images/hair-services.jpg"
-                  alt="Hair Services"
-                  className="h-full w-full object-cover object-[center_20%]"
+                  src="/images/Groom.jpg"
+                  alt="Groom Makeup"
+                  className="h-full w-full object-cover object-[center_18%]"
                 />
                 <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-[#1C120F] via-[#1C120F]/55 to-transparent" />
                 <div className="absolute inset-x-0 bottom-0 p-2.5 flex items-end justify-between gap-1">
                   <div>
                     <h3 className={`${cormorant.className} text-[15px] sm:text-base font-medium text-[#F5F0E8] leading-tight`}>
-                      Hair Services
+                      Groom Makeup
                     </h3>
                   </div>
                   <span className="shrink-0 inline-flex h-5 w-5 items-center justify-center rounded-full bg-[#C8A66A]/25 border border-[#C8A66A]/50 text-[#C8A66A] transition-all duration-300 group-hover:scale-110 group-hover:bg-[#dfb76c] group-hover:text-[#1C120F] hover:!bg-[#dfb76c] hover:!text-[#1C120F]">
@@ -652,24 +652,24 @@ export default function ServicesEditorialCollage({
               </a>
             </div>
 
-            {/* Card 7: Groom Makeup */}
+            {/* Card 7: Hair Services */}
             <div className="col-span-1">
               <button
                 type="button"
-                onClick={onSelectGroomMakeup}
-                aria-label="Groom Makeup"
+                onClick={onSelectHairServices}
+                aria-label="Hair Services"
                 className="group relative w-full h-[185px] overflow-hidden rounded-[2px] border border-[#dfb76c]/30 bg-[#1e110a] text-left block shadow-[0_8px_20px_rgba(0,0,0,0.5)]"
               >
                 <img
-                  src="/images/Groom.jpg"
-                  alt="Groom Makeup"
-                  className="h-full w-full object-cover object-[center_18%]"
+                  src="/images/hair-services.jpg"
+                  alt="Hair Services"
+                  className="h-full w-full object-cover object-[center_20%]"
                 />
                 <div className="absolute inset-x-0 bottom-0 h-18 bg-gradient-to-t from-[#1C120F] via-[#1C120F]/55 to-transparent" />
                 <div className="absolute inset-x-0 bottom-0 p-2 flex items-end justify-between gap-1">
                   <div>
                     <h3 className={`${cormorant.className} text-[15px] sm:text-base font-medium text-[#F5F0E8] leading-tight`}>
-                      Groom Makeup
+                      Hair Services
                     </h3>
                   </div>
                   <span className="shrink-0 inline-flex h-5 w-5 items-center justify-center rounded-full bg-[#C8A66A]/25 border border-[#C8A66A]/50 text-[#C8A66A] transition-all duration-300 group-hover:scale-110 group-hover:bg-[#dfb76c] group-hover:text-[#1C120F] hover:!bg-[#dfb76c] hover:!text-[#1C120F]">
