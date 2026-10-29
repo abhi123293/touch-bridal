@@ -44,6 +44,15 @@ export const GROOM_SUB_SERVICES: GroomSubService[] = [
     image: "/images/rec.jpg",
     alt: "Groom Reception Makeup Artistry by Touch Salon",
   },
+  {
+    id: "party-makeup",
+    number: "03",
+    title: "Party Makeup",
+    description:
+      "Shine at every celebration with glamorous party makeup that enhances your natural beauty and gives you a flawless, stunning look.",
+    image: "/images/party.jpg",
+    alt: "Groom Party Makeup Artistry by Touch Salon",
+  },
 ];
 
 interface GroomMakeupSectionProps {
