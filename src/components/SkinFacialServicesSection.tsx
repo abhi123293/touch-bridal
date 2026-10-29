@@ -71,6 +71,15 @@ export const SKIN_SUB_SERVICES: SkinSubService[] = [
     image: "/images/korean facial.jpg",
     alt: "Korean Facial Therapy by S Touch Salon",
   },
+  {
+    id: "bridal-facial",
+    number: "06",
+    title: "Bridal Facial",
+    description:
+      "Pamper your skin with our bridal facials, designed to nourish, brighten, and give you a radiant glow for your special day.",
+    image: "/images/bridal facials.jpg",
+    alt: "Bridal Facial Skin Care by S Touch Salon",
+  },
 ];
 
 interface SkinFacialServicesSectionProps {
