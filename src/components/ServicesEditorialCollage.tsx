@@ -41,7 +41,7 @@ export default function ServicesEditorialCollage({
   return (
     <section
       aria-label="Editorial Services Gallery"
-      className="relative w-full overflow-hidden bg-[radial-gradient(ellipse_at_top,#2f1c13_0%,#20120b_52%,#140a05_100%)] border border-[#dfb76c]/30 shadow-[0_30px_90px_rgba(15,7,4,0.75)] py-8 sm:py-12 lg:py-16 px-3 sm:px-6 lg:px-8 select-none rounded-[16px] sm:rounded-[24px] lg:rounded-[32px]"
+      className="relative w-full overflow-hidden bg-[radial-gradient(ellipse_at_top,#2f1c13_0%,#20120b_52%,#140a05_100%)] border border-[#dfb76c]/30 shadow-[0_30px_90px_rgba(15,7,4,0.75)] pt-6 sm:pt-8 lg:pt-10 pb-4 sm:pb-6 lg:pb-8 px-3 sm:px-6 lg:px-8 select-none rounded-[16px] sm:rounded-[24px] lg:rounded-[32px]"
     >
       {/* =========================================================================
           1. WARM IVORY BACKGROUND WITH DIAGONAL CHAMPAGNE-GOLD CORNERS
@@ -98,6 +98,20 @@ export default function ServicesEditorialCollage({
       </div>
 
       <div className="relative mx-auto w-full max-w-[1160px]">
+        {/* Section Header */}
+        <div className="text-center mb-6 sm:mb-8 lg:mb-10 pt-1">
+          <div className="inline-flex items-center justify-center gap-2.5 sm:gap-3">
+            <span className="h-px w-6 sm:w-10 bg-gradient-to-r from-transparent to-[#dfb76c]" />
+            <span className={`${inter.className} text-[10.5px] sm:text-xs font-semibold uppercase tracking-[0.28em] text-[#dfb76c]`}>
+              Choose a Perfect Service
+            </span>
+            <span className="h-px w-6 sm:w-10 bg-gradient-to-l from-transparent to-[#dfb76c]" />
+          </div>
+          <h2 className={`${cormorant.className} mt-2 text-2xl sm:text-3xl lg:text-4xl xl:text-[42px] font-normal tracking-wide text-[#F5F0E8]`}>
+            Our Premium Services
+          </h2>
+        </div>
+
         {/* =========================================================================
             DESKTOP & TABLET EDITORIAL COLLAGE (Strict replica of uploaded reference)
             - Proportional 1000 x 1280 coordinate stage
@@ -106,20 +120,20 @@ export default function ServicesEditorialCollage({
             - Editorial philosophy block in lower-left
             - All 8 service frames with inside text + micro-accents
            ========================================================================= */}
-        <div className="relative hidden md:block w-full h-[1180px] lg:h-[1280px] xl:h-[1320px] z-10">
+        <div className="relative hidden md:block w-full h-[880px] lg:h-[950px] xl:h-[990px] z-10">
           {/* -----------------------------------------------------------------------
               THE THIN RECTANGULAR OUTLINE
               (Exact reference: runs from top-left behind center image, across to right,
                down right edge, and across bottom behind lower images)
              ----------------------------------------------------------------------- */}
           <svg
-            viewBox="0 0 1000 1250"
+            viewBox="0 0 1000 1000"
             preserveAspectRatio="none"
             className="pointer-events-none absolute inset-0 w-full h-full z-0"
           >
             {/* Main outlined rectangular contour */}
             <path
-              d="M 175 215 H 955 V 930 H 465"
+              d="M 175 140 H 955 V 830 H 465"
               fill="none"
               stroke="#dfb76c" strokeWidth="1.6" strokeOpacity="0.45"
             />
@@ -130,7 +144,7 @@ export default function ServicesEditorialCollage({
               (Exact reference: medium landscape image on left, below top edge)
              ----------------------------------------------------------------------- */}
           <div
-            className="absolute left-[7%] top-[24.5%] w-[28%] h-[15.5%] z-10"
+            className="absolute left-[7%] top-[17%] w-[28%] h-[21.5%] z-10"
           >
             <button
               type="button"
@@ -167,7 +181,7 @@ export default function ServicesEditorialCollage({
               (Exact reference: tall vertical image near upper-middle, breaks top line)
              ----------------------------------------------------------------------- */}
           <div
-            className="absolute left-[34.5%] top-[13.5%] w-[27%] h-[26.8%] z-20"
+            className="absolute left-[34.5%] top-[2%] w-[27%] h-[36.5%] z-20"
           >
             <button
               type="button"
@@ -204,7 +218,7 @@ export default function ServicesEditorialCollage({
               (Exact reference: medium portrait/square directly below Frame 1)
              ----------------------------------------------------------------------- */}
           <div
-            className="absolute left-[3.5%] top-[40.2%] w-[24%] h-[19%] z-15"
+            className="absolute left-[3.5%] top-[38.8%] w-[24%] h-[26%] z-15"
           >
             <button
               type="button"
@@ -241,7 +255,7 @@ export default function ServicesEditorialCollage({
               (Exact reference: large center photo, flush below Frame 2 & beside Frame 3)
              ----------------------------------------------------------------------- */}
           <div
-            className="absolute left-[27%] top-[40.2%] w-[35%] h-[19%] z-10"
+            className="absolute left-[27%] top-[38.8%] w-[35%] h-[26%] z-10"
           >
             <a
               href={WHATSAPP_ENQUIRY_URL}
@@ -279,7 +293,7 @@ export default function ServicesEditorialCollage({
               (Exact reference: right side, below the "Love" cursive script)
              ----------------------------------------------------------------------- */}
           <div
-            className="absolute left-[62.5%] top-[29.5%] w-[21.5%] h-[13.8%] z-10"
+            className="absolute left-[62.5%] top-[23%] w-[21.5%] h-[19%] z-10"
           >
             <button
               type="button"
@@ -316,7 +330,7 @@ export default function ServicesEditorialCollage({
               (Exact reference: directly below Frame 5)
              ----------------------------------------------------------------------- */}
           <div
-            className="absolute left-[62.5%] top-[43.5%] w-[21.5%] h-[19%] z-10"
+            className="absolute left-[62.5%] top-[42.5%] w-[21.5%] h-[26%] z-10"
           >
             <button
               type="button"
@@ -353,7 +367,7 @@ export default function ServicesEditorialCollage({
               (Exact reference: narrow vertical photo breaking the right border line)
              ----------------------------------------------------------------------- */}
           <div
-            className="absolute left-[84%] top-[37%] w-[16.5%] h-[14.5%] z-20"
+            className="absolute left-[84%] top-[33%] w-[16.5%] h-[20%] z-20"
           >
             <a
               href={WHATSAPP_ENQUIRY_URL}
@@ -391,7 +405,7 @@ export default function ServicesEditorialCollage({
               (Exact reference: vertical portrait below centerpiece, breaks bottom line)
              ----------------------------------------------------------------------- */}
           <div
-            className="absolute left-[26%] top-[59.5%] w-[20.5%] h-[21.5%] z-20"
+            className="absolute left-[26%] top-[65%] w-[20.5%] h-[29.5%] z-20"
           >
             <a
               href={WHATSAPP_ENQUIRY_URL}
@@ -429,7 +443,7 @@ export default function ServicesEditorialCollage({
               (Exact reference: right beside bottom-center portrait, below centerpiece)
              ----------------------------------------------------------------------- */}
           <div
-            className="absolute left-[47%] top-[59.5%] w-[15.5%] h-[19%] z-15"
+            className="absolute left-[47%] top-[65%] w-[15.5%] h-[26%] z-15"
           >
             <a
               href={WHATSAPP_RENTAL_JEWELS_URL}
@@ -469,19 +483,7 @@ export default function ServicesEditorialCollage({
             - Responsive 2-column editorial magazine collage
             - Retains the exact aesthetic: cursive "Love", thin outline, inside texts
            ========================================================================= */}
-        <div className="relative md:hidden flex flex-col gap-5 z-10 pt-2 pb-6 px-1">
-          {/* Top Decorative Header with Cursive Love Accent */}
-          <div className="flex items-center justify-between border-b border-[#dfb76c]/25 pb-3">
-            <div>
-              <span className={`${inter.className} text-[10px] font-semibold uppercase tracking-[0.24em] text-[#dfb76c]`}>
-                Touch Bridal Studio
-              </span>
-              <h2 className={`${cormorant.className} text-2xl font-normal text-[#F5F0E8]`}>
-                Our Services
-              </h2>
-            </div>
-          </div>
-
+        <div className="relative md:hidden flex flex-col gap-5 z-10 pt-0 pb-2 px-1">
           {/* Mobile Collage Cards */}
           <div className="grid grid-cols-2 gap-2.5">
             {/* Card 1: Bridal Makeup (Tall Full-Width) */}
