@@ -27,17 +27,8 @@ export interface HairSubService {
 
 export const HAIR_SUB_SERVICES: HairSubService[] = [
   {
-    id: "hair-extensions",
-    number: "01",
-    title: "Hair Extensions",
-    description:
-      "Transform your look with seamless hair extensions that blend naturally, adding luxurious length, fullness, and movement.",
-    image: "/images/hair%20extensions.jpg",
-    alt: "Hair Extensions by S Touch Salon",
-  },
-  {
     id: "hair-cut",
-    number: "02",
+    number: "01",
     title: "Hair Cut",
     description:
       "Discover a style that reflects your personality with precision haircuts designed to enhance your natural beauty.",
@@ -45,8 +36,26 @@ export const HAIR_SUB_SERVICES: HairSubService[] = [
     alt: "Hair Cut by S Touch Salon",
   },
   {
-    id: "hair-spa",
+    id: "girl-baby-hair-cut",
+    number: "02",
+    title: "Girl Baby Hair Cut",
+    description:
+      "Make your little princess’s haircut special with gentle care and a comfortable salon experience.",
+    image: "/images/girl baby.jpg",
+    alt: "Girl Baby Hair Cut by S Touch Salon",
+  },
+  {
+    id: "hair-extensions",
     number: "03",
+    title: "Hair Extensions",
+    description:
+      "Transform your look with seamless hair extensions that blend naturally, adding luxurious length, fullness, and movement.",
+    image: "/images/hair%20extensions.jpg",
+    alt: "Hair Extensions by S Touch Salon",
+  },
+  {
+    id: "hair-spa",
+    number: "04",
     title: "Hair Spa",
     description:
       "From deep conditioning to revitalising scalp treatments, discover the perfect hair care ritual for healthier-looking, softer, and shinier hair.",
@@ -55,7 +64,7 @@ export const HAIR_SUB_SERVICES: HairSubService[] = [
   },
   {
     id: "hair-colouring",
-    number: "04",
+    number: "05",
     title: "Hair Colouring",
     description:
       "Express your individuality with beautiful hair colours that enhance your style and bring your look to life.",
@@ -64,7 +73,7 @@ export const HAIR_SUB_SERVICES: HairSubService[] = [
   },
   {
     id: "hair-treatment",
-    number: "05",
+    number: "06",
     title: "Hair Treatment",
     description:
       "Restore your hair's natural beauty with nourishing treatments that bring back softness, strength, and shine.",
@@ -73,7 +82,7 @@ export const HAIR_SUB_SERVICES: HairSubService[] = [
   },
   {
     id: "straightening",
-    number: "06",
+    number: "07",
     title: "Straightening",
     description:
       "Experience the beauty of flawlessly smooth hair with a sleek, refined look that radiates confidence and sophistication.",
@@ -82,7 +91,7 @@ export const HAIR_SUB_SERVICES: HairSubService[] = [
   },
   {
     id: "smoothening",
-    number: "07",
+    number: "08",
     title: "Smoothening",
     description:
       "Say goodbye to excess frizz and hello to smoother, more manageable hair that looks effortlessly beautiful every day.",
@@ -91,21 +100,12 @@ export const HAIR_SUB_SERVICES: HairSubService[] = [
   },
   {
     id: "rebonding",
-    number: "08",
+    number: "09",
     title: "Rebonding",
     description:
       "Transform your natural texture into sleek, straight hair with a smooth, polished finish that makes every strand stand out.",
     image: "/images/rebounding.jpg",
     alt: "Rebonding by S Touch Salon",
-  },
-  {
-    id: "girl-baby-hair-cut",
-    number: "09",
-    title: "Girl Baby Hair Cut",
-    description:
-      "Make your little princess’s haircut special with gentle care and a comfortable salon experience.",
-    image: "/images/girl baby.jpg",
-    alt: "Girl Baby Hair Cut by S Touch Salon",
   },
 ];
 
