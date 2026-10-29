@@ -98,6 +98,15 @@ export const HAIR_SUB_SERVICES: HairSubService[] = [
     image: "/images/rebounding.jpg",
     alt: "Rebonding by S Touch Salon",
   },
+  {
+    id: "girl-baby-hair-cut",
+    number: "09",
+    title: "Girl Baby Hair Cut",
+    description:
+      "Make your little princess’s haircut special with gentle care and a comfortable salon experience.",
+    image: "/images/girl baby.jpg",
+    alt: "Girl Baby Hair Cut by S Touch Salon",
+  },
 ];
 
 interface HairServicesSectionProps {
