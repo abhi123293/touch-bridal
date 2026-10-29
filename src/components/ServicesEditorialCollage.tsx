@@ -41,12 +41,18 @@ export default function ServicesEditorialCollage({
   return (
     <section
       aria-label="Editorial Services Gallery"
-      className="relative w-full overflow-hidden bg-[#F5F0E8] border border-[#3A2921]/15 shadow-[0_25px_70px_rgba(28,18,15,0.14)] py-8 sm:py-12 lg:py-16 px-3 sm:px-6 lg:px-8 select-none rounded-[16px] sm:rounded-[24px] lg:rounded-[32px]"
+      className="relative w-full overflow-hidden bg-[radial-gradient(ellipse_at_top,#2f1c13_0%,#20120b_52%,#140a05_100%)] border border-[#dfb76c]/30 shadow-[0_30px_90px_rgba(15,7,4,0.75)] py-8 sm:py-12 lg:py-16 px-3 sm:px-6 lg:px-8 select-none rounded-[16px] sm:rounded-[24px] lg:rounded-[32px]"
     >
       {/* =========================================================================
           1. WARM IVORY BACKGROUND WITH DIAGONAL CHAMPAGNE-GOLD CORNERS
              (Exact reference: solid diagonal triangles at Top-Left & Bottom-Right)
          ========================================================================= */}
+      {/* Subtle Warm Amber Ambient Spotlight in Center */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute left-1/2 top-1/2 h-[650px] w-full max-w-[950px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-b from-[#dfb76c]/12 via-[#8b4a28]/10 to-transparent blur-[120px] z-0"
+      />
+
       {/* Top-Left Champagne-Gold Corner Shape */}
       <div
         aria-hidden="true"
@@ -57,7 +63,15 @@ export default function ServicesEditorialCollage({
           preserveAspectRatio="none"
           className="h-full w-full"
         >
-          <polygon points="0,0 100,0 0,100" fill="#C49D68" />
+          <defs>
+            <linearGradient id="goldCornerTL" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#fdf0d5" stopOpacity="0.9" />
+              <stop offset="35%" stopColor="#dfb76c" stopOpacity="0.75" />
+              <stop offset="85%" stopColor="#8b4a28" stopOpacity="0.4" />
+              <stop offset="100%" stopColor="#2f1c13" stopOpacity="0" />
+            </linearGradient>
+          </defs>
+          <polygon points="0,0 100,0 0,100" fill="url(#goldCornerTL)" />
         </svg>
       </div>
 
@@ -71,7 +85,15 @@ export default function ServicesEditorialCollage({
           preserveAspectRatio="none"
           className="h-full w-full"
         >
-          <polygon points="100,100 0,100 100,0" fill="#C49D68" />
+          <defs>
+            <linearGradient id="goldCornerBR" x1="100%" y1="100%" x2="0%" y2="0%">
+              <stop offset="0%" stopColor="#fdf0d5" stopOpacity="0.9" />
+              <stop offset="35%" stopColor="#dfb76c" stopOpacity="0.75" />
+              <stop offset="85%" stopColor="#8b4a28" stopOpacity="0.4" />
+              <stop offset="100%" stopColor="#2f1c13" stopOpacity="0" />
+            </linearGradient>
+          </defs>
+          <polygon points="100,100 0,100 100,0" fill="url(#goldCornerBR)" />
         </svg>
       </div>
 
@@ -99,9 +121,7 @@ export default function ServicesEditorialCollage({
             <path
               d="M 175 215 H 955 V 930 H 465"
               fill="none"
-              stroke="#1C120F"
-              strokeWidth="1.6"
-              strokeOpacity="0.85"
+              stroke="#dfb76c" strokeWidth="1.6" strokeOpacity="0.45"
             />
           </svg>
 
@@ -113,7 +133,7 @@ export default function ServicesEditorialCollage({
             className="absolute right-[8%] top-[19%] z-10 pointer-events-none text-right"
           >
             <span
-              className="block font-serif italic text-6xl lg:text-7xl xl:text-[84px] text-[#1C120F] leading-none drop-shadow-sm select-none"
+              className="block font-serif italic text-6xl lg:text-7xl xl:text-[84px] text-[#dfb76c]/90 leading-none drop-shadow-[0_2px_14px_rgba(223,183,108,0.3)] select-none"
               style={{
                 fontFamily: "var(--font-cormorant), 'Playfair Display', Georgia, serif",
                 letterSpacing: "0.04em",
@@ -134,7 +154,7 @@ export default function ServicesEditorialCollage({
               type="button"
               onClick={onSelectAdditionalServices}
               aria-label="Additional Services"
-              className="group relative w-full h-full overflow-hidden rounded-[2px] border border-[#2B1C17]/25 bg-[#2B1C17] shadow-md text-left cursor-pointer transition-all duration-300 hover:border-[#C8A66A] hover:shadow-xl focus:outline-none"
+              className="group relative w-full h-full overflow-hidden rounded-[2px] border border-[#dfb76c]/30 bg-[#1e110a] shadow-[0_10px_28px_rgba(0,0,0,0.6)] text-left cursor-pointer transition-all duration-300 hover:border-[#dfb76c] hover:shadow-[0_14px_38px_rgba(223,183,108,0.22)] focus:outline-none"
             >
               <img
                 src="/images/preplating copy.jpg"
@@ -174,7 +194,7 @@ export default function ServicesEditorialCollage({
               type="button"
               onClick={onSelectBridalMakeup}
               aria-label="Bridal Makeup Services"
-              className="group relative w-full h-full overflow-hidden rounded-[2px] border border-[#2B1C17]/30 bg-[#2B1C17] shadow-xl text-left cursor-pointer transition-all duration-300 hover:border-[#C8A66A] hover:shadow-2xl focus:outline-none"
+              className="group relative w-full h-full overflow-hidden rounded-[2px] border border-[#dfb76c]/40 bg-[#1e110a] shadow-[0_14px_36px_rgba(0,0,0,0.7)] text-left cursor-pointer transition-all duration-300 hover:border-[#dfb76c] hover:shadow-[0_16px_45px_rgba(223,183,108,0.3)] focus:outline-none"
             >
               <img
                 src="/images/imageee.jpg"
@@ -214,7 +234,7 @@ export default function ServicesEditorialCollage({
               type="button"
               onClick={onSelectSkinFacial}
               aria-label="Skin & Facial Services"
-              className="group relative w-full h-full overflow-hidden rounded-[2px] border border-[#2B1C17]/25 bg-[#2B1C17] shadow-md text-left cursor-pointer transition-all duration-300 hover:border-[#C8A66A] hover:shadow-xl focus:outline-none"
+              className="group relative w-full h-full overflow-hidden rounded-[2px] border border-[#dfb76c]/30 bg-[#1e110a] shadow-[0_10px_28px_rgba(0,0,0,0.6)] text-left cursor-pointer transition-all duration-300 hover:border-[#dfb76c] hover:shadow-[0_14px_38px_rgba(223,183,108,0.22)] focus:outline-none"
             >
               <img
                 src="/images/skin-facial.jpg"
@@ -255,7 +275,7 @@ export default function ServicesEditorialCollage({
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Appointment Enquiry via WhatsApp"
-              className="group relative block w-full h-full overflow-hidden rounded-[2px] border border-[#2B1C17]/25 bg-[#2B1C17] shadow-md text-left cursor-pointer transition-all duration-300 hover:border-[#C8A66A] hover:shadow-xl focus:outline-none"
+              className="group relative block w-full h-full overflow-hidden rounded-[2px] border border-[#dfb76c]/30 bg-[#1e110a] shadow-[0_10px_28px_rgba(0,0,0,0.6)] text-left cursor-pointer transition-all duration-300 hover:border-[#dfb76c] hover:shadow-[0_14px_38px_rgba(223,183,108,0.22)] focus:outline-none"
             >
               <img
                 src="/images/appointment.jpg"
@@ -295,7 +315,7 @@ export default function ServicesEditorialCollage({
               type="button"
               onClick={onSelectBeautyGrooming}
               aria-label="Beauty & Grooming Services"
-              className="group relative w-full h-full overflow-hidden rounded-[2px] border border-[#2B1C17]/25 bg-[#2B1C17] shadow-md text-left cursor-pointer transition-all duration-300 hover:border-[#C8A66A] hover:shadow-xl focus:outline-none"
+              className="group relative w-full h-full overflow-hidden rounded-[2px] border border-[#dfb76c]/30 bg-[#1e110a] shadow-[0_10px_28px_rgba(0,0,0,0.6)] text-left cursor-pointer transition-all duration-300 hover:border-[#dfb76c] hover:shadow-[0_14px_38px_rgba(223,183,108,0.22)] focus:outline-none"
             >
               <img
                 src="/images/beauty-grooming.jpg"
@@ -335,7 +355,7 @@ export default function ServicesEditorialCollage({
               type="button"
               onClick={onSelectHairServices}
               aria-label="Hair Services"
-              className="group relative w-full h-full overflow-hidden rounded-[2px] border border-[#2B1C17]/25 bg-[#2B1C17] shadow-md text-left cursor-pointer transition-all duration-300 hover:border-[#C8A66A] hover:shadow-xl focus:outline-none"
+              className="group relative w-full h-full overflow-hidden rounded-[2px] border border-[#dfb76c]/30 bg-[#1e110a] shadow-[0_10px_28px_rgba(0,0,0,0.6)] text-left cursor-pointer transition-all duration-300 hover:border-[#dfb76c] hover:shadow-[0_14px_38px_rgba(223,183,108,0.22)] focus:outline-none"
             >
               <img
                 src="/images/hair-services.jpg"
@@ -376,7 +396,7 @@ export default function ServicesEditorialCollage({
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Groom Makeup Enquiry"
-              className="group relative block w-full h-full overflow-hidden rounded-[2px] border border-[#2B1C17]/30 bg-[#2B1C17] shadow-lg text-left cursor-pointer transition-all duration-300 hover:border-[#C8A66A] hover:shadow-xl focus:outline-none"
+              className="group relative block w-full h-full overflow-hidden rounded-[2px] border border-[#dfb76c]/35 bg-[#1e110a] shadow-[0_12px_32px_rgba(0,0,0,0.65)] text-left cursor-pointer transition-all duration-300 hover:border-[#dfb76c] hover:shadow-[0_14px_38px_rgba(223,183,108,0.22)] focus:outline-none"
             >
               <img
                 src="/images/Groom.jpg"
@@ -417,7 +437,7 @@ export default function ServicesEditorialCollage({
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Men's Services Enquiry"
-              className="group relative block w-full h-full overflow-hidden rounded-[2px] border border-[#2B1C17]/30 bg-[#2B1C17] shadow-lg text-left cursor-pointer transition-all duration-300 hover:border-[#C8A66A] hover:shadow-xl focus:outline-none"
+              className="group relative block w-full h-full overflow-hidden rounded-[2px] border border-[#dfb76c]/35 bg-[#1e110a] shadow-[0_12px_32px_rgba(0,0,0,0.65)] text-left cursor-pointer transition-all duration-300 hover:border-[#dfb76c] hover:shadow-[0_14px_38px_rgba(223,183,108,0.22)] focus:outline-none"
             >
               <img
                 src="/images/mens-services.jpg"
@@ -458,7 +478,7 @@ export default function ServicesEditorialCollage({
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Rental Jewels Enquiry via WhatsApp"
-              className="group relative block w-full h-full overflow-hidden rounded-[2px] border border-[#2B1C17]/25 bg-[#2B1C17] shadow-md text-left cursor-pointer transition-all duration-300 hover:border-[#C8A66A] hover:shadow-xl focus:outline-none"
+              className="group relative block w-full h-full overflow-hidden rounded-[2px] border border-[#dfb76c]/30 bg-[#1e110a] shadow-[0_10px_28px_rgba(0,0,0,0.6)] text-left cursor-pointer transition-all duration-300 hover:border-[#dfb76c] hover:shadow-[0_14px_38px_rgba(223,183,108,0.22)] focus:outline-none"
             >
               <img
                 src="/images/rental jewels.jpg"
@@ -496,18 +516,18 @@ export default function ServicesEditorialCollage({
             className="absolute left-[4%] top-[59.5%] w-[21.5%] z-10 pr-2"
           >
             <h4
-              className={`${inter.className} text-[11px] lg:text-[12px] font-bold uppercase tracking-[0.24em] text-[#1C120F] mb-2`}
+              className={`${inter.className} text-[11px] lg:text-[12px] font-bold uppercase tracking-[0.24em] text-[#dfb76c] mb-2`}
             >
               Studio Philosophy
             </h4>
             <p
-              className={`${inter.className} text-[10px] lg:text-[11px] leading-[1.65] text-[#2B1C17]/80 text-justify font-normal`}
+              className={`${inter.className} text-[10px] lg:text-[11px] leading-[1.65] text-[#EAE1D5]/80 text-justify font-normal`}
             >
               Every detail tells a story. Every look captures a dream. At Touch Bridal Makeover Studio, we promise to listen to your vision and craft bespoke bridal artistry, couture hair transformations, and rejuvenating skin therapies tailored to make your special moments truly unforgettable.
             </p>
             <div className="mt-3">
               <span
-                className="block font-serif italic text-base lg:text-lg text-[#1C120F]/85"
+                className="block font-serif italic text-base lg:text-lg text-[#fdf0d5]/90"
                 style={{
                   fontFamily: "var(--font-cormorant), 'Playfair Display', Georgia, serif",
                 }}
@@ -525,17 +545,17 @@ export default function ServicesEditorialCollage({
            ========================================================================= */}
         <div className="relative md:hidden flex flex-col gap-5 z-10 pt-2 pb-6 px-1">
           {/* Top Decorative Header with Cursive Love Accent */}
-          <div className="flex items-center justify-between border-b border-[#1C120F]/20 pb-3">
+          <div className="flex items-center justify-between border-b border-[#dfb76c]/25 pb-3">
             <div>
-              <span className={`${inter.className} text-[10px] font-semibold uppercase tracking-[0.24em] text-[#C49D68]`}>
+              <span className={`${inter.className} text-[10px] font-semibold uppercase tracking-[0.24em] text-[#dfb76c]`}>
                 Touch Bridal Studio
               </span>
-              <h2 className={`${cormorant.className} text-2xl font-normal text-[#1C120F]`}>
+              <h2 className={`${cormorant.className} text-2xl font-normal text-[#F5F0E8]`}>
                 Our Services
               </h2>
             </div>
             <span
-              className="font-serif italic text-4xl text-[#1C120F]"
+              className="font-serif italic text-4xl text-[#dfb76c]"
               style={{
                 fontFamily: "var(--font-cormorant), 'Playfair Display', Georgia, serif",
               }}
@@ -552,7 +572,7 @@ export default function ServicesEditorialCollage({
                 type="button"
                 onClick={onSelectBridalMakeup}
                 aria-label="Bridal Makeup"
-                className="group relative w-full h-[320px] overflow-hidden rounded-[2px] border border-[#2B1C17]/25 bg-[#2B1C17] text-left block"
+                className="group relative w-full h-[320px] overflow-hidden rounded-[2px] border border-[#dfb76c]/30 bg-[#1e110a] text-left block shadow-[0_8px_20px_rgba(0,0,0,0.5)]"
               >
                 <img
                   src="/images/imageee.jpg"
@@ -582,7 +602,7 @@ export default function ServicesEditorialCollage({
                 type="button"
                 onClick={onSelectAdditionalServices}
                 aria-label="Additional Services"
-                className="group relative w-full h-[180px] overflow-hidden rounded-[2px] border border-[#2B1C17]/25 bg-[#2B1C17] text-left block"
+                className="group relative w-full h-[180px] overflow-hidden rounded-[2px] border border-[#dfb76c]/30 bg-[#1e110a] text-left block shadow-[0_8px_20px_rgba(0,0,0,0.5)]"
               >
                 <img
                   src="/images/preplating copy.jpg"
@@ -612,7 +632,7 @@ export default function ServicesEditorialCollage({
                 type="button"
                 onClick={onSelectHairServices}
                 aria-label="Hair Services"
-                className="group relative w-full h-[180px] overflow-hidden rounded-[2px] border border-[#2B1C17]/25 bg-[#2B1C17] text-left block"
+                className="group relative w-full h-[180px] overflow-hidden rounded-[2px] border border-[#dfb76c]/30 bg-[#1e110a] text-left block shadow-[0_8px_20px_rgba(0,0,0,0.5)]"
               >
                 <img
                   src="/images/hair-services.jpg"
@@ -642,7 +662,7 @@ export default function ServicesEditorialCollage({
                 type="button"
                 onClick={onSelectSkinFacial}
                 aria-label="Skin & Facial"
-                className="group relative w-full h-[180px] overflow-hidden rounded-[2px] border border-[#2B1C17]/25 bg-[#2B1C17] text-left block"
+                className="group relative w-full h-[180px] overflow-hidden rounded-[2px] border border-[#dfb76c]/30 bg-[#1e110a] text-left block shadow-[0_8px_20px_rgba(0,0,0,0.5)]"
               >
                 <img
                   src="/images/skin-facial.jpg"
@@ -672,7 +692,7 @@ export default function ServicesEditorialCollage({
                 type="button"
                 onClick={onSelectBeautyGrooming}
                 aria-label="Beauty & Grooming"
-                className="group relative w-full h-[180px] overflow-hidden rounded-[2px] border border-[#2B1C17]/25 bg-[#2B1C17] text-left block"
+                className="group relative w-full h-[180px] overflow-hidden rounded-[2px] border border-[#dfb76c]/30 bg-[#1e110a] text-left block shadow-[0_8px_20px_rgba(0,0,0,0.5)]"
               >
                 <img
                   src="/images/beauty-grooming.jpg"
@@ -703,7 +723,7 @@ export default function ServicesEditorialCollage({
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Appointment Enquiry"
-                className="group relative w-full h-[190px] overflow-hidden rounded-[2px] border border-[#2B1C17]/25 bg-[#2B1C17] text-left block"
+                className="group relative w-full h-[190px] overflow-hidden rounded-[2px] border border-[#dfb76c]/30 bg-[#1e110a] text-left block shadow-[0_8px_20px_rgba(0,0,0,0.5)]"
               >
                 <img
                   src="/images/appointment.jpg"
@@ -735,7 +755,7 @@ export default function ServicesEditorialCollage({
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Groom Makeup"
-                className="group relative w-full h-[160px] overflow-hidden rounded-[2px] border border-[#2B1C17]/25 bg-[#2B1C17] text-left block"
+                className="group relative w-full h-[160px] overflow-hidden rounded-[2px] border border-[#dfb76c]/30 bg-[#1e110a] text-left block shadow-[0_8px_20px_rgba(0,0,0,0.5)]"
               >
                 <img
                   src="/images/Groom.jpg"
@@ -766,7 +786,7 @@ export default function ServicesEditorialCollage({
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Men's Services"
-                className="group relative w-full h-[160px] overflow-hidden rounded-[2px] border border-[#2B1C17]/25 bg-[#2B1C17] text-left block"
+                className="group relative w-full h-[160px] overflow-hidden rounded-[2px] border border-[#dfb76c]/30 bg-[#1e110a] text-left block shadow-[0_8px_20px_rgba(0,0,0,0.5)]"
               >
                 <img
                   src="/images/mens-services.jpg"
@@ -797,7 +817,7 @@ export default function ServicesEditorialCollage({
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Rental Jewels Enquiry via WhatsApp"
-                className="group relative w-full h-[180px] overflow-hidden rounded-[2px] border border-[#2B1C17]/25 bg-[#2B1C17] text-left block"
+                className="group relative w-full h-[180px] overflow-hidden rounded-[2px] border border-[#dfb76c]/30 bg-[#1e110a] text-left block shadow-[0_8px_20px_rgba(0,0,0,0.5)]"
               >
                 <img
                   src="/images/rental jewels.jpg"
@@ -824,11 +844,11 @@ export default function ServicesEditorialCollage({
           </div>
 
           {/* Mobile Editorial Philosophy Block */}
-          <div className="border-t border-[#1C120F]/15 pt-3">
-            <h4 className={`${inter.className} text-[10.5px] font-bold uppercase tracking-[0.2em] text-[#1C120F] mb-1.5`}>
+          <div className="border-t border-[#dfb76c]/25 pt-3">
+            <h4 className={`${inter.className} text-[10.5px] font-bold uppercase tracking-[0.2em] text-[#dfb76c] mb-1.5`}>
               Studio Philosophy
             </h4>
-            <p className={`${inter.className} text-[10px] leading-relaxed text-[#2B1C17]/80 text-justify`}>
+            <p className={`${inter.className} text-[10px] leading-relaxed text-[#EAE1D5]/80 text-justify`}>
               Every detail tells a story. Every look captures a dream. At Touch Bridal Makeover Studio, we promise to listen to your vision and craft bespoke bridal artistry, couture hair transformations, and rejuvenating skin therapies tailored to make your special moments truly unforgettable.
             </p>
           </div>
