@@ -201,7 +201,7 @@ export default function ServicesEditorialCollage({
               <div className="absolute inset-x-0 bottom-0 p-3.5 flex items-end justify-between gap-2">
                 <div>
                   <h3
-                    className={`${cormorant.className} text-lg lg:text-[22px] font-medium text-[#F5F0E8] leading-tight drop-shadow-sm`}
+                    className={`${cormorant.className} text-base lg:text-[18px] font-medium text-[#F5F0E8] leading-tight drop-shadow-sm`}
                   >
                     Bridal Makeup
                   </h3>
@@ -276,7 +276,7 @@ export default function ServicesEditorialCollage({
               <div className="absolute inset-x-0 bottom-0 p-3.5 flex items-end justify-between gap-2">
                 <div>
                   <h3
-                    className={`${cormorant.className} text-lg lg:text-[20px] font-medium text-[#F5F0E8] leading-tight drop-shadow-sm`}
+                    className={`${cormorant.className} text-base lg:text-[18px] font-medium text-[#F5F0E8] leading-tight drop-shadow-sm`}
                   >
                     Appointment Enquiry
                   </h3>
@@ -313,7 +313,7 @@ export default function ServicesEditorialCollage({
               <div className="absolute inset-x-0 bottom-0 p-2.5 flex items-end justify-between gap-1">
                 <div>
                   <h3
-                    className={`${cormorant.className} text-sm lg:text-[16px] font-medium text-[#F5F0E8] leading-tight drop-shadow-sm`}
+                    className={`${cormorant.className} text-base lg:text-[18px] font-medium text-[#F5F0E8] leading-tight drop-shadow-sm`}
                   >
                     Beauty &amp; Grooming
                   </h3>
@@ -388,7 +388,7 @@ export default function ServicesEditorialCollage({
               <div className="absolute inset-x-0 bottom-0 p-2 flex items-end justify-between gap-1">
                 <div>
                   <h3
-                    className={`${cormorant.className} text-xs lg:text-[14px] font-medium text-[#F5F0E8] leading-tight drop-shadow-sm`}
+                    className={`${cormorant.className} text-base lg:text-[18px] font-medium text-[#F5F0E8] leading-tight drop-shadow-sm`}
                   >
                     Groom Makeup
                   </h3>
@@ -464,7 +464,7 @@ export default function ServicesEditorialCollage({
               <div className="absolute inset-x-0 bottom-0 p-2.5 flex items-end justify-between gap-1">
                 <div>
                   <h3
-                    className={`${cormorant.className} text-xs lg:text-[14px] font-medium text-[#F5F0E8] leading-tight drop-shadow-sm`}
+                    className={`${cormorant.className} text-base lg:text-[18px] font-medium text-[#F5F0E8] leading-tight drop-shadow-sm`}
                   >
                     Rental Jewels
                   </h3>
@@ -502,7 +502,7 @@ export default function ServicesEditorialCollage({
                 <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-[#1C120F] via-[#1C120F]/55 to-transparent" />
                 <div className="absolute inset-x-0 bottom-0 p-3.5 flex items-end justify-between gap-2">
                   <div>
-                    <h3 className={`${cormorant.className} text-xl font-medium text-[#F5F0E8]`}>
+                    <h3 className={`${cormorant.className} text-[15px] sm:text-base font-medium text-[#F5F0E8] leading-tight`}>
                       Bridal Makeup
                     </h3>
                   </div>
@@ -529,7 +529,7 @@ export default function ServicesEditorialCollage({
                 <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-[#1C120F] via-[#1C120F]/55 to-transparent" />
                 <div className="absolute inset-x-0 bottom-0 p-2.5 flex items-end justify-between gap-1">
                   <div>
-                    <h3 className={`${cormorant.className} text-sm font-medium text-[#F5F0E8]`}>
+                    <h3 className={`${cormorant.className} text-[15px] sm:text-base font-medium text-[#F5F0E8] leading-tight`}>
                       Additional Services
                     </h3>
                   </div>
@@ -556,7 +556,7 @@ export default function ServicesEditorialCollage({
                 <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-[#1C120F] via-[#1C120F]/55 to-transparent" />
                 <div className="absolute inset-x-0 bottom-0 p-2.5 flex items-end justify-between gap-1">
                   <div>
-                    <h3 className={`${cormorant.className} text-sm font-medium text-[#F5F0E8]`}>
+                    <h3 className={`${cormorant.className} text-[15px] sm:text-base font-medium text-[#F5F0E8] leading-tight`}>
                       Hair Services
                     </h3>
                   </div>
@@ -583,7 +583,7 @@ export default function ServicesEditorialCollage({
                 <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-[#1C120F] via-[#1C120F]/55 to-transparent" />
                 <div className="absolute inset-x-0 bottom-0 p-2.5 flex items-end justify-between gap-1">
                   <div>
-                    <h3 className={`${cormorant.className} text-sm font-medium text-[#F5F0E8]`}>
+                    <h3 className={`${cormorant.className} text-[15px] sm:text-base font-medium text-[#F5F0E8] leading-tight`}>
                       Skin &amp; Facial
                     </h3>
                   </div>
@@ -610,7 +610,7 @@ export default function ServicesEditorialCollage({
                 <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-[#1C120F] via-[#1C120F]/55 to-transparent" />
                 <div className="absolute inset-x-0 bottom-0 p-2.5 flex items-end justify-between gap-1">
                   <div>
-                    <h3 className={`${cormorant.className} text-sm font-medium text-[#F5F0E8]`}>
+                    <h3 className={`${cormorant.className} text-[15px] sm:text-base font-medium text-[#F5F0E8] leading-tight`}>
                       Beauty &amp; Grooming
                     </h3>
                   </div>
@@ -638,7 +638,7 @@ export default function ServicesEditorialCollage({
                 <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-[#1C120F] via-[#1C120F]/55 to-transparent" />
                 <div className="absolute inset-x-0 bottom-0 p-3 flex items-end justify-between gap-2">
                   <div>
-                    <h3 className={`${cormorant.className} text-lg font-medium text-[#F5F0E8]`}>
+                    <h3 className={`${cormorant.className} text-[15px] sm:text-base font-medium text-[#F5F0E8] leading-tight`}>
                       Appointment Enquiry
                     </h3>
                   </div>
@@ -667,7 +667,7 @@ export default function ServicesEditorialCollage({
                 <div className="absolute inset-x-0 bottom-0 h-18 bg-gradient-to-t from-[#1C120F] via-[#1C120F]/55 to-transparent" />
                 <div className="absolute inset-x-0 bottom-0 p-2 flex items-end justify-between gap-1">
                   <div>
-                    <h3 className={`${cormorant.className} text-xs font-medium text-[#F5F0E8]`}>
+                    <h3 className={`${cormorant.className} text-[15px] sm:text-base font-medium text-[#F5F0E8] leading-tight`}>
                       Groom Makeup
                     </h3>
                   </div>
@@ -695,7 +695,7 @@ export default function ServicesEditorialCollage({
                 <div className="absolute inset-x-0 bottom-0 h-18 bg-gradient-to-t from-[#1C120F] via-[#1C120F]/55 to-transparent" />
                 <div className="absolute inset-x-0 bottom-0 p-2 flex items-end justify-between gap-1">
                   <div>
-                    <h3 className={`${cormorant.className} text-xs font-medium text-[#F5F0E8]`}>
+                    <h3 className={`${cormorant.className} text-[15px] sm:text-base font-medium text-[#F5F0E8] leading-tight`}>
                       Men&apos;s Services
                     </h3>
                   </div>
@@ -723,7 +723,7 @@ export default function ServicesEditorialCollage({
                 <div className="absolute inset-x-0 bottom-0 h-22 bg-gradient-to-t from-[#1C120F] via-[#1C120F]/55 to-transparent" />
                 <div className="absolute inset-x-0 bottom-0 p-3 flex items-end justify-between gap-2">
                   <div>
-                    <h3 className={`${cormorant.className} text-lg font-medium text-[#F5F0E8]`}>
+                    <h3 className={`${cormorant.className} text-[15px] sm:text-base font-medium text-[#F5F0E8] leading-tight`}>
                       Rental Jewels
                     </h3>
                   </div>
