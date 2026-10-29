@@ -80,6 +80,15 @@ export const GROOM_SUB_SERVICES: GroomSubService[] = [
     image: "/images/communion.jpg",
     alt: "Holy Communion Groom Makeup by Touch Salon",
   },
+  {
+    id: "god-makeup",
+    number: "07",
+    title: "God Makeup",
+    description:
+      "Achieve a bold and divine look with men’s god makeup, featuring detailed designs and creative styling for a powerful, eye-catching appearance.",
+    image: "/images/god.jpg",
+    alt: "Men's God Makeup Artistry by Touch Salon",
+  },
 ];
 
 interface GroomMakeupSectionProps {
