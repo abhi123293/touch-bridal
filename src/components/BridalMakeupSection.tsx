@@ -32,7 +32,7 @@ export const BRIDAL_SUB_SERVICES: BridalSubService[] = [
     title: "Bridal Makeup",
     description:
       "Every detail tells a story. Every look captures a dream. Bridal beauty, perfected for your special day.",
-    image: "/images/imageee.jpg",
+    image: "/images/makeup bridal.jpg",
     alt: "Bridal Makeup Artistry by Touch Salon",
   },
   {
