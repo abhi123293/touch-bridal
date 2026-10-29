@@ -169,8 +169,8 @@ export default function ServicesEditorialCollage({
                     Additional Services
                   </h3>
                 </div>
-                <span className="shrink-0 inline-flex h-6 w-6 items-center justify-center rounded-full bg-[#C8A66A]/25 border border-[#C8A66A]/50 text-[#C8A66A] transition-transform duration-300 group-hover:scale-110">
-                  <ArrowUpRight className="h-3 w-3 stroke-[2.2]" />
+                <span className="shrink-0 inline-flex h-6 w-6 items-center justify-center rounded-full bg-[#C8A66A]/25 border border-[#C8A66A]/50 text-[#C8A66A] transition-all duration-300 group-hover:scale-110 group-hover:bg-[#dfb76c] group-hover:text-[#1C120F] group-hover:border-[#dfb76c] hover:!bg-[#dfb76c] hover:!text-[#1C120F]">
+                  <ArrowUpRight className="h-3 w-3 stroke-[2.2] transition-colors duration-200" />
                 </span>
               </div>
             </button>
@@ -206,8 +206,8 @@ export default function ServicesEditorialCollage({
                     Bridal Makeup
                   </h3>
                 </div>
-                <span className="shrink-0 inline-flex h-7 w-7 items-center justify-center rounded-full bg-[#C8A66A]/25 border border-[#C8A66A]/50 text-[#C8A66A] transition-transform duration-300 group-hover:scale-110">
-                  <ArrowUpRight className="h-3.5 w-3.5 stroke-[2.2]" />
+                <span className="shrink-0 inline-flex h-7 w-7 items-center justify-center rounded-full bg-[#C8A66A]/25 border border-[#C8A66A]/50 text-[#C8A66A] transition-all duration-300 group-hover:scale-110 group-hover:bg-[#dfb76c] group-hover:text-[#1C120F] group-hover:border-[#dfb76c] hover:!bg-[#dfb76c] hover:!text-[#1C120F]">
+                  <ArrowUpRight className="h-3.5 w-3.5 stroke-[2.2] transition-colors duration-200" />
                 </span>
               </div>
             </button>
@@ -243,8 +243,8 @@ export default function ServicesEditorialCollage({
                     Skin &amp; Facial
                   </h3>
                 </div>
-                <span className="shrink-0 inline-flex h-6 w-6 items-center justify-center rounded-full bg-[#C8A66A]/25 border border-[#C8A66A]/50 text-[#C8A66A] transition-transform duration-300 group-hover:scale-110">
-                  <ArrowUpRight className="h-3 w-3 stroke-[2.2]" />
+                <span className="shrink-0 inline-flex h-6 w-6 items-center justify-center rounded-full bg-[#C8A66A]/25 border border-[#C8A66A]/50 text-[#C8A66A] transition-all duration-300 group-hover:scale-110 group-hover:bg-[#dfb76c] group-hover:text-[#1C120F] group-hover:border-[#dfb76c] hover:!bg-[#dfb76c] hover:!text-[#1C120F]">
+                  <ArrowUpRight className="h-3 w-3 stroke-[2.2] transition-colors duration-200" />
                 </span>
               </div>
             </button>
@@ -281,8 +281,8 @@ export default function ServicesEditorialCollage({
                     Appointment Enquiry
                   </h3>
                 </div>
-                <span className="shrink-0 inline-flex h-6 w-6 items-center justify-center rounded-full bg-[#C8A66A]/25 border border-[#C8A66A]/50 text-[#C8A66A] transition-transform duration-300 group-hover:scale-110">
-                  <ArrowUpRight className="h-3 w-3 stroke-[2.2]" />
+                <span className="shrink-0 inline-flex h-6 w-6 items-center justify-center rounded-full bg-[#C8A66A]/25 border border-[#C8A66A]/50 text-[#C8A66A] transition-all duration-300 group-hover:scale-110 group-hover:bg-[#dfb76c] group-hover:text-[#1C120F] group-hover:border-[#dfb76c] hover:!bg-[#dfb76c] hover:!text-[#1C120F]">
+                  <ArrowUpRight className="h-3 w-3 stroke-[2.2] transition-colors duration-200" />
                 </span>
               </div>
             </a>
@@ -318,8 +318,8 @@ export default function ServicesEditorialCollage({
                     Beauty &amp; Grooming
                   </h3>
                 </div>
-                <span className="shrink-0 inline-flex h-5 w-5 items-center justify-center rounded-full bg-[#C8A66A]/25 border border-[#C8A66A]/50 text-[#C8A66A] transition-transform duration-300 group-hover:scale-110">
-                  <ArrowUpRight className="h-2.5 w-2.5 stroke-[2.2]" />
+                <span className="shrink-0 inline-flex h-5 w-5 items-center justify-center rounded-full bg-[#C8A66A]/25 border border-[#C8A66A]/50 text-[#C8A66A] transition-all duration-300 group-hover:scale-110 group-hover:bg-[#dfb76c] group-hover:text-[#1C120F] group-hover:border-[#dfb76c] hover:!bg-[#dfb76c] hover:!text-[#1C120F]">
+                  <ArrowUpRight className="h-2.5 w-2.5 stroke-[2.2] transition-colors duration-200" />
                 </span>
               </div>
             </button>
@@ -355,8 +355,8 @@ export default function ServicesEditorialCollage({
                     Hair Services
                   </h3>
                 </div>
-                <span className="shrink-0 inline-flex h-6 w-6 items-center justify-center rounded-full bg-[#C8A66A]/25 border border-[#C8A66A]/50 text-[#C8A66A] transition-transform duration-300 group-hover:scale-110">
-                  <ArrowUpRight className="h-3 w-3 stroke-[2.2]" />
+                <span className="shrink-0 inline-flex h-6 w-6 items-center justify-center rounded-full bg-[#C8A66A]/25 border border-[#C8A66A]/50 text-[#C8A66A] transition-all duration-300 group-hover:scale-110 group-hover:bg-[#dfb76c] group-hover:text-[#1C120F] group-hover:border-[#dfb76c] hover:!bg-[#dfb76c] hover:!text-[#1C120F]">
+                  <ArrowUpRight className="h-3 w-3 stroke-[2.2] transition-colors duration-200" />
                 </span>
               </div>
             </button>
@@ -393,8 +393,8 @@ export default function ServicesEditorialCollage({
                     Groom Makeup
                   </h3>
                 </div>
-                <span className="shrink-0 inline-flex h-4.5 w-4.5 items-center justify-center rounded-full bg-[#C8A66A]/25 text-[#C8A66A]">
-                  <ArrowUpRight className="h-2.5 w-2.5 stroke-[2]" />
+                <span className="shrink-0 inline-flex h-5 w-5 items-center justify-center rounded-full bg-[#C8A66A]/25 border border-[#C8A66A]/50 text-[#C8A66A] transition-all duration-300 group-hover:scale-110 group-hover:bg-[#dfb76c] group-hover:text-[#1C120F] group-hover:border-[#dfb76c] hover:!bg-[#dfb76c] hover:!text-[#1C120F]">
+                  <ArrowUpRight className="h-2.5 w-2.5 stroke-[2] transition-colors duration-200" />
                 </span>
               </div>
             </a>
@@ -431,8 +431,8 @@ export default function ServicesEditorialCollage({
                     Men&apos;s Services
                   </h3>
                 </div>
-                <span className="shrink-0 inline-flex h-6 w-6 items-center justify-center rounded-full bg-[#C8A66A]/25 border border-[#C8A66A]/50 text-[#C8A66A] transition-transform duration-300 group-hover:scale-110">
-                  <ArrowUpRight className="h-3 w-3 stroke-[2.2]" />
+                <span className="shrink-0 inline-flex h-6 w-6 items-center justify-center rounded-full bg-[#C8A66A]/25 border border-[#C8A66A]/50 text-[#C8A66A] transition-all duration-300 group-hover:scale-110 group-hover:bg-[#dfb76c] group-hover:text-[#1C120F] group-hover:border-[#dfb76c] hover:!bg-[#dfb76c] hover:!text-[#1C120F]">
+                  <ArrowUpRight className="h-3 w-3 stroke-[2.2] transition-colors duration-200" />
                 </span>
               </div>
             </a>
@@ -469,8 +469,8 @@ export default function ServicesEditorialCollage({
                     Rental Jewels
                   </h3>
                 </div>
-                <span className="shrink-0 inline-flex h-4.5 w-4.5 items-center justify-center rounded-full bg-[#C8A66A]/25 text-[#C8A66A]">
-                  <ArrowUpRight className="h-2.5 w-2.5 stroke-[2]" />
+                <span className="shrink-0 inline-flex h-5 w-5 items-center justify-center rounded-full bg-[#C8A66A]/25 border border-[#C8A66A]/50 text-[#C8A66A] transition-all duration-300 group-hover:scale-110 group-hover:bg-[#dfb76c] group-hover:text-[#1C120F] group-hover:border-[#dfb76c] hover:!bg-[#dfb76c] hover:!text-[#1C120F]">
+                  <ArrowUpRight className="h-2.5 w-2.5 stroke-[2] transition-colors duration-200" />
                 </span>
               </div>
             </a>
@@ -506,8 +506,8 @@ export default function ServicesEditorialCollage({
                       Bridal Makeup
                     </h3>
                   </div>
-                  <span className="shrink-0 inline-flex h-7 w-7 items-center justify-center rounded-full bg-[#C8A66A]/25 text-[#C8A66A]">
-                    <ArrowUpRight className="h-3.5 w-3.5" />
+                  <span className="shrink-0 inline-flex h-7 w-7 items-center justify-center rounded-full bg-[#C8A66A]/25 border border-[#C8A66A]/50 text-[#C8A66A] transition-all duration-300 group-hover:scale-110 group-hover:bg-[#dfb76c] group-hover:text-[#1C120F] hover:!bg-[#dfb76c] hover:!text-[#1C120F]">
+                    <ArrowUpRight className="h-3.5 w-3.5 transition-colors duration-200" />
                   </span>
                 </div>
               </button>
@@ -533,8 +533,8 @@ export default function ServicesEditorialCollage({
                       Additional Services
                     </h3>
                   </div>
-                  <span className="shrink-0 inline-flex h-5 w-5 items-center justify-center rounded-full bg-[#C8A66A]/25 text-[#C8A66A]">
-                    <ArrowUpRight className="h-2.5 w-2.5" />
+                  <span className="shrink-0 inline-flex h-5 w-5 items-center justify-center rounded-full bg-[#C8A66A]/25 border border-[#C8A66A]/50 text-[#C8A66A] transition-all duration-300 group-hover:scale-110 group-hover:bg-[#dfb76c] group-hover:text-[#1C120F] hover:!bg-[#dfb76c] hover:!text-[#1C120F]">
+                    <ArrowUpRight className="h-2.5 w-2.5 transition-colors duration-200" />
                   </span>
                 </div>
               </button>
@@ -560,8 +560,8 @@ export default function ServicesEditorialCollage({
                       Hair Services
                     </h3>
                   </div>
-                  <span className="shrink-0 inline-flex h-5 w-5 items-center justify-center rounded-full bg-[#C8A66A]/25 text-[#C8A66A]">
-                    <ArrowUpRight className="h-2.5 w-2.5" />
+                  <span className="shrink-0 inline-flex h-5 w-5 items-center justify-center rounded-full bg-[#C8A66A]/25 border border-[#C8A66A]/50 text-[#C8A66A] transition-all duration-300 group-hover:scale-110 group-hover:bg-[#dfb76c] group-hover:text-[#1C120F] hover:!bg-[#dfb76c] hover:!text-[#1C120F]">
+                    <ArrowUpRight className="h-2.5 w-2.5 transition-colors duration-200" />
                   </span>
                 </div>
               </button>
@@ -587,8 +587,8 @@ export default function ServicesEditorialCollage({
                       Skin &amp; Facial
                     </h3>
                   </div>
-                  <span className="shrink-0 inline-flex h-5 w-5 items-center justify-center rounded-full bg-[#C8A66A]/25 text-[#C8A66A]">
-                    <ArrowUpRight className="h-2.5 w-2.5" />
+                  <span className="shrink-0 inline-flex h-5 w-5 items-center justify-center rounded-full bg-[#C8A66A]/25 border border-[#C8A66A]/50 text-[#C8A66A] transition-all duration-300 group-hover:scale-110 group-hover:bg-[#dfb76c] group-hover:text-[#1C120F] hover:!bg-[#dfb76c] hover:!text-[#1C120F]">
+                    <ArrowUpRight className="h-2.5 w-2.5 transition-colors duration-200" />
                   </span>
                 </div>
               </button>
@@ -614,8 +614,8 @@ export default function ServicesEditorialCollage({
                       Beauty &amp; Grooming
                     </h3>
                   </div>
-                  <span className="shrink-0 inline-flex h-5 w-5 items-center justify-center rounded-full bg-[#C8A66A]/25 text-[#C8A66A]">
-                    <ArrowUpRight className="h-2.5 w-2.5" />
+                  <span className="shrink-0 inline-flex h-5 w-5 items-center justify-center rounded-full bg-[#C8A66A]/25 border border-[#C8A66A]/50 text-[#C8A66A] transition-all duration-300 group-hover:scale-110 group-hover:bg-[#dfb76c] group-hover:text-[#1C120F] hover:!bg-[#dfb76c] hover:!text-[#1C120F]">
+                    <ArrowUpRight className="h-2.5 w-2.5 transition-colors duration-200" />
                   </span>
                 </div>
               </button>
@@ -671,8 +671,8 @@ export default function ServicesEditorialCollage({
                       Groom Makeup
                     </h3>
                   </div>
-                  <span className="shrink-0 inline-flex h-4.5 w-4.5 items-center justify-center rounded-full bg-[#C8A66A]/25 text-[#C8A66A]">
-                    <ArrowUpRight className="h-2.5 w-2.5" />
+                  <span className="shrink-0 inline-flex h-5 w-5 items-center justify-center rounded-full bg-[#C8A66A]/25 border border-[#C8A66A]/50 text-[#C8A66A] transition-all duration-300 group-hover:scale-110 group-hover:bg-[#dfb76c] group-hover:text-[#1C120F] hover:!bg-[#dfb76c] hover:!text-[#1C120F]">
+                    <ArrowUpRight className="h-2.5 w-2.5 transition-colors duration-200" />
                   </span>
                 </div>
               </a>
@@ -699,8 +699,8 @@ export default function ServicesEditorialCollage({
                       Men&apos;s Services
                     </h3>
                   </div>
-                  <span className="shrink-0 inline-flex h-4.5 w-4.5 items-center justify-center rounded-full bg-[#C8A66A]/25 text-[#C8A66A]">
-                    <ArrowUpRight className="h-2.5 w-2.5" />
+                  <span className="shrink-0 inline-flex h-5 w-5 items-center justify-center rounded-full bg-[#C8A66A]/25 border border-[#C8A66A]/50 text-[#C8A66A] transition-all duration-300 group-hover:scale-110 group-hover:bg-[#dfb76c] group-hover:text-[#1C120F] hover:!bg-[#dfb76c] hover:!text-[#1C120F]">
+                    <ArrowUpRight className="h-2.5 w-2.5 transition-colors duration-200" />
                   </span>
                 </div>
               </a>
