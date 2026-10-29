@@ -53,6 +53,15 @@ export const GROOM_SUB_SERVICES: GroomSubService[] = [
     image: "/images/party.jpg",
     alt: "Groom Party Makeup Artistry by Touch Salon",
   },
+  {
+    id: "baby-shower",
+    number: "04",
+    title: "Baby Shower",
+    description:
+      "Look smart and elegant with groom styling for your baby shower, perfect for celebrating this special occasion with confidence and charm.",
+    image: "/images/shower.jpg",
+    alt: "Groom Baby Shower Styling & Makeup by Touch Salon",
+  },
 ];
 
 interface GroomMakeupSectionProps {
