@@ -77,7 +77,7 @@ export const BRIDAL_SUB_SERVICES: BridalSubService[] = [
     title: "Engagement Makeup",
     description:
       "Enjoy a beautiful engagement look with elegant makeup that enhances your natural beauty and makes your special day unforgettable.",
-    image: "/images/engagement.jpg",
+    image: "/images/engagement copy.jpg",
     alt: "Engagement Makeup by Touch Salon",
   },
   {
@@ -86,7 +86,7 @@ export const BRIDAL_SUB_SERVICES: BridalSubService[] = [
     title: "Holy Communion Makeup",
     description:
       "Celebrate your child’s Holy Communion with beautiful, elegant makeup that creates a natural and graceful look for this special day.",
-    image: "/images/holy.jpeg",
+    image: "/images/holy.jpg",
     alt: "Holy Communion Makeup by Touch Salon",
   },
   {
@@ -95,7 +95,7 @@ export const BRIDAL_SUB_SERVICES: BridalSubService[] = [
     title: "Goddess Makeup",
     description:
       "Get a stunning goddess look with radiant makeup that enhances your natural beauty and gives you an elegant, divine glow.",
-    image: "/images/goddess.jpg",
+    image: "/images/goddess copy.jpg",
     alt: "Goddess Makeup by Touch Salon",
   },
   {
@@ -104,7 +104,7 @@ export const BRIDAL_SUB_SERVICES: BridalSubService[] = [
     title: "SFX Makeup",
     description:
       "Transform your look with creative special-effects makeup featuring realistic wounds, scars, and fantasy designs for a dramatic appearance.",
-    image: "/images/haloween.jpg",
+    image: "/images/haloween copy.jpg",
     alt: "SFX Makeup by Touch Salon",
   },
 ];
