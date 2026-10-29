@@ -62,6 +62,15 @@ export const GROOM_SUB_SERVICES: GroomSubService[] = [
     image: "/images/shower.jpg",
     alt: "Groom Baby Shower Styling & Makeup by Touch Salon",
   },
+  {
+    id: "engagement-makeup",
+    number: "05",
+    title: "Engagement Makeup",
+    description:
+      "Look stylish and confident with groom engagement makeup that enhances your features and gives you a polished, elegant look for your special day.",
+    image: "/images/eng.jpg",
+    alt: "Groom Engagement Makeup Artistry by Touch Salon",
+  },
 ];
 
 interface GroomMakeupSectionProps {
