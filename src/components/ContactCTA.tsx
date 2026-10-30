@@ -2,7 +2,7 @@
 "use client";
 
 import type { FormEvent } from "react";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { Inter_Tight, Cormorant_Garamond } from "next/font/google";
 import ServiceSelector from "@/components/ServiceSelector";
@@ -24,7 +24,7 @@ const cormorant = Cormorant_Garamond({
 const whatsappNumber = "919789376174";
 const phoneNumber = "+919789376174";
 
-export default function ContactCTA() {
+function ContactCTAContent() {
   const searchParams = useSearchParams();
 
   const serviceFromUrl = searchParams.get("service");
@@ -36,7 +36,7 @@ export default function ContactCTA() {
       setSelectedServices([serviceFromUrl]);
     }
   }, [serviceFromUrl]);
-  
+
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
      if (selectedServices.length === 0) {
@@ -273,5 +273,13 @@ export default function ContactCTA() {
         </div>
       </div>
     </section>
+  );
+}
+
+export default function ContactCTA() {
+  return (
+    <Suspense fallback={<div className="min-h-[500px]" />}>
+      <ContactCTAContent />
+    </Suspense>
   );
 }
