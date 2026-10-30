@@ -614,7 +614,7 @@ export default function ServicesShowcase() {
         onMouseLeave={() => {
           isHoveredRef.current = false;
         }}
-        className="relative w-full overflow-hidden rounded-[24px] sm:rounded-[32px] border border-[#D6BC96]/40 bg-gradient-to-b from-[#24150e] via-[#1a0e08] to-[#120703] shadow-2xl flex items-center h-[520px] sm:h-[620px] lg:h-[calc(100vh-120px)] max-h-[860px] min-h-[580px]"
+        className="relative w-full overflow-hidden rounded-[20px] sm:rounded-[28px] lg:rounded-[32px] border border-[#D6BC96]/40 bg-gradient-to-b from-[#24150e] via-[#1a0e08] to-[#120703] shadow-2xl flex items-center h-[calc(100dvh-88px)] sm:h-[calc(100dvh-98px)] lg:h-[calc(100vh-120px)] max-h-[860px]"
       >
         {/* Viewport Container (Fills the entire showcase frame with zero padding) */}
         <div
