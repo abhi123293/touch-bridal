@@ -7,7 +7,7 @@ export const metadata = {
 
 export default function ServicesPage() {
   return (
-    <main className="relative flex min-h-screen w-full flex-col items-center justify-start overflow-x-hidden bg-[radial-gradient(ellipse_at_top_left,#b58b66_0%,#6a4430_42%,#2f1d14_100%)] px-2 py-8 sm:px-4 sm:py-12 lg:px-8 lg:py-16">
+    <main className="relative flex min-h-screen w-full flex-col items-center justify-start overflow-x-hidden bg-[radial-gradient(ellipse_at_top_left,#b58b66_0%,#6a4430_42%,#2f1d14_100%)] px-2 pt-20 pb-4 sm:px-4 sm:pt-22 sm:pb-5 lg:px-6 lg:pt-24 lg:pb-6">
       {/* Decorative Warm Ambient Spotlight behind the Showcase */}
       <div
         aria-hidden="true"
