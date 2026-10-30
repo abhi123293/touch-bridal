@@ -21,28 +21,31 @@ export interface RentalJewelsSubService {
 
 export const RENTAL_JEWELS_SUB_SERVICES: RentalJewelsSubService[] = [
   {
-    id: "temple-collection",
+    id: "temple-collections",
     number: "01",
-    title: "Temple Collection",
+    title: "Temple Collections",
     description:
       "Complete your traditional look with elegant groom temple collections, featuring beautiful accessories for a graceful and traditional appearance on your special day.",
     image: "/images/temple.jpg",
-    alt: "Temple Collection Rental Jewels by S Touch Salon",
+    alt: "Temple Collections Rental Jewels by S Touch Salon",
   },
   {
     id: "antique-collection",
     number: "02",
-    title: "Antique & Heritage Collection",
+    title: "Antique Collection",
     description:
       "Regal handcrafted bridal and groom jewellery ensembles with intricate vintage detailing and timeless allure.",
-    image: "/images/rental jewels.jpg",
-    alt: "Antique Heritage Collection Rental Jewels by S Touch Salon",
+    image: "/images/antique.jpg",
+    alt: "Antique Collection Rental Jewels by S Touch Salon",
   },
 ];
 
 interface RentalJewelsSectionProps {
   onBackToServices?: () => void;
 }
+
+const ROW_HEIGHT = 115;
+const PANEL_HEIGHT = 420;
 
 export default function RentalJewelsSection({
   onBackToServices,
@@ -54,16 +57,19 @@ export default function RentalJewelsSection({
   const getWhatsAppUrl = (title: string) =>
     "https://wa.me/919789376174?text=" +
     encodeURIComponent(
-      `Hi Touch Salon! I would love to enquire about the Rental Jewels - ${title}.`
+      `Hi Touch Salon! I would love to enquire about booking the ${title} from Rental Jewels.`
     );
 
   const getPanelY = (index: number) => {
-    return index * 70;
+    if (RENTAL_JEWELS_SUB_SERVICES.length <= 1) return 0;
+    const totalHeight = RENTAL_JEWELS_SUB_SERVICES.length * ROW_HEIGHT;
+    const travelRange = Math.max(0, totalHeight - PANEL_HEIGHT);
+    return (index / (RENTAL_JEWELS_SUB_SERVICES.length - 1)) * travelRange;
   };
 
   return (
     <section
-      aria-label="Rental Jewels Collection"
+      aria-label="Rental Jewels Sub-Services Collection"
       className="relative w-full overflow-hidden rounded-[26px] sm:rounded-[34px] lg:rounded-[40px] bg-[#F5F0E8] border border-[#3A2921]/15 shadow-[0_25px_70px_rgba(28,18,15,0.18)] py-10 sm:py-14 lg:py-16 px-6 sm:px-10 lg:px-14 select-none"
     >
       {/* 1. Thin vertical muted-gold accent line near the left edge */}
@@ -104,7 +110,7 @@ export default function RentalJewelsSection({
           </nav>
         </div>
 
-        {/* Section Heading matching editorial styling */}
+        {/* Section Heading matching Bridal Makeup design */}
         <div className="mb-8 sm:mb-10 lg:mb-12 pl-2 sm:pl-4">
           <div className="flex items-center gap-3">
             <span className="h-px w-8 bg-[#C8A66A]" />
@@ -129,8 +135,8 @@ export default function RentalJewelsSection({
         {/* =========================================================================
             FULL-WIDTH SERVICE LIST with Interactive Selected Row & Floating Image
            ========================================================================= */}
-        <div className="relative w-full min-h-[360px] lg:min-h-[460px]">
-          {/* Vertical Stack of Full-Width Rows */}
+        <div className="relative w-full">
+          {/* Vertical Stack of Rows */}
           <div className="flex flex-col divide-y divide-[#C8A66A]/25">
             {RENTAL_JEWELS_SUB_SERVICES.map((service, index) => {
               const isActive = activeIndex === index;
@@ -149,7 +155,7 @@ export default function RentalJewelsSection({
                   onMouseEnter={() => setActiveIndex(index)}
                   aria-selected={isActive}
                   role="tab"
-                  className={`group relative w-full text-left transition-all duration-300 min-h-[105px] lg:h-[110px] flex items-center justify-between gap-6 px-6 sm:px-10 lg:px-12 py-5 sm:py-6 rounded-[14px] sm:rounded-[18px] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#C8A66A] ${
+                  className={`group relative w-full text-left transition-all duration-300 min-h-[105px] lg:h-[115px] flex items-center justify-between gap-6 px-6 sm:px-10 lg:px-12 py-5 sm:py-6 rounded-[14px] sm:rounded-[18px] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#C8A66A] ${
                     isActive
                       ? "bg-[#C8A66A] text-[#1C120F] shadow-[0_8px_25px_rgba(200,166,106,0.32)] my-1 border-transparent"
                       : "bg-transparent text-[#1C120F] hover:bg-[#EAE1D5]/60"
@@ -159,8 +165,8 @@ export default function RentalJewelsSection({
                   <div className="flex-1 max-w-[420px] sm:max-w-md lg:max-w-lg xl:max-w-xl pr-4">
                     <div className="flex items-baseline gap-3">
                       <span
-                        className={`text-xs font-mono font-bold tracking-wider ${
-                          isActive ? "text-[#1C120F]/80" : "text-[#8B6F3E]"
+                        className={`text-xs font-mono font-semibold tracking-wider ${
+                          isActive ? "text-[#1C120F]/70" : "text-[#A98955]"
                         }`}
                       >
                         {service.number}
@@ -169,7 +175,7 @@ export default function RentalJewelsSection({
                         className={`${cormorant.className} text-2xl sm:text-[26px] lg:text-[29px] font-normal tracking-wide transition-colors ${
                           isActive
                             ? "text-[#1C120F] font-semibold"
-                            : "text-[#1C120F] group-hover:text-[#4A2D1F]"
+                            : "text-[#1C120F] group-hover:text-[#1C120F]"
                         }`}
                       >
                         {service.title}
@@ -179,8 +185,8 @@ export default function RentalJewelsSection({
                     <p
                       className={`mt-1.5 text-xs sm:text-[13px] lg:text-[14px] leading-relaxed line-clamp-2 transition-colors ${
                         isActive
-                          ? "text-[#1C120F]/90 font-medium"
-                          : "text-[#5A3E30]/75 group-hover:text-[#1C120F]"
+                          ? "text-[#2B1C17]/90 font-medium"
+                          : "text-[#5A3E30]/85 group-hover:text-[#3A2921]"
                       }`}
                     >
                       {service.description}
@@ -227,7 +233,7 @@ export default function RentalJewelsSection({
             style={{
               transform: `translateY(${getPanelY(activeIndex)}px)`,
             }}
-            className="hidden lg:block absolute right-14 lg:right-20 xl:right-28 top-0 w-[320px] xl:w-[350px] h-[400px] rounded-[20px] overflow-hidden border-2 border-[#C8A66A] bg-[#2B1C17] shadow-[0_25px_60px_rgba(28,18,15,0.32)] transition-transform duration-350 ease-out z-20 pointer-events-auto"
+            className="hidden lg:block absolute right-14 lg:right-20 xl:right-28 top-0 w-[320px] xl:w-[350px] h-[420px] rounded-[20px] overflow-hidden border-2 border-[#C8A66A] bg-[#2B1C17] shadow-[0_25px_60px_rgba(28,18,15,0.32)] transition-transform duration-350 ease-out z-20 pointer-events-auto"
           >
             {/* Stack of All Images with Smooth Cross-Dissolve */}
             {RENTAL_JEWELS_SUB_SERVICES.map((service, index) => {
@@ -251,18 +257,18 @@ export default function RentalJewelsSection({
             })}
 
             {/* Subtle Bottom Scrim with Look Title & WhatsApp Action */}
-            <div className="absolute inset-x-0 bottom-0 z-20 h-24 bg-gradient-to-t from-[#1C120F]/96 via-[#1C120F]/50 to-transparent pointer-events-none" />
+            <div className="absolute inset-x-0 bottom-0 z-20 h-24 bg-gradient-to-t from-[#1C120F]/90 via-[#1C120F]/45 to-transparent pointer-events-none" />
 
-            {/* Specular Top Sheen */}
+            {/* Specular Top Gold Sheen */}
             <div className="absolute inset-x-0 top-0 z-20 h-px bg-gradient-to-r from-transparent via-[#C8A66A] to-transparent pointer-events-none" />
 
             <div className="absolute inset-x-0 bottom-0 z-30 p-4 sm:p-5 flex items-end justify-between gap-3">
               <div>
-                <span className="text-[10px] font-sans font-bold tracking-[0.2em] text-[#C8A66A] uppercase block">
-                  {activeService.number} • HERITAGE COLLECTION
+                <span className="text-[10px] font-sans font-semibold tracking-[0.2em] text-[#C8A66A] uppercase block">
+                  {activeService.number} • SIGNATURE COLLECTION
                 </span>
                 <span
-                  className={`${cormorant.className} text-xl xl:text-2xl font-medium tracking-wide text-[#FAF6F0] drop-shadow-[0_1px_4px_rgba(0,0,0,0.9)]`}
+                  className={`${cormorant.className} text-xl xl:text-2xl font-medium tracking-wide text-[#F5F0E8] drop-shadow-[0_1px_4px_rgba(0,0,0,0.9)]`}
                 >
                   {activeService.title}
                 </span>
@@ -283,3 +289,4 @@ export default function RentalJewelsSection({
     </section>
   );
 }
+

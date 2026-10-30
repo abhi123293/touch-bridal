@@ -115,9 +115,9 @@ const SHOWCASE_SERVICES: ServiceShowcaseItem[] = [
     id: "rental-jewels",
     number: "08",
     title: "Rental Jewels",
-    tag: "Temple & Heritage Jewels",
-    description: "Complete your traditional look with elegant groom temple collections",
-    image: "/images/temple.jpg",
+    tag: "Heritage Jewellery",
+    description: "Handcrafted antique temple bridal jewelry collections",
+    image: "/images/rental jewels.jpg",
     actionKey: "rental",
   },
   {
