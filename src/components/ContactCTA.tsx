@@ -3,14 +3,15 @@
 
 import type { FormEvent } from "react";
 import { useState } from "react";
-import { Open_Sans, Cormorant_Garamond } from "next/font/google";
+import { Inter_Tight, Cormorant_Garamond } from "next/font/google";
 import ServiceSelector from "@/components/ServiceSelector";
 
-const openSans = Open_Sans({
+const interTight = Inter_Tight({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
   display: "swap",
 });
+
 
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
@@ -60,7 +61,7 @@ export default function ContactCTA() {
   return (
   <section
   id="booking"
-  className={`${openSans.className} -mt-6 px-3 py-6 sm:-mt-8 sm:px-5 sm:py-8 lg:-mt-20 lg:px-8 lg:py-10`}
+  className={`${interTight.className} -mt-6 px-3 py-6 sm:-mt-8 sm:px-5 sm:py-8 lg:-mt-20 lg:px-8 lg:py-10`}
 >
   <div className="mx-auto w-full max-w-[1320px]">
     <div className="grid overflow-hidden border-0 bg-white md:grid-cols-2">
@@ -246,15 +247,10 @@ export default function ContactCTA() {
               {/* Submit */}
               <button
                 type="submit"
-                className="group flex w-full items-center justify-center gap-3 rounded-full bg-[#3a2418] px-6 py-4 text-[10px] font-semibold uppercase tracking-[0.16em] text-white transition-colors duration-300 hover:bg-[#8b4a28] sm:text-xs"
+                className="group ml-40 flex w-fit items-center justify-center gap-3  bg-[#8D6CA3] px-6 py-4 text-[10px] font-semibold uppercase tracking-[0.16em] text-white transition-colors duration-300 hover:bg-[#8b4a28] sm:text-xs"
               >
                 Send Appointment Enquiry
-                <span
-                  aria-hidden="true"
-                  className="transition-transform duration-300 group-hover:translate-x-1"
-                >
-                  ↗
-                </span>
+        
               </button>
 
               <p className="text-center text-[10px] leading-5 text-[#897b6f]">

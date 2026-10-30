@@ -6,7 +6,7 @@ import { useRef, useState, useCallback, useEffect } from "react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
-import { Cormorant_Garamond } from "next/font/google";
+import { Cormorant_Garamond,Inter_Tight } from "next/font/google";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
@@ -14,6 +14,11 @@ gsap.registerPlugin(ScrollTrigger, useGSAP);
 const serif = Cormorant_Garamond({
   subsets: ["latin"],
   weight: ["500", "600", "700"],
+  display: "swap",
+});
+const interTight = Inter_Tight({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
   display: "swap",
 });
 
@@ -337,15 +342,15 @@ return (
             Discover Our Services
           </p>
 
-          <h2
-            id="featured-services-heading"
-            className={`${serif.className} services-intro-item max-w-sm text-[40px] font-semibold leading-[1.05] text-[#25232c] sm:text-5xl lg:text-[52px]`}
-          >
-            Beauty for your most{" "}
-            <span className="italic text-[#9675ba]">
-              special moments.
-            </span>
-          </h2>
+         <h2
+  id="featured-services-heading"
+  className={`${interTight.className} services-intro-item max-w-sm text-[40px] font-extrabold leading-[1.05] tracking-[-0.04em] text-[#25232A] sm:text-5xl lg:text-[52px]`}
+>
+  Beauty for your most{" "}
+  <span className=" text-[#8D6CA3]">
+    special moments.
+  </span>
+</h2>
 
           <p className="services-intro-item mt-5 max-w-sm text-sm leading-7 text-[#77737f] sm:text-[15px]">
             From bridal makeovers to everyday beauty care, discover services

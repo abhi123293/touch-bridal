@@ -4,15 +4,16 @@ import { useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
-import { Open_Sans } from "next/font/google";
+import { Inter_Tight } from "next/font/google";
 
-
-gsap.registerPlugin(ScrollTrigger, useGSAP);
-const openSans = Open_Sans({
+const interTight = Inter_Tight({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
   display: "swap",
 });
+
+
+gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 
 // Match the Hero and Featured Services palette
@@ -89,9 +90,9 @@ function FeatureArtwork({
   enterFrom: "left" | "right";
 }) {
 const line = SPINE;
-const paper = "#F7F1E9";
-const blush = "#D8B98F";
-const accent = "#A8663F";
+const paper = "#FFFFFF";
+const blush = "#8D6CA3";
+const accent = "#8D6CA3";
 
   return (
    <div
@@ -104,12 +105,12 @@ const accent = "#A8663F";
         xmlns="http://www.w3.org/2000/svg"
         className="block h-auto w-full overflow-visible"
       >
-        <circle cx="80" cy="73" r="56" fill="#E8DCCF" />
+        <circle cx="80" cy="73" r="56" fill="#FFFFFF" />
         <circle
           cx="80"
           cy="73"
           r="47"
-         stroke="#C9AE94"
+         stroke="#FFFFFF"
           strokeWidth="1.2"
           strokeDasharray="3 5"
         />
@@ -212,11 +213,10 @@ function FeatureCopy({ feature }: { feature: Feature }) {
   }`}
 >
       <h3
-       className="text-[26px] leading-[1.02] tracking-[0.01em] md:text-[clamp(26px,2.5vw,34px)]"
-        style={{ color: TITLE }}
-      >
-        {feature.title}
-      </h3>
+  className={`${interTight.className} text-[26px] font-bold leading-[1.02] tracking-[0.01em] text-[#25232A] md:text-[clamp(26px,2.5vw,34px)]`}
+>
+  {feature.title}
+</h3>
 
       <p
        className="mt-2 text-[12px] font-light leading-[1.65] md:text-[13px]"
@@ -374,7 +374,7 @@ export default function WhyChooseUs() {
 return (
   <section
     ref={sectionRef}
-    className={`${openSans.className} relative -mt-4 bg-transparent px-2 pt-2 pb-6 sm:-mt-19 sm:px-3 sm:pt-3 sm:pb-8 lg:px-4`}
+    className={`${interTight.className} relative -mt-4 bg-transparent px-2 pt-2 pb-6 sm:-mt-19 sm:px-3 sm:pt-3 sm:pb-8 lg:px-4`}
   >
     <div className="mx-auto w-full max-w-[1320px]">
       <div className="overflow-hidden border border-[#DDD5DF] bg-[#F1EDF7] p-4 sm:p-6 lg:p-8">
@@ -387,11 +387,17 @@ return (
             <span className="inline-block h-px w-7 bg-[#8D6CA3]" />
           </span>
 
-          <h2 className="mt-4 text-center text-[clamp(2.3rem,5.5vw,4rem)] font-semibold uppercase leading-[1.05] tracking-tight text-[#29252D]">
-            Beauty deserves a
-            <br />
-            Personal Touch
-          </h2>
+        <h2
+  className={`${interTight.className} mt-4 text-center text-[clamp(2.3rem,5.5vw,4rem)] font-bold uppercase leading-[1.05] tracking-[-0.02em] text-[#25232A]`}
+>
+  <span className="block">
+    Beauty deserves a
+  </span>
+
+  <span className="block text-[#8D6CA3]">
+    Personal Touch
+  </span>
+</h2>
 
           <p className="mt-4 text-sm font-normal leading-7 text-[#77717B]">
             Every detail matters when it comes to feeling your best.
