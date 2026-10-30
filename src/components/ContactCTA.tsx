@@ -2,7 +2,8 @@
 "use client";
 
 import type { FormEvent } from "react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { Inter_Tight, Cormorant_Garamond } from "next/font/google";
 import ServiceSelector from "@/components/ServiceSelector";
 
@@ -24,7 +25,18 @@ const whatsappNumber = "919789376174";
 const phoneNumber = "+919789376174";
 
 export default function ContactCTA() {
-    const [selectedServices, setSelectedServices] = useState<string[]>([]);
+  const searchParams = useSearchParams();
+
+  const serviceFromUrl = searchParams.get("service");
+
+  const [selectedServices, setSelectedServices] = useState<string[]>([]);
+
+  useEffect(() => {
+    if (serviceFromUrl) {
+      setSelectedServices([serviceFromUrl]);
+    }
+  }, [serviceFromUrl]);
+  
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
      if (selectedServices.length === 0) {
