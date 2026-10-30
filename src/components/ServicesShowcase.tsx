@@ -1,6 +1,8 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
+import { Cormorant_Garamond } from "next/font/google";
+import { ArrowUpRight, ChevronLeft, ChevronRight, Sparkles } from "lucide-react";
 import ServicesEditorialCollage from "@/components/ServicesEditorialCollage";
 import BridalMakeupSection from "@/components/BridalMakeupSection";
 import HairServicesSection from "@/components/HairServicesSection";
@@ -9,6 +11,12 @@ import SkinFacialServicesSection from "@/components/SkinFacialServicesSection";
 import AdditionalServicesSection from "@/components/AdditionalServicesSection";
 import MensServicesSection from "@/components/MensServicesSection";
 import GroomMakeupSection from "@/components/GroomMakeupSection";
+
+const cormorant = Cormorant_Garamond({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
+  display: "swap",
+});
 
 // Precise Mughal Cusped Arch Paths (Single-line continuous strings to prevent CRLF hydration mismatch)
 const MUGHAL_ARCH_OUTER_PATH =
@@ -47,6 +55,108 @@ const SAREE_MODELS = [
   },
 ];
 
+const WHATSAPP_ENQUIRY_URL =
+  "https://wa.me/919789376174?text=" +
+  encodeURIComponent("Hi Touch Salon! I would love to enquire about booking an appointment.");
+
+const WHATSAPP_RENTAL_JEWELS_URL =
+  "https://wa.me/919789376174?text=" +
+  encodeURIComponent("Hi Touch Salon! I would love to enquire about Rental Jewels.");
+
+interface ServiceShowcaseItem {
+  id: string;
+  number: string;
+  title: string;
+  tag: string;
+  description: string;
+  image: string;
+  actionKey: "bridal" | "groom" | "hair" | "skin" | "beauty" | "additional" | "mens" | "rental" | "appointment";
+}
+
+const SHOWCASE_SERVICES: ServiceShowcaseItem[] = [
+  {
+    id: "bridal-makeup",
+    number: "01",
+    title: "Bridal Makeup",
+    tag: "Signature Bridal",
+    description: "Bridal & reception looks",
+    image: "/images/imageee.jpg",
+    actionKey: "bridal",
+  },
+  {
+    id: "groom-makeup",
+    number: "02",
+    title: "Groom Makeup",
+    tag: "Men's Luxury Grooming",
+    description: "Refined wedding grooming",
+    image: "/images/Groom.jpg",
+    actionKey: "groom",
+  },
+  {
+    id: "hair-services",
+    number: "03",
+    title: "Hair Services",
+    tag: "Rituals & Styling",
+    description: "Keratin, cuts & hair spa",
+    image: "/images/hair-services.jpg",
+    actionKey: "hair",
+  },
+  {
+    id: "skin-facial",
+    number: "04",
+    title: "Skin & Facial",
+    tag: "Glow & Rejuvenation",
+    description: "Hydra & Korean facials",
+    image: "/images/skin-facial.jpg",
+    actionKey: "skin",
+  },
+  {
+    id: "beauty-grooming",
+    number: "05",
+    title: "Beauty & Grooming",
+    tag: "Classic Salon Care",
+    description: "Threading, nails & wax",
+    image: "/images/beauty-grooming.jpg",
+    actionKey: "beauty",
+  },
+  {
+    id: "additional-services",
+    number: "06",
+    title: "Additional Services",
+    tag: "Saree Draping & Care",
+    description: "Pre-pleating & box folding",
+    image: "/images/saree pre pleating.jpg",
+    actionKey: "additional",
+  },
+  {
+    id: "mens-services",
+    number: "07",
+    title: "Men's Services",
+    tag: "Gentlemen's Salon",
+    description: "Beard styling & haircuts",
+    image: "/images/mens-services.jpg",
+    actionKey: "mens",
+  },
+  {
+    id: "rental-jewels",
+    number: "08",
+    title: "Rental Jewels",
+    tag: "Heritage Jewellery",
+    description: "Antique temple bridal sets",
+    image: "/images/rental jewels.jpg",
+    actionKey: "rental",
+  },
+  {
+    id: "appointment-enquiry",
+    number: "09",
+    title: "Appointment Enquiry",
+    tag: "Instant Salon Booking",
+    description: "Direct WhatsApp booking",
+    image: "/images/appointment.jpg",
+    actionKey: "appointment",
+  },
+];
+
 export default function ServicesShowcase() {
   const [isBridalOpen, setIsBridalOpen] = useState(false);
   const [isHairOpen, setIsHairOpen] = useState(false);
@@ -59,7 +169,80 @@ export default function ServicesShowcase() {
     "bridal" | "hair" | "beauty" | "skin" | "additional" | "mens" | "groom" | null
   >(null);
 
-  // Auto-reveal if hash is present (e.g. #bridal-makeup, #hair-services, #beauty-grooming, #skin-facial, or #additional-services)
+  // Auto-scrolling container refs & touch interaction state
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const isPausedRef = useRef(false);
+  const isInteractingRef = useRef(false);
+  const touchStartXRef = useRef(0);
+  const touchStartYRef = useRef(0);
+  const isSwipingRef = useRef(false);
+
+  // Smooth continuous auto-scroll animation loop (pauses smoothly on hover or touch)
+  useEffect(() => {
+    const container = scrollContainerRef.current;
+    if (!container) return;
+
+    let animationFrameId: number;
+    let lastTime: number | null = null;
+    const speed = 40; // pixels per second for stately, regal gliding motion
+
+    const animate = (time: number) => {
+      if (lastTime !== null) {
+        const delta = (time - lastTime) / 1000;
+        if (!isPausedRef.current && !isInteractingRef.current && container) {
+          container.scrollLeft += speed * delta;
+          // Tripled items: loop seamlessly when 1/3 of total scrollWidth has passed
+          const singleSetWidth = container.scrollWidth / 3;
+          if (container.scrollLeft >= singleSetWidth) {
+            container.scrollLeft -= singleSetWidth;
+          }
+        }
+      }
+      lastTime = time;
+      animationFrameId = requestAnimationFrame(animate);
+    };
+
+    animationFrameId = requestAnimationFrame(animate);
+
+    return () => {
+      cancelAnimationFrame(animationFrameId);
+    };
+  }, []);
+
+  const handlePrev = () => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollBy({ left: -280, behavior: "smooth" });
+    }
+  };
+
+  const handleNext = () => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollBy({ left: 280, behavior: "smooth" });
+    }
+  };
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartXRef.current = e.touches[0].clientX;
+    touchStartYRef.current = e.touches[0].clientY;
+    isSwipingRef.current = false;
+    isInteractingRef.current = true;
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    const diffX = Math.abs(e.touches[0].clientX - touchStartXRef.current);
+    const diffY = Math.abs(e.touches[0].clientY - touchStartYRef.current);
+    if (diffX > 8 || diffY > 8) {
+      isSwipingRef.current = true;
+    }
+  };
+
+  const handleTouchEnd = () => {
+    setTimeout(() => {
+      isInteractingRef.current = false;
+    }, 1200);
+  };
+
+  // Auto-reveal if hash is present (e.g. #bridal-makeup, #hair-services, etc.)
   useEffect(() => {
     if (typeof window !== "undefined") {
       const hash = window.location.hash.toLowerCase();
@@ -143,13 +326,12 @@ export default function ServicesShowcase() {
     setIsAdditionalOpen(false);
     setClosingSection(null);
     setIsBridalOpen(true);
-    // Smooth scroll down to bridal subservices section
     setTimeout(() => {
       const el = document.getElementById("bridal-makeup-section");
       if (el) {
         el.scrollIntoView({ behavior: "smooth", block: "start" });
       }
-    }, 100);
+    }, 120);
   };
 
   const handleOpenHairSection = () => {
@@ -161,13 +343,12 @@ export default function ServicesShowcase() {
     setIsAdditionalOpen(false);
     setClosingSection(null);
     setIsHairOpen(true);
-    // Smooth scroll down to hair subservices section
     setTimeout(() => {
       const el = document.getElementById("hair-services-section");
       if (el) {
         el.scrollIntoView({ behavior: "smooth", block: "start" });
       }
-    }, 100);
+    }, 120);
   };
 
   const handleOpenBeautySection = () => {
@@ -179,13 +360,12 @@ export default function ServicesShowcase() {
     setIsAdditionalOpen(false);
     setClosingSection(null);
     setIsBeautyOpen(true);
-    // Smooth scroll down to beauty subservices section
     setTimeout(() => {
       const el = document.getElementById("beauty-grooming-section");
       if (el) {
         el.scrollIntoView({ behavior: "smooth", block: "start" });
       }
-    }, 100);
+    }, 120);
   };
 
   const handleOpenSkinSection = () => {
@@ -197,13 +377,12 @@ export default function ServicesShowcase() {
     setIsAdditionalOpen(false);
     setClosingSection(null);
     setIsSkinOpen(true);
-    // Smooth scroll down to skin & facial subservices section
     setTimeout(() => {
       const el = document.getElementById("skin-facial-section");
       if (el) {
         el.scrollIntoView({ behavior: "smooth", block: "start" });
       }
-    }, 100);
+    }, 120);
   };
 
   const handleOpenAdditionalSection = () => {
@@ -215,33 +394,32 @@ export default function ServicesShowcase() {
     setIsSkinOpen(false);
     setClosingSection(null);
     setIsAdditionalOpen(true);
-    // Smooth scroll down to additional subservices section
     setTimeout(() => {
       const el = document.getElementById("additional-services-section");
       if (el) {
         el.scrollIntoView({ behavior: "smooth", block: "start" });
       }
-    }, 100);
+    }, 120);
   };
 
-    const handleOpenMensSection = () => {
+  const handleOpenMensSection = () => {
     setIsBridalOpen(false);
     setIsHairOpen(false);
     setIsBeautyOpen(false);
     setIsSkinOpen(false);
     setIsAdditionalOpen(false);
+    setIsGroomOpen(false);
     setClosingSection(null);
     setIsMensOpen(true);
-    // Smooth scroll down to men's subservices section
     setTimeout(() => {
       const el = document.getElementById("mens-services-section");
       if (el) {
         el.scrollIntoView({ behavior: "smooth", block: "start" });
       }
-    }, 100);
+    }, 120);
   };
 
-    const handleOpenGroomSection = () => {
+  const handleOpenGroomSection = () => {
     setIsBridalOpen(false);
     setIsHairOpen(false);
     setIsBeautyOpen(false);
@@ -250,18 +428,93 @@ export default function ServicesShowcase() {
     setIsMensOpen(false);
     setClosingSection(null);
     setIsGroomOpen(true);
-    // Smooth scroll down to groom subservices section
     setTimeout(() => {
       const el = document.getElementById("groom-makeup-section");
       if (el) {
         el.scrollIntoView({ behavior: "smooth", block: "start" });
       }
+    }, 120);
+  };
+
+  const handleOpenRentalJewels = () => {
+    setIsBridalOpen(false);
+    setIsHairOpen(false);
+    setIsBeautyOpen(false);
+    setIsSkinOpen(false);
+    setIsAdditionalOpen(false);
+    setIsMensOpen(false);
+    setIsGroomOpen(false);
+    setClosingSection(null);
+
+    setTimeout(() => {
+      const el = document.getElementById("all-services-collage");
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
     }, 100);
+
+    if (typeof window !== "undefined") {
+      window.open(WHATSAPP_RENTAL_JEWELS_URL, "_blank");
+    }
+  };
+
+  const handleOpenAppointmentEnquiry = () => {
+    setIsBridalOpen(false);
+    setIsHairOpen(false);
+    setIsBeautyOpen(false);
+    setIsSkinOpen(false);
+    setIsAdditionalOpen(false);
+    setIsMensOpen(false);
+    setIsGroomOpen(false);
+    setClosingSection(null);
+
+    setTimeout(() => {
+      const el = document.getElementById("all-services-collage");
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }, 100);
+
+    if (typeof window !== "undefined") {
+      window.open(WHATSAPP_ENQUIRY_URL, "_blank");
+    }
+  };
+
+  const handleServiceSelect = (actionKey: ServiceShowcaseItem["actionKey"]) => {
+    switch (actionKey) {
+      case "bridal":
+        handleOpenBridalSection();
+        break;
+      case "groom":
+        handleOpenGroomSection();
+        break;
+      case "hair":
+        handleOpenHairSection();
+        break;
+      case "skin":
+        handleOpenSkinSection();
+        break;
+      case "beauty":
+        handleOpenBeautySection();
+        break;
+      case "additional":
+        handleOpenAdditionalSection();
+        break;
+      case "mens":
+        handleOpenMensSection();
+        break;
+      case "rental":
+        handleOpenRentalJewels();
+        break;
+      case "appointment":
+        handleOpenAppointmentEnquiry();
+        break;
+    }
   };
 
   const handleBackToServices = () => {
-    // 1. Smoothly scroll back up to all-services-collage
-    const el = document.getElementById("all-services-collage");
+    // 1. Smoothly scroll back up to all-services-collage or top of showcase
+    const el = document.getElementById("all-services-collage") || document.getElementById("first-showcase-section");
     if (el) {
       el.scrollIntoView({ behavior: "smooth", block: "start" });
     }
@@ -277,6 +530,8 @@ export default function ServicesShowcase() {
     if (isBeautyOpen) setClosingSection("beauty");
     if (isSkinOpen) setClosingSection("skin");
     if (isAdditionalOpen) setClosingSection("additional");
+    if (isMensOpen) setClosingSection("mens");
+    if (isGroomOpen) setClosingSection("groom");
 
     setTimeout(() => {
       setIsBridalOpen(false);
@@ -284,6 +539,8 @@ export default function ServicesShowcase() {
       setIsBeautyOpen(false);
       setIsSkinOpen(false);
       setIsAdditionalOpen(false);
+      setIsMensOpen(false);
+      setIsGroomOpen(false);
       setClosingSection(null);
     }, 420);
   };
@@ -293,8 +550,12 @@ export default function ServicesShowcase() {
       aria-label="Bridal Saree Showcase & Services"
       className="relative z-10 mx-auto w-full max-w-[1440px] drop-shadow-[0_30px_70px_rgba(20,10,5,0.7)]"
     >
-      {/* 4-Frame Mughal Arcade Container with Zero Gap */}
-      <div className="relative w-full overflow-hidden rounded-[24px] sm:rounded-[32px] border border-[#dfb76c]/30 shadow-2xl">
+      {/* =========================================================================
+          FIRST SECTION: 4-Frame Mughal Arcade Saree Showcase Container
+          WITH 9 Services Auto-Scrolling Glassmorphism Ribbon at the Base
+         ========================================================================= */}
+      <div id="first-showcase-section" className="relative w-full overflow-hidden rounded-[24px] sm:rounded-[32px] border border-[#dfb76c]/30 shadow-2xl">
+        {/* 4 Mughal Arch Saree Models */}
         <div className="grid grid-cols-2 gap-0 sm:grid-cols-2 lg:grid-cols-4 items-end w-full">
           {SAREE_MODELS.map((model, index) => (
             <article
@@ -317,10 +578,10 @@ export default function ServicesShowcase() {
                 className="relative z-10 h-full w-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.025]"
               />
 
-              {/* Subtle Grounding Vignette at Base */}
+              {/* Deep Grounding Scrim Gradient at Base */}
               <div
                 aria-hidden="true"
-                className="pointer-events-none absolute inset-x-0 bottom-0 z-20 h-28 bg-gradient-to-t from-[#140a06]/65 via-transparent to-transparent"
+                className="pointer-events-none absolute inset-x-0 bottom-0 z-20 h-52 sm:h-64 lg:h-72 bg-gradient-to-t from-[#140a06]/95 via-[#140a06]/65 to-transparent"
               />
 
               {/* Decorative Mughal Arch Overlay with Gold Contour & Corner Masks */}
@@ -384,6 +645,128 @@ export default function ServicesShowcase() {
               </svg>
             </article>
           ))}
+        </div>
+
+        {/* =========================================================================
+            S TOUCH SALON — 9 Services Auto-Scrolling Glassmorphism Ribbon at Bottom
+            - Features all 9 services with real image badges, numbers & luxury tags
+            - Auto-scrolls continuously (pauses on hover or touch)
+            - Touching any service smoothly navigates to its subsection
+           ========================================================================= */}
+        <div
+          aria-label="9 Services Auto-Scrolling Navigation"
+          className="absolute inset-x-0 bottom-0 z-40 flex flex-col items-center justify-end pb-3 sm:pb-5 lg:pb-6 px-2 sm:px-4 lg:px-6 pointer-events-none"
+        >
+          {/* Translucent Brownish Glassmorphism Tray at Bottom of Images */}
+          <div className="pointer-events-auto relative w-full max-w-[1360px] overflow-hidden rounded-[20px] sm:rounded-[26px] border border-white/20 border-t-white/35 border-b-black/40 bg-gradient-to-b from-[#331a0e]/80 via-[#200e06]/88 to-[#120602]/92 py-2.5 sm:py-3.5 px-2 sm:px-4 backdrop-blur-xl backdrop-saturate-150 ring-1 ring-[#dfb76c]/40 shadow-[inset_0_1.5px_2px_rgba(255,255,255,0.3),0_20px_50px_rgba(0,0,0,0.65)]">
+
+            {/* Specular Glass Sheen Top Edge */}
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#dfb76c]/80 to-transparent"
+            />
+
+            {/* Tray Header: 9 SIGNATURE SERVICES with Live Indicator & Prev/Next Buttons */}
+            <div className="relative z-10 flex items-center justify-between gap-2 px-2 sm:px-3 mb-2 pb-2 border-b border-[#dfb76c]/20">
+              <div className="flex items-center gap-2">
+                <span className="h-2 w-2 rounded-full bg-[#dfb76c] shadow-[0_0_8px_#dfb76c] animate-pulse" />
+                <h2 className="text-[10px] sm:text-xs font-mono font-semibold tracking-[0.2em] uppercase text-[#dfb76c] flex items-center gap-1.5">
+                  <Sparkles className="h-3 w-3 inline-block" />
+                  <span>9 SIGNATURE SERVICES • AUTO-SCROLLING</span>
+                </h2>
+              </div>
+
+              <span className="text-[10px] sm:text-xs text-[#fdf0d5]/75 tracking-wide hidden md:inline-block font-sans">
+                Touch any service to explore sub-services &amp; rituals
+              </span>
+
+              {/* Prev / Next Chevrons for Manual Stepping */}
+              <div className="flex items-center gap-1.5">
+                <button
+                  type="button"
+                  onClick={handlePrev}
+                  aria-label="Scroll left to previous services"
+                  className="h-7 w-7 rounded-full bg-[#dfb76c]/15 border border-[#dfb76c]/40 flex items-center justify-center text-[#dfb76c] hover:bg-[#dfb76c] hover:text-[#1C120F] transition-all"
+                >
+                  <ChevronLeft className="h-4 w-4 stroke-[2.2]" />
+                </button>
+                <button
+                  type="button"
+                  onClick={handleNext}
+                  aria-label="Scroll right to next services"
+                  className="h-7 w-7 rounded-full bg-[#dfb76c]/15 border border-[#dfb76c]/40 flex items-center justify-center text-[#dfb76c] hover:bg-[#dfb76c] hover:text-[#1C120F] transition-all"
+                >
+                  <ChevronRight className="h-4 w-4 stroke-[2.2]" />
+                </button>
+              </div>
+            </div>
+
+            {/* Infinite Auto-Scrolling Track */}
+            <div
+              ref={scrollContainerRef}
+              onMouseEnter={() => { isPausedRef.current = true; }}
+              onMouseLeave={() => { isPausedRef.current = false; }}
+              onTouchStart={handleTouchStart}
+              onTouchMove={handleTouchMove}
+              onTouchEnd={handleTouchEnd}
+              className="flex gap-2.5 sm:gap-3.5 overflow-x-auto no-scrollbar items-center py-1 px-1"
+              style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+            >
+              {/* Tripled list for butter-smooth infinite wrap */}
+              {[...SHOWCASE_SERVICES, ...SHOWCASE_SERVICES, ...SHOWCASE_SERVICES].map((service, index) => (
+                <button
+                  key={`${service.id}-${index}`}
+                  type="button"
+                  onClick={() => {
+                    if (!isSwipingRef.current) {
+                      handleServiceSelect(service.actionKey);
+                    }
+                  }}
+                  className="group relative flex-shrink-0 w-[230px] sm:w-[270px] lg:w-[290px] h-[86px] sm:h-[96px] text-left cursor-pointer rounded-[14px] sm:rounded-[18px] border border-[#dfb76c]/35 bg-gradient-to-r from-[#2c170d]/90 via-[#1e0f08]/90 to-[#140804]/90 p-2 sm:p-2.5 flex items-center gap-2.5 sm:gap-3 transition-all duration-300 hover:border-[#dfb76c] hover:scale-[1.02] hover:shadow-[0_8px_25px_rgba(223,183,108,0.25)] focus:outline-none select-none"
+                >
+                  {/* Service Image Portal with Luxury Gold Ring */}
+                  <div className="relative h-14 w-14 sm:h-16 sm:w-16 rounded-full overflow-hidden border-2 border-[#dfb76c]/70 shrink-0 shadow-md group-hover:scale-105 transition-transform duration-300">
+                    <img
+                      src={service.image}
+                      alt={service.title}
+                      className="h-full w-full object-cover object-center"
+                    />
+                    <div className="absolute inset-0 ring-1 ring-inset ring-black/30 rounded-full" />
+                  </div>
+
+                  {/* Service Text & Details */}
+                  <div className="flex-1 min-w-0 pr-1">
+                    <div className="flex items-center gap-1.5 mb-0.5">
+                      <span className="text-[10px] font-mono font-bold tracking-wider text-[#dfb76c] uppercase">
+                        {service.number}
+                      </span>
+                      <span className="text-[9px] sm:text-[10px] font-sans font-semibold tracking-wider text-[#dfb76c]/75 uppercase truncate">
+                        • {service.tag}
+                      </span>
+                    </div>
+
+                    <h3
+                      className={`${cormorant.className} text-base sm:text-lg font-medium text-[#fdf0d5] leading-tight truncate group-hover:text-[#dfb76c] transition-colors`}
+                    >
+                      {service.title}
+                    </h3>
+
+                    <div className="mt-1 flex items-center gap-1 text-[10px] font-semibold text-[#dfb76c] tracking-wide uppercase">
+                      <span>Explore</span>
+                      <ArrowUpRight className="h-2.5 w-2.5 stroke-[2.2] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                    </div>
+                  </div>
+
+                  {/* Right Arrow Badge */}
+                  <div className="shrink-0">
+                    <div className="h-7 w-7 sm:h-8 sm:w-8 rounded-full bg-[#dfb76c]/15 border border-[#dfb76c]/40 flex items-center justify-center text-[#dfb76c] group-hover:bg-[#dfb76c] group-hover:text-[#1C120F] transition-all">
+                      <ArrowUpRight className="h-3.5 w-3.5 stroke-[2.2]" />
+                    </div>
+                  </div>
+                </button>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
 
