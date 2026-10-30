@@ -747,11 +747,6 @@ export default function ServicesShowcase() {
                       {service.title}
                     </h3>
 
-                    {/* Description Snippet */}
-                    <p className="mt-1 text-xs sm:text-sm text-[#F5F0E8]/85 font-sans line-clamp-2 leading-relaxed drop-shadow-sm">
-                      {service.description}
-                    </p>
-
                     {/* Touch to Explore Callout Bar */}
                     <div className="mt-3.5 flex items-center justify-between pt-2.5 border-t border-[#D6BC96]/30">
                       <span className="text-[11px] sm:text-xs font-semibold uppercase tracking-[0.16em] text-[#D6BC96] flex items-center gap-1.5">
