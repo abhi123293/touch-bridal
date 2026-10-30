@@ -1,10 +1,16 @@
 "use client";
 
 import { useState } from "react";
-import { Cormorant_Garamond } from "next/font/google";
+import { Cormorant_Garamond, Inter } from "next/font/google";
 import { ArrowLeft, ArrowUpRight } from "lucide-react";
 
 const cormorant = Cormorant_Garamond({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  display: "swap",
+});
+
+const inter = Inter({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
   display: "swap",
@@ -52,36 +58,45 @@ export const SKIN_SUB_SERVICES: SkinSubService[] = [
     number: "04",
     title: "Bleach",
     description:
-      "Lighten facial hair safely while evening out your tone for an instantly brighter, radiant, and well-groomed appearance.",
+      "Safely lighten fine facial hair while enhancing overall skin brightness for an even, golden, and glowing look.",
     image: "/images/bleach.jpg",
-    alt: "Bleach Skin Brightening by S Touch Salon",
+    alt: "Skin Bleach Therapy by S Touch Salon",
   },
   {
-    id: "clean-up",
+    id: "korean-facial",
     number: "05",
-    title: "Clean Up",
+    title: "Korean Facial",
     description:
-      "An essential express ritual to unclog pores, remove impurities, and revive tired-looking skin with a fresh natural radiance.",
-    image: "/images/clean up.jpg",
-    alt: "Clean Up Treatment by S Touch Salon",
+      "Enjoy a refreshing Korean facial that deeply hydrates your skin, enhances your natural glow, and leaves your face looking smooth, fresh, and radiant.",
+    image: "/images/korean facial.jpg",
+    alt: "Korean Facial Therapy by S Touch Salon",
   },
   {
-    id: "korean-glow",
+    id: "bridal-facial",
     number: "06",
-    title: "Korean Glow",
+    title: "Bridal Facial",
     description:
-      "Indulge in multi-step glass-skin nourishment delivering deep hydration, refined texture, and an ethereal dewy glow.",
-    image: "/images/korean glow.jpg",
-    alt: "Korean Glow Glass Skin Treatment by S Touch Salon",
+      "Pamper your skin with our bridal facials, designed to nourish, brighten, and give you a radiant glow for your special day.",
+    image: "/images/bridal facials.jpg",
+    alt: "Bridal Facial Skin Care by S Touch Salon",
   },
   {
-    id: "bb-glow",
+    id: "face-masks",
     number: "07",
-    title: "BB Glow",
+    title: "Face Masks",
     description:
-      "A semi-permanent foundation facial that conceals blemishes, evens out discolorations, and provides effortless radiant skin.",
-    image: "/images/bb glow.jpg",
-    alt: "BB Glow Facial Treatment by S Touch Salon",
+      "Refresh and nourish your skin with face masks that leave your face feeling soft, smooth, and glowing.",
+    image: "/images/face masks.jpg",
+    alt: "Face Masks Therapy by S Touch Salon",
+  },
+  {
+    id: "serum-face-mask",
+    number: "08",
+    title: "Serum Face Mask",
+    description:
+      "Nourish and hydrate your skin with serum face masks that leave it feeling soft, refreshed, and radiant.",
+    image: "/images/serum.jpg",
+    alt: "Serum Face Mask Therapy by S Touch Salon",
   },
 ];
 
@@ -89,12 +104,13 @@ interface SkinFacialServicesSectionProps {
   onBackToServices?: () => void;
 }
 
-const ROW_HEIGHT = 110;
-const PANEL_HEIGHT = 430;
+const ROW_HEIGHT = 115;
+const PANEL_HEIGHT = 410;
 
 export default function SkinFacialServicesSection({
   onBackToServices,
 }: SkinFacialServicesSectionProps) {
+  // Facials is initially highlighted by default
   const [activeIndex, setActiveIndex] = useState(0);
 
   const activeService = SKIN_SUB_SERVICES[activeIndex];
@@ -105,6 +121,7 @@ export default function SkinFacialServicesSection({
       `Hi Touch Salon! I would love to enquire about booking the ${title} service.`
     );
 
+  // Smoothly maps activeIndex across the available container height so the full card is revealed
   const getPanelY = (index: number) => {
     const totalHeight = SKIN_SUB_SERVICES.length * ROW_HEIGHT;
     const travelRange = Math.max(0, totalHeight - PANEL_HEIGHT);
@@ -114,18 +131,18 @@ export default function SkinFacialServicesSection({
   return (
     <section
       aria-label="Skin & Facial Services Collection"
-      className="relative w-full overflow-hidden rounded-[26px] sm:rounded-[34px] lg:rounded-[40px] bg-[#f6f3fa] border border-[#ded7e9] shadow-[0_20px_50px_rgba(56,39,76,0.08)] py-10 sm:py-14 lg:py-16 px-6 sm:px-10 lg:px-14 select-none"
+      className="relative w-full overflow-hidden rounded-[26px] sm:rounded-[34px] lg:rounded-[40px] bg-[#F5F0E8] border border-[#3A2921]/15 shadow-[0_25px_70px_rgba(28,18,15,0.18)] py-10 sm:py-14 lg:py-16 px-6 sm:px-10 lg:px-14 select-none"
     >
-      {/* 1. Thin vertical antique gold accent line near the left edge */}
+      {/* 1. Thin vertical muted-gold accent line near the left edge */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute left-4 sm:left-7 lg:left-8 top-12 bottom-12 w-px bg-gradient-to-b from-transparent via-[#9675ba]/40 to-transparent"
+        className="pointer-events-none absolute left-4 sm:left-7 lg:left-8 top-12 bottom-12 w-px bg-gradient-to-b from-transparent via-[#C8A66A]/40 to-transparent"
       />
 
-      {/* 2. Soft Ambient Mughal Velvet Glow */}
+      {/* 2. Soft Ambient Warm Glow */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute right-10 top-20 h-72 w-96 rounded-full bg-[#9675ba]/10 blur-[100px]"
+        className="pointer-events-none absolute right-10 top-20 h-72 w-96 rounded-full bg-[#C8A66A]/10 blur-[100px]"
       />
 
       <div className="relative mx-auto w-full max-w-[1360px]">
@@ -135,9 +152,9 @@ export default function SkinFacialServicesSection({
             type="button"
             onClick={onBackToServices}
             aria-label="Back to all services"
-            className="group inline-flex items-center gap-2.5 rounded-full border border-[#ded7e9] bg-white px-4 sm:px-5 py-2 sm:py-2.5 text-xs sm:text-[13px] font-semibold tracking-wide text-[#25232c] shadow-sm transition-all duration-250 hover:border-[#9675ba] hover:bg-[#9675ba] hover:text-white hover:shadow-[0_4px_16px_rgba(125,29,43,0.25)]"
+            className="group inline-flex items-center gap-2.5 rounded-full border border-[#C8A66A]/50 bg-[#FAF6F0] px-4 sm:px-5 py-2 sm:py-2.5 text-xs sm:text-[13px] font-semibold tracking-wide text-[#1C120F] shadow-sm transition-all duration-250 hover:border-[#C8A66A] hover:bg-[#C8A66A] hover:text-[#1C120F] hover:shadow-[0_4px_16px_rgba(200,166,106,0.25)]"
           >
-            <ArrowLeft className="h-4 w-4 stroke-[2.2] transition-transform duration-250 group-hover:-translate-x-1 text-[#25232c] group-hover:text-white" />
+            <ArrowLeft className="h-4 w-4 stroke-[2.2] transition-transform duration-250 group-hover:-translate-x-1 text-[#1C120F]" />
             <span>Back to All Services</span>
           </button>
 
@@ -145,34 +162,34 @@ export default function SkinFacialServicesSection({
             <button
               type="button"
               onClick={onBackToServices}
-              className="text-[#77737f] hover:text-[#25232c] hover:underline transition-colors cursor-pointer"
+              className="text-[#5A3E30]/75 hover:text-[#1C120F] hover:underline transition-colors cursor-pointer"
             >
               Services
             </button>
-            <span className="text-[#9675ba]">/</span>
-            <span className="text-[#25232c] font-semibold">Skin &amp; Facial Collection</span>
+            <span className="text-[#C8A66A]">/</span>
+            <span className="text-[#1C120F] font-semibold">Skin &amp; Facial Collection</span>
           </nav>
         </div>
 
-        {/* Section Heading matching Royal Mughal Velvet & Antique Zari Gold */}
+        {/* Section Heading matching the editorial design */}
         <div className="mb-8 sm:mb-10 lg:mb-12 pl-2 sm:pl-4">
           <div className="flex items-center gap-3">
-            <span className="h-px w-8 bg-[#9675ba]" />
-            <span className="text-[11px] font-bold uppercase tracking-[0.24em] text-[#9675ba] sm:text-xs">
+            <span className="h-px w-8 bg-[#C8A66A]" />
+            <span className="text-[11px] font-semibold uppercase tracking-[0.28em] text-[#A98955] sm:text-xs">
               Signature Skin Therapies
             </span>
           </div>
 
           <h2
-            className={`${cormorant.className} mt-3 text-3xl font-normal tracking-tight text-[#25232c] sm:text-4xl lg:text-[46px] leading-[1.1]`}
+            className={`${cormorant.className} mt-3 text-3xl font-normal tracking-tight text-[#1C120F] sm:text-4xl lg:text-[46px] leading-[1.1]`}
           >
             Skin &amp; Facial Collection
           </h2>
 
           <div className="mt-3.5 flex items-center gap-2">
-            <span className="h-[1.5px] w-12 bg-[#9675ba]" />
-            <span className="h-1 w-1 rounded-full bg-[#9675ba]" />
-            <span className="h-[1px] w-20 bg-[#9675ba]/40" />
+            <span className="h-[1.5px] w-12 bg-[#C8A66A]" />
+            <span className="h-1 w-1 rounded-full bg-[#C8A66A]" />
+            <span className="h-[1px] w-20 bg-[#C8A66A]/40" />
           </div>
         </div>
 
@@ -180,8 +197,8 @@ export default function SkinFacialServicesSection({
             FULL-WIDTH SERVICE LIST with Interactive Selected Row & Floating Image
            ========================================================================= */}
         <div className="relative w-full">
-          {/* Vertical Stack of Full-Width Rows */}
-          <div className="flex flex-col divide-y divide-[#ded7e9]">
+          {/* Vertical Stack of 4 Full-Width Rows */}
+          <div className="flex flex-col divide-y divide-[#C8A66A]/25">
             {SKIN_SUB_SERVICES.map((service, index) => {
               const isActive = activeIndex === index;
 
@@ -199,18 +216,18 @@ export default function SkinFacialServicesSection({
                   onMouseEnter={() => setActiveIndex(index)}
                   aria-selected={isActive}
                   role="tab"
-                  className={`group relative w-full text-left transition-all duration-300 min-h-[105px] lg:h-[110px] flex items-center justify-between gap-6 px-6 sm:px-10 lg:px-12 py-5 sm:py-6 rounded-[14px] sm:rounded-[18px] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#9675ba] ${
+                  className={`group relative w-full text-left transition-all duration-300 min-h-[105px] lg:h-[115px] flex items-center justify-between gap-6 px-6 sm:px-10 lg:px-12 py-4 sm:py-5 rounded-[14px] sm:rounded-[18px] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#C8A66A] ${
                     isActive
-                      ? "bg-[#9675ba] text-white shadow-[0_8px_25px_rgba(150,117,186,0.28)] my-1 border-transparent"
-                      : "bg-white/70 text-[#25232c] hover:bg-white"
+                      ? "bg-[#C8A66A] text-[#1C120F] shadow-[0_8px_25px_rgba(200,166,106,0.32)] my-1 border-transparent"
+                      : "bg-transparent text-[#1C120F] hover:bg-[#EAE1D5]/60"
                   }`}
                 >
                   {/* Left: Number, Title, and Short Quote/Description */}
                   <div className="flex-1 max-w-[420px] sm:max-w-md lg:max-w-lg xl:max-w-xl pr-4">
                     <div className="flex items-baseline gap-3">
                       <span
-                        className={`text-xs font-mono font-bold tracking-wider ${
-                          isActive ? "text-white/80" : "text-[#9675ba]"
+                        className={`text-xs font-mono font-semibold tracking-wider ${
+                          isActive ? "text-[#1C120F]/70" : "text-[#A98955]"
                         }`}
                       >
                         {service.number}
@@ -218,8 +235,8 @@ export default function SkinFacialServicesSection({
                       <h3
                         className={`${cormorant.className} text-2xl sm:text-[26px] lg:text-[29px] font-normal tracking-wide transition-colors ${
                           isActive
-                            ? "text-white font-semibold"
-                            : "text-[#25232c] group-hover:text-[#795a9d]"
+                            ? "text-[#1C120F] font-semibold"
+                            : "text-[#1C120F] group-hover:text-[#1C120F]"
                         }`}
                       >
                         {service.title}
@@ -227,10 +244,10 @@ export default function SkinFacialServicesSection({
                     </div>
 
                     <p
-                      className={`mt-1.5 text-xs sm:text-[13px] lg:text-[14px] leading-relaxed line-clamp-2 transition-colors ${
+                      className={`mt-1 text-xs sm:text-[13px] lg:text-[14px] leading-relaxed line-clamp-2 transition-colors ${
                         isActive
-                          ? "text-white/90 font-normal"
-                          : "text-[#77737f] group-hover:text-[#25232c]"
+                          ? "text-[#2B1C17]/90 font-medium"
+                          : "text-[#5A3E30]/85 group-hover:text-[#3A2921]"
                       }`}
                     >
                       {service.description}
@@ -239,7 +256,7 @@ export default function SkinFacialServicesSection({
                     {/* Mobile Book Button badge when row is selected */}
                     {isActive && (
                       <div className="mt-2.5 flex lg:hidden items-center gap-1.5">
-                        <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-white text-[#795a9d] text-xs font-bold shadow-sm">
+                        <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-[#1C120F] text-[#C8A66A] text-xs font-semibold shadow-sm">
                           <span>Book on WhatsApp</span>
                           <ArrowUpRight className="h-3 w-3 stroke-[2.2]" />
                         </span>
@@ -252,8 +269,8 @@ export default function SkinFacialServicesSection({
                     <div
                       className={`h-10 w-10 sm:h-11 sm:w-11 rounded-full flex items-center justify-center transition-all duration-250 ${
                         isActive
-                          ? "bg-white text-[#795a9d] shadow-md"
-                          : "border border-[#dcd2e9] text-[#9675ba] bg-white group-hover:border-[#9675ba] group-hover:bg-[#9675ba] group-hover:text-white"
+                          ? "bg-[#1C120F] text-[#C8A66A] shadow-md"
+                          : "border border-[#C8A66A]/50 text-[#8B6F3E] bg-[#FAF6F0] group-hover:border-[#C8A66A] group-hover:bg-[#C8A66A] group-hover:text-[#1C120F]"
                       }`}
                     >
                       <ArrowUpRight
@@ -272,14 +289,16 @@ export default function SkinFacialServicesSection({
 
           {/* =========================================================================
               FLOATING RECTANGULAR IMAGE PANEL (Desktop)
+              - Reveals full portrait card, overlapping the active row
+              - Follows the active service row smoothly via translateY
              ========================================================================= */}
           <div
             style={{
               transform: `translateY(${getPanelY(activeIndex)}px)`,
             }}
-            className="hidden lg:block absolute right-14 lg:right-20 xl:right-28 top-0 w-[320px] xl:w-[350px] h-[430px] rounded-[20px] overflow-hidden border-2 border-[#9675ba] bg-[#25232c] shadow-[0_25px_60px_rgba(33,19,22,0.32)] transition-transform duration-350 ease-out z-20 pointer-events-auto"
+            className="hidden lg:block absolute right-14 lg:right-20 xl:right-28 top-0 w-[320px] xl:w-[350px] h-[410px] rounded-[20px] overflow-hidden border-2 border-[#C8A66A] bg-[#2B1C17] shadow-[0_25px_60px_rgba(28,18,15,0.32)] transition-transform duration-350 ease-out z-20 pointer-events-auto"
           >
-            {/* Stack of All Images with Smooth Cross-Dissolve */}
+            {/* Stack of All 4 Images with Smooth Cross-Dissolve */}
             {SKIN_SUB_SERVICES.map((service, index) => {
               const isSelected = activeIndex === index;
               return (
@@ -301,18 +320,18 @@ export default function SkinFacialServicesSection({
             })}
 
             {/* Subtle Bottom Scrim with Look Title & WhatsApp Action */}
-            <div className="absolute inset-x-0 bottom-0 z-20 h-24 bg-gradient-to-t from-[#25232c]/96 via-[#25232c]/50 to-transparent pointer-events-none" />
+            <div className="absolute inset-x-0 bottom-0 z-20 h-24 bg-gradient-to-t from-[#1C120F]/90 via-[#1C120F]/45 to-transparent pointer-events-none" />
 
-            {/* Specular Top Sheen */}
-            <div className="absolute inset-x-0 top-0 z-20 h-px bg-gradient-to-r from-transparent via-[#9675ba] to-transparent pointer-events-none" />
+            {/* Specular Top Gold Sheen */}
+            <div className="absolute inset-x-0 top-0 z-20 h-px bg-gradient-to-r from-transparent via-[#C8A66A] to-transparent pointer-events-none" />
 
             <div className="absolute inset-x-0 bottom-0 z-30 p-4 sm:p-5 flex items-end justify-between gap-3">
               <div>
-                <span className="text-[10px] font-sans font-bold tracking-[0.2em] text-white/80 uppercase block">
+                <span className="text-[10px] font-sans font-semibold tracking-[0.2em] text-[#C8A66A] uppercase block">
                   {activeService.number} • SIGNATURE THERAPY
                 </span>
                 <span
-                  className={`${cormorant.className} text-xl xl:text-2xl font-medium tracking-wide text-white drop-shadow-[0_1px_4px_rgba(0,0,0,0.9)]`}
+                  className={`${cormorant.className} text-xl xl:text-2xl font-medium tracking-wide text-[#F5F0E8] drop-shadow-[0_1px_4px_rgba(0,0,0,0.9)]`}
                 >
                   {activeService.title}
                 </span>
@@ -321,7 +340,7 @@ export default function SkinFacialServicesSection({
                 href={getWhatsAppUrl(activeService.title)}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 rounded-full bg-[#9675ba] px-3.5 py-1.5 text-xs font-semibold text-white shadow-md transition-transform duration-250 hover:scale-105 hover:bg-[#795a9d]"
+                className="inline-flex items-center gap-1.5 rounded-full bg-[#C8A66A] px-3.5 py-1.5 text-xs font-semibold text-[#1C120F] shadow-md transition-transform duration-250 hover:scale-105 hover:bg-[#d8b87c]"
               >
                 <span>Book</span>
                 <ArrowUpRight className="h-3.5 w-3.5 stroke-[2.2]" />
