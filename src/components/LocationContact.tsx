@@ -47,7 +47,7 @@ export default function LocationContact() {
   id="location-contact"
   className={`${openSans.className} scroll-mt-28 -mt-4 px-3 py-6 sm:-mt-6 sm:px-5 sm:py-8 lg:-mt-16 lg:px-8 lg:py-10`}
 >
-      <div className="mx-auto w-full max-w-[1320px] overflow-hidden rounded-[28px] border border-[#3a2418]/10 bg-[#f7f1e9] sm:rounded-[36px]">
+      <div className="mx-auto w-full max-w-[1320px] overflow-hidden  border border-[#3a2418]/10 bg-[#F1EDF7] ">
         {/* CONTACT DETAILS */}
         <div className="grid grid-cols-1 gap-8 px-5 py-10 sm:px-8 sm:py-12 lg:grid-cols-[1fr_0.8fr] lg:gap-16 lg:px-14 lg:py-14">
           {/* LEFT: SALON INFORMATION */}
@@ -174,23 +174,28 @@ export default function LocationContact() {
           </div>
 
           {/* RIGHT: LOCATION & GOOGLE MAP */}
-        <div className="flex min-h-[440px] flex-col rounded-[24px] border border-[#d6b27b]/20 bg-[#2d1b13] p-5 shadow-[0_12px_35px_rgba(45,27,19,0.15)] sm:p-7 lg:min-h-[520px]">
-  <span className="text-[10px] font-semibold uppercase tracking-[0.22em] text-[#d6b27b]">
+ 
+<div className="flex min-h-[440px] flex-col rounded-[24px] border border-black/10 bg-white p-5 shadow-[0_8px_30px_rgba(0,0,0,0.04)] sm:p-7 lg:min-h-[520px]">
+
+  {/* SECTION LABEL */}
+  <span className="text-[10px] font-semibold uppercase tracking-[0.22em] text-black/50">
     FIND US HERE
   </span>
 
+  {/* HEADING */}
   <h3
-    className={`${serif.className} mt-3 text-4xl font-semibold leading-tight text-[#fff7ec] sm:text-5xl`}
+    className={`${serif.className} mt-3 text-4xl font-semibold leading-tight text-black sm:text-5xl`}
   >
     Visit Our Studio
   </h3>
 
-  <p className="mt-2 text-sm leading-6 text-[#e2d3c5]/80">
+  {/* DESCRIPTION */}
+  <p className="mt-2 text-sm leading-6 text-black/60">
     Find Touch Bridal Makeover Studio &amp; Unisex Salon in Nagercoil.
   </p>
 
   {/* GOOGLE MAP PREVIEW */}
-  <div className="mt-5 min-h-[260px] flex-1 overflow-hidden rounded-[18px] border border-[#d6b27b]/25 bg-white shadow-inner">
+  <div className="mt-5 min-h-[260px] flex-1 overflow-hidden rounded-[18px] border border-black/10 bg-white shadow-sm">
     <iframe
       title="Touch Bridal Makeover Studio location"
       src={mapEmbedUrl}
@@ -203,18 +208,36 @@ export default function LocationContact() {
   </div>
 
   {/* DIRECTIONS BUTTON */}
- <a
-  href={directionsUrl}
-  target="_blank"
-  rel="noopener noreferrer"
-  className="group relative mt-5 inline-flex w-fit items-center gap-3 overflow-hidden rounded-full border border-[#d6b27b]/40 bg-white/[0.08] px-7 py-3.5 text-xs font-semibold uppercase tracking-[0.14em] text-[#f5dfbd] shadow-[inset_0_1px_0_rgba(255,255,255,0.12),0_8px_24px_rgba(0,0,0,0.15)] backdrop-blur-xl transition-all duration-500 ease-out hover:-translate-y-0.5 hover:border-[#f0d2ad]/80 hover:bg-[#d6b27b]/15 hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.2),0_10px_30px_rgba(214,178,123,0.15)] active:translate-y-0"
->
-  <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/[0.08] to-transparent transition-transform duration-700 group-hover:translate-x-full" />
+  <a
+    href={directionsUrl}
+    target="_blank"
+    rel="noopener noreferrer"
+    className="group relative mt-5 inline-flex w-fit items-center gap-3 overflow-hidden rounded-full border border-black bg-black px-7 py-3.5 text-xs font-semibold uppercase tracking-[0.14em] text-white transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-white hover:text-black active:translate-y-0"
+  >
+    <span className="relative">
+      Get Directions
+    </span>
 
-  <span className="relative">Get Directions</span>
+    {/* ARROW ICON */}
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="16"
+      height="16"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className="transition-transform duration-300 group-hover:translate-x-1"
+    >
+      <path d="M7 17 17 7" />
+      <path d="M7 7h10v10" />
+    </svg>
+  </a>
 
-</a>
 </div>
+
         </div>
       </div>
     </section>

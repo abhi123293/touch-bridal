@@ -371,14 +371,13 @@ export default function WhyChooseUs() {
 );
 
   
-
 return (
   <section
     ref={sectionRef}
     className={`${openSans.className} relative -mt-4 bg-transparent px-2 pt-2 pb-6 sm:-mt-19 sm:px-3 sm:pt-3 sm:pb-8 lg:px-4`}
   >
     <div className="mx-auto w-full max-w-[1320px]">
-      <div className="overflow-hidden border border-[#DDD5DF] bg-[#F1EDF1] p-4 sm:p-6 lg:p-8">
+      <div className="overflow-hidden border border-[#DDD5DF] bg-[#F1EDF7] p-4 sm:p-6 lg:p-8">
 
         {/* SECTION INTRO */}
         <div className="why-section-heading mx-auto mb-10 w-full max-w-[1000px] text-center md:mb-12">
@@ -388,13 +387,13 @@ return (
             <span className="inline-block h-px w-7 bg-[#8D6CA3]" />
           </span>
 
-          <h2 className="mt-4 text-center text-[clamp(2.3rem,5.5vw,4rem)] font-semibold uppercase leading-[1.05] tracking-tight text-[#25232A]">
+          <h2 className="mt-4 text-center text-[clamp(2.3rem,5.5vw,4rem)] font-semibold uppercase leading-[1.05] tracking-tight text-[#29252D]">
             Beauty deserves a
             <br />
             Personal Touch
           </h2>
 
-          <p className="mt-4 text-sm font-normal leading-7 text-[#716B76]">
+          <p className="mt-4 text-sm font-normal leading-7 text-[#77717B]">
             Every detail matters when it comes to feeling your best.
           </p>
         </div>
@@ -468,5 +467,4 @@ return (
     </div>
   </section>
 );
-
 }
