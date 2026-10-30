@@ -6,7 +6,6 @@ import { ArrowUpRight, ChevronLeft, ChevronRight, Sparkles } from "lucide-react"
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
-import ServicesEditorialCollage from "@/components/ServicesEditorialCollage";
 import BridalMakeupSection from "@/components/BridalMakeupSection";
 import HairServicesSection from "@/components/HairServicesSection";
 import BeautyGroomingServicesSection from "@/components/BeautyGroomingServicesSection";
@@ -495,7 +494,7 @@ export default function ServicesShowcase() {
     setClosingSection(null);
 
     setTimeout(() => {
-      const el = document.getElementById("all-services-collage");
+      const el = document.getElementById("first-showcase-section");
       if (el) {
         el.scrollIntoView({ behavior: "smooth", block: "start" });
       }
@@ -517,7 +516,7 @@ export default function ServicesShowcase() {
     setClosingSection(null);
 
     setTimeout(() => {
-      const el = document.getElementById("all-services-collage");
+      const el = document.getElementById("first-showcase-section");
       if (el) {
         el.scrollIntoView({ behavior: "smooth", block: "start" });
       }
@@ -561,8 +560,8 @@ export default function ServicesShowcase() {
   };
 
   const handleBackToServices = () => {
-    // 1. Smoothly scroll back up to all-services-collage or top of showcase
-    const el = document.getElementById("all-services-collage") || document.getElementById("first-showcase-section");
+    // 1. Smoothly scroll back up to top showcase section
+    const el = document.getElementById("first-showcase-section");
     if (el) {
       el.scrollIntoView({ behavior: "smooth", block: "start" });
     }
@@ -801,19 +800,6 @@ export default function ServicesShowcase() {
             </article>
           ))}
         </div>
-      </div>
-
-      {/* Editorial Collage Services Section — Under / After the Image Frames */}
-      <div id="all-services-collage" className="w-full mt-6 sm:mt-8 lg:mt-10">
-        <ServicesEditorialCollage
-          onSelectBridalMakeup={handleOpenBridalSection}
-          onSelectHairServices={handleOpenHairSection}
-          onSelectBeautyGrooming={handleOpenBeautySection}
-          onSelectSkinFacial={handleOpenSkinSection}
-          onSelectAdditionalServices={handleOpenAdditionalSection}
-          onSelectMensServices={handleOpenMensSection}
-          onSelectGroomMakeup={handleOpenGroomSection}
-        />
       </div>
 
       {/* Interactive Bridal Makeup Sub-Service Section (Reveals upon selecting Bridal Makeup) */}
