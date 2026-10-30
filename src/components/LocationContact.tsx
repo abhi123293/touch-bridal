@@ -1,6 +1,6 @@
-import { Cormorant_Garamond, Open_Sans } from "next/font/google";
+import { Cormorant_Garamond, Inter_Tight } from "next/font/google";
 
-const openSans = Open_Sans({
+const interTight = Inter_Tight({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
   display: "swap",
@@ -45,7 +45,7 @@ export default function LocationContact() {
   return (
    <section
   id="location-contact"
-  className={`${openSans.className} scroll-mt-28 -mt-4 px-3 py-6 sm:-mt-6 sm:px-5 sm:py-8 lg:-mt-16 lg:px-8 lg:py-10`}
+  className={`${interTight.className} scroll-mt-28 -mt-4 px-3 py-6 sm:-mt-6 sm:px-5 sm:py-8 lg:-mt-16 lg:px-8 lg:py-10`}
 >
       <div className="mx-auto w-full max-w-[1320px] overflow-hidden  border border-[#3a2418]/10 bg-[#F1EDF7] ">
         {/* CONTACT DETAILS */}
@@ -55,43 +55,49 @@ export default function LocationContact() {
             <p className="text-[10px] font-semibold uppercase tracking-[0.25em] text-[#8b4a28] sm:text-xs">
               WE WOULD LOVE TO WELCOME YOU
             </p>
+<h2
+  className={`${serif.className} mt-4 text-5xl font-semibold leading-[1.02] tracking-tight text-[#25232A] sm:text-6xl lg:text-7xl`}
+>
+  Location &amp;{" "}
+  <span className="text-[#8D6CA3]">
+    Contact
+  </span>
+</h2>
 
-            <h2
-              className={`${serif.className} mt-4 text-5xl font-semibold leading-[1.02] tracking-tight text-[#241811] sm:text-6xl lg:text-7xl`}
-            >
-              Location &amp; Contact
-            </h2>
-
-            <p className="mt-5 max-w-lg text-sm leading-7 text-[#6b5a4d]">
-              Visit Touch Bridal Makeover Studio &amp; Unisex Salon for bridal
-              makeovers, beauty services, and your special occasion needs.
-            </p>
+           <p
+  className={`${interTight.className} mt-5 max-w-lg text-sm font-normal leading-7 text-[#25232A] sm:text-base`}
+>
+  Visit Touch Bridal Makeover Studio &amp; Unisex Salon for bridal
+  makeovers, beauty services, and your special occasion needs.
+</p>
 
             {/* ADDRESS */}
             <div className="mt-8 border-t border-[#3a2418]/15 pt-6">
               <div className="flex items-start gap-4">
-                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#eee1ca] text-[#8b4a28]">
-                  <svg
-                    viewBox="0 0 24 24"
-                    className="h-5 w-5"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="1.7"
-                    aria-hidden="true"
-                  >
-                    <path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z" />
-                    <circle cx="12" cy="10" r="2.5" />
-                  </svg>
-                </div>
+        <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white text-[#25232A]">
+  <svg
+    viewBox="0 0 24 24"
+    className="h-5 w-5"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.7"
+    aria-hidden="true"
+  >
+    <path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z" />
+    <circle cx="12" cy="10" r="2.5" />
+  </svg>
+</div>
 
                 <div className="min-w-0 flex-1">
                   <h3 className="text-xs font-semibold uppercase tracking-[0.15em] text-[#7a5a3b]">
                     Our Address
                   </h3>
 
-                  <p className="mt-2 text-sm font-medium leading-7 text-[#2d1b13] sm:text-base">
-                    {salonAddress}
-                  </p>
+                <p
+  className={`${interTight.className} mt-2 text-sm font-medium leading-7 text-[#25232A] sm:text-base`}
+>
+  {salonAddress}
+</p>
 
                   <a
                     href={mapSearchUrl}
@@ -108,7 +114,7 @@ export default function LocationContact() {
             {/* PHONE NUMBERS */}
             <div className="mt-6 border-t border-[#3a2418]/15 pt-6">
               <div className="flex items-start gap-4">
-                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#eee1ca] text-[#8b4a28]">
+                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white text-[#25232A]">
                   <svg
                     viewBox="0 0 24 24"
                     className="h-5 w-5"
@@ -144,7 +150,7 @@ export default function LocationContact() {
             {/* PROPRIETOR */}
             <div className="mt-6 border-t border-[#3a2418]/15 pt-6">
               <div className="flex items-start gap-4">
-                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#eee1ca] text-[#8b4a28]">
+                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white text-[#25232A]">
                   <svg
                     viewBox="0 0 24 24"
                     className="h-5 w-5"
@@ -165,9 +171,11 @@ export default function LocationContact() {
                     Proprietor
                   </h3>
 
-                  <p className="mt-2 text-base font-medium text-[#2d1b13]">
-                    C. Stephy Sahayaraj
-                  </p>
+                 <p
+  className={`${interTight.className} mt-2 text-base font-semibold text-[#25232A]`}
+>
+  C. Stephy Sahayaraj
+</p>
                 </div>
               </div>
             </div>

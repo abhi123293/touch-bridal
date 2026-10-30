@@ -4,11 +4,11 @@ import { useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
-import { Open_Sans, Cormorant_Garamond } from "next/font/google";
+import { Inter_Tight, Cormorant_Garamond } from "next/font/google";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
-const openSans = Open_Sans({
+const interTight = Inter_Tight({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
   display: "swap",
@@ -92,9 +92,9 @@ function ReviewCard({
       <div>
         <Stars />
 
-        <p className="mt-4 text-[13px] leading-[1.85] text-black sm:text-sm">
-          {review.quote}
-        </p>
+       <p className="mt-4 text-[15px] leading-[1.8] text-black sm:text-base lg:text-[17px]">
+  {review.quote}
+</p>
       </div>
 
       <div className="mt-6 flex flex-wrap items-center gap-3">
@@ -160,7 +160,7 @@ export default function CustomerTestimonials() {
   return (
     <section
       ref={sectionRef}
-      className={`${openSans.className} -mt-6 bg-transparent px-3 py-5 sm:-mt-10 sm:px-5 sm:py-8 lg:-mt-14 lg:px-8 lg:py-10`}
+      className={`${interTight.className} -mt-6 bg-transparent px-3 py-5 sm:-mt-10 sm:px-5 sm:py-8 lg:-mt-14 lg:px-8 lg:py-10`}
     >
       {/* SECTION WIDTH: 1320px */}
       <div className="mx-auto w-full max-w-[1320px]">
@@ -168,15 +168,18 @@ export default function CustomerTestimonials() {
         <div className="overflow-hidden  bg-white px-4 py-10 sm:px-6 sm:py-12 lg:px-10 lg:py-14">
           {/* CENTERED SECTION HEADING */}
           <div className="testimonial-reveal mx-auto mb-8 w-full max-w-[760px] text-center sm:mb-10 lg:mb-12">
-            <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-[#8b4a28] sm:text-xs">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-black sm:text-xs">
               Testimonials
             </p>
 
-            <h2
-              className={`${cormorant.className} mt-3 text-[clamp(2rem,4.5vw,3.5rem)] font-semibold leading-[1.08] text-[#2d1b13]`}
-            >
-              What our clients say about us
-            </h2>
+           <h2
+  className={`${cormorant.className} mt-3 text-[clamp(2rem,4.5vw,3.5rem)] font-semibold leading-[1.08] text-[#25232A]`}
+>
+  What our clients say{" "}
+  <span className="text-[#8D6CA3]">
+    about us
+  </span>
+</h2>
 
             <p className="mx-auto mt-4 max-w-[520px] text-xs leading-6 text-[#7a6d63] sm:text-sm">
               Heartfelt words from our brides and clients, shared in their own
@@ -185,11 +188,11 @@ export default function CustomerTestimonials() {
           </div>
 
           {/* MASONRY-STYLE REVIEW CARDS */}
-          {/* MASONRY-STYLE REVIEW CARDS */}
+     
 <div className="grid grid-cols-1 gap-4 sm:gap-5 lg:grid-cols-4 lg:gap-5">
 
   {/* CARD 1 — WIDE TOP LEFT */}
-  <div className="testimonial-reveal lg:col-span-2">
+  <div className="testimonial-reveal lg:col-span-2  ">
     <ReviewCard review={reviews[0]} />
   </div>
 

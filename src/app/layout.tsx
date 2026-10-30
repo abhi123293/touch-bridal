@@ -1,13 +1,12 @@
 import type { Metadata } from "next";
-
 import "./globals.css";
 import Navbar from "@/components/Navbar";
-import { Open_Sans } from "next/font/google";
+import { Inter_Tight } from "next/font/google";
 
-const openSans = Open_Sans({
+const interTight = Inter_Tight({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
-  variable: "--font-open-sans",
+  weight: ["300", "400", "500", "600", "700", "800"],
+  variable: "--font-inter-tight",
   display: "swap",
 });
 
@@ -22,14 +21,14 @@ export default function RootLayout({
 }: LayoutProps<"/">) {
   return (
     <html
-  lang="en"
-  className={`${openSans.variable} h-full antialiased`}
->
-  <body className={`${openSans.className} flex min-h-full flex-col`}>
-
+      lang="en"
+      className={`${interTight.variable} h-full antialiased`}
+    >
+      <body className={`${interTight.className} flex min-h-full flex-col`}>
         <Navbar />
         {children}
       </body>
     </html>
   );
 }
+

@@ -5,17 +5,19 @@ import { useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
-import { Open_Sans } from "next/font/google";
+import { Inter_Tight } from "next/font/google";
+
+const interTight = Inter_Tight({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
+  display: "swap",
+});
 
 
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
-const openSans = Open_Sans({
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
-  display: "swap",
-});
+
 
 const galleryImages = [
   {
@@ -110,7 +112,7 @@ return (
 >
   <div className="mx-auto w-full max-w-[1320px]">
     <div
-      className={`overflow-hidden bg-white p-5 sm:p-8 lg:p-12 ${openSans.className}`}
+      className={`overflow-hidden bg-white p-5 sm:p-8 lg:p-12 ${interTight.className}`}
     >
         <div className="grid items-center gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-14">
 
@@ -121,12 +123,17 @@ return (
               OUR BRIDAL GALLERY
             </span>
 
-            <h2 className="max-w-[520px] text-3xl font-medium leading-[1.15] tracking-tight text-[#2d1b13] sm:text-4xl lg:text-[52px]">
-              Every bride,
-              <br />
-              beautifully unique.
-            </h2>
+          <h2
+  className={`${interTight.className} max-w-[520px] text-3xl font-bold uppercase leading-[1.05] tracking-[-0.02em] text-[#25232A] sm:text-4xl lg:text-[52px]`}
+>
+  <span className="block">
+    Every bride,
+  </span>
 
+  <span className="block text-[#8D6CA3]">
+    beautifully unique.
+  </span>
+</h2>
             <p className="mt-5 max-w-[430px] text-sm leading-7 text-[#786354] sm:text-base">
               Explore our bridal makeup and styling looks, thoughtfully
               created to celebrate your most special moments.
@@ -134,7 +141,7 @@ return (
 
             <Link
               href="/bridal-gallery"
-              className="mt-8 inline-flex items-center gap-3 bg-[#8b4a28] px-6 py-3.5 text-xs font-semibold tracking-[0.12em] text-white transition-colors duration-300 hover:bg-[#2d1b13]"
+              className="mt-8 inline-flex items-center gap-3 bg-[#8D6CA3] px-6 py-3.5 text-xs font-semibold tracking-[0.12em] text-white transition-colors duration-300 hover:bg-[#2d1b13]"
             >
               EXPLORE BRIDAL GALLERY
               <span className="text-base">↗</span>

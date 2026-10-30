@@ -3,12 +3,12 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { DM_Sans } from "next/font/google";
+import { Inter_Tight } from "next/font/google";
 import { useEffect, useState } from "react";
 
-const dmSans = DM_Sans({
+const interTight = Inter_Tight({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
+  weight: ["300", "400", "500", "600", "700"],
   display: "swap",
 });
 
@@ -54,7 +54,7 @@ export default function AboutUs() {
   return (
 <section
   id="about-us"
-  className={`${dmSans.className} relative -mt-4 mx-auto w-full max-w-[1320px] overflow-hidden bg-white px-5 pb-2 text-[#22212a] sm:px-8 sm:pb-3 lg:px-12 lg:pb-4`}
+  className={`${interTight.className} relative -mt-4 mx-auto w-full max-w-[1320px] overflow-hidden bg-white px-5 pb-2 text-[#22212a] sm:px-8 sm:pb-3 lg:px-12 lg:pb-4`}
 >
   <div className="relative w-full bg-white py-12 sm:py-16 lg:py-20">
     <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16 xl:gap-24">
@@ -192,9 +192,10 @@ export default function AboutUs() {
           </div>
 
           {/* Main heading */}
-          <h2 className="text-[42px] font-extrabold uppercase leading-[0.98] tracking-[-0.055em] text-[#25232c] sm:text-6xl lg:text-[65px] xl:text-[76px]">
-            ABOUT US
-          </h2>
+        <h2 className="text-[42px] font-extrabold uppercase leading-[0.98] tracking-[-0.055em] text-[#25232A] sm:text-6xl lg:text-[65px] xl:text-[76px]">
+  ABOUT{" "}
+  <span className="text-[#8D6CA3]">US</span>
+</h2>
 
           {/* Heading underline */}
           <div className="mt-5 h-[3px] w-14 bg-[#9b7bc4]" />

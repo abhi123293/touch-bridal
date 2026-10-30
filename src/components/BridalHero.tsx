@@ -5,15 +5,15 @@ import { motion, useScroll, useTransform } from "motion/react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import Link from "next/link";
-import { Open_Sans } from "next/font/google";
+import { Inter_Tight } from "next/font/google";
 
 
 gsap.registerPlugin(useGSAP);
 
 // Tall, condensed display font for the headline (like the reference design).
-const display = Open_Sans({
+const interTight = Inter_Tight({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
+  weight: ["300", "400", "500", "600", "700"],
   display: "swap",
 });
 
@@ -294,7 +294,7 @@ return (
             </p>
 
             <h1
-              className={`${display.className} text-[clamp(2.3rem,4.8vw,4.5rem)] font-bold uppercase leading-[1] tracking-[-0.02em] text-[#25232A]`}
+              className={`${interTight.className} text-[clamp(2.3rem,4.8vw,4.5rem)] font-bold uppercase leading-[1] tracking-[-0.02em] text-[#25232A]`}
             >
               <span className="hero-line block opacity-0">
                 Your Dream Bridal
@@ -363,7 +363,7 @@ return (
 
               <div className="leading-tight">
                 <p
-                  className={`${display.className} text-lg font-semibold text-[#25232A]`}
+                  className={`${interTight.className} text-lg font-semibold text-[#25232A]`}
                 >
                   {happyCount}
                 </p>
@@ -497,7 +497,7 @@ return (
             {services.map((item) => (
               <div key={item.number} className="flex gap-3">
                 <span
-                  className={`${display.className} pt-0.5 text-sm text-[#8D6CA3]`}
+                  className={`${interTight.className} pt-0.5 text-sm text-[#8D6CA3]`}
                 >
                   {item.number}
                 </span>
