@@ -58,12 +58,12 @@ export default function ContactCTA() {
   };
 
   return (
-   <section
+  <section
   id="booking"
-  className={`${openSans.className} -mt-4 px-3 py-6 sm:-mt-6 sm:px-5 sm:py-8 lg:-mt-16 lg:px-8 lg:py-10`}
+  className={`${openSans.className} -mt-6 px-3 py-6 sm:-mt-8 sm:px-5 sm:py-8 lg:-mt-20 lg:px-8 lg:py-10`}
 >
-      <div className="mx-auto w-full max-w-[1320px]">
-        <div className="grid overflow-hidden rounded-[26px] border border-[#3a2418]/10 bg-[#faf7f0] shadow-[0_16px_50px_rgba(45,27,19,0.08)] md:grid-cols-2 md:rounded-[32px]">
+  <div className="mx-auto w-full max-w-[1320px]">
+    <div className="grid overflow-hidden border-0 bg-white md:grid-cols-2">
 
           {/* LEFT: BRIDAL IMAGE PANEL */}
 
@@ -133,7 +133,7 @@ export default function ContactCTA() {
 
           {/* RIGHT: BOOKING FORM PANEL */}
 
-          <div className="flex flex-col justify-center bg-[#faf7f0] px-5 py-9 sm:px-8 sm:py-10 lg:px-12 lg:py-12">
+          <div className="flex flex-col justify-center bg-white px-5 py-9 sm:px-8 sm:py-10 lg:px-12 lg:py-12">
             <div>
               <p className="text-[10px] font-semibold uppercase tracking-[0.23em] text-[#8b4a28]">
                 LET'S TALK BEAUTY
