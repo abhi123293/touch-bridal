@@ -98,7 +98,7 @@ const SHOWCASE_SERVICES: ServiceShowcaseItem[] = [
     title: "Additional Services",
     tag: "Saree Draping & Care",
     description: "Signature saree pre-pleating & precise box folding",
-    image: "/images/saree pre pleating.jpg",
+    image: "/images/preplating-copy.jpg",
     actionKey: "additional",
   },
   {
