@@ -427,7 +427,7 @@ return (
                   className="group w-[82%] min-w-0 shrink-0 snap-start sm:w-[calc(50%-10px)] lg:w-[31%]"
                 >
                   <Link
-                    href={`/contact?service=${encodeURIComponent(service.title)}#booking`}
+                    href={`/?service=${encodeURIComponent(service.title)}#booking`}
                     aria-label={`Enquire about ${service.title}`}
                     className="flex h-full flex-col border border-[#e8e1ef] bg-white text-[#25232c] shadow-[0_10px_30px_rgba(56,39,76,0.07)] outline-offset-4 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_38px_rgba(56,39,76,0.13)] focus-visible:outline-2 focus-visible:outline-[#9675ba]"
                   >
