@@ -153,12 +153,12 @@ export default function ServicesShowcase() {
   const touchStartYRef = useRef(0);
   const isSwipingRef = useRef(false);
 
-  // Calculate maximum horizontal travel distance
+  // Calculate maximum horizontal travel distance (gap = 0 between cards)
   const getMaxScroll = useCallback(() => {
     const track = trackRef.current;
     const viewport = scrollContainerRef.current;
     if (!track || !viewport) return 0;
-    return Math.max(0, track.scrollWidth - viewport.clientWidth + 24);
+    return Math.max(0, track.scrollWidth - viewport.clientWidth);
   }, []);
 
   // Smoothly move the track
@@ -188,7 +188,7 @@ export default function ServicesShowcase() {
 
   // In-Place Mouse Wheel Listener:
   // Rolling DOWN moves 01 → 09, Rolling UP moves 09 → 01
-  // Crucially: calls e.preventDefault() so the WEBPAGE DOES NOT SCROLL!
+  // Calls e.preventDefault() so the WEBPAGE DOES NOT SCROLL!
   useEffect(() => {
     const viewport = scrollContainerRef.current;
     if (!viewport) return;
@@ -201,11 +201,11 @@ export default function ServicesShowcase() {
       const isMovingForward = delta > 0 && targetXRef.current < maxScroll - 1;
       const isMovingBackward = delta < 0 && targetXRef.current > 1;
 
-      // If we can scroll cards in this direction, prevent webpage from scrolling!
+      // Prevent webpage vertical scroll while scrubbing the colonnade
       if (isMovingForward || isMovingBackward) {
         e.preventDefault();
         e.stopPropagation();
-        updateTrackPosition(targetXRef.current + delta * 1.25, 0.35);
+        updateTrackPosition(targetXRef.current + delta * 1.35, 0.35);
       }
     };
 
@@ -234,7 +234,7 @@ export default function ServicesShowcase() {
 
     if (Math.abs(diffX) > Math.abs(diffY)) {
       touchStartXRef.current = currentX;
-      updateTrackPosition(targetXRef.current + diffX * 1.3, 0.2);
+      updateTrackPosition(targetXRef.current + diffX * 1.35, 0.2);
     }
   };
 
@@ -524,32 +524,32 @@ export default function ServicesShowcase() {
   return (
     <section
       aria-label="Bridal Saree Showcase & Services"
-      className="relative z-10 mx-auto w-full max-w-[1440px] drop-shadow-[0_30px_70px_rgba(20,10,5,0.7)]"
+      className="relative z-10 mx-auto w-full max-w-[1660px] drop-shadow-[0_30px_70px_rgba(20,10,5,0.7)]"
     >
       {/* =========================================================================
-          FIRST SECTION: Pure Luxury Mughal Arch Showcase (Single-Screen Fit)
-          - Top control bar and bottom pill bar completely removed as requested
-          - Fits cleanly within desktop screen (lg:h-[calc(100vh-125px)])
+          FIRST SECTION: Seamless Mughal Arch Colonnade (Enlarged Frame & Gap-0)
+          - Frame size increased: fills screen height (lg:h-[calc(100vh-120px)]) & max-w-[1660px]
+          - Gap between cards completely removed (gap-0) for seamless royal archway
           - Webpage stays locked in place; zero vertical scroll when wheeling cards
           - Wheel DOWN moves 01 → 09, Wheel UP moves 09 → 01
           - Touching any service image smoothly navigates to its subsection
          ========================================================================= */}
       <div
         id="first-showcase-section"
-        className="relative w-full overflow-hidden rounded-[24px] sm:rounded-[32px] border border-[#D6BC96]/35 bg-gradient-to-b from-[#24150e] via-[#1a0e08] to-[#120703] shadow-2xl flex items-center lg:h-[calc(100vh-125px)] max-h-[820px] min-h-[560px]"
+        className="relative w-full overflow-hidden rounded-[24px] sm:rounded-[32px] border border-[#D6BC96]/40 bg-gradient-to-b from-[#24150e] via-[#1a0e08] to-[#120703] shadow-2xl flex items-center h-[520px] sm:h-[620px] lg:h-[calc(100vh-120px)] max-h-[860px] min-h-[580px]"
       >
-        {/* Viewport Container (Fills the entire showcase area) */}
+        {/* Viewport Container (Fills the entire showcase frame with zero padding) */}
         <div
           ref={scrollContainerRef}
           onTouchStart={handleTouchStart}
           onTouchMove={handleTouchMove}
           onTouchEnd={handleTouchEnd}
-          className="relative w-full h-full overflow-hidden px-4 sm:px-6 lg:px-8 flex items-center select-none cursor-grab active:cursor-grabbing"
+          className="relative w-full h-full overflow-hidden p-0 flex items-center select-none cursor-grab active:cursor-grabbing"
         >
-          {/* Moving Track: Exactly 9 Services (01 to 09) */}
+          {/* Moving Track: Exactly 9 Services with ZERO gap between cards */}
           <div
             ref={trackRef}
-            className="flex gap-4 sm:gap-5 lg:gap-6 items-center will-change-transform py-4"
+            className="flex gap-0 items-center will-change-transform h-full"
           >
             {SHOWCASE_SERVICES.map((service, index) => {
               const isCurrent = activeIndex === index;
@@ -561,10 +561,10 @@ export default function ServicesShowcase() {
                       handleServiceSelect(service.actionKey);
                     }
                   }}
-                  className={`saree-arch-card group relative flex-shrink-0 h-[400px] sm:h-[460px] lg:h-[calc(100vh-185px)] max-h-[600px] aspect-[736/1200] overflow-hidden rounded-[22px] sm:rounded-[26px] bg-[#24150e] border transition-all duration-300 select-none text-left cursor-pointer ${
+                  className={`saree-arch-card group relative flex-shrink-0 h-full aspect-[736/1200] overflow-hidden bg-[#24150e] border-r border-[#D6BC96]/30 last:border-r-0 select-none text-left cursor-pointer transition-all duration-300 ${
                     isCurrent
-                      ? "border-[#D6BC96] shadow-[0_22px_60px_rgba(214,188,150,0.32)] ring-1 ring-[#D6BC96]/40"
-                      : "border-[#D6BC96]/35 shadow-[0_16px_45px_rgba(0,0,0,0.65)] hover:border-[#D6BC96]/80"
+                      ? "ring-1 ring-inset ring-[#D6BC96]/50 shadow-[inset_0_0_40px_rgba(214,188,150,0.15)]"
+                      : "hover:ring-1 hover:ring-inset hover:ring-[#D6BC96]/30"
                   }`}
                 >
                   {/* Subtle Warm Backdrop behind Model */}
@@ -580,10 +580,10 @@ export default function ServicesShowcase() {
                     className="relative z-10 h-full w-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.035]"
                   />
 
-                  {/* Deep Grounding Scrim Gradient at Base */}
+                  {/* Deep Grounding Scrim Gradient at Base for Text Readability */}
                   <div
                     aria-hidden="true"
-                    className="pointer-events-none absolute inset-x-0 bottom-0 z-20 h-56 sm:h-64 lg:h-72 bg-gradient-to-t from-[#140a06]/98 via-[#140a06]/80 via-45% to-transparent"
+                    className="pointer-events-none absolute inset-x-0 bottom-0 z-20 h-64 sm:h-72 lg:h-84 bg-gradient-to-t from-[#140a06]/98 via-[#140a06]/82 via-45% to-transparent"
                   />
 
                   {/* Decorative Mughal Arch Overlay with Gold Contour & Corner Masks */}
@@ -614,7 +614,7 @@ export default function ServicesShowcase() {
                     {/* Soft Top Corner Masks to Reveal Mughal Arch Silhouette */}
                     <path
                       d={MUGHAL_CORNER_MASK_PATH}
-                      fill="#2a170e"
+                      fill="#1a0e08"
                       fillRule="evenodd"
                       className="transition-colors duration-500"
                     />
@@ -648,37 +648,37 @@ export default function ServicesShowcase() {
                   {/* =============================================================
                       SERVICE NAME & DETAILS DIRECTLY ON THE IMAGE
                      ============================================================= */}
-                  <div className="absolute inset-x-0 bottom-0 z-40 p-4 sm:p-5 flex flex-col justify-end">
+                  <div className="absolute inset-x-0 bottom-0 z-40 p-4 sm:p-5 lg:p-6 flex flex-col justify-end">
                     {/* Number & Category Tag Pill */}
-                    <div className="flex items-center gap-1.5 mb-1.5">
-                      <span className="font-mono text-[9.5px] sm:text-[10.5px] font-bold tracking-wider text-[#D6BC96] px-2.5 py-0.5 rounded-full bg-[#38271F]/85 border border-[#D6BC96]/50 shadow-sm backdrop-blur-md">
+                    <div className="flex items-center gap-2 mb-2">
+                      <span className="font-mono text-[10px] sm:text-xs font-bold tracking-wider text-[#D6BC96] px-2.5 py-0.5 rounded-full bg-[#38271F]/85 border border-[#D6BC96]/50 shadow-sm backdrop-blur-md">
                         {service.number}
                       </span>
-                      <span className="font-sans text-[9.5px] sm:text-[10.5px] font-semibold tracking-[0.16em] uppercase text-[#D6BC96] drop-shadow-sm truncate">
+                      <span className="font-sans text-[10px] sm:text-xs font-semibold tracking-[0.18em] uppercase text-[#D6BC96] drop-shadow-sm truncate">
                         {service.tag}
                       </span>
                     </div>
 
                     {/* Service Name displayed prominently on the image */}
                     <h3
-                      className={`${cormorant.className} text-xl sm:text-2xl lg:text-[27px] font-medium text-[#F5F0E8] leading-tight group-hover:text-[#D6BC96] transition-colors drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)]`}
+                      className={`${cormorant.className} text-2xl sm:text-3xl lg:text-4xl font-medium text-[#F5F0E8] leading-tight group-hover:text-[#D6BC96] transition-colors drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)]`}
                     >
                       {service.title}
                     </h3>
 
                     {/* Description Snippet */}
-                    <p className="mt-1 text-xs text-[#F5F0E8]/85 font-sans line-clamp-1 leading-relaxed drop-shadow-sm">
+                    <p className="mt-1 text-xs sm:text-sm text-[#F5F0E8]/85 font-sans line-clamp-2 leading-relaxed drop-shadow-sm">
                       {service.description}
                     </p>
 
                     {/* Touch to Explore Callout Bar */}
-                    <div className="mt-3 flex items-center justify-between pt-2.5 border-t border-[#D6BC96]/30">
-                      <span className="text-[10.5px] sm:text-[11px] font-semibold uppercase tracking-[0.14em] text-[#D6BC96] flex items-center gap-1.5">
+                    <div className="mt-3.5 flex items-center justify-between pt-2.5 border-t border-[#D6BC96]/30">
+                      <span className="text-[11px] sm:text-xs font-semibold uppercase tracking-[0.16em] text-[#D6BC96] flex items-center gap-1.5">
                         <span>Touch to Explore</span>
-                        <ArrowUpRight className="h-3.5 w-3.5 stroke-[2.2] transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                        <ArrowUpRight className="h-3.5 w-3.5 sm:h-4 sm:w-4 stroke-[2.2] transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                       </span>
-                      <div className="h-6 w-6 sm:h-7 sm:w-7 rounded-full bg-[#D6BC96]/20 border border-[#D6BC96]/60 flex items-center justify-center text-[#D6BC96] shadow-sm group-hover:bg-[#D6BC96] group-hover:text-[#38271F] transition-all duration-300">
-                        <ArrowUpRight className="h-3.5 w-3.5 stroke-[2.2]" />
+                      <div className="h-7 w-7 sm:h-8 sm:w-8 rounded-full bg-[#D6BC96]/20 border border-[#D6BC96]/60 flex items-center justify-center text-[#D6BC96] shadow-sm group-hover:bg-[#D6BC96] group-hover:text-[#38271F] transition-all duration-300">
+                        <ArrowUpRight className="h-3.5 w-3.5 sm:h-4 sm:w-4 stroke-[2.2]" />
                       </div>
                     </div>
                   </div>
