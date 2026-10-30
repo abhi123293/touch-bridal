@@ -9,7 +9,7 @@ import ContactCTA from "@/components/ContactCTA";
 
 export default function HomePage() {
   return (
-    <main className="bg-[radial-gradient(ellipse_at_top_left,#ffffff_0%,#fafafa_50%,#f5f5f5_100%)]">
+   <main className="min-h-screen bg-white text-[#302832]">
       <BridalHero />
       <AboutUs />
       <FeaturedServices />

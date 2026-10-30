@@ -52,14 +52,14 @@ export default function AboutUs() {
   }, []);
 
   return (
-   <section
+<section
   id="about-us"
   className={`${dmSans.className} relative -mt-4 mx-auto w-full max-w-[1320px] overflow-hidden bg-white px-5 pb-2 text-[#22212a] sm:px-8 sm:pb-3 lg:px-12 lg:pb-4`}
 >
   <div className="relative w-full bg-white py-12 sm:py-16 lg:py-20">
     <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16 xl:gap-24">
-        {/* LEFT — EDITORIAL IMAGE COLLAGE */}
-        <div className="relative order-1 mx-auto h-[420px] w-full max-w-[570px] sm:h-[520px] lg:h-[570px]">
+      {/* LEFT — EDITORIAL IMAGE COLLAGE */}
+      <div className="relative order-1 mx-auto h-[420px] w-full max-w-[570px] sm:h-[520px] lg:h-[570px]">
 
           {/* Soft decorative background shape */}
           {/* <div
