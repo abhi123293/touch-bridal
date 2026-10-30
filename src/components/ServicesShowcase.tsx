@@ -647,7 +647,7 @@ export default function ServicesShowcase() {
           FIRST SECTION: 4-Frame Mughal Arcade Saree Showcase Container
           WITH 9 Services Auto-Scrolling Glassmorphism Ribbon at the Base
          ========================================================================= */}
-      <div id="first-showcase-section" className="relative w-full overflow-hidden rounded-[24px] sm:rounded-[32px] border border-[#dfb76c]/30 shadow-2xl">
+      <div id="first-showcase-section" className="relative w-full overflow-hidden rounded-[24px] sm:rounded-[32px] border border-[#D6BC96]/30 shadow-2xl">
         {/* 4 Mughal Arch Saree Models */}
         <div className="grid grid-cols-2 gap-0 sm:grid-cols-2 lg:grid-cols-4 items-end w-full">
           {SAREE_MODELS.map((model, index) => (
@@ -695,8 +695,8 @@ export default function ServicesShowcase() {
                     x2="100%"
                     y2="100%"
                   >
-                    <stop offset="0%" stopColor="#fdf0d5" />
-                    <stop offset="28%" stopColor="#dfb76c" />
+                    <stop offset="0%" stopColor="#F5F0E8" />
+                    <stop offset="28%" stopColor="#D6BC96" />
                     <stop offset="68%" stopColor="#8b4a28" />
                     <stop offset="88%" stopColor="#cba879" />
                     <stop offset="100%" stopColor="#382319" />
@@ -752,25 +752,25 @@ export default function ServicesShowcase() {
           className="absolute inset-x-0 bottom-0 z-40 flex flex-col items-center justify-end pb-3 sm:pb-5 lg:pb-6 px-2 sm:px-4 lg:px-6 pointer-events-none"
         >
           {/* Translucent Brownish Glassmorphism Tray at Bottom of Images */}
-          <div className="pointer-events-auto relative w-full max-w-[1360px] overflow-hidden rounded-[20px] sm:rounded-[26px] border border-white/20 border-t-white/35 border-b-black/40 bg-gradient-to-b from-[#331a0e]/80 via-[#200e06]/88 to-[#120602]/92 py-2.5 sm:py-3.5 px-2 sm:px-4 backdrop-blur-xl backdrop-saturate-150 ring-1 ring-[#dfb76c]/40 shadow-[inset_0_1.5px_2px_rgba(255,255,255,0.3),0_20px_50px_rgba(0,0,0,0.65)]">
+          <div className="pointer-events-auto relative w-full max-w-[1360px] overflow-hidden rounded-[20px] sm:rounded-[26px] border border-white/20 border-t-white/35 border-b-black/40 bg-gradient-to-b from-[#331a0e]/80 via-[#200e06]/88 to-[#120602]/92 py-2.5 sm:py-3.5 px-2 sm:px-4 backdrop-blur-xl backdrop-saturate-150 ring-1 ring-[#D6BC96]/40 shadow-[inset_0_1.5px_2px_rgba(255,255,255,0.3),0_20px_50px_rgba(0,0,0,0.65)]">
 
             {/* Specular Glass Sheen Top Edge */}
             <div
               aria-hidden="true"
-              className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#dfb76c]/80 to-transparent"
+              className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#D6BC96]/80 to-transparent"
             />
 
             {/* Tray Header: 9 SIGNATURE SERVICES with Live Indicator & Prev/Next Buttons */}
-            <div className="relative z-10 flex items-center justify-between gap-2 px-2 sm:px-3 mb-2 pb-2 border-b border-[#dfb76c]/20">
+            <div className="relative z-10 flex items-center justify-between gap-2 px-2 sm:px-3 mb-2 pb-2 border-b border-[#D6BC96]/20">
               <div className="flex items-center gap-2">
-                <span className="h-2 w-2 rounded-full bg-[#dfb76c] shadow-[0_0_8px_#dfb76c] animate-pulse" />
-                <h2 className="text-[10px] sm:text-xs font-mono font-semibold tracking-[0.2em] uppercase text-[#dfb76c] flex items-center gap-1.5">
+                <span className="h-2 w-2 rounded-full bg-[#D6BC96] shadow-[0_0_8px_#D6BC96] animate-pulse" />
+                <h2 className="text-[10px] sm:text-xs font-mono font-semibold tracking-[0.2em] uppercase text-[#D6BC96] flex items-center gap-1.5">
                   <Sparkles className="h-3 w-3 inline-block" />
                   <span>9 SIGNATURE SERVICES • SCROLL TRIGGERED</span>
                 </h2>
               </div>
 
-              <span className="text-[10px] sm:text-xs text-[#fdf0d5]/75 tracking-wide hidden md:inline-block font-sans">
+              <span className="text-[10px] sm:text-xs text-[#F5F0E8]/75 tracking-wide hidden md:inline-block font-sans">
                 Touch any service to explore sub-services &amp; rituals
               </span>
 
@@ -780,7 +780,7 @@ export default function ServicesShowcase() {
                   type="button"
                   onClick={handlePrev}
                   aria-label="Scroll left to previous services"
-                  className="h-7 w-7 rounded-full bg-[#dfb76c]/15 border border-[#dfb76c]/40 flex items-center justify-center text-[#dfb76c] hover:bg-[#dfb76c] hover:text-[#1C120F] transition-all"
+                  className="h-7 w-7 rounded-full bg-[#D6BC96]/15 border border-[#D6BC96]/40 flex items-center justify-center text-[#D6BC96] hover:bg-[#D6BC96] hover:text-[#38271F] transition-all"
                 >
                   <ChevronLeft className="h-4 w-4 stroke-[2.2]" />
                 </button>
@@ -788,7 +788,7 @@ export default function ServicesShowcase() {
                   type="button"
                   onClick={handleNext}
                   aria-label="Scroll right to next services"
-                  className="h-7 w-7 rounded-full bg-[#dfb76c]/15 border border-[#dfb76c]/40 flex items-center justify-center text-[#dfb76c] hover:bg-[#dfb76c] hover:text-[#1C120F] transition-all"
+                  className="h-7 w-7 rounded-full bg-[#D6BC96]/15 border border-[#D6BC96]/40 flex items-center justify-center text-[#D6BC96] hover:bg-[#D6BC96] hover:text-[#38271F] transition-all"
                 >
                   <ChevronRight className="h-4 w-4 stroke-[2.2]" />
                 </button>
@@ -816,10 +816,10 @@ export default function ServicesShowcase() {
                       handleServiceSelect(service.actionKey);
                     }
                   }}
-                  className="group relative flex-shrink-0 w-[230px] sm:w-[270px] lg:w-[290px] h-[86px] sm:h-[96px] text-left cursor-pointer rounded-[14px] sm:rounded-[18px] border border-[#dfb76c]/35 bg-gradient-to-r from-[#2c170d]/90 via-[#1e0f08]/90 to-[#140804]/90 p-2 sm:p-2.5 flex items-center gap-2.5 sm:gap-3 transition-all duration-300 hover:border-[#dfb76c] hover:scale-[1.02] hover:shadow-[0_8px_25px_rgba(223,183,108,0.25)] focus:outline-none select-none"
+                  className="group relative flex-shrink-0 w-[230px] sm:w-[270px] lg:w-[290px] h-[86px] sm:h-[96px] text-left cursor-pointer rounded-[14px] sm:rounded-[18px] border border-[#D6BC96]/35 bg-gradient-to-r from-[#2c170d]/90 via-[#1e0f08]/90 to-[#140804]/90 p-2 sm:p-2.5 flex items-center gap-2.5 sm:gap-3 transition-all duration-300 hover:border-[#D6BC96] hover:scale-[1.02] hover:shadow-[0_8px_25px_rgba(223,183,108,0.25)] focus:outline-none select-none"
                 >
                   {/* Service Image Portal with Luxury Gold Ring */}
-                  <div className="relative h-14 w-14 sm:h-16 sm:w-16 rounded-full overflow-hidden border-2 border-[#dfb76c]/70 shrink-0 shadow-md group-hover:scale-105 transition-transform duration-300">
+                  <div className="relative h-14 w-14 sm:h-16 sm:w-16 rounded-full overflow-hidden border-2 border-[#D6BC96]/70 shrink-0 shadow-md group-hover:scale-105 transition-transform duration-300">
                     <img
                       src={service.image}
                       alt={service.title}
@@ -831,21 +831,21 @@ export default function ServicesShowcase() {
                   {/* Service Text & Details */}
                   <div className="flex-1 min-w-0 pr-1">
                     <div className="flex items-center gap-1.5 mb-0.5">
-                      <span className="text-[10px] font-mono font-bold tracking-wider text-[#dfb76c] uppercase">
+                      <span className="text-[10px] font-mono font-bold tracking-wider text-[#D6BC96] uppercase">
                         {service.number}
                       </span>
-                      <span className="text-[9px] sm:text-[10px] font-sans font-semibold tracking-wider text-[#dfb76c]/75 uppercase truncate">
+                      <span className="text-[9px] sm:text-[10px] font-sans font-semibold tracking-wider text-[#D6BC96]/75 uppercase truncate">
                         • {service.tag}
                       </span>
                     </div>
 
                     <h3
-                      className={`${cormorant.className} text-base sm:text-lg font-medium text-[#fdf0d5] leading-tight truncate group-hover:text-[#dfb76c] transition-colors`}
+                      className={`${cormorant.className} text-base sm:text-lg font-medium text-[#F5F0E8] leading-tight truncate group-hover:text-[#D6BC96] transition-colors`}
                     >
                       {service.title}
                     </h3>
 
-                    <div className="mt-1 flex items-center gap-1 text-[10px] font-semibold text-[#dfb76c] tracking-wide uppercase">
+                    <div className="mt-1 flex items-center gap-1 text-[10px] font-semibold text-[#D6BC96] tracking-wide uppercase">
                       <span>Explore</span>
                       <ArrowUpRight className="h-2.5 w-2.5 stroke-[2.2] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                     </div>
@@ -853,7 +853,7 @@ export default function ServicesShowcase() {
 
                   {/* Right Arrow Badge */}
                   <div className="shrink-0">
-                    <div className="h-7 w-7 sm:h-8 sm:w-8 rounded-full bg-[#dfb76c]/15 border border-[#dfb76c]/40 flex items-center justify-center text-[#dfb76c] group-hover:bg-[#dfb76c] group-hover:text-[#1C120F] transition-all">
+                    <div className="h-7 w-7 sm:h-8 sm:w-8 rounded-full bg-[#D6BC96]/15 border border-[#D6BC96]/40 flex items-center justify-center text-[#D6BC96] group-hover:bg-[#D6BC96] group-hover:text-[#38271F] transition-all">
                       <ArrowUpRight className="h-3.5 w-3.5 stroke-[2.2]" />
                     </div>
                   </div>
