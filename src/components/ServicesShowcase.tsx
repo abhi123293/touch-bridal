@@ -161,10 +161,10 @@ export default function ServicesShowcase() {
   const touchStartYRef = useRef(0);
   const isSwipingRef = useRef(false);
 
-  // GSAP ScrollTrigger Animations for entrance and scroll-driven velocity
+  // GSAP ScrollTrigger Animations for UP & DOWN scroll reveals and scrub
   useGSAP(
     () => {
-      // 1. Entrance animation for the Mughal Arch service cards
+      // 1. Up and Down bidirectional scroll trigger entrance animation
       const archCards = gsap.utils.toArray<HTMLElement>(".saree-arch-card");
       if (archCards.length > 0) {
         gsap.fromTo(
@@ -175,20 +175,35 @@ export default function ServicesShowcase() {
             y: 0,
             scale: 1,
             duration: 0.85,
-            stagger: 0.1,
+            stagger: 0.08,
             ease: "power3.out",
             scrollTrigger: {
               trigger: showcaseContainerRef.current,
-              start: "top 82%",
-              toggleActions: "play none none none",
+              start: "top 88%",
+              end: "bottom 12%",
+              toggleActions: "play reverse play reverse",
             },
-            clearProps: "transform,opacity",
           }
         );
+
+        // 2. Alternating up-and-down wave motion on vertical scroll
+        archCards.forEach((card, idx) => {
+          const yOffset = idx % 2 === 0 ? -16 : 16;
+          gsap.to(card, {
+            y: yOffset,
+            ease: "none",
+            scrollTrigger: {
+              trigger: showcaseContainerRef.current,
+              start: "top bottom",
+              end: "bottom top",
+              scrub: 1.2,
+            },
+          });
+        });
       }
 
-      // 2. ScrollTrigger velocity & scrub integration:
-      // When the user scrolls vertically down the page, ScrollTrigger smoothly pushes the horizontal scroll track
+      // 3. ScrollTrigger bidirectional glide on vertical scroll up & down:
+      // When scrolling down, smoothly glides forward; when scrolling up, smoothly glides backward
       if (scrollContainerRef.current && showcaseContainerRef.current) {
         ScrollTrigger.create({
           trigger: showcaseContainerRef.current,
@@ -197,7 +212,7 @@ export default function ServicesShowcase() {
           onUpdate: (self) => {
             const container = scrollContainerRef.current;
             if (container && !isPausedRef.current && !isInteractingRef.current) {
-              const velocity = self.getVelocity() / 240;
+              const velocity = self.getVelocity() / 180;
               container.scrollLeft += velocity;
               const singleSetWidth = container.scrollWidth / 3;
               if (singleSetWidth > 0) {
@@ -287,6 +302,22 @@ export default function ServicesShowcase() {
     setTimeout(() => {
       isInteractingRef.current = false;
     }, 1400);
+  };
+
+  // Convert vertical mouse wheel into horizontal gliding for natural up/down scrolling
+  const handleWheel = (e: React.WheelEvent) => {
+    if (scrollContainerRef.current && Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+      scrollContainerRef.current.scrollLeft += e.deltaY * 0.85;
+      const container = scrollContainerRef.current;
+      const singleSetWidth = container.scrollWidth / 3;
+      if (singleSetWidth > 0) {
+        if (container.scrollLeft >= singleSetWidth * 2) {
+          container.scrollLeft -= singleSetWidth;
+        } else if (container.scrollLeft <= singleSetWidth * 0.1) {
+          container.scrollLeft += singleSetWidth;
+        }
+      }
+    }
   };
 
   // Auto-reveal if hash is present (e.g. #bridal-makeup, #hair-services, etc.)
@@ -665,6 +696,7 @@ export default function ServicesShowcase() {
           onMouseLeave={() => {
             isPausedRef.current = false;
           }}
+          onWheel={handleWheel}
           onTouchStart={handleTouchStart}
           onTouchMove={handleTouchMove}
           onTouchEnd={handleTouchEnd}
