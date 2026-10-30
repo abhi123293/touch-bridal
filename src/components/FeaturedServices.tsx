@@ -1,71 +1,75 @@
 "use client";
 
 import Link from "next/link";
+import { motion } from "motion/react";
 import { useRef, useState, useCallback, useEffect } from "react";
-import { Cormorant_Garamond, Inter } from "next/font/google";
-import { ArrowUpRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
+import { Cormorant_Garamond } from "next/font/google";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
-const cormorant = Cormorant_Garamond({
+// Same heading font as the other sections.
+const serif = Cormorant_Garamond({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
+  weight: ["500", "600", "700"],
   display: "swap",
 });
 
-const inter = Inter({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  display: "swap",
-});
+/*
+  Colour guide (this section sits on the dark brown page background):
+  gold accent      #e7c895
+  heading / text   #fff7ec
+  muted text       white at 70-75%
+  card background  #f7f1e9 with brown text #2d1b13
+  card accent      #8b4a28
+*/
 
 const services = [
   {
     number: "01",
-    title: "Bridal Makeovers",
+    title: "Bridal & Groom Makeovers",
     description:
-      "Bridal and reception looks tailored to your special day.",
+      "Beautiful bridal makeup, groom styling and special occasion looks tailored to your special day.",
     image: "/images/bridal-01.jpg",
-    imageAlt: "Bridal makeup and traditional bridal look",
+    image2: "/servicesimg/grrommens.jpg",
+    imageAlt: "Bridal makeup and wedding makeover",
+    image2Alt: "Groom makeover and wedding styling",
     tag: "BRIDAL BEAUTY",
-    message:
-      "Hi, I would like to enquire about Bridal Makeovers at Touch Bridal Makeover Studio & Unisex Salon.",
   },
   {
     number: "02",
-    title: "Hair Care",
+    title: "Hair Care & Styling",
     description:
-      "Discover hair styling and care for your everyday look and special occasions.",
+      "Haircuts, styling, colouring and hair treatments for both men and women.",
     image: "/servicesimg/haircare.jpg",
-    imageAlt: "Hair styling and beauty look",
+    image2: "/servicesimg/menHairCare.jpg",
+    imageAlt: "Professional hair styling and hair care",
+    image2Alt: "Hair styling for men and women",
     tag: "HAIR CARE",
-    message:
-      "Hi, I would like to enquire about Hair Care at Touch Bridal Makeover Studio & Unisex Salon.",
   },
   {
     number: "03",
-    title: "Skin Care",
+    title: "Skin Care for Men & Women",
     description:
-      "Explore skincare and facial services to help you feel refreshed.",
+      "Refreshing facials and skincare treatments to help everyone look and feel their best.",
     image: "/servicesimg/bridal-03.jpg",
-    imageAlt: "Skin care ",
-    tag: "SKIN CARE",
-    message:
-      "Hi, I would like to enquire about Skin Care at Touch Bridal Makeover Studio & Unisex Salon.",
+    image2: "/servicesimg/menfacial.jpg",
+    imageAlt: "Professional skincare and facial treatments",
+    image2Alt: "Skincare treatment for men and women",
+    tag: "UNISEX SKIN CARE",
   },
   {
     number: "04",
-    title: "Beauty Services",
+    title: "Beauty & Personal Care",
     description:
-      "Thoughtful beauty services and finishing touches for every occasion.",
+      "Makeup, beauty treatments and finishing touches for men and women, for everyday care and special occasions.",
     image: "/images/bridal-04.jpg",
-    imageAlt: "Beauty services and makeup look",
+    image2: "/servicesimg/menbeauty.jpg",
+    imageAlt: "Beauty treatments and personal care",
+    image2Alt: "Professional beauty and makeup services",
     tag: "BEAUTY SERVICES",
-    message:
-      "Hi, I would like to enquire about Beauty Services at Touch Bridal Makeover Studio & Unisex Salon.",
   },
 ];
 
@@ -92,49 +96,32 @@ const featureHighlights = [
   },
 ];
 
-const getWhatsAppLink = (message: string) =>
-  `https://wa.me/919789376174?text=${encodeURIComponent(message)}`;
-
 export default function FeaturedServices() {
-  const sectionRef = useRef<HTMLElement>(null);
   const introRef = useRef<HTMLDivElement>(null);
   const carouselRef = useRef<HTMLDivElement>(null);
 
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
 
-  // Auto-scrolling state & control refs
-  const isInteractingRef = useRef(false);
-  const isHoveredRef = useRef(false);
-  const resumeTimeoutRef = useRef<NodeJS.Timeout | null>(null);
-
   const updateScrollButtons = useCallback(() => {
     const carousel = carouselRef.current;
+
     if (!carousel) return;
 
     const maxScrollLeft = Math.max(
       0,
-      carousel.scrollWidth - carousel.clientWidth
+      carousel.scrollWidth - carousel.clientWidth,
     );
+
     const currentScrollLeft = carousel.scrollLeft;
 
     setCanScrollLeft(currentScrollLeft > 8);
     setCanScrollRight(currentScrollLeft < maxScrollLeft - 8);
   }, []);
 
-  // Pause automatic scrolling on user interaction with a graceful cooldown
-  const pauseAutoScroll = useCallback(() => {
-    isInteractingRef.current = true;
-    if (resumeTimeoutRef.current) {
-      clearTimeout(resumeTimeoutRef.current);
-    }
-    resumeTimeoutRef.current = setTimeout(() => {
-      isInteractingRef.current = false;
-    }, 3200);
-  }, []);
-
   useEffect(() => {
     const carousel = carouselRef.current;
+
     if (!carousel) return;
 
     updateScrollButtons();
@@ -144,6 +131,7 @@ export default function FeaturedServices() {
     });
 
     resizeObserver.observe(carousel);
+
     window.addEventListener("resize", updateScrollButtons);
 
     return () => {
@@ -152,63 +140,17 @@ export default function FeaturedServices() {
     };
   }, [updateScrollButtons]);
 
-  // Gentle automatic scrolling interaction (pauses on interaction, respects reduced motion)
-  useEffect(() => {
-    const carousel = carouselRef.current;
-    if (!carousel) return;
-
-    // Respect user's reduced-motion preference
-    if (
-      typeof window !== "undefined" &&
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches
-    ) {
-      return;
-    }
-
-    let animationFrameId: number;
-    let lastTime: number | null = null;
-    const speed = 24; // gentle, stately scrolling speed in pixels per second
-
-    const animate = (time: number) => {
-      if (lastTime !== null) {
-        const delta = (time - lastTime) / 1000;
-        const maxScroll = carousel.scrollWidth - carousel.clientWidth;
-
-        if (
-          !isHoveredRef.current &&
-          !isInteractingRef.current &&
-          maxScroll > 8
-        ) {
-          carousel.scrollLeft += speed * delta;
-          if (carousel.scrollLeft >= maxScroll - 2) {
-            carousel.scrollTo({ left: 0, behavior: "smooth" });
-          }
-        }
-      }
-      lastTime = time;
-      animationFrameId = requestAnimationFrame(animate);
-    };
-
-    animationFrameId = requestAnimationFrame(animate);
-
-    return () => {
-      cancelAnimationFrame(animationFrameId);
-      if (resumeTimeoutRef.current) {
-        clearTimeout(resumeTimeoutRef.current);
-      }
-    };
-  }, []);
-
   const scrollServices = (direction: "left" | "right") => {
-    pauseAutoScroll();
     const carousel = carouselRef.current;
+
     if (!carousel) return;
 
     const card = carousel.querySelector<HTMLElement>("[data-service-card]");
+
     if (!card) return;
 
     const carouselStyles = window.getComputedStyle(carousel);
-    const gap = parseFloat(carouselStyles.columnGap) || 20;
+    const gap = parseFloat(carouselStyles.columnGap) || 0;
     const scrollAmount = card.offsetWidth + gap;
 
     carousel.scrollBy({
@@ -217,324 +159,340 @@ export default function FeaturedServices() {
     });
   };
 
-  // GSAP ScrollTrigger Animations: One-by-one progressive entrance reveals
   useGSAP(
     () => {
-      // 1. Feature highlights header pills
-      const highlights = gsap.utils.toArray<HTMLElement>(".feature-highlight-item");
-      if (highlights.length > 0) {
-        gsap.fromTo(
-          highlights,
-          { opacity: 0, y: 16 },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.65,
-            stagger: 0.08,
-            ease: "power2.out",
-            scrollTrigger: {
-              trigger: sectionRef.current,
-              start: "top 85%",
-              toggleActions: "play none none none",
-            },
-            clearProps: "transform,opacity",
-          }
-        );
-      }
+      const elements = gsap.utils.toArray<HTMLElement>(".services-intro-item");
 
-      // 2. Left introduction elements: staggered luxury reveal
-      const introElements = gsap.utils.toArray<HTMLElement>(".services-intro-item");
-      if (introElements.length > 0) {
-        gsap.fromTo(
-          introElements,
-          { opacity: 0, y: 24 },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.75,
-            stagger: 0.12,
-            ease: "power2.out",
-            scrollTrigger: {
-              trigger: introRef.current,
-              start: "top 80%",
-              toggleActions: "play none none none",
-            },
-            clearProps: "transform,opacity",
-          }
-        );
-      }
+      gsap.set(elements, {
+        opacity: 0,
+        y: 24,
+      });
 
-      // 3. One-by-one progressive scroll-triggered reveals for each service card
-      const cardElements = gsap.utils.toArray<HTMLElement>("[data-service-card]");
-      cardElements.forEach((card, index) => {
-        const imgWrap = card.querySelector(".service-image-wrap");
-        const titleEl = card.querySelector(".service-title-el");
-        const descEl = card.querySelector(".service-desc-el");
-        const badgeEl = card.querySelector(".service-badge-el");
-
-        const tl = gsap.timeline({
-          scrollTrigger: {
-            trigger: card,
-            start: "top 85%",
-            toggleActions: "play none none none",
-          },
-          delay: index * 0.12, // Progressive staggered entrance so items appear one by one
-        });
-
-        // Image container reveal with smooth fade-in and slight upward movement (750ms)
-        if (imgWrap) {
-          tl.fromTo(
-            imgWrap,
-            { opacity: 0, y: 26 },
-            {
-              opacity: 1,
-              y: 0,
-              duration: 0.75,
-              ease: "power2.out",
-              clearProps: "transform,opacity",
-            }
-          );
-        }
-
-        // Category badge entrance
-        if (badgeEl) {
-          tl.fromTo(
-            badgeEl,
-            { opacity: 0, scale: 0.94 },
-            {
-              opacity: 1,
-              scale: 1,
-              duration: 0.5,
-              ease: "power2.out",
-              clearProps: "transform,opacity",
-            },
-            "-=0.5"
-          );
-        }
-
-        // Service title with subtle staggered animation
-        if (titleEl) {
-          tl.fromTo(
-            titleEl,
-            { opacity: 0, y: 14 },
-            {
-              opacity: 1,
-              y: 0,
-              duration: 0.65,
-              ease: "power2.out",
-              clearProps: "transform,opacity",
-            },
-            "-=0.45"
-          );
-        }
-
-        // Service description with subtle staggered animation
-        if (descEl) {
-          tl.fromTo(
-            descEl,
-            { opacity: 0, y: 10 },
-            {
-              opacity: 1,
-              y: 0,
-              duration: 0.6,
-              ease: "power2.out",
-              clearProps: "transform,opacity",
-            },
-            "-=0.45"
-          );
-        }
+      gsap.to(elements, {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        stagger: 0.15,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: introRef.current,
+          start: "top 75%",
+          toggleActions: "play none none none",
+        },
+        clearProps: "transform",
       });
     },
-    { scope: sectionRef }
+    {
+      scope: introRef,
+    },
   );
 
-  return (
-    <section
-      ref={sectionRef}
-      id="featured-services"
-      aria-labelledby="featured-services-heading"
-      className="bg-transparent px-2 pb-2 sm:px-3 sm:pb-3 lg:px-4 lg:pb-4"
-    >
-      {/* Luxury Container: Light-brown, Champagne-gold (#D6BC96) & Soft Ivory (#F5F0E8) */}
-      <div className="mx-auto max-w-[1320px] overflow-hidden rounded-[26px] border border-[#D6BC96]/35 bg-gradient-to-b from-[#FAF7F2] via-[#F5F0E8] to-[#EFE8DC] px-5 py-7 font-sans text-[#38271F] shadow-[0_20px_55px_-25px_rgba(56,39,31,0.22)] sm:rounded-[34px] sm:px-7 sm:py-8 lg:px-10 lg:py-9">
-        
-        {/* Top Feature Highlights */}
-        <div className="grid grid-cols-2 gap-x-4 gap-y-5 border-b border-[#D6BC96]/30 pb-5 sm:grid-cols-4 sm:gap-5 sm:pb-6">
-          {featureHighlights.map((item) => (
-            <div
-              key={item.title}
-              className="feature-highlight-item flex min-w-0 items-start gap-2.5 sm:gap-3"
-            >
-              <span
-                aria-hidden="true"
-                className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-[#D6BC96]/60 bg-white/70 text-base text-[#B99A70] shadow-sm"
-              >
-                {item.icon}
-              </span>
+  useGSAP(
+    () => {
+      const wrappers = gsap.utils.toArray<HTMLElement>(
+        ".service-image-wrapper",
+      );
 
-              <div className="min-w-0">
-                <h3 className={`${inter.className} text-[9px] font-semibold leading-4 tracking-[0.08em] uppercase text-[#38271F] sm:text-[10px]`}>
-                  {item.title}
-                </h3>
-                <p className="mt-0.5 text-[11px] leading-4 text-[#A9896B] sm:text-xs">
-                  {item.text}
-                </p>
-              </div>
-            </div>
-          ))}
-        </div>
+      wrappers.forEach((wrapper) => {
+        const firstImage =
+          wrapper.querySelector<HTMLElement>(".service-image-first");
 
-        {/* Introduction and Service Cards Layout */}
-        <div className="grid gap-7 pt-7 sm:pt-8 lg:grid-cols-[0.8fr_2fr] lg:items-center lg:gap-8 lg:pt-8">
-          
-          {/* Left Introduction */}
+        const secondImage =
+          wrapper.querySelector<HTMLElement>(".service-image-second");
+
+        if (!firstImage || !secondImage) return;
+
+        // Initial positions
+        gsap.set(firstImage, {
+          xPercent: 0,
+          zIndex: 1,
+        });
+
+        gsap.set(secondImage, {
+          xPercent: 100,
+          zIndex: 2,
+        });
+
+        // Automatically alternate images when the card enters view
+        const timeline = gsap.timeline({
+          repeat: -1,
+          repeatDelay: 0.5,
+          scrollTrigger: {
+            trigger: wrapper,
+            start: "top 85%",
+            toggleActions: "play pause resume pause",
+          },
+        });
+
+        // First image exits left; second enters from right
+        timeline
+          .to(
+            firstImage,
+            {
+              xPercent: -100,
+              duration: 1.8,
+              ease: "power2.inOut",
+            },
+            0,
+          )
+          .to(
+            secondImage,
+            {
+              xPercent: 0,
+              duration: 1.8,
+              ease: "power2.inOut",
+            },
+            0,
+          )
+
+          // Prepare the first image to enter again from the right
+          .set(firstImage, {
+            xPercent: 100,
+            zIndex: 2,
+          })
+          .set(secondImage, {
+            zIndex: 1,
+          })
+
+          // Second image exits left; first image enters from right
+          .to(
+            secondImage,
+            {
+              xPercent: -100,
+              duration: 1.8,
+              ease: "power2.inOut",
+            },
+            "+=0.5",
+          )
+          .to(
+            firstImage,
+            {
+              xPercent: 0,
+              duration: 1.8,
+              ease: "power2.inOut",
+            },
+            "<",
+          )
+
+          // Reset for the next automatic cycle
+          .set(secondImage, {
+            xPercent: 100,
+            zIndex: 2,
+          })
+          .set(firstImage, {
+            zIndex: 1,
+          });
+      });
+    },
+    { scope: carouselRef },
+  );
+
+  
+return (
+  <section
+    id="featured-services"
+    aria-labelledby="featured-services-heading"
+    className="w-full bg-transparent px-2 pb-2 sm:px-3 sm:pb-3 lg:px-4 lg:pb-4"
+  >
+    {/* 1320px Services Container */}
+    <div className="mx-auto w-full max-w-[1320px] overflow-hidden bg-[#f6f3fa] px-5 py-10 font-sans text-[#25232c] sm:px-7 sm:py-14 lg:px-10 lg:py-16">
+
+      {/* FEATURE HIGHLIGHTS */}
+      <div className="grid grid-cols-2 gap-x-4 gap-y-5 border-b border-[#ded7e9] pb-6 sm:grid-cols-4 sm:gap-5 sm:pb-7">
+        {featureHighlights.map((item) => (
           <div
-            ref={introRef}
-            className="flex min-w-0 flex-col items-start justify-center"
+            key={item.title}
+            className="flex min-w-0 items-start gap-2.5 sm:gap-3"
           >
-            <div className="services-intro-item mb-2.5 inline-flex items-center gap-2">
-              <span className="h-1.5 w-1.5 rounded-full bg-[#B99A70]" />
-              <p className={`${inter.className} text-[10px] sm:text-[11px] font-semibold uppercase tracking-[0.24em] text-[#B99A70]`}>
-                DISCOVER OUR SERVICES
+            <span
+              aria-hidden="true"
+              className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-[#9675ba]/40 text-lg text-[#9675ba]"
+            >
+              {item.icon}
+            </span>
+
+            <div className="min-w-0">
+              <h3 className="text-[9px] font-bold leading-4 tracking-[0.1em] text-[#25232c] sm:text-[10px]">
+                {item.title}
+              </h3>
+
+              <p className="mt-0.5 text-[11px] leading-4 text-[#77737f] sm:text-xs">
+                {item.text}
               </p>
             </div>
-
-            <h2
-              id="featured-services-heading"
-              className={`${cormorant.className} services-intro-item max-w-sm text-[32px] font-normal leading-[1.12] tracking-normal text-[#38271F] sm:text-4xl lg:text-[42px]`}
-            >
-              Beauty for your most{" "}
-              <span className="italic font-medium text-[#B99A70]">
-                special moments.
-              </span>
-            </h2>
-
-            <p className="services-intro-item mt-3 max-w-sm text-sm leading-6 text-[#38271F]/80 sm:text-[15px]">
-              From bridal makeovers to everyday beauty care, discover
-              services designed around you.
-            </p>
-
-            <Link
-              href="/services"
-              className="services-intro-item group relative isolate mt-6 sm:mt-10 inline-flex items-center gap-2 overflow-hidden rounded-full border border-[#D6BC96] bg-gradient-to-br from-white/95 via-[#F5F0E8] to-[#E8D7C2]/70 px-6 py-3 text-xs font-semibold tracking-[0.06em] text-[#38271F] shadow-[0_4px_16px_rgba(214,188,150,0.25)] backdrop-blur-xl transition-all duration-300 hover:-translate-y-0.5 hover:border-[#B99A70] hover:shadow-[0_8px_24px_rgba(214,188,150,0.4)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#B99A70]"
-            >
-              <span>VIEW ALL SERVICES</span>
-              <ArrowUpRight className="h-3.5 w-3.5 stroke-[2.2] text-[#B99A70] transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-            </Link>
           </div>
+        ))}
+      </div>
 
-          {/* Service Cards — Progressive One-by-One Reveal + Gentle Auto-Scroll */}
-          <div className="relative min-w-0">
-            <div className="relative">
-              
-              {/* Prev Arrow Button */}
-              <button
-                type="button"
-                onClick={() => scrollServices("left")}
-                disabled={!canScrollLeft}
-                aria-label="Scroll to previous services"
-                className={`absolute left-0 top-[40%] z-20 flex h-10 w-10 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-[#D6BC96] bg-[#F5F0E8] text-[#38271F] shadow-[0_4px_14px_rgba(56,39,31,0.12)] transition-all duration-300 hover:bg-[#D6BC96] hover:text-[#38271F] hover:shadow-[0_6px_20px_rgba(214,188,150,0.4)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#B99A70] ${
-                  canScrollLeft
-                    ? "pointer-events-auto scale-100 opacity-100"
-                    : "pointer-events-none scale-90 opacity-0"
-                }`}
-              >
-                <ChevronLeft className="h-4 w-4 stroke-[2.2]" />
-              </button>
+      {/* INTRODUCTION AND SERVICE CARDS */}
+      <div className="grid gap-10 pt-9 sm:pt-10 lg:grid-cols-[0.78fr_2fr] lg:items-center lg:gap-10 lg:pt-10">
 
-              {/* Next Arrow Button */}
-              <button
-                type="button"
-                onClick={() => scrollServices("right")}
-                disabled={!canScrollRight}
-                aria-label="Scroll to next services"
-                className={`absolute right-0 top-[40%] z-20 flex h-10 w-10 translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-[#D6BC96] bg-[#F5F0E8] text-[#38271F] shadow-[0_4px_14px_rgba(56,39,31,0.12)] transition-all duration-300 hover:bg-[#D6BC96] hover:text-[#38271F] hover:shadow-[0_6px_20px_rgba(214,188,150,0.4)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#B99A70] ${
-                  canScrollRight
-                    ? "pointer-events-auto scale-100 opacity-100"
-                    : "pointer-events-none scale-90 opacity-0"
-                }`}
-              >
-                <ChevronRight className="h-4 w-4 stroke-[2.2]" />
-              </button>
+        {/* LEFT INTRODUCTION */}
+        <div
+          ref={introRef}
+          className="flex min-w-0 flex-col items-start justify-center"
+        >
+          <p className="services-intro-item mb-4 flex items-center gap-3 text-[10px] font-bold uppercase tracking-[0.24em] text-[#9675ba] sm:text-xs">
+            
+            Discover Our Services
+          </p>
 
-              {/* Scrollable Service Cards Container */}
-              <div
-                ref={carouselRef}
-                onScroll={updateScrollButtons}
-                onMouseEnter={() => {
-                  isHoveredRef.current = true;
-                }}
-                onMouseLeave={() => {
-                  isHoveredRef.current = false;
-                }}
-                onTouchStart={pauseAutoScroll}
-                onTouchMove={pauseAutoScroll}
-                onWheel={pauseAutoScroll}
-                className="flex snap-x snap-mandatory gap-5 overflow-x-auto scroll-smooth pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-              >
-                {services.map((service) => (
-                  <article
-                    key={service.number}
-                    data-service-card
-                    className="group w-[82%] min-w-0 shrink-0 snap-start sm:w-[calc(50%-10px)] md:w-[calc(50%-10px)] lg:w-[31%]"
+          <h2
+            id="featured-services-heading"
+            className={`${serif.className} services-intro-item max-w-sm text-[40px] font-semibold leading-[1.05] text-[#25232c] sm:text-5xl lg:text-[52px]`}
+          >
+            Beauty for your most{" "}
+            <span className="italic text-[#9675ba]">
+              special moments.
+            </span>
+          </h2>
+
+          <p className="services-intro-item mt-5 max-w-sm text-sm leading-7 text-[#77737f] sm:text-[15px]">
+            From bridal makeovers to everyday beauty care, discover services
+            designed around you.
+          </p>
+
+          <Link
+            href="/services"
+            className="services-intro-item group mt-8 inline-flex items-center gap-3 bg-[#9675ba] px-6 py-3.5 text-xs font-bold uppercase tracking-[0.14em] text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#795a9d] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#9675ba]"
+          >
+            View All Services
+
+            <span
+              aria-hidden="true"
+              className="transition-transform duration-300 group-hover:translate-x-1"
+            >
+              →
+            </span>
+          </Link>
+        </div>
+
+        {/* SERVICE CAROUSEL */}
+        <div className="relative min-w-0">
+          <div className="relative">
+
+            {/* LEFT ARROW */}
+            <button
+              type="button"
+              onClick={() => scrollServices("left")}
+              disabled={!canScrollLeft}
+              aria-label="Scroll to previous services"
+              className={`absolute left-0 top-[40%] z-20 flex h-11 w-11 -translate-x-1/2 -translate-y-1/2 items-center justify-center border border-[#dcd2e9] bg-white text-lg text-[#9675ba] shadow-md transition-all duration-300 hover:bg-[#9675ba] hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#9675ba] ${
+                canScrollLeft
+                  ? "pointer-events-auto scale-100 opacity-100"
+                  : "pointer-events-none scale-90 opacity-0"
+              }`}
+            >
+              <span aria-hidden="true">←</span>
+            </button>
+
+            {/* RIGHT ARROW */}
+            <button
+              type="button"
+              onClick={() => scrollServices("right")}
+              disabled={!canScrollRight}
+              aria-label="Scroll to next services"
+              className={`absolute right-0 top-[40%] z-20 flex h-11 w-11 translate-x-1/2 -translate-y-1/2 items-center justify-center border border-[#dcd2e9] bg-white text-lg text-[#9675ba] shadow-md transition-all duration-300 hover:bg-[#9675ba] hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#9675ba] ${
+                canScrollRight
+                  ? "pointer-events-auto scale-100 opacity-100"
+                  : "pointer-events-none scale-90 opacity-0"
+              }`}
+            >
+              <span aria-hidden="true">→</span>
+            </button>
+
+            {/* SCROLLABLE SERVICE CARDS */}
+            <div
+              ref={carouselRef}
+              onScroll={updateScrollButtons}
+              className="flex snap-x snap-mandatory items-stretch gap-5 overflow-x-auto scroll-smooth pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+            >
+              {services.map((service, index) => (
+                <motion.article
+                  key={service.number}
+                  data-service-card
+                  initial={{ opacity: 0, y: 14 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.15 }}
+                  transition={{
+                    duration: 0.45,
+                    delay: index * 0.1,
+                    ease: "easeOut",
+                  }}
+                  className="group w-[82%] min-w-0 shrink-0 snap-start sm:w-[calc(50%-10px)] lg:w-[31%]"
+                >
+                  <Link
+                    href={`/contact?service=${encodeURIComponent(service.title)}#booking`}
+                    aria-label={`Enquire about ${service.title}`}
+                    className="flex h-full flex-col border border-[#e8e1ef] bg-white text-[#25232c] shadow-[0_10px_30px_rgba(56,39,76,0.07)] outline-offset-4 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_38px_rgba(56,39,76,0.13)] focus-visible:outline-2 focus-visible:outline-[#9675ba]"
                   >
-                    <div className="relative block overflow-hidden rounded-[18px] border border-[#D6BC96]/40 bg-[#FDFBF7] p-2.5 transition-all duration-500 hover:border-[#D6BC96] hover:shadow-[0_14px_36px_rgba(56,39,31,0.08)] focus-within:border-[#D6BC96]">
-                      
-                      {/* Service Image with Gentle Hover Scale & Subtle Shadow */}
-                      <div className="service-image-wrap relative aspect-[4/3] overflow-hidden rounded-[14px] bg-[#E8D7C2]/40 md:aspect-[3/3.7] lg:aspect-[4/4.5] shadow-sm">
-                        <img
-                          src={service.image}
-                          alt={service.imageAlt}
-                          loading="lazy"
-                          className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.035] motion-reduce:transition-none"
-                        />
+                    {/* IMAGE AREA */}
+                    <div className="service-image-wrapper relative aspect-[4/5] shrink-0 overflow-hidden bg-[#eee8f8]">
 
-                        {/* Subtle Grounding Gradient */}
-                        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#38271F]/80 via-[#38271F]/20 to-transparent opacity-80 transition-opacity duration-300 group-hover:opacity-90" />
+                      {/* First image */}
+                      <img
+                        src={service.image}
+                        alt={service.imageAlt}
+                        loading="lazy"
+                        className="service-image-first absolute inset-0 z-0 h-full w-full object-cover"
+                      />
 
-                        {/* Category Tag Badge */}
-                        <span className="service-badge-el absolute left-3 top-3 max-w-[calc(100%-3rem)] rounded-full border border-white/50 bg-[#F5F0E8]/95 px-3 py-1 text-[8.5px] font-semibold tracking-[0.1em] text-[#38271F] uppercase shadow-sm backdrop-blur-md">
-                          {service.tag}
-                        </span>
+                      {/* Second image */}
+                      <img
+                        src={service.image2}
+                        alt={service.image2Alt}
+                        loading="lazy"
+                        className="service-image-second absolute inset-0 z-[1] h-full w-full object-cover"
+                      />
 
-                        {/* Service Number Accent */}
-                        <span className="absolute right-3 top-3 text-[11px] font-mono font-bold tracking-wider text-white/85">
-                          {service.number}
-                        </span>
+                      {/* Image overlay */}
+                      <div className="pointer-events-none absolute inset-0 z-[2] bg-gradient-to-t from-[#25232c]/70 via-transparent to-transparent" />
 
-                        {/* WhatsApp Enquire Button with Champagne-Gold Sheen */}
-                        <a
-                          href={getWhatsAppLink(service.message)}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          aria-label={`Enquire on WhatsApp about ${service.title}`}
-                          className="absolute inset-x-3 bottom-3 flex items-center justify-center transition-all duration-300 ease-out sm:translate-y-2 sm:opacity-95 sm:group-hover:translate-y-0 sm:group-hover:opacity-100"
-                        >
-                          <span className="inline-flex min-h-10 w-full items-center justify-center gap-1.5 rounded-full border border-[#D6BC96] bg-[#38271F]/90 px-4 py-2 text-[10px] font-semibold tracking-[0.1em] text-[#F5F0E8] shadow-[0_4px_16px_rgba(56,39,31,0.3)] backdrop-blur-md transition-all duration-300 group-hover:border-[#D6BC96] group-hover:bg-[#38271F] group-hover:shadow-[0_0_20px_rgba(214,188,150,0.45)]">
-                            <span>ENQUIRE VIA WHATSAPP</span>
-                            <ArrowUpRight className="h-3.5 w-3.5 stroke-[2.2] text-[#D6BC96]" />
-                          </span>
-                        </a>
-                      </div>
+                      {/* Category label */}
+                      <span className="absolute left-4 top-4 z-10 bg-white px-3 py-2 text-[8px] font-bold uppercase tracking-[0.16em] text-[#795a9d] sm:text-[9px]">
+                        {service.tag}
+                      </span>
 
-                      {/* Service Details: Title & Description with Staggered Entrance */}
-                      <div className="pt-3.5 pb-1 px-1">
-                        <h3 className={`${cormorant.className} service-title-el text-lg font-medium leading-snug tracking-normal text-[#38271F] group-hover:text-[#B99A70] transition-colors sm:text-lg lg:text-[19px]`}>
-                          {service.title}
-                        </h3>
+                      {/* Service number */}
+                      <span className="absolute right-4 top-4 z-10 text-[11px] font-bold tracking-[0.14em] text-white drop-shadow">
+                        {service.number} / 04
+                      </span>
 
-                        <p className="service-desc-el mt-1.5 text-xs leading-[1.65] text-[#38271F]/75 sm:text-[12.5px]">
-                          {service.description}
-                        </p>
-                      </div>
+                      {/* Image CTA */}
+                     <div className="absolute bottom-5 left-4 right-4 z-10 flex items-center justify-between">
+  <button
+    type="button"
+    className="border border-white/80 bg-white px-5 py-2.5 text-[10px] font-bold uppercase tracking-[0.16em] text-[#795a9d] transition-all duration-300 hover:bg-[#795a9d] hover:text-white"
+  >
+    Enquiry
+  </button>
+</div>
                     </div>
-                  </article>
-                ))}
-              </div>
+
+                    {/* CARD INFORMATION */}
+                    <div className="flex flex-1 flex-col bg-white px-5 pb-5 pt-5">
+
+                      <h3
+                        className={`${serif.className} text-[24px] font-semibold leading-tight text-[#25232c] sm:text-[26px]`}
+                      >
+                        {service.title}
+                      </h3>
+
+                      <p className="mt-2 text-[12px] leading-[1.8] text-[#77737f] sm:text-[13px]">
+                        {service.description}
+                      </p>
+
+                    
+                    </div>
+                  </Link>
+                </motion.article>
+              ))}
             </div>
           </div>
         </div>
       </div>
-    </section>
-  );
+    </div>
+  </section>
+);
+
 }

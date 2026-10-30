@@ -1,12 +1,14 @@
+
 "use client";
 
 import Image from "next/image";
-import { Cormorant_Garamond } from "next/font/google";
+import Link from "next/link";
+import { DM_Sans } from "next/font/google";
 import { useEffect, useState } from "react";
 
-const serifFont = Cormorant_Garamond({
+const dmSans = DM_Sans({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "500", "600", "700", "800"],
   display: "swap",
 });
 
@@ -25,7 +27,7 @@ const aboutImages = [
   },
   {
     src: "/images/about%203.jpg",
-    alt: "The S Touch Elegant Hair & Makeup",
+    alt: "The S Touch Elegant Hair and Makeup",
   },
   {
     src: "/images/about%204.jpg",
@@ -40,132 +42,207 @@ const aboutImages = [
 export default function AboutUs() {
   const [active, setActive] = useState(0);
 
-  // Automatically cycles every 3.8 seconds with seamless cross-dissolve & continuous Ken Burns motion
+  // Automatic main image slideshow
   useEffect(() => {
     const timer = setInterval(() => {
       setActive((prev) => (prev + 1) % aboutImages.length);
-    }, 3800);
+    }, 4200);
 
     return () => clearInterval(timer);
   }, []);
 
   return (
-    <section
-      id="about-us"
-      className="relative z-10 bg-transparent px-2 pb-2 sm:px-3 sm:pb-3 lg:px-4 lg:pb-4"
-    >
-      {/* Main Wide Horizontal Rectangular Container matching Hero card style */}
-      <div className="relative mx-auto max-w-[1320px] overflow-hidden rounded-[26px] sm:rounded-[34px] border border-[#3a2418]/[0.08] bg-[#f7f1e9] text-[#2d1b13] shadow-[0_30px_80px_-30px_rgba(0,0,0,0.65)]">
-        <div className="grid grid-cols-1 items-stretch lg:grid-cols-12">
-          
-          {/* Left Side — About Us Content */}
-          <div className="flex flex-col justify-center px-6 py-10 sm:px-10 sm:py-14 md:px-14 lg:col-span-7 lg:py-16 xl:px-18 xl:py-20">
-            {/* Elegant Sub-eyebrow */}
-            <div className="flex items-center gap-3">
-              <span className="h-px w-8 bg-[#a8663f]" />
-              <span className="text-[11px] font-semibold uppercase tracking-[0.28em] text-[#a8663f] sm:text-xs">
-                Our Story &amp; Philosophy
-              </span>
-            </div>
+   <section
+  id="about-us"
+  className={`${dmSans.className} relative -mt-4 mx-auto w-full max-w-[1320px] overflow-hidden bg-white px-5 pb-2 text-[#22212a] sm:px-8 sm:pb-3 lg:px-12 lg:pb-4`}
+>
+  <div className="relative w-full bg-white py-12 sm:py-16 lg:py-20">
+    <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16 xl:gap-24">
+        {/* LEFT — EDITORIAL IMAGE COLLAGE */}
+        <div className="relative order-1 mx-auto h-[420px] w-full max-w-[570px] sm:h-[520px] lg:h-[570px]">
 
-            {/* Main Heading */}
-            <h2
-              className={`${serifFont.className} mt-3 text-4xl font-normal tracking-tight text-[#2d1b13] sm:text-5xl lg:text-[54px] xl:text-6xl`}
-            >
-              About Us
-            </h2>
+          {/* Soft decorative background shape */}
+          {/* <div
+            aria-hidden="true"
+            className="absolute left-[13%] top-[15%] h-[65%] w-[65%] rounded-full bg-[#eee8f8]"
+          /> */}
 
-            {/* Delicate Gold Accent Divider */}
-            <div className="mt-4 mb-7 flex items-center gap-2">
-              <span className="h-[1.5px] w-12 bg-[#b58750]" />
-              <span className="h-1 w-1 rounded-full bg-[#b58750]" />
-              <span className="h-[1px] w-20 bg-[#d8c3af]" />
-            </div>
+          {/* Small top-left image */}
+          {/* <div className="absolute left-[2%] top-[9%] z-[1] h-[20%] w-[23%] overflow-hidden rounded-[5px] bg-[#eee8f8] shadow-sm">
+            <Image
+              src={aboutImages[3].src}
+              alt={aboutImages[3].alt}
+              fill
+              sizes="140px"
+              className="object-cover"
+            />
+          </div> */}
 
-            {/* Body Content */}
-            <div className="space-y-4 text-sm leading-relaxed text-[#4a3327] sm:text-[15px] sm:leading-7 lg:text-base lg:leading-8">
-              <p>
-                Welcome to The S Touch Bridal Makeover, where timeless elegance meets
-                modern beauty and dedicated to making every bride feel beautiful,
-                confident, and extraordinary on her most special day.
-              </p>
+          {/* Main animated bridal image */}
+          <div className="absolute left-[8%] top-[25%] z-[2] h-[59%] w-[43%] overflow-hidden rounded-[5px] bg-[#eee8f8] shadow-[0_12px_35px_rgba(30,20,45,0.10)]">
 
-              <p>
-                Every brushstroke is crafted with love, every hairstyle is styled
-                with precision, and every transformation is designed to make you shine
-                with confidence.
-              </p>
-
-              <p>
-                At The S Touch Bridal Makeover, we don&apos;t just create beautiful
-                looks—we create unforgettable bridal moments, cherished memories,
-                and the confidence to embrace your beauty.
-              </p>
-
-              {/* Highlighted Signature Accent */}
-              <div className="relative my-6 rounded-2xl border-l-2 border-[#b58750] bg-[#f7efe4]/60 py-3.5 pl-5 pr-4">
-                <p
-                  className={`${serifFont.className} text-lg font-medium italic tracking-wide text-[#8b4a28] sm:text-xl md:text-[22px]`}
-                >
-                  &ldquo;Your dream look. Your timeless elegance. Our signature touch.&rdquo;
-                </p>
+            {aboutImages.map((image, index) => (
+              <div
+                key={image.src}
+                aria-hidden={index !== active}
+                className={`absolute inset-0 transition-opacity duration-[1200ms] ease-in-out ${
+                  active === index
+                    ? "z-10 opacity-100"
+                    : "z-0 pointer-events-none opacity-0"
+                }`}
+              >
+                <Image
+                  src={image.src}
+                  alt={image.alt}
+                  fill
+                  sizes="(max-width: 1024px) 43vw, 260px"
+                  priority={index === 0}
+                  className="object-cover object-top"
+                />
               </div>
+            ))}
 
-              <p>
-                Let your beauty tell your story with The S Touch Bridal Makeover.
-              </p>
+          </div>
+
+          {/* Floating information panel */}
+      <div className="absolute right-[3%] -top-[5%] z-[3] w-[47%] max-w-[235px] bg-white p-4 shadow-[0_8px_35px_rgba(30,20,45,0.10)] sm:p-5">
+
+            <div className="flex items-center justify-between">
+              <span className="text-[9px] font-bold uppercase tracking-[0.2em] text-[#8870ad]">
+                THE S TOUCH
+              </span>
+
+              <span className="text-lg text-[#9b7bc4]">✳</span>
+            </div>
+
+            <h3 className="mt-4 text-lg font-bold leading-tight text-[#282530] sm:text-xl">
+              Bridal Beauty
+              <br />
+              With A Signature
+              <br />
+              Touch.
+            </h3>
+
+            <div className="mt-4 h-px w-full bg-[#e9e4ef]" />
+
+            <div className="mt-3 flex items-center justify-between gap-2">
+              <span className="text-[8px] uppercase tracking-[0.12em] text-[#8f8999]">
+                Bridal · Beauty · Styling
+              </span>
+              <span className="text-sm text-[#9b7bc4]">↗</span>
             </div>
           </div>
 
-          {/* Right Side — Bridal Image Panel with Ken Burns Effect (Seamless Edge-to-Edge) */}
-          <div className="relative col-span-1 min-h-[420px] w-full overflow-hidden sm:min-h-[500px] md:min-h-[560px] lg:col-span-5 lg:min-h-full">
-            {aboutImages.map((image, index) => {
-              const isActive = index === active;
-              const isEven = index % 2 === 0;
-
-              return (
-                <div
-                  key={image.src}
-                  className={`absolute inset-0 h-full w-full transition-opacity duration-1000 ease-in-out ${
-                    isActive ? "opacity-100 z-10" : "opacity-0 z-0 pointer-events-none"
-                  }`}
-                >
-                  {/* Ken Burns Animated Layer */}
-                  <div
-                    className={`relative h-full w-full ${
-                      isActive
-                        ? isEven
-                          ? "animate-ken-burns-in"
-                          : "animate-ken-burns-out"
-                        : "scale-100"
-                    }`}
-                    style={{
-                      transformOrigin: "top center",
-                    }}
-                  >
-                    <Image
-                      src={image.src}
-                      alt={image.alt}
-                      fill
-                      sizes="(max-width: 1024px) 100vw, 45vw"
-                      priority={index === 0}
-                      className="object-cover object-top"
-                      style={{ objectPosition: "top center" }}
-                    />
-                  </div>
-                </div>
-              );
-            })}
-
-            {/* Soft luxury editorial overlay blending into left card */}
-            <div
-              aria-hidden="true"
-              className="pointer-events-none absolute inset-0 z-20 bg-gradient-to-t from-[#2d1b13]/25 via-transparent to-transparent lg:bg-gradient-to-r lg:from-[#f7f1e9]/10 lg:via-transparent lg:to-transparent"
+          {/* Second image */}
+          <div className="absolute bottom-[5%] right-[5%] z-[2] h-[53%] w-[43%] overflow-hidden rounded-[5px] bg-[#eee8f8] shadow-[0_12px_35px_rgba(30,20,45,0.12)]">
+            <Image
+              src={aboutImages[1].src}
+              alt={aboutImages[1].alt}
+              fill
+              sizes="(max-width: 1024px) 43vw, 260px"
+              className="object-cover object-top"
             />
           </div>
 
+          {/* Small floating bottom label */}
+          <div className="absolute bottom-[1%] left-[5%] z-[4] bg-white px-4 py-3 shadow-[0_6px_24px_rgba(30,20,45,0.08)]">
+            <p className="text-[8px] font-semibold uppercase tracking-[0.15em] text-[#726a7d]">
+              Crafted with care
+            </p>
+
+            <div className="mt-1 flex items-center gap-1 text-sm text-[#9b7bc4]">
+              <span>✦</span>
+              <span>✦</span>
+              <span>✦</span>
+              <span>✦</span>
+              <span>✦</span>
+            </div>
+          </div>
+
+          {/* Slideshow indicators */}
+          <div className="absolute bottom-[0%] right-[4%] z-[5] flex items-center gap-1.5 sm:bottom-[-2%]">
+            {aboutImages.map((image, index) => (
+              <button
+                key={image.src}
+                type="button"
+                onClick={() => setActive(index)}
+                aria-label={`Show bridal image ${index + 1}`}
+                aria-current={active === index ? "true" : undefined}
+                className={`h-[3px] transition-all duration-500 ${
+                  active === index
+                    ? "w-7 bg-[#8f70b5]"
+                    : "w-3 bg-[#d9d1e4] hover:bg-[#a58bc5]"
+                }`}
+              />
+            ))}
+          </div>
+
+        </div>
+
+        {/* RIGHT — ABOUT US TYPOGRAPHY */}
+        <div className="order-2 flex flex-col items-start lg:pl-2">
+
+          {/* Eyebrow */}
+          <div className="mb-5 flex items-center gap-3">
+            <span className="h-[2px] w-7 bg-[#9b7bc4]" />
+
+            <p className="text-[10px] font-bold uppercase tracking-[0.32em] text-[#9677bb]">
+              A BIT ABOUT US
+            </p>
+          </div>
+
+          {/* Main heading */}
+          <h2 className="text-[42px] font-extrabold uppercase leading-[0.98] tracking-[-0.055em] text-[#25232c] sm:text-6xl lg:text-[65px] xl:text-[76px]">
+            ABOUT US
+          </h2>
+
+          {/* Heading underline */}
+          <div className="mt-5 h-[3px] w-14 bg-[#9b7bc4]" />
+
+          {/* Main description */}
+          <div className="mt-7 max-w-lg space-y-5 text-[13px] leading-[1.95] text-[#77737f] sm:text-[14px] sm:leading-8">
+
+            <p>
+              Welcome to The S Touch Bridal Makeover, where timeless
+              elegance meets modern beauty. We are dedicated to making
+              every bride feel beautiful, confident, and extraordinary
+              on her most special day.
+            </p>
+
+            <p>
+              Every brushstroke is crafted with love, every hairstyle
+              is styled with precision, and every transformation is
+              designed to make you shine with confidence.
+            </p>
+
+            <p>
+              We don't just create beautiful looks. We create
+              unforgettable bridal moments, cherished memories,
+              and the confidence to embrace your beauty.
+            </p>
+
+          </div>
+
+          {/* Minimal signature line */}
+          <p className="mt-7 text-[12px] font-semibold tracking-wide text-[#35313e]">
+            Your dream look. Your timeless elegance.
+          </p>
+
+          {/* CTA */}
+          <Link
+            href="#booking"
+            className="group relative mt-9 inline-flex items-center gap-3 overflow-hidden rounded-[5px] bg-[#9675ba] px-6 py-3.5 text-[10px] font-bold uppercase tracking-[0.13em] text-white shadow-[0_8px_20px_rgba(150,117,186,0.20)] transition-all duration-300 hover:-translate-y-1 hover:bg-[#795a9d] hover:shadow-[0_12px_25px_rgba(150,117,186,0.30)]"
+          >
+            <span>EXPLORE MORE</span>
+
+            <span className="text-sm transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1">
+              ↗
+            </span>
+          </Link>
+
         </div>
       </div>
+        </div>
     </section>
   );
 }
