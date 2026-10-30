@@ -282,7 +282,7 @@ tl.fromTo(
      {/* Hero main container */}
 <div
   ref={contentRef}
-  className="relative mx-auto max-w-[1320px] overflow-hidden bg-[#f7f1e9] text-[#2d1b13] shadow-[0_30px_80px_-30px_rgba(0,0,0,0.65)]"
+  className="relative mx-auto max-w-[1320px] overflow-hidden bg-[#f7f1e9] text-[#2d1b13] "
 >
     
      

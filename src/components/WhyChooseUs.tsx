@@ -16,9 +16,10 @@ const openSans = Open_Sans({
 
 
 // Match the Hero and Featured Services palette
-const SPINE = "#3A2418"; // Dark coffee brown
+ // Dark coffee brown
 const TITLE = "#8B4A28"; // Warm brown headings
-const TEXT = "#756356";  // Muted brown descriptions
+const SPINE = "#9675BA";
+const TEXT = "#716B73"; // Muted brown descriptions
 const PAPER = "#F7F1E9"; // Shared cream background
 
 type ArtworkType =
@@ -369,64 +370,52 @@ export default function WhyChooseUs() {
   { scope: sectionRef }
 );
 
-  return (
-   <section
-  ref={sectionRef}
-  className={`${openSans.className} relative -mt-4 bg-transparent px-2 pt-2 pb-6 sm:-mt-19 sm:px-3 sm:pt-3 sm:pb-8 lg:px-4`}
->
-  <div className="mx-auto w-full max-w-[1320px]">
-    <div
-      className="overflow-hidden rounded-[26px] border border-[#3a2418]/[0.06] bg-[#f7f1e9] p-4  sm:rounded-[34px] sm:p-6 lg:p-8"
-    >
+  
+
+return (
+  <section
+    ref={sectionRef}
+    className={`${openSans.className} relative -mt-4 bg-transparent px-2 pt-2 pb-6 sm:-mt-19 sm:px-3 sm:pt-3 sm:pb-8 lg:px-4`}
+  >
+    <div className="mx-auto w-full max-w-[1320px]">
+      <div className="overflow-hidden border border-[#DDD5DF] bg-[#F1EDF1] p-4 sm:p-6 lg:p-8">
+
         {/* SECTION INTRO */}
         <div className="why-section-heading mx-auto mb-10 w-full max-w-[1000px] text-center md:mb-12">
-          <span
-           className="inline-flex items-center justify-center gap-3 text-[11px] font-normal tracking-[0.26em]"
-            style={{ color: SPINE }}
-          >
-            <span className="inline-block h-px w-7" style={{ backgroundColor: SPINE }} />
+          <span className="inline-flex items-center justify-center gap-3 text-[11px] font-semibold tracking-[0.24em] text-[#8D6CA3]">
+            <span className="inline-block h-px w-7 bg-[#8D6CA3]" />
             WHY CHOOSE TOUCH
-            <span className="inline-block h-px w-7" style={{ backgroundColor: SPINE }} />
+            <span className="inline-block h-px w-7 bg-[#8D6CA3]" />
           </span>
 
-         <h2
-  className="mt-4 text-center text-[clamp(2.6rem,6vw,4.4rem)] font-semibold uppercase leading-[0.98]"
-  style={{ color: SPINE }}
->
-  Beauty deserves a 
-  <br />
-  Personal Touch
-</h2>
+          <h2 className="mt-4 text-center text-[clamp(2.3rem,5.5vw,4rem)] font-semibold uppercase leading-[1.05] tracking-tight text-[#25232A]">
+            Beauty deserves a
+            <br />
+            Personal Touch
+          </h2>
 
-          <p
-           className="mt-4 text-sm font-light leading-7"
-            style={{ color: TEXT }}
-          >
+          <p className="mt-4 text-sm font-normal leading-7 text-[#716B76]">
             Every detail matters when it comes to feeling your best.
           </p>
         </div>
 
-        {/* SPINE TOP CAP AND LOGO (desktop only, like the reference) */}
+        {/* SPINE TOP CAP AND LOGO — DESKTOP */}
         <div className="hidden md:block" aria-hidden="true">
-          <div
-            className="mx-auto h-7 w-[102px]"
-            style={{ backgroundColor: SPINE }}
-          />
-          <p
-          className="py-3 text-center text-lg font-semibold tracking-[0.3em]"
-            style={{ color: SPINE }}
-          >
+          <div className="mx-auto h-7 w-[102px] bg-[#8D6CA3]" />
+
+          <p className="py-3 text-center text-lg font-semibold tracking-[0.3em] text-[#8D6CA3]">
             TOUCH
           </p>
         </div>
 
         {/* NUMBERED TIMELINE */}
         <div className="why-timeline relative isolate pb-7">
-          {/* The crimson spine: thin line on mobile, wide strip on desktop */}
+
+          {/* Timeline spine */}
           <div
             aria-hidden="true"
             className="why-timeline-spine absolute inset-y-0 left-[20px] z-0 w-1 md:left-1/2 md:w-[102px] md:-translate-x-1/2"
-            style={{ backgroundColor: SPINE }}
+            style={{ backgroundColor: "#8D6CA3" }}
           />
 
           {features.map((feature) => {
@@ -435,12 +424,13 @@ export default function WhyChooseUs() {
             return (
               <article
                 key={feature.number}
-                className="why-row relative z-10 grid grid-cols-[44px_minmax(0,1fr)] items-center gap-y-2 border-t border-[#9B1118]/10 py-6 first:border-t-0 md:min-h-[130px] md:grid-cols-[minmax(0,1fr)_102px_minmax(0,1fr)] md:gap-y-0 md:border-0 md:py-0"
+                className="why-row relative z-10 grid grid-cols-[44px_minmax(0,1fr)] items-center gap-y-2 border-t border-[#8D6CA3]/15 py-6 first:border-t-0 md:min-h-[130px] md:grid-cols-[minmax(0,1fr)_102px_minmax(0,1fr)] md:gap-y-0 md:border-0 md:py-0"
               >
+
                 {/* NUMBER */}
                 <div
-                 className={`why-number col-start-1 row-span-2 row-start-1 flex h-[54px] w-11 items-center justify-center self-center rounded-r-xl text-base text-[#FFF8EE] md:col-start-2 md:row-span-1 md:h-auto md:w-auto md:self-stretch md:rounded-none md:bg-transparent md:text-[clamp(34px,3.6vw,52px)]`}
-                  style={{ backgroundColor: SPINE }}
+                  className="why-number col-start-1 row-span-2 row-start-1 flex h-[54px] w-11 items-center justify-center self-center rounded-r-xl text-base font-semibold text-white md:col-start-2 md:row-span-1 md:h-auto md:w-auto md:self-stretch md:rounded-none md:bg-transparent md:text-[clamp(34px,3.6vw,52px)]"
+                  style={{ backgroundColor: "#8D6CA3" }}
                 >
                   {feature.number}
                 </div>
@@ -464,17 +454,19 @@ export default function WhyChooseUs() {
                       : "md:col-start-1 md:justify-end md:pl-0 md:pr-8"
                   }`}
                 >
-                 <FeatureArtwork
-  type={feature.artwork}
-  enterFrom={feature.side === "left" ? "right" : "left"}
-/>
+                  <FeatureArtwork
+                    type={feature.artwork}
+                    enterFrom={feature.side === "left" ? "right" : "left"}
+                  />
                 </div>
+
               </article>
             );
           })}
         </div>
-         </div>
-  </div>
-</section>
-  );
+      </div>
+    </div>
+  </section>
+);
+
 }
