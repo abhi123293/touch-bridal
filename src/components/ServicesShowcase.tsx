@@ -152,7 +152,7 @@ export default function ServicesShowcase() {
     "bridal" | "hair" | "beauty" | "skin" | "additional" | "mens" | "groom" | null
   >(null);
 
-  // Refs for Start-to-End & End-to-Start Pinned ScrollTrigger Scrub
+  // Refs for 1 to 9 (Scroll Down) and 9 to 1 (Scroll Up) Pinned ScrollTrigger
   const showcaseContainerRef = useRef<HTMLDivElement>(null);
   const pinSectionRef = useRef<HTMLDivElement>(null);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
@@ -164,7 +164,7 @@ export default function ServicesShowcase() {
   const touchStartYRef = useRef(0);
   const isSwipingRef = useRef(false);
 
-  // GSAP ScrollTrigger: START to END on Scroll Down, END to START on Scroll Up
+  // GSAP ScrollTrigger: Strictly 1 to 9 on Scroll Down, 9 to 1 on Scroll Up (No continuous moving)
   useGSAP(
     () => {
       const pinSec = pinSectionRef.current;
@@ -176,18 +176,19 @@ export default function ServicesShowcase() {
         return Math.max(0, track.scrollWidth - viewport.clientWidth + 48);
       };
 
-      // 1. Horizontal ScrollTrigger scrub:
-      // Scrolling DOWN scrubs from START (01) to END (09)
-      // Scrolling UP scrubs from END (09) to START (01)
+      // Horizontal ScrollTrigger scrub:
+      // Scrolling DOWN moves strictly from 01 to 09
+      // Scrolling UP moves strictly from 09 to 01
+      // When not scrolling, completely stationary
       const horizontalTween = gsap.to(track, {
         x: () => -getScrollDistance(),
         ease: "none",
         scrollTrigger: {
           trigger: pinSec,
-          start: "top 72px",
-          end: () => `+=${Math.max(getScrollDistance() * 1.15, 1800)}`,
+          start: "top 80px",
+          end: () => `+=${Math.max(getScrollDistance() * 1.15, 2000)}`,
           pin: true,
-          scrub: 1.1,
+          scrub: 1,
           anticipatePin: 1,
           invalidateOnRefresh: true,
           onUpdate: (self) => {
@@ -205,12 +206,12 @@ export default function ServicesShowcase() {
         },
       });
 
-      // 2. Individual cards scale & opacity transitions as they pass through view
+      // Individual cards scale & focus as they scrub across the screen
       const cards = gsap.utils.toArray<HTMLElement>(".saree-arch-card");
       cards.forEach((card) => {
         gsap.fromTo(
           card,
-          { opacity: 0.82, scale: 0.96 },
+          { opacity: 0.85, scale: 0.97 },
           {
             opacity: 1,
             scale: 1,
@@ -230,16 +231,17 @@ export default function ServicesShowcase() {
   );
 
   const handlePrev = () => {
-    window.scrollBy({ left: 0, top: -380, behavior: "smooth" });
+    window.scrollBy({ left: 0, top: -400, behavior: "smooth" });
   };
 
   const handleNext = () => {
-    window.scrollBy({ left: 0, top: 380, behavior: "smooth" });
+    window.scrollBy({ left: 0, top: 400, behavior: "smooth" });
   };
 
+  // Convert vertical mouse wheel into window scroll to smoothly drive the 1-to-9 / 9-to-1 scrub
   const handleWheel = (e: React.WheelEvent) => {
     if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
-      window.scrollBy({ top: e.deltaY * 0.95, behavior: "auto" });
+      window.scrollBy({ top: e.deltaY, behavior: "auto" });
     }
   };
 
@@ -255,15 +257,16 @@ export default function ServicesShowcase() {
     if (Math.abs(diffX) > 8 || Math.abs(diffY) > 8) {
       isSwipingRef.current = true;
     }
+    // Forward horizontal swipe on mobile directly to page scroll to scrub 1 to 9 / 9 to 1
     if (Math.abs(diffX) > Math.abs(diffY)) {
-      window.scrollBy({ top: diffX * 0.85, behavior: "auto" });
+      window.scrollBy({ top: diffX * 0.95, behavior: "auto" });
     }
   };
 
   const handleTouchEnd = () => {
     setTimeout(() => {
       isSwipingRef.current = false;
-    }, 250);
+    }, 200);
   };
 
   // Auto-reveal if hash is present (e.g. #bridal-makeup, #hair-services, etc.)
@@ -603,9 +606,10 @@ export default function ServicesShowcase() {
       className="relative z-10 mx-auto w-full max-w-[1440px] drop-shadow-[0_30px_70px_rgba(20,10,5,0.7)]"
     >
       {/* =========================================================================
-          FIRST SECTION: 9 Services Start-to-End / End-to-Start Pinned ScrollTrigger
-          - As you scroll DOWN: scrubs from START (01) to END (09)
-          - As you scroll UP: scrubs from END (09) to START (01)
+          FIRST SECTION: 9 Services 1 to 9 (Scroll Down) & 9 to 1 (Scroll Up)
+          - Scrolling DOWN moves strictly from Service 01 to Service 09
+          - Scrolling UP moves strictly from Service 09 to Service 01
+          - Not continuously moving when idle (stops completely)
           - Each service image features the service name prominently on the image
           - Touching any service image smoothly navigates to its subsection
          ========================================================================= */}
@@ -614,14 +618,14 @@ export default function ServicesShowcase() {
         ref={pinSectionRef}
         className="relative w-full overflow-hidden rounded-[24px] sm:rounded-[32px] border border-[#D6BC96]/35 bg-gradient-to-b from-[#24150e] via-[#1a0e08] to-[#120703] shadow-2xl"
       >
-        {/* Regal Top Bar: Live Progress & Start-to-End Indicators */}
+        {/* Regal Top Bar: 1-to-9 Live Progress & Scroll Direction Indicator */}
         <div className="relative z-30 flex flex-col gap-2.5 px-4 sm:px-6 py-3 border-b border-[#D6BC96]/25 bg-gradient-to-r from-[#200e06]/98 via-[#2c170d]/95 to-[#200e06]/98 backdrop-blur-md">
           <div className="flex items-center justify-between gap-3">
             <div className="flex items-center gap-2.5">
-              <span className="h-2 w-2 rounded-full bg-[#D6BC96] shadow-[0_0_10px_#D6BC96] animate-pulse" />
+              <span className="h-2 w-2 rounded-full bg-[#D6BC96] shadow-[0_0_10px_#D6BC96]" />
               <h2 className={`${inter.className} text-[10.5px] sm:text-xs font-semibold tracking-[0.2em] uppercase text-[#D6BC96] flex items-center gap-1.5`}>
                 <Sparkles className="h-3.5 w-3.5 text-[#D6BC96]" />
-                <span>SCROLL DOWN: START → END • SCROLL UP: END → START</span>
+                <span>SCROLL DOWN: 01 → 09 • SCROLL UP: 09 → 01</span>
               </h2>
             </div>
 
@@ -638,7 +642,7 @@ export default function ServicesShowcase() {
               <button
                 type="button"
                 onClick={handlePrev}
-                aria-label="Scroll towards start"
+                aria-label="Scroll backward towards service 01"
                 className="h-8 w-8 rounded-full bg-[#D6BC96]/15 border border-[#D6BC96]/50 flex items-center justify-center text-[#D6BC96] hover:bg-[#D6BC96] hover:text-[#38271F] transition-all shadow-sm"
               >
                 <ChevronLeft className="h-4 w-4 stroke-[2.2]" />
@@ -646,7 +650,7 @@ export default function ServicesShowcase() {
               <button
                 type="button"
                 onClick={handleNext}
-                aria-label="Scroll towards end"
+                aria-label="Scroll forward towards service 09"
                 className="h-8 w-8 rounded-full bg-[#D6BC96]/15 border border-[#D6BC96]/50 flex items-center justify-center text-[#D6BC96] hover:bg-[#D6BC96] hover:text-[#38271F] transition-all shadow-sm"
               >
                 <ChevronRight className="h-4 w-4 stroke-[2.2]" />
@@ -654,10 +658,10 @@ export default function ServicesShowcase() {
             </div>
           </div>
 
-          {/* Luxury Gold Progress Bar: START (01) ───●─── END (09) */}
+          {/* Luxury Gold Progress Bar: SERVICE 01 ───●─── SERVICE 09 */}
           <div className="flex items-center gap-2 pt-0.5">
             <span className="text-[9px] font-mono font-bold tracking-wider text-[#D6BC96] uppercase shrink-0">
-              START (01)
+              SERVICE 01
             </span>
             <div className="relative flex-1 h-1.5 rounded-full bg-black/50 border border-[#D6BC96]/20 overflow-hidden">
               <div
@@ -667,7 +671,7 @@ export default function ServicesShowcase() {
               />
             </div>
             <span className="text-[9px] font-mono font-bold tracking-wider text-[#D6BC96] uppercase shrink-0">
-              END (09)
+              SERVICE 09
             </span>
           </div>
         </div>
@@ -681,7 +685,7 @@ export default function ServicesShowcase() {
           onTouchEnd={handleTouchEnd}
           className="relative w-full overflow-hidden p-3.5 sm:p-5 lg:p-6"
         >
-          {/* Moving Track */}
+          {/* Moving Track: Exactly 9 Services (01 to 09) */}
           <div
             ref={trackRef}
             className="flex gap-4 sm:gap-5 lg:gap-6 items-stretch will-change-transform"
