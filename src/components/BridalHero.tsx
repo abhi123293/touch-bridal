@@ -279,10 +279,11 @@ tl.fromTo(
   className="relative overflow-hidden px-2 pb-2 pt-4 sm:px-3 sm:pb-3 sm:pt-5 lg:px-4 lg:pb-4 lg:pt-26"
 >
       {/* Rounded cream frame, like a browser card */}
-      <div
-        ref={contentRef}
-        className="relative mx-auto max-w-[1320px] overflow-hidden rounded-[26px] bg-[#f7f1e9] text-[#2d1b13] shadow-[0_30px_80px_-30px_rgba(0,0,0,0.65)] sm:rounded-[34px]"
-      >
+     {/* Hero main container */}
+<div
+  ref={contentRef}
+  className="relative mx-auto max-w-[1320px] overflow-hidden bg-[#f7f1e9] text-[#2d1b13] shadow-[0_30px_80px_-30px_rgba(0,0,0,0.65)]"
+>
     
      
         {/* HERO */}
