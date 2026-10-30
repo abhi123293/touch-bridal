@@ -7,6 +7,8 @@ import HairServicesSection from "@/components/HairServicesSection";
 import BeautyGroomingServicesSection from "@/components/BeautyGroomingServicesSection";
 import SkinFacialServicesSection from "@/components/SkinFacialServicesSection";
 import AdditionalServicesSection from "@/components/AdditionalServicesSection";
+import MensServicesSection from "@/components/MensServicesSection";
+import GroomMakeupSection from "@/components/GroomMakeupSection";
 
 // Precise Mughal Cusped Arch Paths (Single-line continuous strings to prevent CRLF hydration mismatch)
 const MUGHAL_ARCH_OUTER_PATH =
@@ -51,8 +53,10 @@ export default function ServicesShowcase() {
   const [isBeautyOpen, setIsBeautyOpen] = useState(false);
   const [isSkinOpen, setIsSkinOpen] = useState(false);
   const [isAdditionalOpen, setIsAdditionalOpen] = useState(false);
+  const [isMensOpen, setIsMensOpen] = useState(false);
+  const [isGroomOpen, setIsGroomOpen] = useState(false);
   const [closingSection, setClosingSection] = useState<
-    "bridal" | "hair" | "beauty" | "skin" | "additional" | null
+    "bridal" | "hair" | "beauty" | "skin" | "additional" | "mens" | "groom" | null
   >(null);
 
   // Auto-reveal if hash is present (e.g. #bridal-makeup, #hair-services, #beauty-grooming, #skin-facial, or #additional-services)
@@ -60,6 +64,28 @@ export default function ServicesShowcase() {
     if (typeof window !== "undefined") {
       const hash = window.location.hash.toLowerCase();
       if (
+        hash.includes("groom-makeup") ||
+        hash.includes("groom")
+      ) {
+        setIsGroomOpen(true);
+        setTimeout(() => {
+          const el = document.getElementById("groom-makeup-section");
+          if (el) {
+            el.scrollIntoView({ behavior: "smooth", block: "start" });
+          }
+        }, 150);
+      } else if (
+        hash.includes("mens") ||
+        hash.includes("men")
+      ) {
+        setIsMensOpen(true);
+        setTimeout(() => {
+          const el = document.getElementById("mens-services-section");
+          if (el) {
+            el.scrollIntoView({ behavior: "smooth", block: "start" });
+          }
+        }, 150);
+      } else if (
         hash.includes("additional") ||
         hash.includes("saree") ||
         hash.includes("pleating") ||
@@ -109,6 +135,8 @@ export default function ServicesShowcase() {
   }, []);
 
   const handleOpenBridalSection = () => {
+    setIsGroomOpen(false);
+    setIsMensOpen(false);
     setIsHairOpen(false);
     setIsBeautyOpen(false);
     setIsSkinOpen(false);
@@ -125,6 +153,8 @@ export default function ServicesShowcase() {
   };
 
   const handleOpenHairSection = () => {
+    setIsGroomOpen(false);
+    setIsMensOpen(false);
     setIsBridalOpen(false);
     setIsBeautyOpen(false);
     setIsSkinOpen(false);
@@ -141,6 +171,8 @@ export default function ServicesShowcase() {
   };
 
   const handleOpenBeautySection = () => {
+    setIsGroomOpen(false);
+    setIsMensOpen(false);
     setIsBridalOpen(false);
     setIsHairOpen(false);
     setIsSkinOpen(false);
@@ -157,6 +189,8 @@ export default function ServicesShowcase() {
   };
 
   const handleOpenSkinSection = () => {
+    setIsGroomOpen(false);
+    setIsMensOpen(false);
     setIsBridalOpen(false);
     setIsHairOpen(false);
     setIsBeautyOpen(false);
@@ -173,6 +207,8 @@ export default function ServicesShowcase() {
   };
 
   const handleOpenAdditionalSection = () => {
+    setIsGroomOpen(false);
+    setIsMensOpen(false);
     setIsBridalOpen(false);
     setIsHairOpen(false);
     setIsBeautyOpen(false);
@@ -182,6 +218,41 @@ export default function ServicesShowcase() {
     // Smooth scroll down to additional subservices section
     setTimeout(() => {
       const el = document.getElementById("additional-services-section");
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }, 100);
+  };
+
+    const handleOpenMensSection = () => {
+    setIsBridalOpen(false);
+    setIsHairOpen(false);
+    setIsBeautyOpen(false);
+    setIsSkinOpen(false);
+    setIsAdditionalOpen(false);
+    setClosingSection(null);
+    setIsMensOpen(true);
+    // Smooth scroll down to men's subservices section
+    setTimeout(() => {
+      const el = document.getElementById("mens-services-section");
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }, 100);
+  };
+
+    const handleOpenGroomSection = () => {
+    setIsBridalOpen(false);
+    setIsHairOpen(false);
+    setIsBeautyOpen(false);
+    setIsSkinOpen(false);
+    setIsAdditionalOpen(false);
+    setIsMensOpen(false);
+    setClosingSection(null);
+    setIsGroomOpen(true);
+    // Smooth scroll down to groom subservices section
+    setTimeout(() => {
+      const el = document.getElementById("groom-makeup-section");
       if (el) {
         el.scrollIntoView({ behavior: "smooth", block: "start" });
       }
@@ -324,6 +395,8 @@ export default function ServicesShowcase() {
           onSelectBeautyGrooming={handleOpenBeautySection}
           onSelectSkinFacial={handleOpenSkinSection}
           onSelectAdditionalServices={handleOpenAdditionalSection}
+          onSelectMensServices={handleOpenMensSection}
+          onSelectGroomMakeup={handleOpenGroomSection}
         />
       </div>
 
@@ -384,6 +457,30 @@ export default function ServicesShowcase() {
           }`}
         >
           <AdditionalServicesSection onBackToServices={handleBackToServices} />
+        </div>
+      )}
+    
+      {/* Interactive Men's Services Sub-Service Section (Reveals upon selecting Men's Services) */}
+      {isMensOpen && (
+        <div
+          id="mens-services-section"
+          className={`w-full mt-8 sm:mt-12 lg:mt-16 scroll-mt-28 transition-all duration-400 ease-out ${
+            closingSection === "mens" ? "opacity-0 translate-y-6 pointer-events-none" : "opacity-100 translate-y-0"
+          }`}
+        >
+          <MensServicesSection onBackToServices={handleBackToServices} />
+        </div>
+      )}
+    
+      {/* Interactive Groom Makeup Sub-Service Section (Reveals upon selecting Groom Makeup) */}
+      {isGroomOpen && (
+        <div
+          id="groom-makeup-section"
+          className={`w-full mt-8 sm:mt-12 lg:mt-16 scroll-mt-28 transition-all duration-400 ease-out ${
+            closingSection === "groom" ? "opacity-0 translate-y-6 pointer-events-none" : "opacity-100 translate-y-0"
+          }`}
+        >
+          <GroomMakeupSection onBackToServices={handleBackToServices} />
         </div>
       )}
     </section>

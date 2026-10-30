@@ -27,8 +27,17 @@ export interface BridalSubService {
 
 export const BRIDAL_SUB_SERVICES: BridalSubService[] = [
   {
-    id: "bridal-makeup",
+    id: "engagement-makeup",
     number: "01",
+    title: "Engagement Makeup",
+    description:
+      "Enjoy a beautiful engagement look with elegant makeup that enhances your natural beauty and makes your special day unforgettable.",
+    image: "/images/engagement copy.jpg",
+    alt: "Engagement Makeup by Touch Salon",
+  },
+  {
+    id: "bridal-makeup",
+    number: "02",
     title: "Bridal Makeup",
     description:
       "Every detail tells a story. Every look captures a dream. Bridal beauty, perfected for your special day.",
@@ -37,7 +46,7 @@ export const BRIDAL_SUB_SERVICES: BridalSubService[] = [
   },
   {
     id: "reception-makeup",
-    number: "02",
+    number: "03",
     title: "Reception Makeup",
     description:
       "Step into the spotlight with a beautifully refined look that captures the magic of your celebration and leaves a lasting impression.",
@@ -46,7 +55,7 @@ export const BRIDAL_SUB_SERVICES: BridalSubService[] = [
   },
   {
     id: "party-makeup",
-    number: "03",
+    number: "04",
     title: "Party Makeup",
     description:
       "Turn every occasion into a moment to shine with a flawless, glamorous look that reflects your unique style.",
@@ -55,7 +64,7 @@ export const BRIDAL_SUB_SERVICES: BridalSubService[] = [
   },
   {
     id: "baby-shower-makeup",
-    number: "04",
+    number: "05",
     title: "Baby Shower Makeup",
     description:
       "Embrace the magic of motherhood with a graceful, glowing look that makes your precious moments even more memorable.",
@@ -64,12 +73,39 @@ export const BRIDAL_SUB_SERVICES: BridalSubService[] = [
   },
   {
     id: "puberty-makeup",
-    number: "05",
+    number: "06",
     title: "Puberty Makeup",
     description:
       "Blending cultural elegance with youthful charm, create a fresh and radiant look for this cherished celebration.",
     image: "/images/puberty.jpg",
     alt: "Puberty Makeup by Touch Salon",
+  },
+  {
+    id: "holy-communion-makeup",
+    number: "07",
+    title: "Holy Communion Makeup",
+    description:
+      "Celebrate your child’s Holy Communion with beautiful, elegant makeup that creates a natural and graceful look for this special day.",
+    image: "/images/holy.jpg",
+    alt: "Holy Communion Makeup by Touch Salon",
+  },
+  {
+    id: "goddess-makeup",
+    number: "08",
+    title: "Goddess Makeup",
+    description:
+      "Get a stunning goddess look with radiant makeup that enhances your natural beauty and gives you an elegant, divine glow.",
+    image: "/images/goddess copy.jpg",
+    alt: "Goddess Makeup by Touch Salon",
+  },
+  {
+    id: "sfx-makeup",
+    number: "09",
+    title: "SFX Makeup",
+    description:
+      "Transform your look with creative special-effects makeup featuring realistic wounds, scars, and fantasy designs for a dramatic appearance.",
+    image: "/images/haloween copy.jpg",
+    alt: "SFX Makeup by Touch Salon",
   },
 ];
 
@@ -166,54 +202,6 @@ export default function BridalMakeupSection({
           </div>
         </div>
 
-        {/* Mobile / Tablet Image Preview (Full portrait card above the list) */}
-        <div className="block lg:hidden w-full mb-6">
-          <div className="relative w-full aspect-[4/5] max-h-[420px] overflow-hidden rounded-[20px] border-2 border-[#C8A66A]/50 bg-[#2B1C17] shadow-[0_16px_40px_rgba(28,18,15,0.25)]">
-            {BRIDAL_SUB_SERVICES.map((service, index) => {
-              const isSelected = activeIndex === index;
-              return (
-                <div
-                  key={service.id}
-                  className={`absolute inset-0 transition-opacity duration-500 ease-out ${
-                    isSelected ? "opacity-100 z-10" : "opacity-0 pointer-events-none z-0"
-                  }`}
-                >
-                  <img
-                    src={service.image}
-                    alt={service.alt}
-                    className="h-full w-full object-cover object-top"
-                  />
-                </div>
-              );
-            })}
-            <div
-              aria-hidden="true"
-              className="pointer-events-none absolute inset-x-0 bottom-0 z-20 h-20 bg-gradient-to-t from-[#1C120F]/90 via-[#1C120F]/40 to-transparent"
-            />
-            <div className="absolute inset-x-0 bottom-0 z-30 p-4 sm:p-5 flex items-end justify-between gap-4">
-              <div>
-                <span className="text-[10px] font-sans font-semibold tracking-[0.2em] text-[#C8A66A] uppercase block">
-                  {activeService.number} • Selected Look
-                </span>
-                <span
-                  className={`${cormorant.className} text-xl sm:text-2xl font-medium tracking-[0.03em] text-[#F5F0E8] drop-shadow-[0_1px_4px_rgba(0,0,0,0.9)]`}
-                >
-                  {activeService.title}
-                </span>
-              </div>
-              <a
-                href={getWhatsAppUrl(activeService.title)}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 rounded-full bg-[#C8A66A] px-3.5 py-1.5 text-xs font-semibold text-[#1C120F] shadow-md transition-transform hover:scale-105"
-              >
-                <span>Book</span>
-                <ArrowUpRight className="h-3.5 w-3.5 stroke-[2.2]" />
-              </a>
-            </div>
-          </div>
-        </div>
-
         {/* =========================================================================
             FULL-WIDTH SERVICE LIST with Interactive Selected Row & Floating Image
            ========================================================================= */}
@@ -227,7 +215,13 @@ export default function BridalMakeupSection({
                 <button
                   key={service.id}
                   type="button"
-                  onClick={() => setActiveIndex(index)}
+                  onClick={() => {
+                    if (isActive && typeof window !== "undefined" && window.innerWidth < 1024) {
+                      window.open(getWhatsAppUrl(service.title), "_blank");
+                    } else {
+                      setActiveIndex(index);
+                    }
+                  }}
                   onMouseEnter={() => setActiveIndex(index)}
                   aria-selected={isActive}
                   role="tab"
@@ -267,6 +261,16 @@ export default function BridalMakeupSection({
                     >
                       {service.description}
                     </p>
+
+                    {/* Mobile Book Button badge when row is selected */}
+                    {isActive && (
+                      <div className="mt-2.5 flex lg:hidden items-center gap-1.5">
+                        <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-[#1C120F] text-[#C8A66A] text-xs font-semibold shadow-sm">
+                          <span>Book on WhatsApp</span>
+                          <ArrowUpRight className="h-3 w-3 stroke-[2.2]" />
+                        </span>
+                      </div>
+                    )}
                   </div>
 
                   {/* Far Right: Diagonal Arrow-Up-Right Icon */}
