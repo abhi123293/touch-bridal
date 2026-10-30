@@ -3,6 +3,9 @@
 import { useState, useEffect, useRef } from "react";
 import { Cormorant_Garamond } from "next/font/google";
 import { ArrowUpRight, ChevronLeft, ChevronRight, Sparkles } from "lucide-react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
 import ServicesEditorialCollage from "@/components/ServicesEditorialCollage";
 import BridalMakeupSection from "@/components/BridalMakeupSection";
 import HairServicesSection from "@/components/HairServicesSection";
@@ -11,6 +14,8 @@ import SkinFacialServicesSection from "@/components/SkinFacialServicesSection";
 import AdditionalServicesSection from "@/components/AdditionalServicesSection";
 import MensServicesSection from "@/components/MensServicesSection";
 import GroomMakeupSection from "@/components/GroomMakeupSection";
+
+gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
@@ -169,7 +174,9 @@ export default function ServicesShowcase() {
     "bridal" | "hair" | "beauty" | "skin" | "additional" | "mens" | "groom" | null
   >(null);
 
-  // Auto-scrolling container refs & touch interaction state
+  // Refs for ScrollTrigger & auto-scrolling
+  const showcaseContainerRef = useRef<HTMLDivElement>(null);
+  const trayRef = useRef<HTMLDivElement>(null);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const isPausedRef = useRef(false);
   const isInteractingRef = useRef(false);
@@ -177,24 +184,109 @@ export default function ServicesShowcase() {
   const touchStartYRef = useRef(0);
   const isSwipingRef = useRef(false);
 
-  // Smooth continuous auto-scroll animation loop (pauses smoothly on hover or touch)
+  // GSAP ScrollTrigger Animations for entrance and scroll-driven velocity
+  useGSAP(
+    () => {
+      // 1. Entrance animation for the 4 Mughal Arch saree cards
+      const archCards = gsap.utils.toArray<HTMLElement>(".saree-arch-card");
+      if (archCards.length > 0) {
+        gsap.fromTo(
+          archCards,
+          { opacity: 0, y: 35, scale: 0.96 },
+          {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            duration: 0.9,
+            stagger: 0.12,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: showcaseContainerRef.current,
+              start: "top 80%",
+              toggleActions: "play none none none",
+            },
+            clearProps: "transform,opacity",
+          }
+        );
+      }
+
+      // 2. Entrance for the 9-services glassmorphism tray
+      if (trayRef.current) {
+        gsap.fromTo(
+          trayRef.current,
+          { opacity: 0, y: 40, scale: 0.97 },
+          {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            duration: 0.85,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: showcaseContainerRef.current,
+              start: "top 75%",
+              toggleActions: "play none none none",
+            },
+            clearProps: "transform,opacity",
+          }
+        );
+      }
+
+      // 3. ScrollTrigger velocity & scrub integration:
+      // As the user scrolls vertically down the page, ScrollTrigger smoothly accelerates and glides the horizontal scroll track
+      if (scrollContainerRef.current && showcaseContainerRef.current) {
+        ScrollTrigger.create({
+          trigger: showcaseContainerRef.current,
+          start: "top bottom",
+          end: "bottom top",
+          onUpdate: (self) => {
+            const container = scrollContainerRef.current;
+            if (container && !isPausedRef.current && !isInteractingRef.current) {
+              const velocity = self.getVelocity() / 250;
+              container.scrollLeft += velocity;
+              const singleSetWidth = container.scrollWidth / 3;
+              if (singleSetWidth > 0) {
+                if (container.scrollLeft >= singleSetWidth * 2) {
+                  container.scrollLeft -= singleSetWidth;
+                } else if (container.scrollLeft <= singleSetWidth * 0.1) {
+                  container.scrollLeft += singleSetWidth;
+                }
+              }
+            }
+          },
+        });
+      }
+    },
+    { scope: showcaseContainerRef }
+  );
+
+  // Continuous smooth auto-scroll animation loop (pauses smoothly on hover or touch)
   useEffect(() => {
     const container = scrollContainerRef.current;
     if (!container) return;
 
+    // Start at middle duplicate set so scrolling in either direction has ample buffer
+    const singleSetWidth = container.scrollWidth / 3;
+    if (singleSetWidth > 0 && container.scrollLeft === 0) {
+      container.scrollLeft = singleSetWidth;
+    }
+
     let animationFrameId: number;
     let lastTime: number | null = null;
-    const speed = 40; // pixels per second for stately, regal gliding motion
+    const speed = 40; // baseline steady glide speed in pixels per second
 
     const animate = (time: number) => {
       if (lastTime !== null) {
         const delta = (time - lastTime) / 1000;
         if (!isPausedRef.current && !isInteractingRef.current && container) {
           container.scrollLeft += speed * delta;
-          // Tripled items: loop seamlessly when 1/3 of total scrollWidth has passed
-          const singleSetWidth = container.scrollWidth / 3;
-          if (container.scrollLeft >= singleSetWidth) {
-            container.scrollLeft -= singleSetWidth;
+          // Tripled items: loop seamlessly across duplicate sets
+          const singleWidth = container.scrollWidth / 3;
+          if (singleWidth > 0) {
+            if (container.scrollLeft >= singleWidth * 2) {
+              container.scrollLeft -= singleWidth;
+            } else if (container.scrollLeft <= singleWidth * 0.1) {
+              container.scrollLeft += singleWidth;
+            }
           }
         }
       }
@@ -547,6 +639,7 @@ export default function ServicesShowcase() {
 
   return (
     <section
+      ref={showcaseContainerRef}
       aria-label="Bridal Saree Showcase & Services"
       className="relative z-10 mx-auto w-full max-w-[1440px] drop-shadow-[0_30px_70px_rgba(20,10,5,0.7)]"
     >
@@ -560,7 +653,7 @@ export default function ServicesShowcase() {
           {SAREE_MODELS.map((model, index) => (
             <article
               key={model.id}
-              className="group relative w-full aspect-[736/1308] overflow-hidden bg-[#24150e] transition-all duration-500"
+              className="saree-arch-card group relative w-full aspect-[736/1308] overflow-hidden bg-[#24150e] transition-all duration-500"
               style={{
                 borderLeft: index > 0 ? "1px solid rgba(223, 183, 108, 0.35)" : "none",
               }}
@@ -649,11 +742,12 @@ export default function ServicesShowcase() {
 
         {/* =========================================================================
             S TOUCH SALON — 9 Services Auto-Scrolling Glassmorphism Ribbon at Bottom
-            - Features all 9 services with real image badges, numbers & luxury tags
-            - Auto-scrolls continuously (pauses on hover or touch)
+            - Powered by GSAP ScrollTrigger for entrance reveal & scroll-driven velocity
+            - Continuous smooth auto-glide when idle
             - Touching any service smoothly navigates to its subsection
            ========================================================================= */}
         <div
+          ref={trayRef}
           aria-label="9 Services Auto-Scrolling Navigation"
           className="absolute inset-x-0 bottom-0 z-40 flex flex-col items-center justify-end pb-3 sm:pb-5 lg:pb-6 px-2 sm:px-4 lg:px-6 pointer-events-none"
         >
@@ -672,7 +766,7 @@ export default function ServicesShowcase() {
                 <span className="h-2 w-2 rounded-full bg-[#dfb76c] shadow-[0_0_8px_#dfb76c] animate-pulse" />
                 <h2 className="text-[10px] sm:text-xs font-mono font-semibold tracking-[0.2em] uppercase text-[#dfb76c] flex items-center gap-1.5">
                   <Sparkles className="h-3 w-3 inline-block" />
-                  <span>9 SIGNATURE SERVICES • AUTO-SCROLLING</span>
+                  <span>9 SIGNATURE SERVICES • SCROLL TRIGGERED</span>
                 </h2>
               </div>
 
@@ -701,7 +795,7 @@ export default function ServicesShowcase() {
               </div>
             </div>
 
-            {/* Infinite Auto-Scrolling Track */}
+            {/* Infinite Auto-Scrolling Track with ScrollTrigger Dynamic Scrub */}
             <div
               ref={scrollContainerRef}
               onMouseEnter={() => { isPausedRef.current = true; }}
