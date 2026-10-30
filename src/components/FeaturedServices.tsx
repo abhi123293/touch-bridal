@@ -9,50 +9,106 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
+// const services = [
+//   {
+//     number: "01",
+//     title: "Bridal Makeovers",
+//     description:
+//       "Bridal and reception looks tailored to your special day.",
+//     image: "/images/bridal-01.jpg",
+//     imageAlt: "Bridal makeup and traditional bridal look",
+//     tag: "BRIDAL BEAUTY",
+//     message:
+//       "Hi, I would like to enquire about Bridal Makeovers at Touch Bridal Makeover Studio & Unisex Salon.",
+//   },
+//   {
+//     number: "02",
+//     title: "Hair Care",
+//     description:
+//       "Discover hair styling and care for your everyday look and special occasions.",
+//     image: "/servicesimg/haircare.jpg",
+//     imageAlt: "Hair styling and beauty look",
+//     tag: "HAIR CARE",
+//     message:
+//       "Hi, I would like to enquire about Hair Care at Touch Bridal Makeover Studio & Unisex Salon.",
+//   },
+//   {
+//     number: "03",
+//     title: "Skin Care",
+//     description:
+//       "Explore skincare and facial services to help you feel refreshed.",
+//     image: "/servicesimg/bridal-03.jpg",
+//     imageAlt: "Skin care ",
+//     tag: "SKIN CARE",
+//     message:
+//       "Hi, I would like to enquire about Skin Care at Touch Bridal Makeover Studio & Unisex Salon.",
+//   },
+//   {
+//     number: "04",
+//     title: "Beauty Services",
+//     description:
+//       "Thoughtful beauty services and finishing touches for every occasion.",
+//     image: "/images/bridal-04.jpg",
+//     imageAlt: "Beauty services and makeup look",
+//     tag: "BEAUTY SERVICES",
+//     message:
+//       "Hi, I would like to enquire about Beauty Services at Touch Bridal Makeover Studio & Unisex Salon.",
+//   },
+// ];
+
+
 const services = [
   {
     number: "01",
-    title: "Bridal Makeovers",
+    title: "Bridal & Groom Makeovers",
     description:
-      "Bridal and reception looks tailored to your special day.",
+      "Beautiful bridal makeup, groom styling and special occasion looks tailored to your special day.",
     image: "/images/bridal-01.jpg",
-    imageAlt: "Bridal makeup and traditional bridal look",
+    image2: "/servicesimg/grrommens.jpg",
+    imageAlt: "Bridal makeup and wedding makeover",
+    image2Alt: "Groom makeover and wedding styling",
     tag: "BRIDAL BEAUTY",
     message:
-      "Hi, I would like to enquire about Bridal Makeovers at Touch Bridal Makeover Studio & Unisex Salon.",
+      "Hi, I would like to enquire about Bridal & Groom Makeovers at Touch Bridal Makeover Studio & Unisex Salon.",
   },
   {
     number: "02",
-    title: "Hair Care",
+    title: "Hair Care & Styling",
     description:
-      "Discover hair styling and care for your everyday look and special occasions.",
+      "Haircuts, styling, colouring and hair treatments for both men and women.",
     image: "/servicesimg/haircare.jpg",
-    imageAlt: "Hair styling and beauty look",
+    image2: "/servicesimg/menHairCare.jpg",
+    imageAlt: "Professional hair styling and hair care",
+    image2Alt: "Hair styling for men and women",
     tag: "HAIR CARE",
     message:
-      "Hi, I would like to enquire about Hair Care at Touch Bridal Makeover Studio & Unisex Salon.",
+      "Hi, I would like to enquire about Hair Care & Styling for men and women at Touch Bridal Makeover Studio & Unisex Salon.",
   },
   {
     number: "03",
-    title: "Skin Care",
+    title: "Skin Care for Men & Women",
     description:
-      "Explore skincare and facial services to help you feel refreshed.",
+      "Refreshing facials and skincare treatments to help everyone look and feel their best.",
     image: "/servicesimg/bridal-03.jpg",
-    imageAlt: "Skin care ",
-    tag: "SKIN CARE",
+    image2: "/servicesimg/menfacial.jpg",
+    imageAlt: "Professional skincare and facial treatments",
+    image2Alt: "Skincare treatment for men and women",
+    tag: "UNISEX SKIN CARE",
     message:
-      "Hi, I would like to enquire about Skin Care at Touch Bridal Makeover Studio & Unisex Salon.",
+      "Hi, I would like to enquire about Skin Care for Men & Women at Touch Bridal Makeover Studio & Unisex Salon.",
   },
   {
     number: "04",
-    title: "Beauty Services",
+    title: "Beauty & Personal Care",
     description:
-      "Thoughtful beauty services and finishing touches for every occasion.",
+      "Makeup, beauty treatments and finishing touches for men and women, for everyday care and special occasions.",
     image: "/images/bridal-04.jpg",
-    imageAlt: "Beauty services and makeup look",
+    image2: "/servicesimg/menbeauty.jpg",
+    imageAlt: "Beauty treatments and personal care",
+    image2Alt: "Professional beauty and makeup services",
     tag: "BEAUTY SERVICES",
     message:
-      "Hi, I would like to enquire about Beauty Services at Touch Bridal Makeover Studio & Unisex Salon.",
+      "Hi, I would like to enquire about Beauty & Personal Care for men and women at Touch Bridal Makeover Studio & Unisex Salon.",
   },
 ];
 
@@ -178,6 +234,95 @@ useGSAP(
 );
 
 
+useGSAP(() => {
+  const wrappers = gsap.utils.toArray<HTMLElement>(
+    ".service-image-wrapper"
+  );
+
+  wrappers.forEach((wrapper) => {
+    const firstImage =
+      wrapper.querySelector<HTMLElement>(".service-image-first");
+
+    const secondImage =
+      wrapper.querySelector<HTMLElement>(".service-image-second");
+
+    if (!firstImage || !secondImage) return;
+
+    // Initial positions
+    gsap.set(firstImage, {
+      xPercent: 0,
+      zIndex: 1,
+    });
+
+    gsap.set(secondImage, {
+      xPercent: 100,
+      zIndex: 2,
+    });
+
+    // Automatically alternate images when the card enters view
+    const timeline = gsap.timeline({
+      repeat: -1,
+      repeatDelay: 0.5,
+      scrollTrigger: {
+        trigger: wrapper,
+        start: "top 85%",
+        toggleActions: "play pause resume pause",
+      },
+    });
+
+    // First image exits left; second enters from right
+    timeline
+      .to(
+        firstImage,
+        {
+          xPercent: -100,
+          duration: 1.8,
+          ease: "power2.inOut",
+        },
+        0
+      )
+      .to(
+        secondImage,
+        {
+          xPercent: 0,
+          duration: 1.8,
+          ease: "power2.inOut",
+        },
+        0
+      )
+
+      // Prepare the first image to enter again from the right
+      .set(firstImage, {
+        xPercent: 100,
+        zIndex: 2,
+      })
+      .set(secondImage, {
+        zIndex: 1,
+      })
+
+      // Second image exits left; first image enters from right
+      .to(secondImage, {
+        xPercent: -100,
+        duration: 1.8,
+        ease: "power2.inOut",
+      }, "+=0.5")
+      .to(firstImage, {
+        xPercent: 0,
+        duration: 1.8,
+        ease: "power2.inOut",
+      }, "<")
+
+      // Reset for the next automatic cycle
+      .set(secondImage, {
+        xPercent: 100,
+        zIndex: 2,
+      })
+      .set(firstImage, {
+        zIndex: 1,
+      });
+  });
+});
+
   return (
     <section
       id="featured-services"
@@ -233,7 +378,7 @@ useGSAP(
             </h2>
 
             <p className="services-intro-item mt-3 max-w-sm text-sm leading-6 text-[#756356] sm:text-[15px]">
-              From bridal makeovers to everyday beauty care, discover
+            From bridal makeovers to everyday beauty care, discover
               services designed around you.
             </p>
 
@@ -304,34 +449,49 @@ useGSAP(
           className="group w-[82%] min-w-0 shrink-0 snap-start sm:w-[calc(50%-10px)] md:w-[calc(50%-10px)] lg:w-[31%]"
         >
           <Link
-            href="/bridal-gallery"
+            href={`/contact?service=${encodeURIComponent(service.title)}#contact-cta`}
             aria-label={`View the bridal gallery for ${service.title}`}
             className="group relative block overflow-hidden rounded-[13px] border border-[#3a2418]/10 bg-[#e8dccd] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#8b4a28]"
           >
             {/* Service image */}
-            <div className="relative aspect-[4/3] overflow-hidden md:aspect-[3/3.7] lg:aspect-[4/4.5]">
-              <img
-                src={service.image}
-                alt={service.imageAlt}
-                loading="lazy"
-                className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04] motion-reduce:transition-none"
-              />
+        
+{/* Two Side-by-Side Service Images */}
+{/* Full-Width Animated Service Images */}
+<div className="service-image-wrapper relative isolate aspect-[4/3] overflow-hidden bg-[#e8dccd] md:aspect-[3/3.7] lg:aspect-[4/4.5]">
 
-              {/* Image gradient */}
-              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#2d1b13]/65 via-transparent to-transparent opacity-80" />
+  {/* Current image */}
+  <img
+    src={service.image}
+    alt={service.imageAlt}
+    loading="lazy"
+    className="service-image-first absolute inset-0 z-0 h-full w-full object-cover"
+  />
 
-              {/* Category badge */}
-              <span className="absolute left-2.5 top-2.5 max-w-[calc(100%-1.25rem)] rounded-full border border-white/40 bg-[#f7f1e9]/95 px-2.5 py-1.5 text-[8px] font-semibold tracking-[0.07em] text-[#3a2418] sm:text-[9px]">
-                {service.tag}
-              </span>
+  {/* Next image: enters from the right */}
+  <img
+    src={service.image2}
+    alt={service.image2Alt}
+    loading="lazy"
+    className="service-image-second absolute inset-0 z-[1] h-full w-full object-cover"
+  />
 
-              {/* Enquire label */}
-              <span className="absolute inset-x-3 bottom-3 flex translate-y-0 items-center justify-center opacity-100 transition-all duration-300 ease-out sm:translate-y-3 sm:opacity-0 sm:group-hover:translate-y-0 sm:group-hover:opacity-100 sm:group-focus-within:translate-y-0 sm:group-focus-within:opacity-100">
-                <span className="inline-flex min-h-10 items-center justify-center gap-2 rounded-full border border-[#e7c9a0]/70 bg-[#2d1b13]/80 px-5 py-2.5 text-[10px] font-semibold tracking-[0.09em] text-[#fff5e6] shadow-[0_0_12px_rgba(231,201,160,0.2),inset_0_1px_2px_rgba(255,255,255,0.12)] backdrop-blur-xl transition-all duration-300 group-hover:border-[#e7c9a0] group-hover:shadow-[0_0_18px_rgba(231,201,160,0.4)]">
-                  ENQUIRE
-                </span>
-              </span>
-            </div>
+  {/* Gradient above both images */}
+  <div className="pointer-events-none absolute inset-0 z-[2] bg-gradient-to-t from-[#2d1b13]/65 via-transparent to-transparent opacity-80" />
+
+  {/* Category badge */}
+  <span className="absolute left-2.5 top-2.5 z-10 max-w-[calc(100%-1.25rem)] rounded-full border border-white/40 bg-[#f7f1e9]/95 px-2.5 py-1.5 text-[8px] font-semibold tracking-[0.07em] text-[#3a2418] sm:text-[9px]">
+    {service.tag}
+  </span>
+
+  {/* Enquire button */}
+  <span className="absolute inset-x-3 bottom-3 z-10 flex items-center justify-center sm:translate-y-3 sm:opacity-0 sm:transition-all sm:duration-300 sm:group-hover:translate-y-0 sm:group-hover:opacity-100 sm:group-focus-within:translate-y-0 sm:group-focus-within:opacity-100">
+    <span className="inline-flex min-h-10 items-center justify-center rounded-full border border-[#e7c9a0]/70 bg-[#2d1b13]/80 px-5 py-2.5 text-[10px] font-semibold tracking-[0.09em] text-[#fff5e6] shadow-md backdrop-blur-xl">
+      ENQUIRE
+    </span>
+  </span>
+
+</div>
+
           </Link>
 
           {/* Service details */}
