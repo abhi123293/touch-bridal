@@ -151,8 +151,6 @@ export default function ServicesShowcase() {
   const targetXRef = useRef(0);
   const isHoveredRef = useRef(false);
   const directionRef = useRef<1 | -1>(1); // 1 = 01 -> 09, -1 = 09 -> 01
-  const touchStartXRef = useRef(0);
-  const touchStartYRef = useRef(0);
   const isSwipingRef = useRef(false);
 
   // Calculate maximum horizontal travel distance (gap = 0 between cards)
@@ -164,7 +162,7 @@ export default function ServicesShowcase() {
   }, []);
 
   // Smooth manual scrub update (Wheel / Touch)
-  const updateTrackPosition = useCallback((newTargetX: number, duration = 0.45) => {
+  const updateTrackPosition = useCallback((newTargetX: number, duration = 0.42) => {
     const track = trackRef.current;
     if (!track) return;
 
@@ -191,22 +189,25 @@ export default function ServicesShowcase() {
   // =========================================================================
   // AUTO SCROLL ANIMATION
   // - Smooth auto-progression through services 01 → 09, then 09 → 01
-  // - STOPS IMMEDIATELY whenever the mouse points to / hovers over any card
-  // - Resumes gracefully when mouse leaves
+  // - STOPS IMMEDIATELY whenever the mouse points to / touches any card
+  // - Slightly faster speed in mobile view (~1.25px/frame) for fluid motion
   // =========================================================================
   useEffect(() => {
     let animId: number;
     let lastTime = performance.now();
-    const autoScrollSpeed = 0.72; // Luxuriously gentle glide speed (~43px / second)
 
     const tick = (now: number) => {
       const dt = Math.min(now - lastTime, 40);
       lastTime = now;
 
-      // Only auto-scroll when user is NOT hovering and NOT dragging
+      // Only auto-scroll when user is NOT hovering/touching and NOT dragging
       if (!isHoveredRef.current && !isSwipingRef.current) {
         const maxScroll = getMaxScroll();
         const track = trackRef.current;
+
+        // Increased auto moving speed on mobile per user request
+        const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
+        const autoScrollSpeed = isMobile ? 1.25 : 0.72;
 
         if (maxScroll > 10 && track) {
           let nextX = targetXRef.current + (autoScrollSpeed * (dt / 16)) * directionRef.current;
@@ -240,17 +241,15 @@ export default function ServicesShowcase() {
   }, [getMaxScroll]);
 
   // =========================================================================
-  // SMOOTH SCROLL TRIGGER (Wheel Navigation)
+  // SMOOTH SCROLL TRIGGER (Wheel Navigation for Desktop)
   // - Wheel DOWN scrubs forward 01 → 09
   // - Wheel UP scrubs backward 09 → 01
-  // - Intercepts wheel to keep webpage locked in place
   // =========================================================================
   useEffect(() => {
     const viewport = scrollContainerRef.current;
     if (!viewport) return;
 
     const onWheel = (e: WheelEvent) => {
-      // Mouse interaction stops auto-scroll
       isHoveredRef.current = true;
 
       const delta = Math.abs(e.deltaY) > Math.abs(e.deltaX) ? e.deltaY : e.deltaX;
@@ -274,38 +273,69 @@ export default function ServicesShowcase() {
     };
   }, [getMaxScroll, updateTrackPosition]);
 
-  // Touch Swipe for Mobile & Tablet
-  const handleTouchStart = (e: React.TouchEvent) => {
-    isHoveredRef.current = true;
-    touchStartXRef.current = e.touches[0].clientX;
-    touchStartYRef.current = e.touches[0].clientY;
-    isSwipingRef.current = false;
-  };
+  // =========================================================================
+  // MOBILE TOUCH SCROLL TRIGGER (Vertical Thumb Swipe & Horizontal Drag)
+  // - Swiping UP or LEFT on phone scrubs forward 01 → 09
+  // - Swiping DOWN or RIGHT on phone scrubs backward 09 → 01
+  // - Pauses auto-scroll on touch, smoothly resumes on release
+  // =========================================================================
+  useEffect(() => {
+    const viewport = scrollContainerRef.current;
+    if (!viewport) return;
 
-  const handleTouchMove = (e: React.TouchEvent) => {
-    const currentX = e.touches[0].clientX;
-    const currentY = e.touches[0].clientY;
-    const diffX = touchStartXRef.current - currentX;
-    const diffY = touchStartYRef.current - currentY;
+    let startX = 0;
+    let startY = 0;
+    let touchActive = false;
 
-    if (Math.abs(diffX) > 8) {
-      isSwipingRef.current = true;
-    }
-
-    if (Math.abs(diffX) > Math.abs(diffY)) {
-      touchStartXRef.current = currentX;
-      directionRef.current = diffX > 0 ? 1 : -1;
-      updateTrackPosition(targetXRef.current + diffX * 1.35, 0.2);
-    }
-  };
-
-  const handleTouchEnd = () => {
-    setTimeout(() => {
+    const onTouchStart = (e: TouchEvent) => {
+      isHoveredRef.current = true;
+      touchActive = true;
+      startX = e.touches[0].clientX;
+      startY = e.touches[0].clientY;
       isSwipingRef.current = false;
-      // Resume auto-scroll after touch inactivity
-      isHoveredRef.current = false;
-    }, 1500);
-  };
+    };
+
+    const onTouchMove = (e: TouchEvent) => {
+      if (!touchActive) return;
+
+      const currentX = e.touches[0].clientX;
+      const currentY = e.touches[0].clientY;
+      const diffX = startX - currentX;
+      const diffY = startY - currentY;
+
+      // Handle both vertical thumb swipes (diffY) and horizontal drags (diffX) seamlessly
+      const dominantDelta = Math.abs(diffX) >= Math.abs(diffY) ? diffX : diffY;
+
+      if (Math.abs(dominantDelta) > 5) {
+        isSwipingRef.current = true;
+        if (e.cancelable) {
+          e.preventDefault();
+        }
+        startX = currentX;
+        startY = currentY;
+        directionRef.current = dominantDelta > 0 ? 1 : -1;
+        updateTrackPosition(targetXRef.current + dominantDelta * 1.5, 0.22);
+      }
+    };
+
+    const onTouchEnd = () => {
+      touchActive = false;
+      setTimeout(() => {
+        isSwipingRef.current = false;
+        isHoveredRef.current = false;
+      }, 1200);
+    };
+
+    viewport.addEventListener("touchstart", onTouchStart, { passive: true });
+    viewport.addEventListener("touchmove", onTouchMove, { passive: false });
+    viewport.addEventListener("touchend", onTouchEnd, { passive: true });
+
+    return () => {
+      viewport.removeEventListener("touchstart", onTouchStart);
+      viewport.removeEventListener("touchmove", onTouchMove);
+      viewport.removeEventListener("touchend", onTouchEnd);
+    };
+  }, [updateTrackPosition]);
 
   // Auto-reveal if hash is present (e.g. #bridal-makeup, #hair-services, etc.)
   useEffect(() => {
@@ -415,6 +445,7 @@ export default function ServicesShowcase() {
     setIsBridalOpen(false);
     setIsHairOpen(false);
     setIsBeautyOpen(false);
+    setIsSkinOpen(false);
     setIsAdditionalOpen(false);
     setIsMensOpen(false);
     setIsGroomOpen(false);
@@ -600,11 +631,12 @@ export default function ServicesShowcase() {
       className="relative z-10 mx-auto w-full max-w-[1660px] drop-shadow-[0_30px_70px_rgba(20,10,5,0.7)]"
     >
       {/* =========================================================================
-          FIRST SECTION: Auto Scroll Colonnade with Mouse Hover Pause
+          FIRST SECTION: Seamless Mughal Arch Colonnade (Enlarged Frame & Gap-0)
+          - Frame size increased: fills screen height & max-w-[1660px]
           - Auto scrolls smoothly forward (01 → 09) and backward (09 → 01)
-          - Mouse points to ANY card: STOPS IMMEDIATELY
-          - Smooth scroll trigger with mouse wheel & mobile touch
-          - Zero vertical page scroll when interacting with cards
+          - Increased auto-moving speed on mobile view for lively progression
+          - Full mobile touch scroll trigger (vertical thumb swipe & horizontal drag)
+          - Mouse/touch stops auto-scroll immediately
          ========================================================================= */}
       <div
         id="first-showcase-section"
@@ -619,9 +651,6 @@ export default function ServicesShowcase() {
         {/* Viewport Container (Fills the entire showcase frame with zero padding) */}
         <div
           ref={scrollContainerRef}
-          onTouchStart={handleTouchStart}
-          onTouchMove={handleTouchMove}
-          onTouchEnd={handleTouchEnd}
           className="relative w-full h-full overflow-hidden p-0 flex items-center select-none cursor-grab active:cursor-grabbing"
         >
           {/* Moving Track: Exactly 9 Services with ZERO gap between cards */}
@@ -754,7 +783,7 @@ export default function ServicesShowcase() {
                         <ArrowUpRight className="h-3.5 w-3.5 sm:h-4 sm:w-4 stroke-[2.2] transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                       </span>
                       <div className="h-7 w-7 sm:h-8 sm:w-8 rounded-full bg-[#D6BC96]/20 border border-[#D6BC96]/60 flex items-center justify-center text-[#D6BC96] shadow-sm group-hover:bg-[#D6BC96] group-hover:text-[#38271F] transition-all duration-300">
-                        <ArrowUpRight className="h-3.5 w-3.5 sm:h-4 sm:w-4 stroke-[2.2]" />
+                        <ArrowUpRight className="h-3.5 w-3.5 stroke-[2.2]" />
                       </div>
                     </div>
                   </div>
