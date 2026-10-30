@@ -11,6 +11,7 @@ import SkinFacialServicesSection from "@/components/SkinFacialServicesSection";
 import AdditionalServicesSection from "@/components/AdditionalServicesSection";
 import MensServicesSection from "@/components/MensServicesSection";
 import GroomMakeupSection from "@/components/GroomMakeupSection";
+import RentalJewelsSection from "@/components/RentalJewelsSection";
 
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
@@ -114,9 +115,9 @@ const SHOWCASE_SERVICES: ServiceShowcaseItem[] = [
     id: "rental-jewels",
     number: "08",
     title: "Rental Jewels",
-    tag: "Heritage Jewellery",
-    description: "Handcrafted antique temple bridal jewelry collections",
-    image: "/images/rental jewels.jpg",
+    tag: "Temple & Heritage Jewels",
+    description: "Complete your traditional look with elegant groom temple collections",
+    image: "/images/temple.jpg",
     actionKey: "rental",
   },
   {
@@ -140,8 +141,9 @@ export default function ServicesShowcase() {
   const [isAdditionalOpen, setIsAdditionalOpen] = useState(false);
   const [isMensOpen, setIsMensOpen] = useState(false);
   const [isGroomOpen, setIsGroomOpen] = useState(false);
+  const [isRentalOpen, setIsRentalOpen] = useState(false);
   const [closingSection, setClosingSection] = useState<
-    "bridal" | "hair" | "beauty" | "skin" | "additional" | "mens" | "groom" | null
+    "bridal" | "hair" | "beauty" | "skin" | "additional" | "mens" | "groom" | "rental" | null
   >(null);
 
   const isAnyOpen =
@@ -396,6 +398,16 @@ export default function ServicesShowcase() {
           const el = document.getElementById("beauty-grooming-section");
           if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
         }, 180);
+      } else if (
+        hash.includes("rental") ||
+        hash.includes("jewel") ||
+        hash.includes("temple")
+      ) {
+        setIsRentalOpen(true);
+        setTimeout(() => {
+          const el = document.getElementById("rental-jewels-section");
+          if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+        }, 180);
       } else if (hash.includes("hair")) {
         setIsHairOpen(true);
         setTimeout(() => {
@@ -420,6 +432,7 @@ export default function ServicesShowcase() {
     setIsAdditionalOpen(false);
     setIsMensOpen(false);
     setIsGroomOpen(false);
+    setIsRentalOpen(false);
     setClosingSection(null);
     setIsBridalOpen(true);
     setTimeout(() => {
@@ -436,6 +449,7 @@ export default function ServicesShowcase() {
     setIsAdditionalOpen(false);
     setIsMensOpen(false);
     setIsGroomOpen(false);
+    setIsRentalOpen(false);
     setClosingSection(null);
     setIsHairOpen(true);
     setTimeout(() => {
@@ -452,6 +466,7 @@ export default function ServicesShowcase() {
     setIsAdditionalOpen(false);
     setIsMensOpen(false);
     setIsGroomOpen(false);
+    setIsRentalOpen(false);
     setClosingSection(null);
     setIsBeautyOpen(true);
     setTimeout(() => {
@@ -469,6 +484,7 @@ export default function ServicesShowcase() {
     setIsAdditionalOpen(false);
     setIsMensOpen(false);
     setIsGroomOpen(false);
+    setIsRentalOpen(false);
     setClosingSection(null);
     setIsSkinOpen(true);
     setTimeout(() => {
@@ -485,6 +501,7 @@ export default function ServicesShowcase() {
     setIsSkinOpen(false);
     setIsMensOpen(false);
     setIsGroomOpen(false);
+    setIsRentalOpen(false);
     setClosingSection(null);
     setIsAdditionalOpen(true);
     setTimeout(() => {
@@ -501,6 +518,7 @@ export default function ServicesShowcase() {
     setIsSkinOpen(false);
     setIsAdditionalOpen(false);
     setIsGroomOpen(false);
+    setIsRentalOpen(false);
     setClosingSection(null);
     setIsMensOpen(true);
     setTimeout(() => {
@@ -517,6 +535,7 @@ export default function ServicesShowcase() {
     setIsSkinOpen(false);
     setIsAdditionalOpen(false);
     setIsMensOpen(false);
+    setIsRentalOpen(false);
     setClosingSection(null);
     setIsGroomOpen(true);
     setTimeout(() => {
@@ -535,15 +554,12 @@ export default function ServicesShowcase() {
     setIsMensOpen(false);
     setIsGroomOpen(false);
     setClosingSection(null);
+    setIsRentalOpen(true);
 
     setTimeout(() => {
-      const el = document.getElementById("first-showcase-section");
+      const el = document.getElementById("rental-jewels-section");
       if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
-    }, 100);
-
-    if (typeof window !== "undefined") {
-      window.open(WHATSAPP_RENTAL_JEWELS_URL, "_blank");
-    }
+    }, 180);
   };
 
   const handleOpenAppointmentEnquiry = () => {
@@ -555,6 +571,7 @@ export default function ServicesShowcase() {
     setIsAdditionalOpen(false);
     setIsMensOpen(false);
     setIsGroomOpen(false);
+    setIsRentalOpen(false);
     setClosingSection(null);
 
     setTimeout(() => {
@@ -623,6 +640,8 @@ export default function ServicesShowcase() {
       ? "mens"
       : isGroomOpen
       ? "groom"
+      : isRentalOpen
+      ? "rental"
       : null;
 
     if (activeSection) {
@@ -637,6 +656,7 @@ export default function ServicesShowcase() {
       setIsAdditionalOpen(false);
       setIsMensOpen(false);
       setIsGroomOpen(false);
+      setIsRentalOpen(false);
       setClosingSection(null);
       isHoveredRef.current = false;
     }, 420);
@@ -895,6 +915,18 @@ export default function ServicesShowcase() {
           }`}
         >
           <GroomMakeupSection onBackToServices={handleBackToServices} />
+        </div>
+      )}
+
+      {/* Interactive Rental Jewels Sub-Service Section */}
+      {isRentalOpen && (
+        <div
+          id="rental-jewels-section"
+          className={`w-full mt-8 sm:mt-12 lg:mt-16 scroll-mt-28 transition-all duration-400 ease-out ${
+            closingSection === "rental" ? "opacity-0 translate-y-6 pointer-events-none" : "opacity-100 translate-y-0"
+          }`}
+        >
+          <RentalJewelsSection onBackToServices={handleBackToServices} />
         </div>
       )}
     </section>
