@@ -21,15 +21,12 @@ const cormorant = Cormorant_Garamond({
   display: "swap",
 });
 
-// TODO: replace with the link to your Google reviews page.
 const reviewsUrl =
   "https://www.google.com/maps/search/?api=1&query=" +
   encodeURIComponent(
     "Touch Bridal Makeover Studio, 215 B Sargunaveethi, Nagercoil, Tamil Nadu, India",
   );
 
-// Replace these sample entries with genuine customer-approved reviews.
-// Layout: the first review is the middle card, the next two stack on the right.
 const reviews = [
   {
     id: "01",
@@ -56,12 +53,20 @@ const reviews = [
       "Loved every detail of my makeover. The team was welcoming, professional, and incredibly talented.",
   },
   {
-  id: "04",
-  name: "Aaradhya N.",
-  initial: "A",
-  service: "Wedding Styling",
+    id: "04",
+    name: "Aaradhya N.",
+    initial: "A",
+    service: "Wedding Styling",
+    quote:
+      "The hairstyle and makeup were exactly what I imagined. I felt confident and beautiful all day.",
+  },
+  {
+  id: "05",
+  name: "Nisha V.",
+  initial: "N",
+  service: "Bridal Styling",
   quote:
-    "The hairstyle and makeup were exactly what I imagined. I felt confident and beautiful all day.",
+    "The team made me feel so comfortable and special. My bridal look was beautiful, and I received so many compliments on my wedding day.",
 },
 ];
 
@@ -77,23 +82,34 @@ function Stars() {
   );
 }
 
-function ReviewCard({ review }: { review: (typeof reviews)[number] }) {
+function ReviewCard({
+  review,
+}: {
+  review: (typeof reviews)[number];
+}) {
   return (
-    <article className="rounded-[18px] border border-[#3a2418]/[0.06] bg-white p-6 shadow-[0_14px_40px_-18px_rgba(45,27,19,0.22)] sm:p-7">
-      <Stars />
+    <article className="flex h-full min-h-[190px] flex-col justify-between rounded-[18px] border border-[#3a2418]/[0.06] bg-white p-5 shadow-[0_14px_40px_-18px_rgba(45,27,19,0.18)] sm:p-6 lg:p-7">
+      <div>
+        <Stars />
 
-      <p className="mt-4 text-[13px] leading-[1.85] text-[#6b6159] sm:text-sm">
-        {review.quote}
-      </p>
+        <p className="mt-4 text-[13px] leading-[1.85] text-black sm:text-sm">
+          {review.quote}
+        </p>
+      </div>
 
-      <div className="mt-6 flex items-center gap-3">
+      <div className="mt-6 flex flex-wrap items-center gap-3">
         <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-[#e1d3c2] bg-[#eee4d7] text-xs font-semibold text-[#70472f]">
           {review.initial}
         </div>
 
-        <p className="text-xs font-semibold text-[#292521]">{review.name}</p>
+        <p className="text-xs font-semibold text-[#292521]">
+          {review.name}
+        </p>
 
-        <span className="h-3.5 w-px bg-[#3a2418]/20" aria-hidden="true" />
+        <span
+          className="hidden h-3.5 w-px bg-[#3a2418]/20 sm:block"
+          aria-hidden="true"
+        />
 
         <p className="text-[11px] font-medium text-[#8b4a28]">
           {review.service}
@@ -141,9 +157,6 @@ export default function CustomerTestimonials() {
     { scope: sectionRef },
   );
 
-const middleColumn = reviews.slice(0, 2);
-const rightColumn = reviews.slice(2, 4);
-
   return (
     <section
       ref={sectionRef}
@@ -151,62 +164,59 @@ const rightColumn = reviews.slice(2, 4);
     >
       {/* SECTION WIDTH: 1320px */}
       <div className="mx-auto w-full max-w-[1320px]">
-        <div className="overflow-hidden rounded-[28px] border border-[#3a2418]/10 bg-[#faf7f0] px-5 py-12 sm:rounded-[36px] sm:px-8 sm:py-14 lg:px-14 lg:py-16">
-          <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-[0.85fr_1.05fr_1.05fr] lg:gap-8 xl:gap-10">
-            {/* LEFT: HEADING */}
-            <div className="testimonial-reveal">
-              <p className="text-[20px] font-semibold tracking-[0.12em] text-[#8b4a28]">
-                Testimonial
-              </p>
+        {/* WHITE SECTION BACKGROUND — KEEP AS IS */}
+        <div className="overflow-hidden  bg-white px-4 py-10 sm:px-6 sm:py-12 lg:px-10 lg:py-14">
+          {/* CENTERED SECTION HEADING */}
+          <div className="testimonial-reveal mx-auto mb-8 w-full max-w-[760px] text-center sm:mb-10 lg:mb-12">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-[#8b4a28] sm:text-xs">
+              Testimonials
+            </p>
 
-              
-<h2
-  className={`${cormorant.className} mt-3 text-3xl font-semibold leading-[1.12] text-[#2d1b13] sm:text-4xl lg:text-[42px]`}
->
-  What our clients say about us
-</h2>
+            <h2
+              className={`${cormorant.className} mt-3 text-[clamp(2rem,4.5vw,3.5rem)] font-semibold leading-[1.08] text-[#2d1b13]`}
+            >
+              What our clients say about us
+            </h2>
 
+            <p className="mx-auto mt-4 max-w-[520px] text-xs leading-6 text-[#7a6d63] sm:text-sm">
+              Heartfelt words from our brides and clients, shared in their own
+              voice.
+            </p>
+          </div>
 
-              <p className="mt-4 max-w-[290px] text-xs leading-6 text-[#7a6d63] sm:text-[13px]">
-                Heartfelt words from our brides and clients, shared in their own
-                voice.
-              </p>
+          {/* MASONRY-STYLE REVIEW CARDS */}
+          {/* MASONRY-STYLE REVIEW CARDS */}
+<div className="grid grid-cols-1 gap-4 sm:gap-5 lg:grid-cols-4 lg:gap-5">
 
-              {/* <a
-                href={reviewsUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group mt-7 inline-flex items-center gap-2 rounded-full bg-[#eee1ca] px-5 py-2.5 text-[11px] font-semibold text-[#8b4a28] transition-colors duration-300 hover:bg-[#8b4a28] hover:text-white"
-              >
-                View all testimonials
-                <span
-                  aria-hidden="true"
-                  className="transition-transform duration-300 group-hover:translate-x-1"
-                >
-                  ›
-                </span>
-              </a> */}
-            </div>
+  {/* CARD 1 — WIDE TOP LEFT */}
+  <div className="testimonial-reveal lg:col-span-2">
+    <ReviewCard review={reviews[0]} />
+  </div>
 
-            {/* MIDDLE: ONE REVIEW */}
-           {/* MIDDLE: TWO STACKED REVIEWS */}
-<div className="flex flex-col gap-5">
-  {middleColumn.map((review) => (
-    <div key={review.id} className="testimonial-reveal">
-      <ReviewCard review={review} />
-    </div>
-  ))}
+  {/* CARD 2 — TOP MIDDLE */}
+  <div className="testimonial-reveal lg:col-span-1">
+    <ReviewCard review={reviews[1]} />
+  </div>
+
+  {/* CARD 3 — TALL RIGHT */}
+  <div className="testimonial-reveal lg:col-span-1 lg:row-span-2">
+    <ReviewCard review={reviews[2]} />
+  </div>
+
+  {/* CARD 4 — WIDE BOTTOM LEFT */}
+  <div className="testimonial-reveal lg:col-span-2">
+    <ReviewCard review={reviews[3]} />
+  </div>
+
+  {/* CARD 5 — FILL THE EMPTY SPACE */}
+  <div className="testimonial-reveal lg:col-span-1">
+    <ReviewCard review={reviews[4]} />
+  </div>
+
 </div>
 
-            {/* RIGHT: TWO STACKED REVIEWS */}
-            <div className="flex flex-col gap-5">
-              {rightColumn.map((review) => (
-                <div key={review.id} className="testimonial-reveal">
-                  <ReviewCard review={review} />
-                </div>
-              ))}
-            </div>
-          </div>
+          {/* GOOGLE REVIEWS CTA */}
+
         </div>
       </div>
     </section>
