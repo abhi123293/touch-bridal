@@ -118,7 +118,7 @@ return (
 
           {/* LEFT CONTENT */}
           <div className="bridal-gallery-text">
-            <span className="mb-5 inline-flex items-center gap-3 text-[10px] font-semibold tracking-[0.24em] text-[#9a6845] sm:text-xs">
+            <span className="mb-5 inline-flex items-center gap-3 text-[10px] font-semibold tracking-[0.24em] text-[#8D6CA3] sm:text-xs">
               <span className="h-px w-8 bg-[#9a6845]" />
               OUR BRIDAL GALLERY
             </span>

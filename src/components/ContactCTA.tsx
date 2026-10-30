@@ -109,7 +109,7 @@ export default function ContactCTA() {
                   href={`https://wa.me/${whatsappNumber}?text=${encodeURIComponent("Hello Touch Bridal Makeover Studio & Unisex Salon! I would like to book an appointment.")}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-3 rounded-full bg-[#f2e3c8] px-5 py-3 text-[11px] font-semibold text-[#3a2418] transition-colors hover:bg-white"
+                  className="inline-flex items-center border border-white/50 gap-3  px-5 py-3 text-[11px] font-semibold text-white transition-colors hover:bg-white/15"
                 >
                   Book on WhatsApp
                   
@@ -117,7 +117,7 @@ export default function ContactCTA() {
 
                 <a
                   href={`tel:${phoneNumber}`}
-                  className="inline-flex items-center gap-2 rounded-full border border-white/50 px-5 py-3 text-[11px] font-semibold text-white transition-colors hover:bg-white/15"
+                  className="inline-flex items-center gap-2  border border-white/50 px-5 py-3 text-[11px] font-semibold text-white transition-colors hover:bg-white/15"
                 >
                   Call Us
                 </a>
@@ -136,7 +136,7 @@ export default function ContactCTA() {
 
           <div className="flex flex-col justify-center bg-white px-5 py-9 sm:px-8 sm:py-10 lg:px-12 lg:py-12">
             <div>
-              <p className="text-[10px] font-semibold uppercase tracking-[0.23em] text-[#8b4a28]">
+              <p className="text-[10px] font-semibold uppercase tracking-[0.23em] text-[#8D6CA3]">
                 LET'S TALK BEAUTY
               </p>
 
