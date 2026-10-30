@@ -164,108 +164,129 @@ export default function BridalHero() {
   });
   const archY = useTransform(scrollYProgress, [0, 1], [0, 60]);
 
-  useGSAP(
-    () => {
-      const mm = gsap.matchMedia();
+ 
+useGSAP(
+  () => {
+    const mm = gsap.matchMedia();
 
-      mm.add("(prefers-reduced-motion: no-preference)", () => {
-        const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
-
-        tl.fromTo(
-          ".hero-eyebrow",
-          { opacity: 0, y: 12 },
-          { opacity: 1, y: 0, duration: 0.7 },
-          0.1,
-        );
-
-       // Heading: blur-to-sharp reveal, one line at a time
-tl.fromTo(
-  ".hero-line",
-  {
-    opacity: 0,
-    filter: "blur(18px)",
-    y: 30,
-  },
-  {
-    opacity: 1,
-    filter: "blur(0px)",
-    y: 0,
-    duration: 1.1,
-    stagger: 0.18,
-    ease: "power3.out",
-  },
-  0.2,
-);
-
-        tl.fromTo(
-          ".hero-description",
-          { opacity: 0, y: 15 },
-          { opacity: 1, y: 0, duration: 0.8 },
-          0.7,
-        );
-
-
-        // CTA buttons: reveal individually with a soft blur
-tl.fromTo(
-  ".hero-cta",
-  {
-    opacity: 0,
-    filter: "blur(12px)",
-    y: 18,
-    scale: 0.97,
-  },
-  {
-    opacity: 1,
-    filter: "blur(0px)",
-    y: 0,
-    scale: 1,
-    duration: 0.8,
-    stagger: 0.2,
-    ease: "power3.out",
-  },
-  1.5,
-);
-        tl.fromTo(
-          ".hero-fade",
-          { opacity: 0, y: 12 },
-          { opacity: 1, y: 0, duration: 0.7, stagger: 0.12 },
-          0.9,
-        );
-
-        tl.fromTo(
-          ".hero-visual",
-          { opacity: 0, y: 30, scale: 0.97 },
-          { opacity: 1, y: 0, scale: 1, duration: 1.1 },
-          0.3,
-        );
-
-        // The floating info cards drift softly up and down.
-        gsap.to(".float-card", {
-          y: -8,
-          duration: 2.6,
-          ease: "sine.inOut",
-          yoyo: true,
-          repeat: -1,
-          stagger: 0.5,
-        });
+    mm.add("(prefers-reduced-motion: no-preference)", () => {
+      const tl = gsap.timeline({
+        defaults: { ease: "power3.out" },
       });
 
-      mm.add("(prefers-reduced-motion: reduce)", () => {
-       gsap.set(
-  ".hero-eyebrow, .hero-line, .hero-description, .hero-fade, .hero-cta, .hero-visual",
-  {
-    opacity: 1,
-    filter: "none",
-    y: 0,
-    scale: 1,
-  },
-);
-      });
+      // Eyebrow: smooth fade-up
+      tl.fromTo(
+        ".hero-eyebrow",
+        { opacity: 0, y: 15 },
+        { opacity: 1, y: 0, duration: 0.7 },
+        0.1,
+      );
 
-      return () => mm.revert();
-    },
-    { scope: contentRef },
-  );
+      // Heading: smooth fade-up with subtle scale
+      tl.fromTo(
+        ".hero-line",
+        {
+          opacity: 0,
+          y: 35,
+          scale: 0.98,
+        },
+        {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 1,
+          stagger: 0.18,
+          ease: "power3.out",
+        },
+        0.2,
+      );
+
+      // Description
+      tl.fromTo(
+        ".hero-description",
+        { opacity: 0, y: 18 },
+        { opacity: 1, y: 0, duration: 0.8 },
+        0.7,
+      );
+
+      // CTA buttons: smooth fade-up
+      tl.fromTo(
+        ".hero-cta",
+        {
+          opacity: 0,
+          y: 20,
+          scale: 0.96,
+        },
+        {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 0.8,
+          stagger: 0.2,
+          ease: "power3.out",
+        },
+        1.5,
+      );
+
+      // Other hero elements
+      tl.fromTo(
+        ".hero-fade",
+        { opacity: 0, y: 15 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.7,
+          stagger: 0.12,
+        },
+        0.9,
+      );
+
+      // Hero visual
+      tl.fromTo(
+        ".hero-visual",
+        {
+          opacity: 0,
+          y: 35,
+          scale: 0.96,
+        },
+        {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 1.1,
+          ease: "power3.out",
+        },
+        0.3,
+      );
+
+      // Floating info cards
+      gsap.to(".float-card", {
+        y: -8,
+        duration: 2.6,
+        ease: "sine.inOut",
+        yoyo: true,
+        repeat: -1,
+        stagger: 0.5,
+      });
+    });
+
+    // Reduced motion accessibility
+    mm.add("(prefers-reduced-motion: reduce)", () => {
+      gsap.set(
+        ".hero-eyebrow, .hero-line, .hero-description, .hero-fade, .hero-cta, .hero-visual",
+        {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+        },
+      );
+    });
+
+    return () => mm.revert();
+  },
+  { scope: contentRef },
+);
+
 
   const whatsappLink =
     "https://wa.me/919789376174?text=" +
