@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { Cormorant_Garamond } from "next/font/google";
+import { Cormorant_Garamond, Inter } from "next/font/google";
 import { ArrowUpRight, ChevronLeft, ChevronRight, Sparkles } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -23,6 +23,12 @@ const cormorant = Cormorant_Garamond({
   display: "swap",
 });
 
+const inter = Inter({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  display: "swap",
+});
+
 // Precise Mughal Cusped Arch Paths (Single-line continuous strings to prevent CRLF hydration mismatch)
 const MUGHAL_ARCH_OUTER_PATH =
   "M 368 12 C 400 40, 440 68, 490 95 C 560 135, 640 185, 695 245 C 725 280, 736 320, 736 370 V 1308 H 0 V 370 C 0 320, 11 280, 41 245 C 96 185, 176 135, 246 95 C 296 68, 336 40, 368 12 Z";
@@ -32,33 +38,6 @@ const MUGHAL_ARCH_INNER_PATH =
 
 const MUGHAL_CORNER_MASK_PATH =
   "M 0 0 H 736 V 1308 H 0 Z M 368 12 C 400 40, 440 68, 490 95 C 560 135, 640 185, 695 245 C 725 280, 736 320, 736 370 V 1308 H 0 V 370 C 0 320, 11 280, 41 245 C 96 185, 176 135, 246 95 C 296 68, 336 40, 368 12 Z";
-
-const SAREE_MODELS = [
-  {
-    id: "saree-1",
-    image: "/images/saree-1.jpg",
-    bgStart: "#382014",
-    bgEnd: "#1a0d07",
-  },
-  {
-    id: "saree-2",
-    image: "/images/saree-2.jpg",
-    bgStart: "#351e12",
-    bgEnd: "#180c06",
-  },
-  {
-    id: "saree-3",
-    image: "/images/saree-3.jpg",
-    bgStart: "#3b2216",
-    bgEnd: "#1c0e07",
-  },
-  {
-    id: "saree-5",
-    image: "/images/saree-5.jpg",
-    bgStart: "#321b10",
-    bgEnd: "#170b05",
-  },
-];
 
 const WHATSAPP_ENQUIRY_URL =
   "https://wa.me/919789376174?text=" +
@@ -84,7 +63,7 @@ const SHOWCASE_SERVICES: ServiceShowcaseItem[] = [
     number: "01",
     title: "Bridal Makeup",
     tag: "Signature Bridal",
-    description: "Bridal & reception looks",
+    description: "Bridal makeovers & reception looks tailored to perfection",
     image: "/images/imageee.jpg",
     actionKey: "bridal",
   },
@@ -93,7 +72,7 @@ const SHOWCASE_SERVICES: ServiceShowcaseItem[] = [
     number: "02",
     title: "Groom Makeup",
     tag: "Men's Luxury Grooming",
-    description: "Refined wedding grooming",
+    description: "Refined wedding styling & gentlemen's grooming rituals",
     image: "/images/Groom.jpg",
     actionKey: "groom",
   },
@@ -102,7 +81,7 @@ const SHOWCASE_SERVICES: ServiceShowcaseItem[] = [
     number: "03",
     title: "Hair Services",
     tag: "Rituals & Styling",
-    description: "Keratin, cuts & hair spa",
+    description: "Keratin, customized haircuts, coloring & luxury spa",
     image: "/images/hair-services.jpg",
     actionKey: "hair",
   },
@@ -111,7 +90,7 @@ const SHOWCASE_SERVICES: ServiceShowcaseItem[] = [
     number: "04",
     title: "Skin & Facial",
     tag: "Glow & Rejuvenation",
-    description: "Hydra & Korean facials",
+    description: "Hydra facials, Korean glow & deep skin rejuvenation",
     image: "/images/skin-facial.jpg",
     actionKey: "skin",
   },
@@ -120,7 +99,7 @@ const SHOWCASE_SERVICES: ServiceShowcaseItem[] = [
     number: "05",
     title: "Beauty & Grooming",
     tag: "Classic Salon Care",
-    description: "Threading, nails & wax",
+    description: "Threading, waxing, nail art, manicure & pedicure",
     image: "/images/beauty-grooming.jpg",
     actionKey: "beauty",
   },
@@ -129,7 +108,7 @@ const SHOWCASE_SERVICES: ServiceShowcaseItem[] = [
     number: "06",
     title: "Additional Services",
     tag: "Saree Draping & Care",
-    description: "Pre-pleating & box folding",
+    description: "Signature saree pre-pleating & precise box folding",
     image: "/images/saree pre pleating.jpg",
     actionKey: "additional",
   },
@@ -138,7 +117,7 @@ const SHOWCASE_SERVICES: ServiceShowcaseItem[] = [
     number: "07",
     title: "Men's Services",
     tag: "Gentlemen's Salon",
-    description: "Beard styling & haircuts",
+    description: "Beard sculpting, haircuts, facials & hair spa",
     image: "/images/mens-services.jpg",
     actionKey: "mens",
   },
@@ -147,7 +126,7 @@ const SHOWCASE_SERVICES: ServiceShowcaseItem[] = [
     number: "08",
     title: "Rental Jewels",
     tag: "Heritage Jewellery",
-    description: "Antique temple bridal sets",
+    description: "Handcrafted antique temple bridal jewelry collections",
     image: "/images/rental jewels.jpg",
     actionKey: "rental",
   },
@@ -156,7 +135,7 @@ const SHOWCASE_SERVICES: ServiceShowcaseItem[] = [
     number: "09",
     title: "Appointment Enquiry",
     tag: "Instant Salon Booking",
-    description: "Direct WhatsApp booking",
+    description: "Direct WhatsApp concierge for consultations & bookings",
     image: "/images/appointment.jpg",
     actionKey: "appointment",
   },
@@ -176,7 +155,6 @@ export default function ServicesShowcase() {
 
   // Refs for ScrollTrigger & auto-scrolling
   const showcaseContainerRef = useRef<HTMLDivElement>(null);
-  const trayRef = useRef<HTMLDivElement>(null);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const isPausedRef = useRef(false);
   const isInteractingRef = useRef(false);
@@ -187,7 +165,7 @@ export default function ServicesShowcase() {
   // GSAP ScrollTrigger Animations for entrance and scroll-driven velocity
   useGSAP(
     () => {
-      // 1. Entrance animation for the 4 Mughal Arch saree cards
+      // 1. Entrance animation for the Mughal Arch service cards
       const archCards = gsap.utils.toArray<HTMLElement>(".saree-arch-card");
       if (archCards.length > 0) {
         gsap.fromTo(
@@ -197,33 +175,12 @@ export default function ServicesShowcase() {
             opacity: 1,
             y: 0,
             scale: 1,
-            duration: 0.9,
-            stagger: 0.12,
-            ease: "power3.out",
-            scrollTrigger: {
-              trigger: showcaseContainerRef.current,
-              start: "top 80%",
-              toggleActions: "play none none none",
-            },
-            clearProps: "transform,opacity",
-          }
-        );
-      }
-
-      // 2. Entrance for the 9-services glassmorphism tray
-      if (trayRef.current) {
-        gsap.fromTo(
-          trayRef.current,
-          { opacity: 0, y: 40, scale: 0.97 },
-          {
-            opacity: 1,
-            y: 0,
-            scale: 1,
             duration: 0.85,
+            stagger: 0.1,
             ease: "power3.out",
             scrollTrigger: {
               trigger: showcaseContainerRef.current,
-              start: "top 75%",
+              start: "top 82%",
               toggleActions: "play none none none",
             },
             clearProps: "transform,opacity",
@@ -231,8 +188,8 @@ export default function ServicesShowcase() {
         );
       }
 
-      // 3. ScrollTrigger velocity & scrub integration:
-      // As the user scrolls vertically down the page, ScrollTrigger smoothly accelerates and glides the horizontal scroll track
+      // 2. ScrollTrigger velocity & scrub integration:
+      // When the user scrolls vertically down the page, ScrollTrigger smoothly pushes the horizontal scroll track
       if (scrollContainerRef.current && showcaseContainerRef.current) {
         ScrollTrigger.create({
           trigger: showcaseContainerRef.current,
@@ -241,7 +198,7 @@ export default function ServicesShowcase() {
           onUpdate: (self) => {
             const container = scrollContainerRef.current;
             if (container && !isPausedRef.current && !isInteractingRef.current) {
-              const velocity = self.getVelocity() / 250;
+              const velocity = self.getVelocity() / 240;
               container.scrollLeft += velocity;
               const singleSetWidth = container.scrollWidth / 3;
               if (singleSetWidth > 0) {
@@ -264,7 +221,7 @@ export default function ServicesShowcase() {
     const container = scrollContainerRef.current;
     if (!container) return;
 
-    // Start at middle duplicate set so scrolling in either direction has ample buffer
+    // Start around the middle duplicate set so scrolling in either direction has ample buffer
     const singleSetWidth = container.scrollWidth / 3;
     if (singleSetWidth > 0 && container.scrollLeft === 0) {
       container.scrollLeft = singleSetWidth;
@@ -272,14 +229,13 @@ export default function ServicesShowcase() {
 
     let animationFrameId: number;
     let lastTime: number | null = null;
-    const speed = 40; // baseline steady glide speed in pixels per second
+    const speed = 36; // smooth, elegant gliding speed in pixels per second
 
     const animate = (time: number) => {
       if (lastTime !== null) {
         const delta = (time - lastTime) / 1000;
         if (!isPausedRef.current && !isInteractingRef.current && container) {
           container.scrollLeft += speed * delta;
-          // Tripled items: loop seamlessly across duplicate sets
           const singleWidth = container.scrollWidth / 3;
           if (singleWidth > 0) {
             if (container.scrollLeft >= singleWidth * 2) {
@@ -303,13 +259,13 @@ export default function ServicesShowcase() {
 
   const handlePrev = () => {
     if (scrollContainerRef.current) {
-      scrollContainerRef.current.scrollBy({ left: -280, behavior: "smooth" });
+      scrollContainerRef.current.scrollBy({ left: -340, behavior: "smooth" });
     }
   };
 
   const handleNext = () => {
     if (scrollContainerRef.current) {
-      scrollContainerRef.current.scrollBy({ left: 280, behavior: "smooth" });
+      scrollContainerRef.current.scrollBy({ left: 340, behavior: "smooth" });
     }
   };
 
@@ -331,7 +287,7 @@ export default function ServicesShowcase() {
   const handleTouchEnd = () => {
     setTimeout(() => {
       isInteractingRef.current = false;
-    }, 1200);
+    }, 1400);
   };
 
   // Auto-reveal if hash is present (e.g. #bridal-makeup, #hair-services, etc.)
@@ -381,7 +337,7 @@ export default function ServicesShowcase() {
             el.scrollIntoView({ behavior: "smooth", block: "start" });
           }
         }, 150);
-      } else if (hash.includes("beauty-grooming") || hash.includes("beauty") || hash.includes("grooming")) {
+      } else if (hash.includes("beauty") || hash.includes("grooming")) {
         setIsBeautyOpen(true);
         setTimeout(() => {
           const el = document.getElementById("beauty-grooming-section");
@@ -389,7 +345,7 @@ export default function ServicesShowcase() {
             el.scrollIntoView({ behavior: "smooth", block: "start" });
           }
         }, 150);
-      } else if (hash.includes("hair-services") || hash.includes("hair")) {
+      } else if (hash.includes("hair")) {
         setIsHairOpen(true);
         setTimeout(() => {
           const el = document.getElementById("hair-services-section");
@@ -397,7 +353,7 @@ export default function ServicesShowcase() {
             el.scrollIntoView({ behavior: "smooth", block: "start" });
           }
         }, 150);
-      } else if (hash.includes("bridal-makeup") || hash.includes("bridal-services")) {
+      } else if (hash.includes("bridal") || hash.includes("makeup")) {
         setIsBridalOpen(true);
         setTimeout(() => {
           const el = document.getElementById("bridal-makeup-section");
@@ -410,12 +366,12 @@ export default function ServicesShowcase() {
   }, []);
 
   const handleOpenBridalSection = () => {
-    setIsGroomOpen(false);
-    setIsMensOpen(false);
     setIsHairOpen(false);
     setIsBeautyOpen(false);
     setIsSkinOpen(false);
     setIsAdditionalOpen(false);
+    setIsMensOpen(false);
+    setIsGroomOpen(false);
     setClosingSection(null);
     setIsBridalOpen(true);
     setTimeout(() => {
@@ -427,12 +383,12 @@ export default function ServicesShowcase() {
   };
 
   const handleOpenHairSection = () => {
-    setIsGroomOpen(false);
-    setIsMensOpen(false);
     setIsBridalOpen(false);
     setIsBeautyOpen(false);
     setIsSkinOpen(false);
     setIsAdditionalOpen(false);
+    setIsMensOpen(false);
+    setIsGroomOpen(false);
     setClosingSection(null);
     setIsHairOpen(true);
     setTimeout(() => {
@@ -444,12 +400,12 @@ export default function ServicesShowcase() {
   };
 
   const handleOpenBeautySection = () => {
-    setIsGroomOpen(false);
-    setIsMensOpen(false);
     setIsBridalOpen(false);
     setIsHairOpen(false);
     setIsSkinOpen(false);
     setIsAdditionalOpen(false);
+    setIsMensOpen(false);
+    setIsGroomOpen(false);
     setClosingSection(null);
     setIsBeautyOpen(true);
     setTimeout(() => {
@@ -461,12 +417,12 @@ export default function ServicesShowcase() {
   };
 
   const handleOpenSkinSection = () => {
-    setIsGroomOpen(false);
-    setIsMensOpen(false);
     setIsBridalOpen(false);
     setIsHairOpen(false);
     setIsBeautyOpen(false);
     setIsAdditionalOpen(false);
+    setIsMensOpen(false);
+    setIsGroomOpen(false);
     setClosingSection(null);
     setIsSkinOpen(true);
     setTimeout(() => {
@@ -478,12 +434,12 @@ export default function ServicesShowcase() {
   };
 
   const handleOpenAdditionalSection = () => {
-    setIsGroomOpen(false);
-    setIsMensOpen(false);
     setIsBridalOpen(false);
     setIsHairOpen(false);
     setIsBeautyOpen(false);
     setIsSkinOpen(false);
+    setIsMensOpen(false);
+    setIsGroomOpen(false);
     setClosingSection(null);
     setIsAdditionalOpen(true);
     setTimeout(() => {
@@ -617,13 +573,25 @@ export default function ServicesShowcase() {
     }
 
     // 3. Initiate exit transition and disappear the active sub-section after scrolling up
-    if (isBridalOpen) setClosingSection("bridal");
-    if (isHairOpen) setClosingSection("hair");
-    if (isBeautyOpen) setClosingSection("beauty");
-    if (isSkinOpen) setClosingSection("skin");
-    if (isAdditionalOpen) setClosingSection("additional");
-    if (isMensOpen) setClosingSection("mens");
-    if (isGroomOpen) setClosingSection("groom");
+    const activeSection = isBridalOpen
+      ? "bridal"
+      : isHairOpen
+      ? "hair"
+      : isBeautyOpen
+      ? "beauty"
+      : isSkinOpen
+      ? "skin"
+      : isAdditionalOpen
+      ? "additional"
+      : isMensOpen
+      ? "mens"
+      : isGroomOpen
+      ? "groom"
+      : null;
+
+    if (activeSection) {
+      setClosingSection(activeSection);
+    }
 
     setTimeout(() => {
       setIsBridalOpen(false);
@@ -644,19 +612,76 @@ export default function ServicesShowcase() {
       className="relative z-10 mx-auto w-full max-w-[1440px] drop-shadow-[0_30px_70px_rgba(20,10,5,0.7)]"
     >
       {/* =========================================================================
-          FIRST SECTION: 4-Frame Mughal Arcade Saree Showcase Container
-          WITH 9 Services Auto-Scrolling Glassmorphism Ribbon at the Base
+          FIRST SECTION: 9 Services Auto-Scrolling Mughal Arcade Showcase
+          - Each service image features the service name prominently on the image
+          - Full-height regal Mughal Arch frame with gold contour & apex finial
+          - Smooth continuous auto-scrolling with GSAP ScrollTrigger velocity scrub
+          - Touching any service image smoothly navigates to its subsection
          ========================================================================= */}
-      <div id="first-showcase-section" className="relative w-full overflow-hidden rounded-[24px] sm:rounded-[32px] border border-[#D6BC96]/30 shadow-2xl">
-        {/* 4 Mughal Arch Saree Models */}
-        <div className="grid grid-cols-2 gap-0 sm:grid-cols-2 lg:grid-cols-4 items-end w-full">
-          {SAREE_MODELS.map((model, index) => (
+      <div
+        id="first-showcase-section"
+        className="relative w-full overflow-hidden rounded-[24px] sm:rounded-[32px] border border-[#D6BC96]/35 bg-gradient-to-b from-[#24150e] via-[#1a0e08] to-[#120703] shadow-2xl"
+      >
+        {/* Regal Top Bar: 9 SIGNATURE SERVICES + Live Indicator + Prev/Next Controls */}
+        <div className="relative z-30 flex items-center justify-between gap-3 px-4 sm:px-6 py-3.5 border-b border-[#D6BC96]/25 bg-gradient-to-r from-[#200e06]/95 via-[#2c170d]/90 to-[#200e06]/95 backdrop-blur-md">
+          <div className="flex items-center gap-2.5">
+            <span className="h-2 w-2 rounded-full bg-[#D6BC96] shadow-[0_0_10px_#D6BC96] animate-pulse" />
+            <h2 className={`${inter.className} text-[10.5px] sm:text-xs font-semibold tracking-[0.24em] uppercase text-[#D6BC96] flex items-center gap-2`}>
+              <Sparkles className="h-3.5 w-3.5 text-[#D6BC96]" />
+              <span>9 SIGNATURE SERVICES • AUTO-SCROLLING SHOWCASE</span>
+            </h2>
+          </div>
+
+          <span className="text-[11px] text-[#F5F0E8]/75 tracking-wide hidden sm:inline-block font-sans">
+            Touch any service image to explore treatments &amp; rituals
+          </span>
+
+          {/* Stepping Chevrons */}
+          <div className="flex items-center gap-2">
+            <button
+              type="button"
+              onClick={handlePrev}
+              aria-label="Scroll left to previous service"
+              className="h-8 w-8 rounded-full bg-[#D6BC96]/15 border border-[#D6BC96]/50 flex items-center justify-center text-[#D6BC96] hover:bg-[#D6BC96] hover:text-[#38271F] transition-all shadow-sm"
+            >
+              <ChevronLeft className="h-4 w-4 stroke-[2.2]" />
+            </button>
+            <button
+              type="button"
+              onClick={handleNext}
+              aria-label="Scroll right to next service"
+              className="h-8 w-8 rounded-full bg-[#D6BC96]/15 border border-[#D6BC96]/50 flex items-center justify-center text-[#D6BC96] hover:bg-[#D6BC96] hover:text-[#38271F] transition-all shadow-sm"
+            >
+              <ChevronRight className="h-4 w-4 stroke-[2.2]" />
+            </button>
+          </div>
+        </div>
+
+        {/* Infinite Auto-Scrolling Track with Full Mughal Arch Service Cards */}
+        <div
+          ref={scrollContainerRef}
+          onMouseEnter={() => {
+            isPausedRef.current = true;
+          }}
+          onMouseLeave={() => {
+            isPausedRef.current = false;
+          }}
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
+          className="flex gap-4 sm:gap-5 lg:gap-6 overflow-x-auto no-scrollbar items-stretch p-3.5 sm:p-5 lg:p-6"
+          style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+        >
+          {/* Tripled list for seamless infinite wrapping */}
+          {[...SHOWCASE_SERVICES, ...SHOWCASE_SERVICES, ...SHOWCASE_SERVICES].map((service, index) => (
             <article
-              key={model.id}
-              className="saree-arch-card group relative w-full aspect-[736/1308] overflow-hidden bg-[#24150e] transition-all duration-500"
-              style={{
-                borderLeft: index > 0 ? "1px solid rgba(223, 183, 108, 0.35)" : "none",
+              key={`${service.id}-${index}`}
+              onClick={() => {
+                if (!isSwipingRef.current) {
+                  handleServiceSelect(service.actionKey);
+                }
               }}
+              className="saree-arch-card group relative flex-shrink-0 w-[275px] sm:w-[315px] lg:w-[345px] aspect-[736/1200] overflow-hidden rounded-[20px] sm:rounded-[26px] bg-[#24150e] border border-[#D6BC96]/35 shadow-[0_16px_45px_rgba(0,0,0,0.65)] transition-all duration-500 hover:border-[#D6BC96] hover:shadow-[0_20px_55px_rgba(214,188,150,0.3)] select-none text-left cursor-pointer"
             >
               {/* Subtle Warm Backdrop behind Model */}
               <div
@@ -664,17 +689,17 @@ export default function ServicesShowcase() {
                 className="absolute inset-0 bg-gradient-to-b from-[#382115] via-[#24150e] to-[#140a06]"
               />
 
-              {/* Seamlessly Fitted Model Image inside Mughal Arch Frame */}
+              {/* Seamlessly Fitted Service Image inside Mughal Arch Frame */}
               <img
-                src={model.image}
-                alt={`Bridal saree makeover showcase ${index + 1}`}
-                className="relative z-10 h-full w-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.025]"
+                src={service.image}
+                alt={service.title}
+                className="relative z-10 h-full w-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.035]"
               />
 
               {/* Deep Grounding Scrim Gradient at Base */}
               <div
                 aria-hidden="true"
-                className="pointer-events-none absolute inset-x-0 bottom-0 z-20 h-52 sm:h-64 lg:h-72 bg-gradient-to-t from-[#140a06]/95 via-[#140a06]/65 to-transparent"
+                className="pointer-events-none absolute inset-x-0 bottom-0 z-20 h-64 sm:h-72 lg:h-80 bg-gradient-to-t from-[#140a06]/98 via-[#140a06]/80 via-45% to-transparent"
               />
 
               {/* Decorative Mughal Arch Overlay with Gold Contour & Corner Masks */}
@@ -687,9 +712,8 @@ export default function ServicesShowcase() {
                 role="img"
               >
                 <defs>
-                  {/* Metallic Gold & Bronze Gradient */}
                   <linearGradient
-                    id={`gold-border-${model.id}`}
+                    id={`gold-border-${service.id}-${index}`}
                     x1="0%"
                     y1="0%"
                     x2="100%"
@@ -715,7 +739,7 @@ export default function ServicesShowcase() {
                 <path
                   d={MUGHAL_ARCH_INNER_PATH}
                   fill="none"
-                  stroke={`url(#gold-border-${model.id})`}
+                  stroke={`url(#gold-border-${service.id}-${index})`}
                   strokeWidth="1.2"
                   opacity="0.68"
                   className="transition-opacity duration-300 group-hover:opacity-95"
@@ -725,142 +749,57 @@ export default function ServicesShowcase() {
                 <path
                   d={MUGHAL_ARCH_OUTER_PATH}
                   fill="none"
-                  stroke={`url(#gold-border-${model.id})`}
+                  stroke={`url(#gold-border-${service.id}-${index})`}
                   strokeWidth="3.2"
                   className="transition-all duration-300 group-hover:stroke-width-[3.8]"
                 />
 
                 {/* Decorative Mughal Apex Crown Finial Motif */}
-                <g fill={`url(#gold-border-${model.id})`}>
+                <g fill={`url(#gold-border-${service.id}-${index})`}>
                   <path d="M 368 2 L 374 12 L 368 18 L 362 12 Z" />
                   <circle cx="368" cy="2" r="2.5" />
                 </g>
               </svg>
+
+              {/* =============================================================
+                  SERVICE NAME & DETAILS DIRECTLY ON THE IMAGE
+                 ============================================================= */}
+              <div className="absolute inset-x-0 bottom-0 z-40 p-4 sm:p-5 flex flex-col justify-end">
+                {/* Number & Category Tag Pill */}
+                <div className="flex items-center gap-2 mb-1.5">
+                  <span className="font-mono text-[10px] sm:text-[11px] font-bold tracking-wider text-[#D6BC96] px-2.5 py-0.5 rounded-full bg-[#38271F]/85 border border-[#D6BC96]/50 shadow-sm backdrop-blur-md">
+                    {service.number}
+                  </span>
+                  <span className="font-sans text-[10px] sm:text-[11px] font-semibold tracking-[0.16em] uppercase text-[#D6BC96] drop-shadow-sm truncate">
+                    {service.tag}
+                  </span>
+                </div>
+
+                {/* Service Name displayed prominently on the image */}
+                <h3
+                  className={`${cormorant.className} text-2xl sm:text-3xl font-medium text-[#F5F0E8] leading-tight group-hover:text-[#D6BC96] transition-colors drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)]`}
+                >
+                  {service.title}
+                </h3>
+
+                {/* Description Snippet */}
+                <p className="mt-1 text-xs text-[#F5F0E8]/85 font-sans line-clamp-1 leading-relaxed drop-shadow-sm">
+                  {service.description}
+                </p>
+
+                {/* Touch to Explore Callout Bar */}
+                <div className="mt-3.5 flex items-center justify-between pt-2.5 border-t border-[#D6BC96]/30">
+                  <span className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[#D6BC96] flex items-center gap-1.5">
+                    <span>Touch to Explore</span>
+                    <ArrowUpRight className="h-3.5 w-3.5 stroke-[2.2] transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                  </span>
+                  <div className="h-7 w-7 sm:h-8 sm:w-8 rounded-full bg-[#D6BC96]/20 border border-[#D6BC96]/60 flex items-center justify-center text-[#D6BC96] shadow-sm group-hover:bg-[#D6BC96] group-hover:text-[#38271F] transition-all duration-300">
+                    <ArrowUpRight className="h-3.5 w-3.5 sm:h-4 sm:w-4 stroke-[2.2]" />
+                  </div>
+                </div>
+              </div>
             </article>
           ))}
-        </div>
-
-        {/* =========================================================================
-            S TOUCH SALON — 9 Services Auto-Scrolling Glassmorphism Ribbon at Bottom
-            - Powered by GSAP ScrollTrigger for entrance reveal & scroll-driven velocity
-            - Continuous smooth auto-glide when idle
-            - Touching any service smoothly navigates to its subsection
-           ========================================================================= */}
-        <div
-          ref={trayRef}
-          aria-label="9 Services Auto-Scrolling Navigation"
-          className="absolute inset-x-0 bottom-0 z-40 flex flex-col items-center justify-end pb-3 sm:pb-5 lg:pb-6 px-2 sm:px-4 lg:px-6 pointer-events-none"
-        >
-          {/* Translucent Brownish Glassmorphism Tray at Bottom of Images */}
-          <div className="pointer-events-auto relative w-full max-w-[1360px] overflow-hidden rounded-[20px] sm:rounded-[26px] border border-white/20 border-t-white/35 border-b-black/40 bg-gradient-to-b from-[#331a0e]/80 via-[#200e06]/88 to-[#120602]/92 py-2.5 sm:py-3.5 px-2 sm:px-4 backdrop-blur-xl backdrop-saturate-150 ring-1 ring-[#D6BC96]/40 shadow-[inset_0_1.5px_2px_rgba(255,255,255,0.3),0_20px_50px_rgba(0,0,0,0.65)]">
-
-            {/* Specular Glass Sheen Top Edge */}
-            <div
-              aria-hidden="true"
-              className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#D6BC96]/80 to-transparent"
-            />
-
-            {/* Tray Header: 9 SIGNATURE SERVICES with Live Indicator & Prev/Next Buttons */}
-            <div className="relative z-10 flex items-center justify-between gap-2 px-2 sm:px-3 mb-2 pb-2 border-b border-[#D6BC96]/20">
-              <div className="flex items-center gap-2">
-                <span className="h-2 w-2 rounded-full bg-[#D6BC96] shadow-[0_0_8px_#D6BC96] animate-pulse" />
-                <h2 className="text-[10px] sm:text-xs font-mono font-semibold tracking-[0.2em] uppercase text-[#D6BC96] flex items-center gap-1.5">
-                  <Sparkles className="h-3 w-3 inline-block" />
-                  <span>9 SIGNATURE SERVICES • SCROLL TRIGGERED</span>
-                </h2>
-              </div>
-
-              <span className="text-[10px] sm:text-xs text-[#F5F0E8]/75 tracking-wide hidden md:inline-block font-sans">
-                Touch any service to explore sub-services &amp; rituals
-              </span>
-
-              {/* Prev / Next Chevrons for Manual Stepping */}
-              <div className="flex items-center gap-1.5">
-                <button
-                  type="button"
-                  onClick={handlePrev}
-                  aria-label="Scroll left to previous services"
-                  className="h-7 w-7 rounded-full bg-[#D6BC96]/15 border border-[#D6BC96]/40 flex items-center justify-center text-[#D6BC96] hover:bg-[#D6BC96] hover:text-[#38271F] transition-all"
-                >
-                  <ChevronLeft className="h-4 w-4 stroke-[2.2]" />
-                </button>
-                <button
-                  type="button"
-                  onClick={handleNext}
-                  aria-label="Scroll right to next services"
-                  className="h-7 w-7 rounded-full bg-[#D6BC96]/15 border border-[#D6BC96]/40 flex items-center justify-center text-[#D6BC96] hover:bg-[#D6BC96] hover:text-[#38271F] transition-all"
-                >
-                  <ChevronRight className="h-4 w-4 stroke-[2.2]" />
-                </button>
-              </div>
-            </div>
-
-            {/* Infinite Auto-Scrolling Track with ScrollTrigger Dynamic Scrub */}
-            <div
-              ref={scrollContainerRef}
-              onMouseEnter={() => { isPausedRef.current = true; }}
-              onMouseLeave={() => { isPausedRef.current = false; }}
-              onTouchStart={handleTouchStart}
-              onTouchMove={handleTouchMove}
-              onTouchEnd={handleTouchEnd}
-              className="flex gap-2.5 sm:gap-3.5 overflow-x-auto no-scrollbar items-center py-1 px-1"
-              style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
-            >
-              {/* Tripled list for butter-smooth infinite wrap */}
-              {[...SHOWCASE_SERVICES, ...SHOWCASE_SERVICES, ...SHOWCASE_SERVICES].map((service, index) => (
-                <button
-                  key={`${service.id}-${index}`}
-                  type="button"
-                  onClick={() => {
-                    if (!isSwipingRef.current) {
-                      handleServiceSelect(service.actionKey);
-                    }
-                  }}
-                  className="group relative flex-shrink-0 w-[230px] sm:w-[270px] lg:w-[290px] h-[86px] sm:h-[96px] text-left cursor-pointer rounded-[14px] sm:rounded-[18px] border border-[#D6BC96]/35 bg-gradient-to-r from-[#2c170d]/90 via-[#1e0f08]/90 to-[#140804]/90 p-2 sm:p-2.5 flex items-center gap-2.5 sm:gap-3 transition-all duration-300 hover:border-[#D6BC96] hover:scale-[1.02] hover:shadow-[0_8px_25px_rgba(223,183,108,0.25)] focus:outline-none select-none"
-                >
-                  {/* Service Image Portal with Luxury Gold Ring */}
-                  <div className="relative h-14 w-14 sm:h-16 sm:w-16 rounded-full overflow-hidden border-2 border-[#D6BC96]/70 shrink-0 shadow-md group-hover:scale-105 transition-transform duration-300">
-                    <img
-                      src={service.image}
-                      alt={service.title}
-                      className="h-full w-full object-cover object-center"
-                    />
-                    <div className="absolute inset-0 ring-1 ring-inset ring-black/30 rounded-full" />
-                  </div>
-
-                  {/* Service Text & Details */}
-                  <div className="flex-1 min-w-0 pr-1">
-                    <div className="flex items-center gap-1.5 mb-0.5">
-                      <span className="text-[10px] font-mono font-bold tracking-wider text-[#D6BC96] uppercase">
-                        {service.number}
-                      </span>
-                      <span className="text-[9px] sm:text-[10px] font-sans font-semibold tracking-wider text-[#D6BC96]/75 uppercase truncate">
-                        • {service.tag}
-                      </span>
-                    </div>
-
-                    <h3
-                      className={`${cormorant.className} text-base sm:text-lg font-medium text-[#F5F0E8] leading-tight truncate group-hover:text-[#D6BC96] transition-colors`}
-                    >
-                      {service.title}
-                    </h3>
-
-                    <div className="mt-1 flex items-center gap-1 text-[10px] font-semibold text-[#D6BC96] tracking-wide uppercase">
-                      <span>Explore</span>
-                      <ArrowUpRight className="h-2.5 w-2.5 stroke-[2.2] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                    </div>
-                  </div>
-
-                  {/* Right Arrow Badge */}
-                  <div className="shrink-0">
-                    <div className="h-7 w-7 sm:h-8 sm:w-8 rounded-full bg-[#D6BC96]/15 border border-[#D6BC96]/40 flex items-center justify-center text-[#D6BC96] group-hover:bg-[#D6BC96] group-hover:text-[#38271F] transition-all">
-                      <ArrowUpRight className="h-3.5 w-3.5 stroke-[2.2]" />
-                    </div>
-                  </div>
-                </button>
-              ))}
-            </div>
-          </div>
         </div>
       </div>
 
