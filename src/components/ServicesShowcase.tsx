@@ -149,6 +149,8 @@ export default function ServicesShowcase() {
   const trackRef = useRef<HTMLDivElement>(null);
 
   const targetXRef = useRef(0);
+  const isHoveredRef = useRef(false);
+  const directionRef = useRef<1 | -1>(1); // 1 = 01 -> 09, -1 = 09 -> 01
   const touchStartXRef = useRef(0);
   const touchStartYRef = useRef(0);
   const isSwipingRef = useRef(false);
@@ -161,8 +163,8 @@ export default function ServicesShowcase() {
     return Math.max(0, track.scrollWidth - viewport.clientWidth);
   }, []);
 
-  // Smoothly move the track
-  const updateTrackPosition = useCallback((newTargetX: number, duration = 0.5) => {
+  // Smooth manual scrub update (Wheel / Touch)
+  const updateTrackPosition = useCallback((newTargetX: number, duration = 0.45) => {
     const track = trackRef.current;
     if (!track) return;
 
@@ -186,14 +188,71 @@ export default function ServicesShowcase() {
     });
   }, [getMaxScroll]);
 
-  // In-Place Mouse Wheel Listener:
-  // Rolling DOWN moves 01 → 09, Rolling UP moves 09 → 01
-  // Calls e.preventDefault() so the WEBPAGE DOES NOT SCROLL!
+  // =========================================================================
+  // AUTO SCROLL ANIMATION
+  // - Smooth auto-progression through services 01 → 09, then 09 → 01
+  // - STOPS IMMEDIATELY whenever the mouse points to / hovers over any card
+  // - Resumes gracefully when mouse leaves
+  // =========================================================================
+  useEffect(() => {
+    let animId: number;
+    let lastTime = performance.now();
+    const autoScrollSpeed = 0.72; // Luxuriously gentle glide speed (~43px / second)
+
+    const tick = (now: number) => {
+      const dt = Math.min(now - lastTime, 40);
+      lastTime = now;
+
+      // Only auto-scroll when user is NOT hovering and NOT dragging
+      if (!isHoveredRef.current && !isSwipingRef.current) {
+        const maxScroll = getMaxScroll();
+        const track = trackRef.current;
+
+        if (maxScroll > 10 && track) {
+          let nextX = targetXRef.current + (autoScrollSpeed * (dt / 16)) * directionRef.current;
+
+          // Reversible smooth ping-pong: 01 → 09 then 09 → 01
+          if (nextX >= maxScroll) {
+            nextX = maxScroll;
+            directionRef.current = -1;
+          } else if (nextX <= 0) {
+            nextX = 0;
+            directionRef.current = 1;
+          }
+
+          targetXRef.current = nextX;
+          gsap.set(track, { x: -nextX });
+
+          const progress = nextX / maxScroll;
+          const activeIdx = Math.min(
+            SHOWCASE_SERVICES.length - 1,
+            Math.max(0, Math.round(progress * (SHOWCASE_SERVICES.length - 1)))
+          );
+          setActiveIndex(activeIdx);
+        }
+      }
+
+      animId = requestAnimationFrame(tick);
+    };
+
+    animId = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(animId);
+  }, [getMaxScroll]);
+
+  // =========================================================================
+  // SMOOTH SCROLL TRIGGER (Wheel Navigation)
+  // - Wheel DOWN scrubs forward 01 → 09
+  // - Wheel UP scrubs backward 09 → 01
+  // - Intercepts wheel to keep webpage locked in place
+  // =========================================================================
   useEffect(() => {
     const viewport = scrollContainerRef.current;
     if (!viewport) return;
 
     const onWheel = (e: WheelEvent) => {
+      // Mouse interaction stops auto-scroll
+      isHoveredRef.current = true;
+
       const delta = Math.abs(e.deltaY) > Math.abs(e.deltaX) ? e.deltaY : e.deltaX;
       if (Math.abs(delta) < 2) return;
 
@@ -201,10 +260,10 @@ export default function ServicesShowcase() {
       const isMovingForward = delta > 0 && targetXRef.current < maxScroll - 1;
       const isMovingBackward = delta < 0 && targetXRef.current > 1;
 
-      // Prevent webpage vertical scroll while scrubbing the colonnade
       if (isMovingForward || isMovingBackward) {
         e.preventDefault();
         e.stopPropagation();
+        directionRef.current = delta > 0 ? 1 : -1;
         updateTrackPosition(targetXRef.current + delta * 1.35, 0.35);
       }
     };
@@ -217,6 +276,7 @@ export default function ServicesShowcase() {
 
   // Touch Swipe for Mobile & Tablet
   const handleTouchStart = (e: React.TouchEvent) => {
+    isHoveredRef.current = true;
     touchStartXRef.current = e.touches[0].clientX;
     touchStartYRef.current = e.touches[0].clientY;
     isSwipingRef.current = false;
@@ -234,6 +294,7 @@ export default function ServicesShowcase() {
 
     if (Math.abs(diffX) > Math.abs(diffY)) {
       touchStartXRef.current = currentX;
+      directionRef.current = diffX > 0 ? 1 : -1;
       updateTrackPosition(targetXRef.current + diffX * 1.35, 0.2);
     }
   };
@@ -241,7 +302,9 @@ export default function ServicesShowcase() {
   const handleTouchEnd = () => {
     setTimeout(() => {
       isSwipingRef.current = false;
-    }, 200);
+      // Resume auto-scroll after touch inactivity
+      isHoveredRef.current = false;
+    }, 1500);
   };
 
   // Auto-reveal if hash is present (e.g. #bridal-makeup, #hair-services, etc.)
@@ -300,6 +363,7 @@ export default function ServicesShowcase() {
   }, []);
 
   const handleOpenBridalSection = () => {
+    isHoveredRef.current = true;
     setIsHairOpen(false);
     setIsBeautyOpen(false);
     setIsSkinOpen(false);
@@ -315,6 +379,7 @@ export default function ServicesShowcase() {
   };
 
   const handleOpenHairSection = () => {
+    isHoveredRef.current = true;
     setIsBridalOpen(false);
     setIsBeautyOpen(false);
     setIsSkinOpen(false);
@@ -330,6 +395,7 @@ export default function ServicesShowcase() {
   };
 
   const handleOpenBeautySection = () => {
+    isHoveredRef.current = true;
     setIsBridalOpen(false);
     setIsHairOpen(false);
     setIsSkinOpen(false);
@@ -345,6 +411,7 @@ export default function ServicesShowcase() {
   };
 
   const handleOpenSkinSection = () => {
+    isHoveredRef.current = true;
     setIsBridalOpen(false);
     setIsHairOpen(false);
     setIsBeautyOpen(false);
@@ -360,6 +427,7 @@ export default function ServicesShowcase() {
   };
 
   const handleOpenAdditionalSection = () => {
+    isHoveredRef.current = true;
     setIsBridalOpen(false);
     setIsHairOpen(false);
     setIsBeautyOpen(false);
@@ -375,6 +443,7 @@ export default function ServicesShowcase() {
   };
 
   const handleOpenMensSection = () => {
+    isHoveredRef.current = true;
     setIsBridalOpen(false);
     setIsHairOpen(false);
     setIsBeautyOpen(false);
@@ -390,6 +459,7 @@ export default function ServicesShowcase() {
   };
 
   const handleOpenGroomSection = () => {
+    isHoveredRef.current = true;
     setIsBridalOpen(false);
     setIsHairOpen(false);
     setIsBeautyOpen(false);
@@ -405,6 +475,7 @@ export default function ServicesShowcase() {
   };
 
   const handleOpenRentalJewels = () => {
+    isHoveredRef.current = true;
     setIsBridalOpen(false);
     setIsHairOpen(false);
     setIsBeautyOpen(false);
@@ -425,6 +496,7 @@ export default function ServicesShowcase() {
   };
 
   const handleOpenAppointmentEnquiry = () => {
+    isHoveredRef.current = true;
     setIsBridalOpen(false);
     setIsHairOpen(false);
     setIsBeautyOpen(false);
@@ -518,6 +590,7 @@ export default function ServicesShowcase() {
       setIsMensOpen(false);
       setIsGroomOpen(false);
       setClosingSection(null);
+      isHoveredRef.current = false;
     }, 420);
   };
 
@@ -527,15 +600,20 @@ export default function ServicesShowcase() {
       className="relative z-10 mx-auto w-full max-w-[1660px] drop-shadow-[0_30px_70px_rgba(20,10,5,0.7)]"
     >
       {/* =========================================================================
-          FIRST SECTION: Seamless Mughal Arch Colonnade (Enlarged Frame & Gap-0)
-          - Frame size increased: fills screen height (lg:h-[calc(100vh-120px)]) & max-w-[1660px]
-          - Gap between cards completely removed (gap-0) for seamless royal archway
-          - Webpage stays locked in place; zero vertical scroll when wheeling cards
-          - Wheel DOWN moves 01 → 09, Wheel UP moves 09 → 01
-          - Touching any service image smoothly navigates to its subsection
+          FIRST SECTION: Auto Scroll Colonnade with Mouse Hover Pause
+          - Auto scrolls smoothly forward (01 → 09) and backward (09 → 01)
+          - Mouse points to ANY card: STOPS IMMEDIATELY
+          - Smooth scroll trigger with mouse wheel & mobile touch
+          - Zero vertical page scroll when interacting with cards
          ========================================================================= */}
       <div
         id="first-showcase-section"
+        onMouseEnter={() => {
+          isHoveredRef.current = true;
+        }}
+        onMouseLeave={() => {
+          isHoveredRef.current = false;
+        }}
         className="relative w-full overflow-hidden rounded-[24px] sm:rounded-[32px] border border-[#D6BC96]/40 bg-gradient-to-b from-[#24150e] via-[#1a0e08] to-[#120703] shadow-2xl flex items-center h-[520px] sm:h-[620px] lg:h-[calc(100vh-120px)] max-h-[860px] min-h-[580px]"
       >
         {/* Viewport Container (Fills the entire showcase frame with zero padding) */}
@@ -556,6 +634,9 @@ export default function ServicesShowcase() {
               return (
                 <article
                   key={service.id}
+                  onMouseEnter={() => {
+                    isHoveredRef.current = true;
+                  }}
                   onClick={() => {
                     if (!isSwipingRef.current) {
                       handleServiceSelect(service.actionKey);
