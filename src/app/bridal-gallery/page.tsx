@@ -4,6 +4,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Inter_Tight } from "next/font/google";
+import BridalMakeoverGallery from "@/components/BridalMakeoverGallery";
 
 const interTight = Inter_Tight({
   subsets: ["latin"],
@@ -212,6 +213,7 @@ export default function BridalGalleryPage() {
 
       </section>
 
+<BridalMakeoverGallery />
     </main>
   );
 }
