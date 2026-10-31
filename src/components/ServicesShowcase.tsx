@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef, useCallback } from "react";
+import { useRouter } from "next/navigation";
 import { Inter_Tight } from "next/font/google";
 import { ArrowUpRight } from "lucide-react";
 import gsap from "gsap";
@@ -11,6 +12,7 @@ import SkinFacialServicesSection from "@/components/SkinFacialServicesSection";
 import AdditionalServicesSection from "@/components/AdditionalServicesSection";
 import MensServicesSection from "@/components/MensServicesSection";
 import GroomMakeupSection from "@/components/GroomMakeupSection";
+import RentalJewelsSection from "@/components/RentalJewelsSection";
 
 const interTight = Inter_Tight({
   subsets: ["latin"],
@@ -148,6 +150,7 @@ function renderCardTitle(title: string) {
 }
 
 export default function ServicesShowcase() {
+  const router = useRouter();
   const [activeIndex, setActiveIndex] = useState(0);
 
   const [isBridalOpen, setIsBridalOpen] = useState(false);
@@ -157,8 +160,9 @@ export default function ServicesShowcase() {
   const [isAdditionalOpen, setIsAdditionalOpen] = useState(false);
   const [isMensOpen, setIsMensOpen] = useState(false);
   const [isGroomOpen, setIsGroomOpen] = useState(false);
+  const [isRentalOpen, setIsRentalOpen] = useState(false);
   const [closingSection, setClosingSection] = useState<
-    "bridal" | "hair" | "beauty" | "skin" | "additional" | "mens" | "groom" | null
+    "bridal" | "hair" | "beauty" | "skin" | "additional" | "mens" | "groom" | "rental" | null
   >(null);
 
   const isAnyOpen =
@@ -168,7 +172,8 @@ export default function ServicesShowcase() {
     isSkinOpen ||
     isAdditionalOpen ||
     isMensOpen ||
-    isGroomOpen;
+    isGroomOpen ||
+    isRentalOpen;
 
   const isAnyOpenRef = useRef(false);
   useEffect(() => {
@@ -272,16 +277,72 @@ export default function ServicesShowcase() {
   }, [getMaxScroll]);
 
   // =========================================================================
-  // SMOOTH SCROLL TRIGGER (Wheel Navigation for Desktop)
-  // - Wheel DOWN scrubs forward 01 → 09
-  // - Wheel UP scrubs backward 09 → 01
+  // PAGE LOCK & SCROLL TRIGGER (Locked frame, no blank white space)
+  // - When in standalone showcase mode (!isAnyOpen), page scroll is locked
+  // - Mouse wheel ANYWHERE triggers horizontal card movement
+  // - Auto-movement resumes 1.4s after user stops wheel scrolling
   // =========================================================================
+  useEffect(() => {
+    if (typeof document === "undefined") return;
+
+    if (!isAnyOpen) {
+      const originalBodyOverflow = document.body.style.overflow;
+      const originalHtmlOverflow = document.documentElement.style.overflow;
+      document.body.style.overflow = "hidden";
+      document.documentElement.style.overflow = "hidden";
+      window.scrollTo({ top: 0, behavior: "instant" });
+
+      return () => {
+        document.body.style.overflow = originalBodyOverflow;
+        document.documentElement.style.overflow = originalHtmlOverflow;
+      };
+    } else {
+      document.body.style.overflow = "";
+      document.documentElement.style.overflow = "";
+    }
+  }, [isAnyOpen]);
+
+  const wheelTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  useEffect(() => {
+    const onWindowWheel = (e: WheelEvent) => {
+      // If a sub-service is open, allow natural vertical scrolling down the page
+      if (isAnyOpenRef.current) return;
+
+      // Standalone showcase: Prevent default window scroll to LOCK frame in place
+      e.preventDefault();
+      isHoveredRef.current = true;
+
+      if (wheelTimeoutRef.current) {
+        clearTimeout(wheelTimeoutRef.current);
+      }
+      wheelTimeoutRef.current = setTimeout(() => {
+        isHoveredRef.current = false;
+      }, 1400);
+
+      const delta = Math.abs(e.deltaY) > Math.abs(e.deltaX) ? e.deltaY : e.deltaX;
+      if (Math.abs(delta) < 2) return;
+
+      directionRef.current = delta > 0 ? 1 : -1;
+      updateTrackPosition(targetXRef.current + delta * 1.35, 0.35);
+    };
+
+    window.addEventListener("wheel", onWindowWheel, { passive: false });
+    return () => {
+      window.removeEventListener("wheel", onWindowWheel);
+      if (wheelTimeoutRef.current) {
+        clearTimeout(wheelTimeoutRef.current);
+      }
+    };
+  }, [updateTrackPosition]);
+
+  // Local wheel for showcase track when a sub-service is open
   useEffect(() => {
     const viewport = scrollContainerRef.current;
     if (!viewport) return;
 
-    const onWheel = (e: WheelEvent) => {
-      isHoveredRef.current = true;
+    const onViewportWheel = (e: WheelEvent) => {
+      if (!isAnyOpenRef.current) return;
 
       const delta = Math.abs(e.deltaY) > Math.abs(e.deltaX) ? e.deltaY : e.deltaX;
       if (Math.abs(delta) < 2) return;
@@ -298,9 +359,9 @@ export default function ServicesShowcase() {
       }
     };
 
-    viewport.addEventListener("wheel", onWheel, { passive: false });
+    viewport.addEventListener("wheel", onViewportWheel, { passive: false });
     return () => {
-      viewport.removeEventListener("wheel", onWheel);
+      viewport.removeEventListener("wheel", onViewportWheel);
     };
   }, [getMaxScroll, updateTrackPosition]);
 
@@ -427,6 +488,22 @@ export default function ServicesShowcase() {
           const el = document.getElementById("hair-services-section");
           if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
         }, 180);
+      } else if (
+        hash.includes("rental") ||
+        hash.includes("jewel") ||
+        hash.includes("temple") ||
+        hash.includes("kundan") ||
+        hash.includes("antique") ||
+        hash.includes("victorian") ||
+        hash.includes("ad") ||
+        hash.includes("jadavu") ||
+        hash.includes("jadau")
+      ) {
+        setIsRentalOpen(true);
+        setTimeout(() => {
+          const el = document.getElementById("rental-jewels-section");
+          if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+        }, 180);
       } else if (hash.includes("bridal") || hash.includes("makeup")) {
         setIsBridalOpen(true);
         setTimeout(() => {
@@ -439,6 +516,7 @@ export default function ServicesShowcase() {
 
   const handleOpenBridalSection = () => {
     isHoveredRef.current = true;
+    setIsRentalOpen(false);
     setIsHairOpen(false);
     setIsBeautyOpen(false);
     setIsSkinOpen(false);
@@ -455,6 +533,7 @@ export default function ServicesShowcase() {
 
   const handleOpenHairSection = () => {
     isHoveredRef.current = true;
+    setIsRentalOpen(false);
     setIsBridalOpen(false);
     setIsBeautyOpen(false);
     setIsSkinOpen(false);
@@ -471,6 +550,7 @@ export default function ServicesShowcase() {
 
   const handleOpenBeautySection = () => {
     isHoveredRef.current = true;
+    setIsRentalOpen(false);
     setIsBridalOpen(false);
     setIsHairOpen(false);
     setIsSkinOpen(false);
@@ -487,6 +567,7 @@ export default function ServicesShowcase() {
 
   const handleOpenSkinSection = () => {
     isHoveredRef.current = true;
+    setIsRentalOpen(false);
     setIsBridalOpen(false);
     setIsHairOpen(false);
     setIsBeautyOpen(false);
@@ -504,6 +585,7 @@ export default function ServicesShowcase() {
 
   const handleOpenAdditionalSection = () => {
     isHoveredRef.current = true;
+    setIsRentalOpen(false);
     setIsBridalOpen(false);
     setIsHairOpen(false);
     setIsBeautyOpen(false);
@@ -520,6 +602,7 @@ export default function ServicesShowcase() {
 
   const handleOpenMensSection = () => {
     isHoveredRef.current = true;
+    setIsRentalOpen(false);
     setIsBridalOpen(false);
     setIsHairOpen(false);
     setIsBeautyOpen(false);
@@ -536,6 +619,7 @@ export default function ServicesShowcase() {
 
   const handleOpenGroomSection = () => {
     isHoveredRef.current = true;
+    setIsRentalOpen(false);
     setIsBridalOpen(false);
     setIsHairOpen(false);
     setIsBeautyOpen(false);
@@ -560,19 +644,17 @@ export default function ServicesShowcase() {
     setIsMensOpen(false);
     setIsGroomOpen(false);
     setClosingSection(null);
+    setIsRentalOpen(true);
 
     setTimeout(() => {
-      const el = document.getElementById("first-showcase-section");
+      const el = document.getElementById("rental-jewels-section");
       if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
-    }, 100);
-
-    if (typeof window !== "undefined") {
-      window.open(WHATSAPP_RENTAL_JEWELS_URL, "_blank");
-    }
+    }, 180);
   };
 
   const handleOpenAppointmentEnquiry = () => {
     isHoveredRef.current = true;
+    setIsRentalOpen(false);
     setIsBridalOpen(false);
     setIsHairOpen(false);
     setIsBeautyOpen(false);
@@ -582,14 +664,7 @@ export default function ServicesShowcase() {
     setIsGroomOpen(false);
     setClosingSection(null);
 
-    setTimeout(() => {
-      const el = document.getElementById("first-showcase-section");
-      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
-    }, 100);
-
-    if (typeof window !== "undefined") {
-      window.open(WHATSAPP_ENQUIRY_URL, "_blank");
-    }
+    router.push("/#booking");
   };
 
   const handleServiceSelect = (actionKey: ServiceShowcaseItem["actionKey"]) => {
@@ -651,7 +726,9 @@ export default function ServicesShowcase() {
                 ? "mens"
                 : isGroomOpen
                   ? "groom"
-                  : null;
+                  : isRentalOpen
+                    ? "rental"
+                    : null;
 
     if (activeSection) {
       setClosingSection(activeSection);
@@ -665,6 +742,7 @@ export default function ServicesShowcase() {
       setIsAdditionalOpen(false);
       setIsMensOpen(false);
       setIsGroomOpen(false);
+      setIsRentalOpen(false);
       setClosingSection(null);
       isHoveredRef.current = false;
     }, 420);
@@ -673,11 +751,11 @@ export default function ServicesShowcase() {
   return (
     <section
       aria-label="Bridal Saree Showcase & Services"
-      className="relative z-10 mx-auto w-full max-w-[1660px] drop-shadow-[0_20px_50px_rgba(37,35,42,0.12)]"
+      className="relative z-10 mx-auto w-full max-w-[1320px]"
     >
       {/* =========================================================================
           FIRST SECTION: Seamless Mughal Arch Colonnade (Enlarged Frame & Gap-0)
-          - Frame size increased: fills screen height & max-w-[1660px]
+          - Frame size increased: fills screen height & max-w-[1320px]
           - Auto scrolls smoothly forward (01 → 09) and backward (09 → 01)
           - Increased auto-moving speed on mobile view for lively progression
           - Full mobile touch scroll trigger (vertical thumb swipe & horizontal drag)
@@ -691,7 +769,7 @@ export default function ServicesShowcase() {
         onMouseLeave={() => {
           isHoveredRef.current = false;
         }}
-        className="relative w-full overflow-hidden rounded-[20px] sm:rounded-[28px] lg:rounded-[32px] border border-[#8D6CA3]/30 bg-[#F1EDF7] shadow-xl flex items-center h-[calc(100dvh-88px)] sm:h-[calc(100dvh-98px)] lg:h-[calc(100vh-120px)] max-h-[860px]"
+        className="relative w-full overflow-hidden rounded-none border border-[#8D6CA3]/30 bg-[#F1EDF7] flex items-center h-[calc(100dvh-104px)] sm:h-[calc(100dvh-120px)] lg:h-[calc(100dvh-152px)] max-h-[800px]"
       >
         {/* Viewport Container (Fills the entire showcase frame with zero padding) */}
         <div
@@ -913,6 +991,21 @@ export default function ServicesShowcase() {
           <GroomMakeupSection onBackToServices={handleBackToServices} />
         </div>
       )}
+
+      {/* Interactive Rental Jewels Sub-Service Section (Reveals upon selecting Rental Jewels) */}
+      {isRentalOpen && (
+        <div
+          id="rental-jewels-section"
+          className={`w-full mt-8 sm:mt-12 lg:mt-16 scroll-mt-28 transition-all duration-400 ease-out ${closingSection === "rental" ? "opacity-0 translate-y-6 pointer-events-none" : "opacity-100 translate-y-0"
+            }`}
+        >
+          <RentalJewelsSection onBackToServices={handleBackToServices} />
+        </div>
+      )}
     </section>
   );
 }
+
+
+
+

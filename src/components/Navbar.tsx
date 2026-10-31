@@ -42,26 +42,19 @@ export default function Navbar() {
         }`}
       >
         {/* NAVBAR MAIN */}
-        <div className="flex items-center justify-between gap-3 px-4 py-3 sm:px-7 sm:py-3.5">
+        <div className="flex items-center justify-between gap-3 px-4 py-1.5 sm:px-6 sm:py-2 lg:px-7 lg:py-2">
           {/* BRAND */}
           <Link
             href="/"
             onClick={() => setMenuOpen(false)}
-            className="group flex min-w-0 shrink items-center gap-3 sm:gap-4"
+            className="group flex min-w-0 shrink items-center py-0.5 ml-4 sm:ml-7 md:ml-10 lg:ml-12 xl:ml-14"
+            aria-label="S Touch Bridal Makeover Studio & Unisex Salon"
           >
-            <span
-              className={`shrink-0 text-[17px] font-semibold uppercase leading-none tracking-[0.14em] transition-colors duration-300 sm:text-[19px] ${
-                scrolled ? "text-black" : "text-black"
-              }`}
-            >
-              TOUCH
-            </span>
-
-            <span className="border-l border-black/20 pl-3 text-left text-[9px] font-medium leading-tight tracking-[0.08em] text-black/60 sm:pl-4 sm:text-[11px]">
-              Bridal Makeover Studio
-              <br />
-              &amp; Unisex Salon
-            </span>
+            <img
+              src="/images/logo.png"
+              alt="S Touch Bridal Makeover Studio & Unisex Salon"
+              className="h-16 sm:h-20 md:h-24 lg:h-[104px] xl:h-[116px] w-auto object-contain transition-transform duration-300 group-hover:scale-105 drop-shadow-[0_2px_6px_rgba(0,0,0,0.18)]"
+            />
           </Link>
 
           {/* DESKTOP NAVIGATION */}

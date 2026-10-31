@@ -32,8 +32,19 @@ function ContactCTAContent() {
   const [selectedServices, setSelectedServices] = useState<string[]>([]);
 
   useEffect(() => {
-    if (serviceFromUrl) {
-      setSelectedServices([serviceFromUrl]);
+    if (typeof window !== "undefined") {
+      if (serviceFromUrl) {
+        setSelectedServices([serviceFromUrl]);
+      }
+      if (window.location.hash === "#booking" || serviceFromUrl) {
+        const timer = setTimeout(() => {
+          const el = document.getElementById("booking");
+          if (el) {
+            el.scrollIntoView({ behavior: "smooth", block: "start" });
+          }
+        }, 150);
+        return () => clearTimeout(timer);
+      }
     }
   }, [serviceFromUrl]);
 
