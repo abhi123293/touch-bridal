@@ -12,16 +12,11 @@ const interTight = Inter_Tight({
   display: "swap",
 });
 
-
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
-
-// Match the Hero and Featured Services palette
- // Dark coffee brown
-const TITLE = "#8B4A28"; // Warm brown headings
-const SPINE = "#9675BA";
-const TEXT = "#716B73"; // Muted brown descriptions
-const PAPER = "#F7F1E9"; // Shared cream background
+// Same colours as before (unchanged)
+const SPINE = "#9675BA"; // Purple used for icons and accents
+const TEXT = "#716B73"; // Muted descriptions
 
 type ArtworkType =
   | "personalized"
@@ -34,8 +29,13 @@ type Feature = {
   number: string;
   title: string;
   description: string;
-  side: "left" | "right";
   artwork: ArtworkType;
+  /** "purple" = solid purple note, "white" = white note */
+  variant: "purple" | "white";
+  /** Small tilt, in degrees, like a note pinned to a board */
+  rotate: number;
+  /** Position of the note in the collage (desktop) and on tablet/phone */
+  place: string;
 };
 
 const features: Feature[] = [
@@ -44,77 +44,76 @@ const features: Feature[] = [
     title: "PERSONALISED BEAUTY",
     description:
       "Every look begins with your style, preferences, and the occasion you are celebrating.",
-    side: "left",
     artwork: "personalized",
+    variant: "purple",
+    rotate: -4,
+    place: "lg:col-start-1 lg:row-start-1",
   },
   {
     number: "02",
     title: "BRIDAL & OCCASION LOOKS",
     description:
       "Explore makeup and styling ideas for weddings, receptions, and other special moments.",
-    side: "right",
     artwork: "bridal",
+    variant: "white",
+    rotate: 3,
+    place: "lg:col-start-3 lg:row-start-1",
   },
   {
     number: "03",
     title: "ATTENTION TO DETAIL",
     description:
       "Thoughtful finishing touches help bring your chosen beauty look together.",
-    side: "left",
     artwork: "detail",
+    variant: "white",
+    rotate: -2,
+    place: "lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:self-center",
   },
   {
     number: "04",
     title: "BEAUTY & GROOMING",
     description:
       "Discover hair, skincare, facials, and grooming services to suit your needs.",
-    side: "right",
     artwork: "grooming",
+    variant: "white",
+    rotate: -3,
+    place: "lg:col-start-1 lg:row-start-2",
   },
   {
     number: "05",
     title: "A LOOK THAT FEELS LIKE YOU",
     description:
       "Share your ideas with us and explore a look that reflects your personality and occasion.",
-    side: "left",
     artwork: "experience",
+    variant: "purple",
+    rotate: 4,
+    place:
+      "sm:col-span-2 sm:w-[calc(50%-1rem)] sm:justify-self-center lg:col-span-1 lg:col-start-3 lg:row-start-2 lg:w-auto lg:justify-self-stretch",
   },
 ];
 
-/* Line illustration inside a pale pink circle */
+/* Line icon (no background circle, it sits directly on the note) */
 function FeatureArtwork({
   type,
-  enterFrom,
+  tone,
 }: {
   type: ArtworkType;
-  enterFrom: "left" | "right";
+  tone: "light" | "dark";
 }) {
-const line = SPINE;
-const paper = "#FFFFFF";
-const blush = "#8D6CA3";
-const accent = "#8D6CA3";
+  // light = icon on a white note, dark = icon on a purple note
+  const line = tone === "dark" ? "#FFFFFF" : SPINE;
+  const paper = tone === "dark" ? "rgba(255,255,255,0.16)" : "#FFFFFF";
+  const blush = tone === "dark" ? "rgba(255,255,255,0.55)" : "#8D6CA3";
+  const accent = tone === "dark" ? "#FFFFFF" : "#8D6CA3";
 
   return (
-   <div
-  className={`why-artwork why-enter-${enterFrom} w-[76px] shrink-0 md:w-[150px]`}
-  aria-hidden="true"
->
+    <div className="why-icon w-[64px] shrink-0 md:w-[76px]" aria-hidden="true">
       <svg
-        viewBox="0 0 160 145"
+        viewBox="28 28 110 100"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
         className="block h-auto w-full overflow-visible"
       >
-        <circle cx="80" cy="73" r="56" fill="#FFFFFF" />
-        <circle
-          cx="80"
-          cy="73"
-          r="47"
-         stroke="#FFFFFF"
-          strokeWidth="1.2"
-          strokeDasharray="3 5"
-        />
-
         {type === "personalized" && (
           <g stroke={line} strokeWidth="2.5" strokeLinecap="round">
             <path
@@ -205,25 +204,61 @@ const accent = "#8D6CA3";
   );
 }
 
-function FeatureCopy({ feature }: { feature: Feature }) {
-  return (
-   <div
-  className={`why-copy why-enter-${feature.side} w-full max-w-[330px] text-left ${
-    feature.side === "left" ? "md:text-right" : ""
-  }`}
->
-      <h3
-  className={`${interTight.className} text-[26px] font-bold leading-[1.02] tracking-[0.01em] text-[#25232A] md:text-[clamp(26px,2.5vw,34px)]`}
->
-  {feature.title}
-</h3>
+/* Round push pin, like the ones in the reference */
+function Pin({ variant }: { variant: "purple" | "white" }) {
+  const background =
+    variant === "purple"
+      ? "radial-gradient(circle at 35% 30%, #F1EDF7 0%, #B9A2D3 55%, #6E5190 100%)"
+      : "radial-gradient(circle at 35% 30%, #C7B2E0 0%, #8D6CA3 55%, #5E4480 100%)";
 
-      <p
-       className="mt-2 text-[12px] font-light leading-[1.65] md:text-[13px]"
-        style={{ color: TEXT }}
+  return (
+    <span
+      aria-hidden="true"
+      className="why-pin pointer-events-none absolute -top-4 left-1/2 z-10 -translate-x-1/2"
+    >
+      <span
+        className="block h-7 w-7 rounded-full shadow-[0_6px_10px_-2px_rgba(37,35,42,0.45)]"
+        style={{ background }}
+      />
+    </span>
+  );
+}
+
+function FeatureCard({ feature }: { feature: Feature }) {
+  const isPurple = feature.variant === "purple";
+
+  return (
+    <div className={`why-card ${feature.place}`}>
+      <div
+        className={`relative flex h-full min-h-[210px] flex-col items-center justify-center rounded-[6px] px-6 py-8 text-center shadow-[0_22px_34px_-18px_rgba(37,35,42,0.4)] lg:min-h-[235px] ${
+          isPurple ? "bg-[#8D6CA3]" : "bg-white"
+        }`}
+        style={{ transform: `rotate(${feature.rotate}deg)` }}
       >
-        {feature.description}
-      </p>
+        <Pin variant={feature.variant} />
+
+        <FeatureArtwork
+          type={feature.artwork}
+          tone={isPurple ? "dark" : "light"}
+        />
+
+        <h3
+          className={`${interTight.className} mt-4 text-[18px] font-bold leading-[1.1] tracking-[0.01em] md:text-[20px] ${
+            isPurple ? "text-white" : "text-[#25232A]"
+          }`}
+        >
+          {feature.title}
+        </h3>
+
+        <p
+          className={`mt-2 max-w-[250px] text-[12px] font-light leading-[1.65] md:text-[13px] ${
+            isPurple ? "text-white/85" : ""
+          }`}
+          style={isPurple ? undefined : { color: TEXT }}
+        >
+          {feature.description}
+        </p>
+      </div>
     </div>
   );
 }
@@ -231,246 +266,129 @@ function FeatureCopy({ feature }: { feature: Feature }) {
 export default function WhyChooseUs() {
   const sectionRef = useRef<HTMLElement>(null);
 
- useGSAP(
-  () => {
-    const mm = gsap.matchMedia();
+  useGSAP(
+    () => {
+      const mm = gsap.matchMedia();
 
-    mm.add("(prefers-reduced-motion: no-preference)", () => {
-      const section = sectionRef.current;
+      mm.add("(prefers-reduced-motion: no-preference)", () => {
+        const section = sectionRef.current;
 
-      if (!section) return;
+        if (!section) return;
 
-      const heading = section.querySelector(".why-section-heading");
-      const timeline = section.querySelector(".why-timeline");
+        const heading = section.querySelector(".why-section-heading");
+        const board = section.querySelector(".why-board");
 
-      // Heading fades and moves upward into view.
-      if (heading) {
+        // Heading fades and moves upward into view.
+        if (heading) {
+          gsap.fromTo(
+            heading,
+            {
+              opacity: 0,
+              y: 24,
+            },
+            {
+              opacity: 1,
+              y: 0,
+              duration: 0.8,
+              ease: "power3.out",
+              scrollTrigger: {
+                trigger: heading,
+                start: "top 88%",
+                end: "bottom 12%",
+                toggleActions: "play reverse play reverse",
+              },
+            },
+          );
+        }
+
+        if (!board) return;
+
+        const scrollTrigger = {
+          trigger: board,
+          start: "top 85%",
+          end: "bottom 10%",
+          toggleActions: "play reverse play reverse" as const,
+        };
+
+        // Notes drop onto the board one after another.
         gsap.fromTo(
-          heading,
+          section.querySelectorAll(".why-card"),
           {
             opacity: 0,
-            y: 24,
+            y: 50,
+            scale: 0.92,
           },
           {
             opacity: 1,
             y: 0,
+            scale: 1,
             duration: 0.8,
+            stagger: 0.13,
             ease: "power3.out",
-            scrollTrigger: {
-              trigger: heading,
-              start: "top 88%",
-              end: "bottom 12%",
-              toggleActions: "play reverse play reverse",
-            },
-          }
+            scrollTrigger,
+          },
         );
-      }
 
-      // Centre strip reveals vertically.
-      const spine = section.querySelector(".why-timeline-spine");
-
-      if (spine && timeline) {
+        // Pins pop in just after their notes.
         gsap.fromTo(
-          spine,
+          section.querySelectorAll(".why-pin"),
           {
-            scaleY: 0,
             opacity: 0,
-            transformOrigin: "top center",
+            y: -18,
           },
           {
-            scaleY: 1,
             opacity: 1,
-            duration: 1,
-            ease: "power2.out",
-            scrollTrigger: {
-              trigger: timeline,
-              start: "top 85%",
-              end: "bottom 15%",
-              toggleActions: "play reverse play reverse",
-            },
-          }
+            y: 0,
+            duration: 0.5,
+            delay: 0.25,
+            stagger: 0.13,
+            ease: "back.out(1.8)",
+            scrollTrigger,
+          },
         );
-      }
-
-      // Animate each row independently.
-      const rows = section.querySelectorAll<HTMLElement>(".why-row");
-
-      rows.forEach((row) => {
-        const leftItems = row.querySelectorAll(".why-enter-left");
-        const rightItems = row.querySelectorAll(".why-enter-right");
-        const number = row.querySelector(".why-number");
-
-        const scrollTrigger = {
-          trigger: row,
-          start: "top 88%",
-          end: "bottom 12%",
-          toggleActions: "play reverse play reverse" as const,
-        };
-
-        // Left content enters from the left.
-        if (leftItems.length) {
-          gsap.fromTo(
-            leftItems,
-            {
-              x: -55,
-              opacity: 0,
-            },
-            {
-              x: 0,
-              opacity: 1,
-              duration: 0.8,
-              stagger: 0.1,
-              ease: "power3.out",
-              scrollTrigger,
-            }
-          );
-        }
-
-        // Right content and circles enter from the right.
-        if (rightItems.length) {
-          gsap.fromTo(
-            rightItems,
-            {
-              x: 55,
-              opacity: 0,
-            },
-            {
-              x: 0,
-              opacity: 1,
-              duration: 0.8,
-              stagger: 0.1,
-              ease: "power3.out",
-              scrollTrigger,
-            }
-          );
-        }
-
-        // Numbers fade and scale into place.
-        if (number) {
-          gsap.fromTo(
-            number,
-            {
-              opacity: 0,
-              scale: 0.8,
-            },
-            {
-              opacity: 1,
-              scale: 1,
-              duration: 0.6,
-              ease: "power2.out",
-              scrollTrigger,
-            }
-          );
-        }
       });
-    });
 
-    return () => mm.revert();
-  },
-  { scope: sectionRef }
-);
+      return () => mm.revert();
+    },
+    { scope: sectionRef },
+  );
 
-  
-return (
-  <section
-    ref={sectionRef}
-    className={`${interTight.className} relative -mt-4 bg-transparent px-2 pt-2 pb-6 sm:-mt-19 sm:px-3 sm:pt-3 sm:pb-8 lg:px-4`}
-  >
-    <div className="mx-auto w-full max-w-[1320px]">
-      <div className="overflow-hidden border border-[#DDD5DF] bg-[#F1EDF7] p-4 sm:p-6 lg:p-8">
+  return (
+    <section
+      ref={sectionRef}
+      className={`${interTight.className} relative -mt-4 bg-transparent px-2 pb-6 pt-2 sm:-mt-19 sm:px-3 sm:pb-8 sm:pt-3 lg:px-4`}
+    >
+      <div className="mx-auto w-full max-w-[1320px]">
+        <div className="overflow-hidden border border-[#DDD5DF] bg-[#F1EDF7] p-4 sm:p-6 lg:p-8">
+          {/* SECTION INTRO */}
+          <div className="why-section-heading mx-auto mb-12 w-full max-w-[1000px] text-center md:mb-16">
+            <span className="inline-flex items-center justify-center gap-3 text-[11px] font-semibold tracking-[0.24em] text-[#8D6CA3]">
+              <span className="inline-block h-px w-7 bg-[#8D6CA3]" />
+              WHY CHOOSE TOUCH
+              <span className="inline-block h-px w-7 bg-[#8D6CA3]" />
+            </span>
 
-        {/* SECTION INTRO */}
-        <div className="why-section-heading mx-auto mb-10 w-full max-w-[1000px] text-center md:mb-12">
-          <span className="inline-flex items-center justify-center gap-3 text-[11px] font-semibold tracking-[0.24em] text-[#8D6CA3]">
-            <span className="inline-block h-px w-7 bg-[#8D6CA3]" />
-            WHY CHOOSE TOUCH
-            <span className="inline-block h-px w-7 bg-[#8D6CA3]" />
-          </span>
+            <h2
+              className={`${interTight.className} mt-4 text-center text-[clamp(2.3rem,5.5vw,4rem)] font-bold uppercase leading-[1.05] tracking-[-0.02em] text-[#25232A]`}
+            >
+              <span className="block">Beauty deserves a</span>
 
-        <h2
-  className={`${interTight.className} mt-4 text-center text-[clamp(2.3rem,5.5vw,4rem)] font-bold uppercase leading-[1.05] tracking-[-0.02em] text-[#25232A]`}
->
-  <span className="block">
-    Beauty deserves a
-  </span>
+              <span className="block text-[#8D6CA3]">Personal Touch</span>
+            </h2>
 
-  <span className="block text-[#8D6CA3]">
-    Personal Touch
-  </span>
-</h2>
+            <p className="mt-4 text-sm font-normal leading-7 text-[#77717B]">
+              Every detail matters when it comes to feeling your best.
+            </p>
+          </div>
 
-          <p className="mt-4 text-sm font-normal leading-7 text-[#77717B]">
-            Every detail matters when it comes to feeling your best.
-          </p>
-        </div>
-
-        {/* SPINE TOP CAP AND LOGO — DESKTOP */}
-        <div className="hidden md:block" aria-hidden="true">
-          <div className="mx-auto h-7 w-[102px] bg-[#8D6CA3]" />
-
-          <p className="py-3 text-center text-lg font-semibold tracking-[0.3em] text-[#8D6CA3]">
-            TOUCH
-          </p>
-        </div>
-
-        {/* NUMBERED TIMELINE */}
-        <div className="why-timeline relative isolate pb-7">
-
-          {/* Timeline spine */}
-          <div
-            aria-hidden="true"
-            className="why-timeline-spine absolute inset-y-0 left-[20px] z-0 w-1 md:left-1/2 md:w-[102px] md:-translate-x-1/2"
-            style={{ backgroundColor: "#8D6CA3" }}
-          />
-
-          {features.map((feature) => {
-            const copyOnLeft = feature.side === "left";
-
-            return (
-              <article
-                key={feature.number}
-                className="why-row relative z-10 grid grid-cols-[44px_minmax(0,1fr)] items-center gap-y-2 border-t border-[#8D6CA3]/15 py-6 first:border-t-0 md:min-h-[130px] md:grid-cols-[minmax(0,1fr)_102px_minmax(0,1fr)] md:gap-y-0 md:border-0 md:py-0"
-              >
-
-                {/* NUMBER */}
-                <div
-                  className="why-number col-start-1 row-span-2 row-start-1 flex h-[54px] w-11 items-center justify-center self-center rounded-r-xl text-base font-semibold text-white md:col-start-2 md:row-span-1 md:h-auto md:w-auto md:self-stretch md:rounded-none md:bg-transparent md:text-[clamp(34px,3.6vw,52px)]"
-                  style={{ backgroundColor: "#8D6CA3" }}
-                >
-                  {feature.number}
-                </div>
-
-                {/* TEXT */}
-                <div
-                  className={`col-start-2 row-start-1 flex min-w-0 items-center justify-start pl-3.5 md:row-start-1 ${
-                    copyOnLeft
-                      ? "md:col-start-1 md:justify-end md:pl-0 md:pr-8"
-                      : "md:col-start-3 md:justify-start md:pl-8"
-                  }`}
-                >
-                  <FeatureCopy feature={feature} />
-                </div>
-
-                {/* ILLUSTRATION */}
-                <div
-                  className={`col-start-2 row-start-2 flex min-w-0 items-center justify-start pl-3.5 md:row-start-1 ${
-                    copyOnLeft
-                      ? "md:col-start-3 md:justify-start md:pl-8"
-                      : "md:col-start-1 md:justify-end md:pl-0 md:pr-8"
-                  }`}
-                >
-                  <FeatureArtwork
-                    type={feature.artwork}
-                    enterFrom={feature.side === "left" ? "right" : "left"}
-                  />
-                </div>
-
-              </article>
-            );
-          })}
+          {/* PINNED NOTES BOARD */}
+          <div className="why-board mx-auto grid max-w-[1000px] grid-cols-1 gap-x-8 gap-y-12 px-2 pb-6 pt-2 sm:grid-cols-2 sm:px-4 lg:grid-cols-3 lg:grid-rows-2 lg:gap-x-12 lg:gap-y-14 lg:px-6">
+            {features.map((feature) => (
+              <FeatureCard key={feature.number} feature={feature} />
+            ))}
+          </div>
         </div>
       </div>
-    </div>
-  </section>
-);
+    </section>
+  );
 }

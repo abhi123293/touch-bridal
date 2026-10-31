@@ -60,20 +60,13 @@ const reviews = [
     quote:
       "The hairstyle and makeup were exactly what I imagined. I felt confident and beautiful all day.",
   },
-  {
-  id: "05",
-  name: "Nisha V.",
-  initial: "N",
-  service: "Bridal Styling",
-  quote:
-    "The team made me feel so comfortable and special. My bridal look was beautiful, and I received so many compliments on my wedding day.",
-},
+ 
 ];
 
-function Stars() {
+function Stars({ className = "" }: { className?: string }) {
   return (
     <div
-      className="text-[15px] leading-none tracking-[3px] text-[#f5a623]"
+      className={`text-[15px] leading-none tracking-[3px] text-[#f5a623] ${className}`}
       role="img"
       aria-label="5 out of 5 stars"
     >
@@ -82,38 +75,38 @@ function Stars() {
   );
 }
 
-function ReviewCard({
-  review,
-}: {
-  review: (typeof reviews)[number];
-}) {
+function ReviewCard({ review }: { review: (typeof reviews)[number] }) {
   return (
-    <article className="flex h-full min-h-[190px] flex-col justify-between rounded-[18px] border border-[#3a2418]/[0.06] bg-white p-5 shadow-[0_14px_40px_-18px_rgba(45,27,19,0.18)] sm:p-6 lg:p-7">
-      <div>
+    <article className="flex h-full flex-col rounded-[20px] border border-[#E6DEF0] bg-[#F1EDF7] p-5 transition-shadow duration-300 hover:shadow-[0_16px_36px_-20px_rgba(141,108,163,0.55)] sm:p-6">
+      <div className="flex items-center justify-between">
         <Stars />
 
-       <p className="mt-4 text-[15px] leading-[1.8] text-black sm:text-base lg:text-[17px]">
-  {review.quote}
-</p>
+        <span
+          className={`${cormorant.className} text-5xl leading-none text-[#8D6CA3]/40`}
+          aria-hidden="true"
+        >
+          &rdquo;
+        </span>
       </div>
 
-      <div className="mt-6 flex flex-wrap items-center gap-3">
-        <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-[#e1d3c2] bg-[#eee4d7] text-xs font-semibold text-[#70472f]">
+      <p className="mt-3 flex-1 text-[15px] leading-[1.7] text-[#25232A]">
+        {review.quote}
+      </p>
+
+      <div className="mt-5 flex items-center gap-3 border-t border-[#8D6CA3]/15 pt-4">
+        <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#8D6CA3] text-xs font-semibold text-white">
           {review.initial}
         </div>
 
-        <p className="text-xs font-semibold text-[#292521]">
-          {review.name}
-        </p>
+        <div className="min-w-0">
+          <p className="text-[13px] font-semibold leading-tight text-[#25232A]">
+            {review.name}
+          </p>
 
-        <span
-          className="hidden h-3.5 w-px bg-[#3a2418]/20 sm:block"
-          aria-hidden="true"
-        />
-
-        <p className="text-[11px] font-medium text-[#8b4a28]">
-          {review.service}
-        </p>
+          <p className="mt-0.5 text-[11px] font-medium text-[#8D6CA3]">
+            {review.service}
+          </p>
+        </div>
       </div>
     </article>
   );
@@ -157,6 +150,8 @@ export default function CustomerTestimonials() {
     { scope: sectionRef },
   );
 
+  const lastIndex = reviews.length - 1;
+
   return (
     <section
       ref={sectionRef}
@@ -164,62 +159,78 @@ export default function CustomerTestimonials() {
     >
       {/* SECTION WIDTH: 1320px */}
       <div className="mx-auto w-full max-w-[1320px]">
-        {/* WHITE SECTION BACKGROUND — KEEP AS IS */}
-        <div className="overflow-hidden  bg-white px-4 py-10 sm:px-6 sm:py-12 lg:px-10 lg:py-14">
-          {/* CENTERED SECTION HEADING */}
-          <div className="testimonial-reveal mx-auto mb-8 w-full max-w-[760px] text-center sm:mb-10 lg:mb-12">
-            <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-black sm:text-xs">
-              Testimonials
-            </p>
+        {/* WHITE SECTION BACKGROUND */}
+        <div className="overflow-hidden bg-white px-4 py-10 sm:px-6 sm:py-12 lg:px-10 lg:py-14">
+          <div className="grid grid-cols-1 items-start gap-5 lg:grid-cols-[0.78fr_1.6fr] lg:gap-6">
+            {/* LEFT: PURPLE INTRO PANEL (fills the height of the reviews) */}
+           <div className="testimonial-reveal relative flex min-h-[440px] flex-col justify-between gap-6 overflow-hidden rounded-[20px] bg-[#8D6CA3] p-6 text-white sm:min-h-[480px] sm:gap-8 sm:p-7 lg:min-h-[520px] lg:p-8">
+              {/* Decorative quote mark */}
+              <span
+                aria-hidden="true"
+                className={`${cormorant.className} pointer-events-none absolute -right-2 -top-6 text-[180px] leading-none text-white/10`}
+              >
+                &ldquo;
+              </span>
 
-           <h2
-  className={`${cormorant.className} mt-3 text-[clamp(2rem,4.5vw,3.5rem)] font-semibold leading-[1.08] text-[#25232A]`}
->
-  What our clients say{" "}
-  <span className="text-[#8D6CA3]">
-    about us
-  </span>
-</h2>
+              {/* TOP: HEADING */}
+              <div className="relative">
+                <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-white/80 sm:text-xs">
+                  Testimonials
+                </p>
 
-            <p className="mx-auto mt-4 max-w-[520px] text-xs leading-6 text-[#7a6d63] sm:text-sm">
-              Heartfelt words from our brides and clients, shared in their own
-              voice.
-            </p>
-          </div>
+                <h2
+                  className={`${cormorant.className} mt-4 text-[clamp(2.4rem,4.2vw,3.6rem)] font-semibold leading-[1.05]`}
+                >
+                  What our clients say{" "}
+                  <span className="italic text-[#E6DAF2]">about us</span>
+                </h2>
 
-          {/* MASONRY-STYLE REVIEW CARDS */}
-     
-<div className="grid grid-cols-1 gap-4 sm:gap-5 lg:grid-cols-4 lg:gap-5">
+                <p className="mt-5 max-w-[340px] text-sm leading-7 text-white/85">
+                  Heartfelt words from our brides and clients, shared in their
+                  own voice.
+                </p>
+              </div>
 
-  {/* CARD 1 — WIDE TOP LEFT */}
-  <div className="testimonial-reveal lg:col-span-2  ">
-    <ReviewCard review={reviews[0]} />
-  </div>
+              {/* MIDDLE: SERVICES OUR CLIENTS LOVED (same labels as the review cards) */}
+             
 
-  {/* CARD 2 — TOP MIDDLE */}
-  <div className="testimonial-reveal lg:col-span-1">
-    <ReviewCard review={reviews[1]} />
-  </div>
+              {/* BOTTOM: REVIEWERS AND BUTTON */}
+              <div className="relative">
+                <div className="flex items-center gap-4">
+                  <div className="flex">
+                    {reviews.map((review) => (
+                      <span
+                        key={review.id}
+                        className="-ml-2 flex h-10 w-10 items-center justify-center rounded-full border-2 border-[#8D6CA3] bg-white text-xs font-semibold text-[#8D6CA3] first:ml-0"
+                      >
+                        {review.initial}
+                      </span>
+                    ))}
+                  </div>
 
-  {/* CARD 3 — TALL RIGHT */}
-  <div className="testimonial-reveal lg:col-span-1 lg:row-span-2">
-    <ReviewCard review={reviews[2]} />
-  </div>
+                  <div>
+                    <Stars className="!text-[#FFD27A]" />
+                    <p className="mt-1.5 text-[12px] text-white/85">
+                      Loved by our brides
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
 
-  {/* CARD 4 — WIDE BOTTOM LEFT */}
-  <div className="testimonial-reveal lg:col-span-2">
-    <ReviewCard review={reviews[3]} />
-  </div>
-
-  {/* CARD 5 — FILL THE EMPTY SPACE */}
-  <div className="testimonial-reveal lg:col-span-1">
-    <ReviewCard review={reviews[4]} />
-  </div>
-
+            {/* RIGHT: REVIEWS (two per row, the last one centred) */}
+            {/* RIGHT: REVIEWS — 2 × 2 GRID */}
+<div className="grid grid-cols-1 content-start gap-5 sm:grid-cols-2">
+  {reviews.slice(0, 4).map((review) => (
+    <div
+      key={review.id}
+      className="testimonial-reveal h-full"
+    >
+      <ReviewCard review={review} />
+    </div>
+  ))}
 </div>
-
-          {/* GOOGLE REVIEWS CTA */}
-
+          </div>
         </div>
       </div>
     </section>
