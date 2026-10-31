@@ -55,7 +55,7 @@ export default function LocationContact() {
             </p>
 
             <h2
-              className={`${serif.className} mt-4 text-5xl font-semibold leading-[1.02] tracking-tight text-[#25232A] sm:text-6xl lg:text-7xl`}
+              className={`${interTight.className} mt-4 text-4xl font-semibold leading-[1.02] tracking-tight text-[#25232A] sm:text-5xl lg:text-6xl`}
             >
               Location &amp;{" "}
               <span className="text-[#8D6CA3]">Contact</span>
@@ -86,26 +86,37 @@ export default function LocationContact() {
                   </svg>
                 </div>
 
-                <div className="min-w-0 flex-1">
-                  <h3 className="text-xs font-semibold uppercase tracking-[0.15em] text-[#8D6CA3]">
-                    Our Address
-                  </h3>
+             
+<div className="min-w-0 flex-1">
+  {/* SECTION LABEL */}
+  <h3
+    className={`${interTight.className} text-xs font-semibold uppercase tracking-[0.16em] text-[#8D6CA3]`}
+  >
+    Our Address
+  </h3>
 
-                  <p
-                    className={`${interTight.className} mt-2 text-sm font-medium leading-7 text-[#25232A] sm:text-base`}
-                  >
-                    {salonAddress}
-                  </p>
+  {/* ADDRESS */}
+  <p
+    className={`${interTight.className} mt-2 text-sm font-medium leading-7 text-black/75 sm:text-base`}
+  >
+    {salonAddress}
+  </p>
 
-                  <a
-                    href={mapSearchUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="mt-3 inline-flex items-center gap-2 text-sm font-semibold text-[#8D6CA3] transition-colors hover:text-[#25232A]"
-                  >
-                    View location <span aria-hidden="true">↗</span>
-                  </a>
-                </div>
+  {/* LOCATION LINK */}
+  <a
+    href={mapSearchUrl}
+    target="_blank"
+    rel="noopener noreferrer"
+    className={`${interTight.className} group mt-4 inline-flex items-center gap-2 text-sm font-semibold text-black transition-colors duration-300 hover:text-[#D77D99]`}
+  >
+    <span className="border-b border-black/20 pb-0.5 transition-colors duration-300 group-hover:border-[#D77D99]">
+      View location
+    </span>
+
+   
+  </a>
+</div>
+
               </div>
             </div>
 
@@ -188,7 +199,7 @@ export default function LocationContact() {
 
             {/* HEADING */}
             <h3
-              className={`${serif.className} mt-3 text-4xl font-semibold leading-tight text-[#25232A] sm:text-5xl`}
+              className={`${interTight.className} mt-3 text-4xl font-semibold leading-tight text-[#25232A] sm:text-4xl`}
             >
               Visit Our Studio
             </h3>
@@ -213,31 +224,7 @@ export default function LocationContact() {
             </div>
 
             {/* DIRECTIONS BUTTON */}
-            <a
-              href={directionsUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group relative mt-5 inline-flex w-fit items-center gap-3 overflow-hidden rounded-full border border-[#25232A] bg-[#25232A] px-7 py-3.5 text-xs font-semibold uppercase tracking-[0.14em] text-white transition-all duration-300 ease-out hover:-translate-y-0.5 hover:border-[#8D6CA3] hover:bg-[#8D6CA3] active:translate-y-0"
-            >
-              <span className="relative">Get Directions</span>
-
-              {/* ARROW ICON */}
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.8"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="transition-transform duration-300 group-hover:translate-x-1"
-              >
-                <path d="M7 17 17 7" />
-                <path d="M7 7h10v10" />
-              </svg>
-            </a>
+            
           </div>
         </div>
       </div>
