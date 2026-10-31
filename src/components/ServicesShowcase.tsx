@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef, useCallback } from "react";
+import { useRouter } from "next/navigation";
 import { Inter_Tight } from "next/font/google";
 import { ArrowUpRight } from "lucide-react";
 import gsap from "gsap";
@@ -149,6 +150,7 @@ function renderCardTitle(title: string) {
 }
 
 export default function ServicesShowcase() {
+  const router = useRouter();
   const [activeIndex, setActiveIndex] = useState(0);
 
   const [isBridalOpen, setIsBridalOpen] = useState(false);
@@ -662,14 +664,7 @@ export default function ServicesShowcase() {
     setIsGroomOpen(false);
     setClosingSection(null);
 
-    setTimeout(() => {
-      const el = document.getElementById("first-showcase-section");
-      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
-    }, 100);
-
-    if (typeof window !== "undefined") {
-      window.open(WHATSAPP_ENQUIRY_URL, "_blank");
-    }
+    router.push("/#booking");
   };
 
   const handleServiceSelect = (actionKey: ServiceShowcaseItem["actionKey"]) => {
@@ -774,7 +769,7 @@ export default function ServicesShowcase() {
         onMouseLeave={() => {
           isHoveredRef.current = false;
         }}
-        className="relative w-full overflow-hidden rounded-none border border-[#8D6CA3]/30 bg-[#F1EDF7] flex items-center h-[calc(100dvh-92px)] sm:h-[calc(100dvh-106px)] lg:h-[calc(100dvh-132px)] max-h-[820px]"
+        className="relative w-full overflow-hidden rounded-none border border-[#8D6CA3]/30 bg-[#F1EDF7] flex items-center h-[calc(100dvh-104px)] sm:h-[calc(100dvh-120px)] lg:h-[calc(100dvh-152px)] max-h-[800px]"
       >
         {/* Viewport Container (Fills the entire showcase frame with zero padding) */}
         <div

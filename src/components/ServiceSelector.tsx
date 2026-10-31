@@ -64,9 +64,11 @@ return (
       className="flex w-full items-center justify-between rounded-xl border border-[#25232A]/15 bg-white px-4 py-3.5 text-left text-sm text-[#25232A] transition hover:border-[#8D6CA3]/50"
       aria-expanded={isOpen}
     >
-      <span className="truncate">
-        {selectedServices.length > 0
-          ? `${selectedServices.length} service(s) selected`
+      <span className="truncate font-medium text-[#25232A]">
+        {selectedServices.length === 1
+          ? selectedServices[0]
+          : selectedServices.length > 1
+          ? `${selectedServices.length} services selected`
           : "Select your services"}
       </span>
 

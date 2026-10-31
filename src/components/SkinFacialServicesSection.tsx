@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { Inter_Tight } from "next/font/google";
 import { ArrowLeft, ArrowUpRight } from "lucide-react";
 
@@ -137,15 +138,15 @@ export default function SkinFacialServicesSection({
   onBackToServices,
 }: SkinFacialServicesSectionProps) {
   // Facials is initially highlighted by default
-  const [activeIndex, setActiveIndex] = useState(0);
+  const router = useRouter();
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const [displayIndex, setDisplayIndex] = useState(0);
 
-  const activeService = SKIN_SUB_SERVICES[activeIndex];
+  const activeService = SKIN_SUB_SERVICES[displayIndex];
 
-  const getWhatsAppUrl = (title: string) =>
-    "https://wa.me/919789376174?text=" +
-    encodeURIComponent(
-      `Hi Touch Salon! I would love to enquire about booking the ${title} service.`
-    );
+  const handleServiceClick = (serviceTitle: string) => {
+    router.push(`/?service=${encodeURIComponent(serviceTitle)}#booking`);
+  };
 
   // Smoothly maps activeIndex across the available container height so the full card is revealed
   const getPanelY = (index: number) => {
@@ -225,87 +226,51 @@ export default function SkinFacialServicesSection({
            ========================================================================= */}
         <div className="relative w-full">
           {/* Vertical Stack of 4 Full-Width Rows */}
-          <div className="flex flex-col divide-y divide-[#8D6CA3]/15">
+          <div onMouseLeave={() => setHoveredIndex(null)}
+          className="flex flex-col divide-y divide-[#8D6CA3]/15">
             {SKIN_SUB_SERVICES.map((service, index) => {
-              const isActive = activeIndex === index;
+              const isHovered = hoveredIndex === index;
 
               return (
                 <button
                   key={service.id}
                   type="button"
-                  onClick={() => {
-                    if (isActive && typeof window !== "undefined" && window.innerWidth < 1024) {
-                      window.open(getWhatsAppUrl(service.title), "_blank");
-                    } else {
-                      setActiveIndex(index);
-                    }
-                  }}
-                  onMouseEnter={() => setActiveIndex(index)}
-                  aria-selected={isActive}
+                  onClick={() => handleServiceClick(service.title)}
+                  onMouseEnter={() => { setHoveredIndex(index); setDisplayIndex(index); }}
+                  aria-selected={isHovered}
                   role="tab"
-                  className={`group relative w-full text-left transition-all duration-300 min-h-[105px] lg:h-[115px] flex items-center justify-between gap-6 px-6 sm:px-10 lg:px-12 py-4 sm:py-5 rounded-[14px] sm:rounded-[18px] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#8D6CA3] ${
-                    isActive
-                      ? "bg-[#8D6CA3] text-white shadow-[0_8px_25px_rgba(141,108,163,0.28)] my-1 border-transparent"
-                      : "bg-transparent text-[#25232A] hover:bg-[#EDE4F3]/50"
-                  }`}
+                  className="group relative w-full text-left transition-colors duration-200 min-h-[105px] lg:h-[115px] flex items-center justify-between gap-6 px-6 sm:px-10 lg:px-12 py-4 sm:py-5 rounded-[14px] sm:rounded-[18px] bg-transparent hover:bg-[#8D6CA3]/10 focus:outline-none cursor-pointer"
                 >
                   {/* Left: Number, Title, and Short Quote/Description */}
                   <div className="flex-1 max-w-[420px] sm:max-w-md lg:max-w-lg xl:max-w-xl pr-4">
                     <div className="flex items-baseline gap-3">
                       <span
-                        className={`${interTight.className} text-xs font-bold tracking-wider ${
-                          isActive ? "text-white/80" : "text-[#8D6CA3]"
-                        }`}
+                        className={`${interTight.className} text-xs font-bold tracking-wider text-[#8D6CA3]`}
                       >
                         {service.number}
                       </span>
                       <h3
-                        className={`${interTight.className} text-xl sm:text-2xl lg:text-[23px] font-bold tracking-[-0.01em] transition-colors ${
-                          isActive
-                            ? "text-white font-semibold"
-                            : "text-[#25232A] group-hover:text-[#25232A]"
-                        }`}
+                        className={`${interTight.className} text-xl sm:text-2xl lg:text-[23px] font-bold tracking-[-0.01em] text-[#25232A] group-hover:text-[#8D6CA3] transition-colors`}
                       >
                         {service.title}
                       </h3>
                     </div>
 
                     <p
-                      className={`mt-1 text-xs sm:text-[13px] lg:text-[14px] leading-relaxed line-clamp-2 transition-colors ${
-                        isActive
-                          ? "text-white/90 font-medium"
-                          : "text-[#716B76] group-hover:text-[#25232A]"
-                      }`}
+                      className={`mt-1 text-xs sm:text-[13px] lg:text-[14px] leading-relaxed line-clamp-2 transition-colors text-[#716B76] group-hover:text-[#25232A]`}
                     >
                       {service.description}
                     </p>
 
-                    {/* Mobile Book Button badge when row is selected */}
-                    {isActive && (
-                      <div className="mt-2.5 flex lg:hidden items-center gap-1.5">
-                        <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-white text-[#8D6CA3] text-xs font-semibold shadow-sm">
-                          <span>Book on WhatsApp</span>
-                          <ArrowUpRight className="h-3 w-3 stroke-[2.2]" />
-                        </span>
-                      </div>
-                    )}
-                  </div>
+                    </div>
 
                   {/* Far Right: Diagonal Arrow-Up-Right Icon */}
                   <div className="flex-shrink-0 z-10">
                     <div
-                      className={`h-10 w-10 sm:h-11 sm:w-11 rounded-full flex items-center justify-center transition-all duration-250 ${
-                        isActive
-                          ? "bg-white text-[#8D6CA3] shadow-md"
-                          : "border border-[#8D6CA3]/25 text-[#8D6CA3] bg-[#EDE4F3]/60 group-hover:border-[#8D6CA3] group-hover:bg-[#8D6CA3] group-hover:text-white"
-                      }`}
+                      className="h-10 w-10 sm:h-11 sm:w-11 rounded-full flex items-center justify-center transition-all duration-200 border border-[#8D6CA3]/25 text-[#8D6CA3] bg-[#EDE4F3]/60 group-hover:border-[#8D6CA3] group-hover:bg-[#8D6CA3] group-hover:text-white"
                     >
                       <ArrowUpRight
-                        className={`h-5 w-5 stroke-[2.2] transition-transform duration-250 ${
-                          isActive
-                            ? "translate-x-0.5 -translate-y-0.5"
-                            : "group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                        }`}
+                        className="h-5 w-5 stroke-[2.2] transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
                       />
                     </div>
                   </div>
@@ -321,13 +286,17 @@ export default function SkinFacialServicesSection({
              ========================================================================= */}
           <div
             style={{
-              transform: `translateY(${getPanelY(activeIndex)}px)`,
+              transform: `translateY(${getPanelY(displayIndex)}px)`,
             }}
-            className="hidden lg:block absolute right-14 lg:right-20 xl:right-28 top-0 w-[320px] xl:w-[350px] h-[410px] rounded-[20px] overflow-hidden border-2 border-[#8D6CA3] bg-[#25232A] shadow-[0_25px_60px_rgba(37,35,42,0.25)] transition-transform duration-350 ease-out z-20 pointer-events-auto"
+            className={`hidden lg:block absolute right-14 lg:right-20 xl:right-28 top-0 w-[320px] xl:w-[350px] h-[410px] rounded-none overflow-hidden border-2 border-[#8D6CA3] bg-[#25232A] shadow-[0_25px_60px_rgba(37,35,42,0.25)] transition-all duration-300 ease-out z-20 pointer-events-none ${
+              hoveredIndex !== null
+                ? "opacity-100 scale-100"
+                : "opacity-0 scale-95"
+            }`}
           >
             {/* Stack of All 4 Images with Smooth Cross-Dissolve */}
             {SKIN_SUB_SERVICES.map((service, index) => {
-              const isSelected = activeIndex === index;
+              const isSelected = displayIndex === index;
               return (
                 <div
                   key={service.id}
@@ -346,7 +315,7 @@ export default function SkinFacialServicesSection({
               );
             })}
 
-            {/* Subtle Bottom Scrim with Look Title & WhatsApp Action */}
+            {/* Subtle Bottom Scrim with Look Title */}
             <div className="absolute inset-x-0 bottom-0 z-20 h-24 bg-gradient-to-t from-[#25232A]/95 via-[#25232A]/50 to-transparent pointer-events-none" />
 
             {/* Specular Top Gold Sheen */}
@@ -363,15 +332,14 @@ export default function SkinFacialServicesSection({
                   {activeService.title}
                 </span>
               </div>
-              <a
-                href={getWhatsAppUrl(activeService.title)}
-                target="_blank"
-                rel="noopener noreferrer"
+              <button
+                type="button"
+                onClick={() => handleServiceClick(activeService.title)}
                 className="inline-flex items-center gap-1.5 rounded-full bg-[#8D6CA3] px-3.5 py-1.5 text-xs font-semibold text-white shadow-md transition-transform duration-250 hover:scale-105 hover:bg-[#76558D]"
               >
                 <span>Book</span>
                 <ArrowUpRight className="h-3.5 w-3.5 stroke-[2.2]" />
-              </a>
+              </button>
             </div>
           </div>
         </div>
