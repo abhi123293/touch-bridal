@@ -157,7 +157,7 @@ export default function GroomMakeupSection({
   return (
     <section
       aria-label="Groom Makeup Sub-Services Collection"
-      className="relative w-full overflow-hidden rounded-[26px] sm:rounded-[34px] lg:rounded-[40px] bg-white border border-[#8D6CA3]/20 shadow-[0_20px_50px_rgba(37,35,42,0.08)] py-10 sm:py-14 lg:py-16 px-6 sm:px-10 lg:px-14 select-none"
+      className="relative w-full overflow-hidden rounded-none bg-[#F1EDF7] border border-[#8D6CA3]/30 py-10 sm:py-14 lg:py-16 px-6 sm:px-10 lg:px-14 select-none"
     >
       {/* 1. Thin vertical muted-gold accent line near the left edge */}
       <div
@@ -171,7 +171,7 @@ export default function GroomMakeupSection({
         className="pointer-events-none absolute right-10 top-20 h-72 w-96 rounded-full bg-[#8D6CA3]/10 blur-[100px]"
       />
 
-      <div className="relative mx-auto w-full max-w-[1360px]">
+      <div className="relative mx-auto w-full max-w-[1320px]">
         {/* Navigation & Breadcrumbs Header */}
         <div className="flex flex-wrap items-center justify-between gap-4 mb-6 sm:mb-8 lg:mb-10 pl-2 sm:pl-4">
           <button
