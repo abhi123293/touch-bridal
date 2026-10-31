@@ -7,11 +7,11 @@ export const metadata = {
 
 export default function ServicesPage() {
   return (
-    <main className="relative flex min-h-[100dvh] w-full flex-col items-center justify-start overflow-x-hidden bg-[radial-gradient(ellipse_at_top_left,#b58b66_0%,#6a4430_42%,#2f1d14_100%)] px-2 pt-18 pb-2 sm:px-3 sm:pt-20 sm:pb-3 lg:px-4 lg:pt-24 lg:pb-4">
-      {/* Decorative Warm Ambient Spotlight behind the Showcase */}
+    <main className="relative flex min-h-[100dvh] w-full flex-col items-center justify-start overflow-x-hidden bg-[#F1EDF7] text-[#25232A] px-2 pt-18 pb-4 sm:px-3 sm:pt-20 sm:pb-6 lg:px-4 lg:pt-24 lg:pb-8">
+      {/* Decorative Soft Ambient Spotlight matching Hero palette */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute left-1/2 top-1/3 h-[500px] w-full max-w-[1400px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-b from-[#e6c178]/15 via-[#8b4a28]/10 to-transparent blur-[120px]"
+        className="pointer-events-none absolute left-1/2 top-1/3 h-[520px] w-full max-w-[1400px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-b from-[#8D6CA3]/15 via-[#E4D9ED]/40 to-transparent blur-[130px]"
       />
 
       {/* Bridal Showcase & Services Sections */}

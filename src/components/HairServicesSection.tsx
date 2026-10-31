@@ -1,21 +1,14 @@
 "use client";
 
 import { useState } from "react";
-import { Cormorant_Garamond, Inter } from "next/font/google";
+import { Inter_Tight } from "next/font/google";
 import { ArrowLeft, ArrowUpRight } from "lucide-react";
 
-const cormorant = Cormorant_Garamond({
+const interTight = Inter_Tight({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["300", "400", "500", "600", "700", "800"],
   display: "swap",
 });
-
-const inter = Inter({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  display: "swap",
-});
-
 export interface HairSubService {
   id: string;
   number: string;
@@ -116,6 +109,39 @@ interface HairServicesSectionProps {
 const ROW_HEIGHT = 110;
 const PANEL_HEIGHT = 440;
 
+// Splits text into half black and half lavender matching "Every bride, beautifully unique."
+function renderHalfAndHalf(text: string, isActive: boolean = false) {
+  const words = text.trim().split(/\s+/);
+  if (words.length <= 1) {
+    return <span className={isActive ? "text-white" : "text-[#25232A]"}>{text}</span>;
+  }
+  const mid = Math.ceil(words.length / 2);
+  const part1 = words.slice(0, mid).join(" ");
+  const part2 = words.slice(mid).join(" ");
+  return (
+    <>
+      <span className={isActive ? "text-white" : "text-[#25232A]"}>{part1} </span>
+      <span className={isActive ? "text-[#EDE4F3]" : "text-[#8D6CA3]"}>{part2}</span>
+    </>
+  );
+}
+
+function renderPanelTitle(text: string) {
+  const words = text.trim().split(/\s+/);
+  if (words.length <= 1) {
+    return <span className="text-white">{text}</span>;
+  }
+  const mid = Math.ceil(words.length / 2);
+  const part1 = words.slice(0, mid).join(" ");
+  const part2 = words.slice(mid).join(" ");
+  return (
+    <>
+      <span className="text-white">{part1} </span>
+      <span className="text-[#EDE4F3]">{part2}</span>
+    </>
+  );
+}
+
 export default function HairServicesSection({
   onBackToServices,
 }: HairServicesSectionProps) {
@@ -140,18 +166,18 @@ export default function HairServicesSection({
   return (
     <section
       aria-label="Hair Services & Rituals Collection"
-      className="relative w-full overflow-hidden rounded-[26px] sm:rounded-[34px] lg:rounded-[40px] bg-[#F5F0E8] border border-[#3A2921]/15 shadow-[0_25px_70px_rgba(28,18,15,0.18)] py-10 sm:py-14 lg:py-16 px-6 sm:px-10 lg:px-14 select-none"
+      className="relative w-full overflow-hidden rounded-[26px] sm:rounded-[34px] lg:rounded-[40px] bg-white border border-[#8D6CA3]/20 shadow-[0_20px_50px_rgba(37,35,42,0.08)] py-10 sm:py-14 lg:py-16 px-6 sm:px-10 lg:px-14 select-none"
     >
       {/* 1. Thin vertical muted-gold accent line near the left edge */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute left-4 sm:left-7 lg:left-8 top-12 bottom-12 w-px bg-gradient-to-b from-transparent via-[#C8A66A]/40 to-transparent"
+        className="pointer-events-none absolute left-4 sm:left-7 lg:left-8 top-12 bottom-12 w-px bg-gradient-to-b from-transparent via-[#8D6CA3]/40 to-transparent"
       />
 
       {/* 2. Soft Ambient Warm Glow */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute right-10 top-20 h-72 w-96 rounded-full bg-[#C8A66A]/10 blur-[100px]"
+        className="pointer-events-none absolute right-10 top-20 h-72 w-96 rounded-full bg-[#8D6CA3]/10 blur-[100px]"
       />
 
       <div className="relative mx-auto w-full max-w-[1360px]">
@@ -161,9 +187,9 @@ export default function HairServicesSection({
             type="button"
             onClick={onBackToServices}
             aria-label="Back to all services"
-            className="group inline-flex items-center gap-2.5 rounded-full border border-[#C8A66A]/50 bg-[#FAF6F0] px-4 sm:px-5 py-2 sm:py-2.5 text-xs sm:text-[13px] font-semibold tracking-wide text-[#1C120F] shadow-sm transition-all duration-250 hover:border-[#C8A66A] hover:bg-[#C8A66A] hover:text-[#1C120F] hover:shadow-[0_4px_16px_rgba(200,166,106,0.25)]"
+            className="group inline-flex items-center gap-2.5 rounded-full border border-[#8D6CA3]/25 bg-white px-4 sm:px-5 py-2 sm:py-2.5 text-xs sm:text-[13px] font-semibold tracking-wide text-[#25232A] shadow-sm transition-all duration-250 hover:border-[#8D6CA3] hover:bg-[#8D6CA3] hover:text-white hover:shadow-[0_4px_16px_rgba(141,108,163,0.25)]"
           >
-            <ArrowLeft className="h-4 w-4 stroke-[2.2] transition-transform duration-250 group-hover:-translate-x-1 text-[#1C120F]" />
+            <ArrowLeft className="h-4 w-4 stroke-[2.2] transition-transform duration-250 group-hover:-translate-x-1 text-[#25232A] group-hover:text-white" />
             <span>Back to All Services</span>
           </button>
 
@@ -171,34 +197,35 @@ export default function HairServicesSection({
             <button
               type="button"
               onClick={onBackToServices}
-              className="text-[#5A3E30]/75 hover:text-[#1C120F] hover:underline transition-colors cursor-pointer"
+              className="text-[#716B76] hover:text-[#25232A] hover:underline transition-colors cursor-pointer"
             >
               Services
             </button>
-            <span className="text-[#C8A66A]">/</span>
-            <span className="text-[#1C120F] font-semibold">Hair Services Collection</span>
+            <span className="text-[#8D6CA3]">/</span>
+            <span className="text-[#25232A] font-semibold">Hair Services Collection</span>
           </nav>
         </div>
 
         {/* Section Heading matching the editorial design */}
         <div className="mb-8 sm:mb-10 lg:mb-12 pl-2 sm:pl-4">
           <div className="flex items-center gap-3">
-            <span className="h-px w-8 bg-[#C8A66A]" />
-            <span className="text-[11px] font-semibold uppercase tracking-[0.28em] text-[#A98955] sm:text-xs">
+            <span className="h-px w-8 bg-[#8D6CA3]" />
+            <span className="text-[11px] font-semibold uppercase tracking-[0.24em] font-bold text-[#8D6CA3] sm:text-xs">
               Signature Hair Artistry & Rituals
             </span>
           </div>
 
           <h2
-            className={`${cormorant.className} mt-3 text-3xl font-normal tracking-tight text-[#1C120F] sm:text-4xl lg:text-[46px] leading-[1.1]`}
+            className={`${interTight.className} mt-3 max-w-[580px] text-3xl font-bold uppercase leading-[1.05] tracking-[-0.02em] sm:text-4xl lg:text-[50px]`}
           >
-            Hair Services Collection
+            <span className="block text-[#25232A]">Hair Services,</span>
+            <span className="block text-[#8D6CA3]">Collection.</span>
           </h2>
 
           <div className="mt-3.5 flex items-center gap-2">
-            <span className="h-[1.5px] w-12 bg-[#C8A66A]" />
-            <span className="h-1 w-1 rounded-full bg-[#C8A66A]" />
-            <span className="h-[1px] w-20 bg-[#C8A66A]/40" />
+            <span className="h-[1.5px] w-12 bg-[#8D6CA3]" />
+            <span className="h-1 w-1 rounded-full bg-[#8D6CA3]" />
+            <span className="h-[1px] w-20 bg-[#8D6CA3]/40" />
           </div>
         </div>
 
@@ -207,7 +234,7 @@ export default function HairServicesSection({
            ========================================================================= */}
         <div className="relative w-full">
           {/* Vertical Stack of 8 Full-Width Rows */}
-          <div className="flex flex-col divide-y divide-[#C8A66A]/25">
+          <div className="flex flex-col divide-y divide-[#8D6CA3]/15">
             {HAIR_SUB_SERVICES.map((service, index) => {
               const isActive = activeIndex === index;
 
@@ -225,27 +252,27 @@ export default function HairServicesSection({
                   onMouseEnter={() => setActiveIndex(index)}
                   aria-selected={isActive}
                   role="tab"
-                  className={`group relative w-full text-left transition-all duration-300 min-h-[100px] lg:h-[110px] flex items-center justify-between gap-6 px-6 sm:px-10 lg:px-12 py-4 sm:py-5 rounded-[14px] sm:rounded-[18px] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#C8A66A] ${
+                  className={`group relative w-full text-left transition-all duration-300 min-h-[100px] lg:h-[110px] flex items-center justify-between gap-6 px-6 sm:px-10 lg:px-12 py-4 sm:py-5 rounded-[14px] sm:rounded-[18px] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#8D6CA3] ${
                     isActive
-                      ? "bg-[#C8A66A] text-[#1C120F] shadow-[0_8px_25px_rgba(200,166,106,0.32)] my-1 border-transparent"
-                      : "bg-transparent text-[#1C120F] hover:bg-[#EAE1D5]/60"
+                      ? "bg-[#8D6CA3] text-white shadow-[0_8px_25px_rgba(141,108,163,0.28)] my-1 border-transparent"
+                      : "bg-transparent text-[#25232A] hover:bg-[#EDE4F3]/50"
                   }`}
                 >
                   {/* Left: Number, Title, and Short Quote/Description */}
                   <div className="flex-1 max-w-[420px] sm:max-w-md lg:max-w-lg xl:max-w-xl pr-4">
                     <div className="flex items-baseline gap-3">
                       <span
-                        className={`text-xs font-mono font-semibold tracking-wider ${
-                          isActive ? "text-[#1C120F]/70" : "text-[#A98955]"
+                        className={`${interTight.className} text-xs font-bold tracking-wider ${
+                          isActive ? "text-white/80" : "text-[#8D6CA3]"
                         }`}
                       >
                         {service.number}
                       </span>
                       <h3
-                        className={`${cormorant.className} text-2xl sm:text-[26px] lg:text-[29px] font-normal tracking-wide transition-colors ${
+                        className={`${interTight.className} text-xl sm:text-2xl lg:text-[23px] font-bold tracking-[-0.01em] transition-colors ${
                           isActive
-                            ? "text-[#1C120F] font-semibold"
-                            : "text-[#1C120F] group-hover:text-[#1C120F]"
+                            ? "text-white font-semibold"
+                            : "text-[#25232A] group-hover:text-[#25232A]"
                         }`}
                       >
                         {service.title}
@@ -255,8 +282,8 @@ export default function HairServicesSection({
                     <p
                       className={`mt-1 text-xs sm:text-[13px] lg:text-[14px] leading-relaxed line-clamp-2 transition-colors ${
                         isActive
-                          ? "text-[#2B1C17]/90 font-medium"
-                          : "text-[#5A3E30]/85 group-hover:text-[#3A2921]"
+                          ? "text-white/90 font-medium"
+                          : "text-[#716B76] group-hover:text-[#25232A]"
                       }`}
                     >
                       {service.description}
@@ -265,7 +292,7 @@ export default function HairServicesSection({
                     {/* Mobile Book Button badge when row is selected */}
                     {isActive && (
                       <div className="mt-2.5 flex lg:hidden items-center gap-1.5">
-                        <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-[#1C120F] text-[#C8A66A] text-xs font-semibold shadow-sm">
+                        <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-white text-[#8D6CA3] text-xs font-semibold shadow-sm">
                           <span>Book on WhatsApp</span>
                           <ArrowUpRight className="h-3 w-3 stroke-[2.2]" />
                         </span>
@@ -278,8 +305,8 @@ export default function HairServicesSection({
                     <div
                       className={`h-10 w-10 sm:h-11 sm:w-11 rounded-full flex items-center justify-center transition-all duration-250 ${
                         isActive
-                          ? "bg-[#1C120F] text-[#C8A66A] shadow-md"
-                          : "border border-[#C8A66A]/50 text-[#8B6F3E] bg-[#FAF6F0] group-hover:border-[#C8A66A] group-hover:bg-[#C8A66A] group-hover:text-[#1C120F]"
+                          ? "bg-white text-[#8D6CA3] shadow-md"
+                          : "border border-[#8D6CA3]/25 text-[#8D6CA3] bg-[#EDE4F3]/60 group-hover:border-[#8D6CA3] group-hover:bg-[#8D6CA3] group-hover:text-white"
                       }`}
                     >
                       <ArrowUpRight
@@ -305,7 +332,7 @@ export default function HairServicesSection({
             style={{
               transform: `translateY(${getPanelY(activeIndex)}px)`,
             }}
-            className="hidden lg:block absolute right-14 lg:right-20 xl:right-28 top-0 w-[320px] xl:w-[350px] h-[440px] rounded-[20px] overflow-hidden border-2 border-[#C8A66A] bg-[#2B1C17] shadow-[0_25px_60px_rgba(28,18,15,0.32)] transition-transform duration-350 ease-out z-20 pointer-events-auto"
+            className="hidden lg:block absolute right-14 lg:right-20 xl:right-28 top-0 w-[320px] xl:w-[350px] h-[440px] rounded-[20px] overflow-hidden border-2 border-[#8D6CA3] bg-[#25232A] shadow-[0_25px_60px_rgba(37,35,42,0.25)] transition-transform duration-350 ease-out z-20 pointer-events-auto"
           >
             {/* Stack of All 8 Images with Smooth Cross-Dissolve */}
             {HAIR_SUB_SERVICES.map((service, index) => {
@@ -329,18 +356,18 @@ export default function HairServicesSection({
             })}
 
             {/* Subtle Bottom Scrim with Look Title & WhatsApp Action */}
-            <div className="absolute inset-x-0 bottom-0 z-20 h-24 bg-gradient-to-t from-[#1C120F]/90 via-[#1C120F]/45 to-transparent pointer-events-none" />
+            <div className="absolute inset-x-0 bottom-0 z-20 h-24 bg-gradient-to-t from-[#25232A]/95 via-[#25232A]/50 to-transparent pointer-events-none" />
 
             {/* Specular Top Gold Sheen */}
-            <div className="absolute inset-x-0 top-0 z-20 h-px bg-gradient-to-r from-transparent via-[#C8A66A] to-transparent pointer-events-none" />
+            <div className="absolute inset-x-0 top-0 z-20 h-px bg-gradient-to-r from-transparent via-[#8D6CA3] to-transparent pointer-events-none" />
 
             <div className="absolute inset-x-0 bottom-0 z-30 p-4 sm:p-5 flex items-end justify-between gap-3">
               <div>
-                <span className="text-[10px] font-sans font-semibold tracking-[0.2em] text-[#C8A66A] uppercase block">
+                <span className="text-[10px] font-sans font-semibold tracking-[0.2em] text-white/80 uppercase block">
                   {activeService.number} • SIGNATURE RITUAL
                 </span>
                 <span
-                  className={`${cormorant.className} text-xl xl:text-2xl font-medium tracking-wide text-[#F5F0E8] drop-shadow-[0_1px_4px_rgba(0,0,0,0.9)]`}
+                  className={`${interTight.className} text-lg xl:text-xl font-bold uppercase tracking-tight text-white drop-shadow-[0_1px_4px_rgba(0,0,0,0.9)]`}
                 >
                   {activeService.title}
                 </span>
@@ -349,7 +376,7 @@ export default function HairServicesSection({
                 href={getWhatsAppUrl(activeService.title)}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 rounded-full bg-[#C8A66A] px-3.5 py-1.5 text-xs font-semibold text-[#1C120F] shadow-md transition-transform duration-250 hover:scale-105 hover:bg-[#d8b87c]"
+                className="inline-flex items-center gap-1.5 rounded-full bg-[#8D6CA3] px-3.5 py-1.5 text-xs font-semibold text-white shadow-md transition-transform duration-250 hover:scale-105 hover:bg-[#76558D]"
               >
                 <span>Book</span>
                 <ArrowUpRight className="h-3.5 w-3.5 stroke-[2.2]" />

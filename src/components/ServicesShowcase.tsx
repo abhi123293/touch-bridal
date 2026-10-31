@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef, useCallback } from "react";
-import { Cormorant_Garamond } from "next/font/google";
+import { Inter_Tight } from "next/font/google";
 import { ArrowUpRight } from "lucide-react";
 import gsap from "gsap";
 import BridalMakeupSection from "@/components/BridalMakeupSection";
@@ -12,9 +12,9 @@ import AdditionalServicesSection from "@/components/AdditionalServicesSection";
 import MensServicesSection from "@/components/MensServicesSection";
 import GroomMakeupSection from "@/components/GroomMakeupSection";
 
-const cormorant = Cormorant_Garamond({
+const interTight = Inter_Tight({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
+  weight: ["300", "400", "500", "600", "700", "800"],
   display: "swap",
 });
 
@@ -130,6 +130,23 @@ const SHOWCASE_SERVICES: ServiceShowcaseItem[] = [
   },
 ];
 
+// Splits card title into half white and half lavender
+function renderCardTitle(title: string) {
+  const words = title.trim().split(/\s+/);
+  if (words.length <= 1) {
+    return <span className="block text-white">{title}</span>;
+  }
+  const mid = Math.ceil(words.length / 2);
+  const part1 = words.slice(0, mid).join(" ");
+  const part2 = words.slice(mid).join(" ");
+  return (
+    <>
+      <span className="block text-white">{part1}</span>
+      <span className="block text-[#EDE4F3]">{part2}</span>
+    </>
+  );
+}
+
 export default function ServicesShowcase() {
   const [activeIndex, setActiveIndex] = useState(0);
 
@@ -143,6 +160,20 @@ export default function ServicesShowcase() {
   const [closingSection, setClosingSection] = useState<
     "bridal" | "hair" | "beauty" | "skin" | "additional" | "mens" | "groom" | null
   >(null);
+
+  const isAnyOpen =
+    isBridalOpen ||
+    isHairOpen ||
+    isBeautyOpen ||
+    isSkinOpen ||
+    isAdditionalOpen ||
+    isMensOpen ||
+    isGroomOpen;
+
+  const isAnyOpenRef = useRef(false);
+  useEffect(() => {
+    isAnyOpenRef.current = isAnyOpen;
+  }, [isAnyOpen]);
 
   // In-Place Scroll Container Refs
   const scrollContainerRef = useRef<HTMLDivElement>(null);
@@ -303,18 +334,32 @@ export default function ServicesShowcase() {
       const diffX = startX - currentX;
       const diffY = startY - currentY;
 
-      // Handle both vertical thumb swipes (diffY) and horizontal drags (diffX) seamlessly
-      const dominantDelta = Math.abs(diffX) >= Math.abs(diffY) ? diffX : diffY;
+      if (!isAnyOpenRef.current) {
+        // In standalone showcase mode, any thumb swipe smoothly scrubs through cards
+        const dominantDelta = Math.abs(diffX) >= Math.abs(diffY) ? diffX : diffY;
 
-      if (Math.abs(dominantDelta) > 5) {
-        isSwipingRef.current = true;
-        if (e.cancelable) {
-          e.preventDefault();
+        if (Math.abs(dominantDelta) > 5) {
+          isSwipingRef.current = true;
+          if (e.cancelable) {
+            e.preventDefault();
+          }
+          startX = currentX;
+          startY = currentY;
+          directionRef.current = dominantDelta > 0 ? 1 : -1;
+          updateTrackPosition(targetXRef.current + dominantDelta * 1.5, 0.22);
         }
-        startX = currentX;
-        startY = currentY;
-        directionRef.current = dominantDelta > 0 ? 1 : -1;
-        updateTrackPosition(targetXRef.current + dominantDelta * 1.5, 0.22);
+      } else {
+        // When a sub-service is expanded, horizontal drags move cards, while vertical swipes scroll the page
+        if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 5) {
+          isSwipingRef.current = true;
+          if (e.cancelable) {
+            e.preventDefault();
+          }
+          startX = currentX;
+          startY = currentY;
+          directionRef.current = diffX > 0 ? 1 : -1;
+          updateTrackPosition(targetXRef.current + diffX * 1.5, 0.22);
+        }
       }
     };
 
@@ -595,18 +640,18 @@ export default function ServicesShowcase() {
     const activeSection = isBridalOpen
       ? "bridal"
       : isHairOpen
-      ? "hair"
-      : isBeautyOpen
-      ? "beauty"
-      : isSkinOpen
-      ? "skin"
-      : isAdditionalOpen
-      ? "additional"
-      : isMensOpen
-      ? "mens"
-      : isGroomOpen
-      ? "groom"
-      : null;
+        ? "hair"
+        : isBeautyOpen
+          ? "beauty"
+          : isSkinOpen
+            ? "skin"
+            : isAdditionalOpen
+              ? "additional"
+              : isMensOpen
+                ? "mens"
+                : isGroomOpen
+                  ? "groom"
+                  : null;
 
     if (activeSection) {
       setClosingSection(activeSection);
@@ -628,7 +673,7 @@ export default function ServicesShowcase() {
   return (
     <section
       aria-label="Bridal Saree Showcase & Services"
-      className="relative z-10 mx-auto w-full max-w-[1660px] drop-shadow-[0_30px_70px_rgba(20,10,5,0.7)]"
+      className="relative z-10 mx-auto w-full max-w-[1660px] drop-shadow-[0_20px_50px_rgba(37,35,42,0.12)]"
     >
       {/* =========================================================================
           FIRST SECTION: Seamless Mughal Arch Colonnade (Enlarged Frame & Gap-0)
@@ -646,7 +691,7 @@ export default function ServicesShowcase() {
         onMouseLeave={() => {
           isHoveredRef.current = false;
         }}
-        className="relative w-full overflow-hidden rounded-[20px] sm:rounded-[28px] lg:rounded-[32px] border border-[#D6BC96]/40 bg-gradient-to-b from-[#24150e] via-[#1a0e08] to-[#120703] shadow-2xl flex items-center h-[calc(100dvh-88px)] sm:h-[calc(100dvh-98px)] lg:h-[calc(100vh-120px)] max-h-[860px]"
+        className="relative w-full overflow-hidden rounded-[20px] sm:rounded-[28px] lg:rounded-[32px] border border-[#8D6CA3]/30 bg-[#F1EDF7] shadow-xl flex items-center h-[calc(100dvh-88px)] sm:h-[calc(100dvh-98px)] lg:h-[calc(100vh-120px)] max-h-[860px]"
       >
         {/* Viewport Container (Fills the entire showcase frame with zero padding) */}
         <div
@@ -671,16 +716,15 @@ export default function ServicesShowcase() {
                       handleServiceSelect(service.actionKey);
                     }
                   }}
-                  className={`saree-arch-card group relative flex-shrink-0 h-full aspect-[736/1200] overflow-hidden bg-[#24150e] border-r border-[#D6BC96]/30 last:border-r-0 select-none text-left cursor-pointer transition-all duration-300 ${
-                    isCurrent
-                      ? "ring-1 ring-inset ring-[#D6BC96]/50 shadow-[inset_0_0_40px_rgba(214,188,150,0.15)]"
-                      : "hover:ring-1 hover:ring-inset hover:ring-[#D6BC96]/30"
-                  }`}
+                  className={`saree-arch-card group relative flex-shrink-0 h-full aspect-[736/1200] overflow-hidden bg-[#F1EDF7] border-r border-[#8D6CA3]/20 last:border-r-0 select-none text-left cursor-pointer transition-all duration-300 ${isCurrent
+                      ? "ring-1 ring-inset ring-[#8D6CA3]/50 shadow-[inset_0_0_40px_rgba(141,108,163,0.15)]"
+                      : "hover:ring-1 hover:ring-inset hover:ring-[#8D6CA3]/30"
+                    }`}
                 >
                   {/* Subtle Warm Backdrop behind Model */}
                   <div
                     aria-hidden="true"
-                    className="absolute inset-0 bg-gradient-to-b from-[#382115] via-[#24150e] to-[#140a06]"
+                    className="absolute inset-0 bg-gradient-to-b from-[#EDE4F3] via-[#E4D9ED] to-[#D8C8E4]"
                   />
 
                   {/* Seamlessly Fitted Service Image inside Mughal Arch Frame */}
@@ -693,7 +737,7 @@ export default function ServicesShowcase() {
                   {/* Deep Grounding Scrim Gradient at Base for Text Readability */}
                   <div
                     aria-hidden="true"
-                    className="pointer-events-none absolute inset-x-0 bottom-0 z-20 h-64 sm:h-72 lg:h-84 bg-gradient-to-t from-[#140a06]/98 via-[#140a06]/82 via-45% to-transparent"
+                    className="pointer-events-none absolute inset-x-0 bottom-0 z-20 h-64 sm:h-72 lg:h-84 bg-gradient-to-t from-[#25232A]/96 via-[#25232A]/72 via-45% to-transparent"
                   />
 
                   {/* Decorative Mughal Arch Overlay with Gold Contour & Corner Masks */}
@@ -713,18 +757,17 @@ export default function ServicesShowcase() {
                         x2="100%"
                         y2="100%"
                       >
-                        <stop offset="0%" stopColor="#F5F0E8" />
-                        <stop offset="28%" stopColor="#D6BC96" />
-                        <stop offset="68%" stopColor="#8b4a28" />
-                        <stop offset="88%" stopColor="#cba879" />
-                        <stop offset="100%" stopColor="#382319" />
+                        <stop offset="0%" stopColor="#FFFFFF" />
+                        <stop offset="25%" stopColor="#EDE4F3" />
+                        <stop offset="65%" stopColor="#8D6CA3" />
+                        <stop offset="100%" stopColor="#76558D" />
                       </linearGradient>
                     </defs>
 
                     {/* Soft Top Corner Masks to Reveal Mughal Arch Silhouette */}
                     <path
                       d={MUGHAL_CORNER_MASK_PATH}
-                      fill="#1a0e08"
+                      fill="#F1EDF7"
                       fillRule="evenodd"
                       className="transition-colors duration-500"
                     />
@@ -760,29 +803,29 @@ export default function ServicesShowcase() {
                      ============================================================= */}
                   <div className="absolute inset-x-0 bottom-0 z-40 p-4 sm:p-5 lg:p-6 flex flex-col justify-end">
                     {/* Number & Category Tag Pill */}
-                    <div className="flex items-center gap-2 mb-2">
-                      <span className="font-mono text-[10px] sm:text-xs font-bold tracking-wider text-[#D6BC96] px-2.5 py-0.5 rounded-full bg-[#38271F]/85 border border-[#D6BC96]/50 shadow-sm backdrop-blur-md">
+                    <div className="flex items-center gap-2 mb-2 transition-transform duration-500 ease-out group-hover:-translate-y-0.5">
+                      <span className={`${interTight.className} text-[11px] sm:text-xs font-bold text-white px-2.5 py-0.5 rounded-full bg-[#8D6CA3] border border-white/20 shadow-sm backdrop-blur-md`}>
                         {service.number}
                       </span>
-                      <span className="font-sans text-[10px] sm:text-xs font-semibold tracking-[0.18em] uppercase text-[#D6BC96] drop-shadow-sm truncate">
+                      <span className="font-sans text-[10px] sm:text-xs font-bold tracking-[0.2em] uppercase text-[#EDE4F3] drop-shadow-sm truncate">
                         {service.tag}
                       </span>
                     </div>
 
                     {/* Service Name displayed prominently on the image */}
                     <h3
-                      className={`${cormorant.className} text-2xl sm:text-3xl lg:text-4xl font-medium text-[#F5F0E8] leading-tight group-hover:text-[#D6BC96] transition-colors drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)]`}
+                      className={`${interTight.className} text-2xl sm:text-3xl lg:text-[32px] font-bold uppercase tracking-[-0.02em] leading-tight group-hover:text-[#EDE4F3] transition-colors drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)]`}
                     >
-                      {service.title}
+                      {renderCardTitle(service.title)}
                     </h3>
 
                     {/* Touch to Explore Callout Bar */}
-                    <div className="mt-3.5 flex items-center justify-between pt-2.5 border-t border-[#D6BC96]/30">
-                      <span className="text-[11px] sm:text-xs font-semibold uppercase tracking-[0.16em] text-[#D6BC96] flex items-center gap-1.5">
+                    <div className="mt-3.5 flex items-center justify-between pt-2.5 border-t border-white/20">
+                      <span className="text-[11px] sm:text-xs font-bold uppercase tracking-[0.14em] text-white/90 group-hover:text-[#EDE4F3] flex items-center gap-1.5 transition-colors">
                         <span>Touch to Explore</span>
                         <ArrowUpRight className="h-3.5 w-3.5 sm:h-4 sm:w-4 stroke-[2.2] transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                       </span>
-                      <div className="h-7 w-7 sm:h-8 sm:w-8 rounded-full bg-[#D6BC96]/20 border border-[#D6BC96]/60 flex items-center justify-center text-[#D6BC96] shadow-sm group-hover:bg-[#D6BC96] group-hover:text-[#38271F] transition-all duration-300">
+                      <div className="h-7 w-7 sm:h-8 sm:w-8 rounded-full bg-white/95 border border-white flex items-center justify-center text-[#8D6CA3] shadow-sm transition-all duration-300 group-hover:bg-[#8D6CA3] group-hover:text-white">
                         <ArrowUpRight className="h-3.5 w-3.5 stroke-[2.2]" />
                       </div>
                     </div>
@@ -798,9 +841,8 @@ export default function ServicesShowcase() {
       {isBridalOpen && (
         <div
           id="bridal-makeup-section"
-          className={`w-full mt-8 sm:mt-12 lg:mt-16 scroll-mt-28 transition-all duration-400 ease-out ${
-            closingSection === "bridal" ? "opacity-0 translate-y-6 pointer-events-none" : "opacity-100 translate-y-0"
-          }`}
+          className={`w-full mt-8 sm:mt-12 lg:mt-16 scroll-mt-28 transition-all duration-400 ease-out ${closingSection === "bridal" ? "opacity-0 translate-y-6 pointer-events-none" : "opacity-100 translate-y-0"
+            }`}
         >
           <BridalMakeupSection onBackToServices={handleBackToServices} />
         </div>
@@ -810,9 +852,8 @@ export default function ServicesShowcase() {
       {isHairOpen && (
         <div
           id="hair-services-section"
-          className={`w-full mt-8 sm:mt-12 lg:mt-16 scroll-mt-28 transition-all duration-400 ease-out ${
-            closingSection === "hair" ? "opacity-0 translate-y-6 pointer-events-none" : "opacity-100 translate-y-0"
-          }`}
+          className={`w-full mt-8 sm:mt-12 lg:mt-16 scroll-mt-28 transition-all duration-400 ease-out ${closingSection === "hair" ? "opacity-0 translate-y-6 pointer-events-none" : "opacity-100 translate-y-0"
+            }`}
         >
           <HairServicesSection onBackToServices={handleBackToServices} />
         </div>
@@ -822,9 +863,8 @@ export default function ServicesShowcase() {
       {isBeautyOpen && (
         <div
           id="beauty-grooming-section"
-          className={`w-full mt-8 sm:mt-12 lg:mt-16 scroll-mt-28 transition-all duration-400 ease-out ${
-            closingSection === "beauty" ? "opacity-0 translate-y-6 pointer-events-none" : "opacity-100 translate-y-0"
-          }`}
+          className={`w-full mt-8 sm:mt-12 lg:mt-16 scroll-mt-28 transition-all duration-400 ease-out ${closingSection === "beauty" ? "opacity-0 translate-y-6 pointer-events-none" : "opacity-100 translate-y-0"
+            }`}
         >
           <BeautyGroomingServicesSection onBackToServices={handleBackToServices} />
         </div>
@@ -834,9 +874,8 @@ export default function ServicesShowcase() {
       {isSkinOpen && (
         <div
           id="skin-facial-section"
-          className={`w-full mt-8 sm:mt-12 lg:mt-16 scroll-mt-28 transition-all duration-400 ease-out ${
-            closingSection === "skin" ? "opacity-0 translate-y-6 pointer-events-none" : "opacity-100 translate-y-0"
-          }`}
+          className={`w-full mt-8 sm:mt-12 lg:mt-16 scroll-mt-28 transition-all duration-400 ease-out ${closingSection === "skin" ? "opacity-0 translate-y-6 pointer-events-none" : "opacity-100 translate-y-0"
+            }`}
         >
           <SkinFacialServicesSection onBackToServices={handleBackToServices} />
         </div>
@@ -846,9 +885,8 @@ export default function ServicesShowcase() {
       {isAdditionalOpen && (
         <div
           id="additional-services-section"
-          className={`w-full mt-8 sm:mt-12 lg:mt-16 scroll-mt-28 transition-all duration-400 ease-out ${
-            closingSection === "additional" ? "opacity-0 translate-y-6 pointer-events-none" : "opacity-100 translate-y-0"
-          }`}
+          className={`w-full mt-8 sm:mt-12 lg:mt-16 scroll-mt-28 transition-all duration-400 ease-out ${closingSection === "additional" ? "opacity-0 translate-y-6 pointer-events-none" : "opacity-100 translate-y-0"
+            }`}
         >
           <AdditionalServicesSection onBackToServices={handleBackToServices} />
         </div>
@@ -858,9 +896,8 @@ export default function ServicesShowcase() {
       {isMensOpen && (
         <div
           id="mens-services-section"
-          className={`w-full mt-8 sm:mt-12 lg:mt-16 scroll-mt-28 transition-all duration-400 ease-out ${
-            closingSection === "mens" ? "opacity-0 translate-y-6 pointer-events-none" : "opacity-100 translate-y-0"
-          }`}
+          className={`w-full mt-8 sm:mt-12 lg:mt-16 scroll-mt-28 transition-all duration-400 ease-out ${closingSection === "mens" ? "opacity-0 translate-y-6 pointer-events-none" : "opacity-100 translate-y-0"
+            }`}
         >
           <MensServicesSection onBackToServices={handleBackToServices} />
         </div>
@@ -870,9 +907,8 @@ export default function ServicesShowcase() {
       {isGroomOpen && (
         <div
           id="groom-makeup-section"
-          className={`w-full mt-8 sm:mt-12 lg:mt-16 scroll-mt-28 transition-all duration-400 ease-out ${
-            closingSection === "groom" ? "opacity-0 translate-y-6 pointer-events-none" : "opacity-100 translate-y-0"
-          }`}
+          className={`w-full mt-8 sm:mt-12 lg:mt-16 scroll-mt-28 transition-all duration-400 ease-out ${closingSection === "groom" ? "opacity-0 translate-y-6 pointer-events-none" : "opacity-100 translate-y-0"
+            }`}
         >
           <GroomMakeupSection onBackToServices={handleBackToServices} />
         </div>
